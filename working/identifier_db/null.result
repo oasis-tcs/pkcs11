@@ -1,0 +1,11 @@
+In accourdance to our standing rules, the following identifiers have been
+allocated for your proposal "NULL mechanism".
+
+Mechanisms:
+
+ #define CKM_NULL 0x0000400bUL
+
+This represents the following changes to your original proposal:
+    CKM_NULL was allocated 0x400b because no number was proposed
+
+Please update your spec before sending it to ballot.

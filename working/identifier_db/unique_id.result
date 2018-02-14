@@ -1,0 +1,7 @@
+In accourdance to our standing rules, the following identifiers have been
+allocated for your proposal "Unique ID".
+
+Attributes:
+
+ #define CKA_UNIQUE_ID 0x00000004UL
+

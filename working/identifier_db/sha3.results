@@ -1,0 +1,50 @@
+In accourdance to our standing rules, the following identifiers have been
+allocated for your proposal "SHA3".
+
+Key types:
+
+ #define CKK_SHA3_224_HMAC 0x00000036UL
+ #define CKK_SHA3_256_HMAC 0x00000037UL
+ #define CKK_SHA3_384_HMAC 0x00000038UL
+ #define CKK_SHA3_512_HMAC 0x00000039UL
+
+Mechanisms:
+
+ #define CKM_DSA_SHA3_224          0x00000018UL
+ #define CKM_DSA_SHA3_256          0x00000019UL
+ #define CKM_DSA_SHA3_384          0x0000001aUL
+ #define CKM_DSA_SHA3_512          0x0000001bUL
+ #define CKM_SHA3_256_RSA_PKCS     0x00000060UL
+ #define CKM_SHA3_384_RSA_PKCS     0x00000061UL
+ #define CKM_SHA3_512_RSA_PKCS     0x00000062UL
+ #define CKM_SHA3_256_RSA_PKCS_PSS 0x00000063UL
+ #define CKM_SHA3_384_RSA_PKCS_PSS 0x00000064UL
+ #define CKM_SHA3_512_RSA_PKCS_PSS 0x00000065UL
+ #define CKM_SHA3_224_RSA_PKCS     0x00000066UL
+ #define CKM_SHA3_224_RSA_PKCS_PSS 0x00000067UL
+ #define CKM_SHA3_256              0x000002b0UL
+ #define CKM_SHA3_256_HMAC         0x000002b1UL
+ #define CKM_SHA3_256_HMAC_GENERAL 0x000002b2UL
+ #define CKM_SHA3_224              0x000002b5UL
+ #define CKM_SHA3_224_HMAC         0x000002b6UL
+ #define CKM_SHA3_224_HMAC_GENERAL 0x000002b7UL
+ #define CKM_SHA3_384              0x000002c0UL
+ #define CKM_SHA3_384_HMAC         0x000002c1UL
+ #define CKM_SHA3_384_HMAC_GENERAL 0x000002c2UL
+ #define CKM_SHA3_512              0x000002d0UL
+ #define CKM_SHA3_512_HMAC         0x000002d1UL
+ #define CKM_SHA3_512_HMAC_GENERAL 0x000002d2UL
+ #define CKM_SHA3_256_KEY_DERIVE   0x00000397UL
+ #define CKM_SHA3_224_KEY_DERIVE   0x00000398UL
+ #define CKM_SHA3_384_KEY_DERIVE   0x00000399UL
+ #define CKM_SHA3_512_KEY_DERIVE   0x0000039aUL
+ #define CKM_SHAKE_128_KEY_DERIVE  0x0000039bUL
+ #define CKM_SHAKE_256_KEY_DERIVE  0x0000039cUL
+
+This represents the following changes to your original proposal:
+    CKK_SHA3_224_HMAC was allocated 0x36 because no number was proposed
+    CKK_SHA3_256_HMAC was allocated 0x37 because no number was proposed
+    CKK_SHA3_384_HMAC was allocated 0x38 because no number was proposed
+    CKK_SHA3_512_HMAC was allocated 0x39 because no number was proposed
+
+Please update your spec before sending it to ballot.

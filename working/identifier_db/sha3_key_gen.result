@@ -1,0 +1,11 @@
+In accourdance to our standing rules, the following identifiers have been
+allocated for your proposal "SHA3 Key Gen".
+
+Mechanisms:
+
+ #define CKM_SHA3_256_KEYGEN 0x000002b3UL
+ #define CKM_SHA3_224_KEYGEN 0x000002b8UL
+ #define CKM_SHA3_384_KEYGEN 0x000002c3UL
+ #define CKM_SHA3_512_KEYGEN 0x000002d3UL
+
+This represents the following changes to your original proposal:

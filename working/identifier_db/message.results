@@ -1,0 +1,24 @@
+In accourdance to our standing rules, the following identifiers have been
+allocated for your proposal "AEAD Message based encryption proposal".
+
+Mechanisms flags:
+
+ #define CKF_MESSAGE_ENCRYPT 0x00000002UL
+ #define CKF_MESSAGE_DECRYPT 0x00000004UL
+ #define CKF_MESSAGE_SIGN    0x00000008UL
+ #define CKF_MESSAGE_VERIFY  0x00000010UL
+ #define CKF_MULTI_MESSGE    0x00000020UL
+
+This represents the following changes to your original proposal:
+    CKF_MESSAGE_ENCRYPT was changed to 0x2 because the proposed 0x100000
+     conflicted with CKF_EC_F_P
+    CKF_MESSAGE_DECRYPT was changed to 0x4 because the proposed 0x200000
+     conflicted with CKF_EC_F_2M
+    CKF_MESSAGE_SIGN was changed to 0x8 because the proposed 0x400000
+     conflicted with CKF_EC_ECPARAMETERS
+    CKF_MESSAGE_VERIFY was changed to 0x10 because the proposed 0x800000
+     conflicted with CKF_EC_NAMEDCURVE
+    CKF_MULTI_MESSGE was changed to 0x20 because the proposed 0x1000000
+     conflicted with CKF_EC_UNCOMPRESS
+
+Please update your spec before sending it to ballot.

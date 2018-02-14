@@ -1,0 +1,21 @@
+In accourdance to our standing rules, the following identifiers have been
+allocated for your proposal "AES XTS".
+
+Key types:
+
+ #define CKK_AES_XTS 0x00000035UL
+
+Mechanisms:
+
+ #define CKM_AES_XTS         0x00001071UL
+ #define CKM_AES_XTS_KEY_GEN 0x00001072UL
+
+This represents the following changes to your original proposal:
+    CKK_AES_XTS was changed to 0x35 because the proposed 0x2a
+     conflicted with CKK_RIPEMD160_HMAC
+    CKM_AES_XTS was changed to 0x1071 because the proposed 0x108e
+     conflicts with CKM_AES_GMAC
+    CKM_AES_XTS_KEY_GEN was changed to 0x1072 to keep it close to
+     CKM_AES_XTS
+
+Please update your spec before sending it to ballot.

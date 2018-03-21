@@ -1,0 +1,28 @@
+In accourdance to our standing rules, the following identifiers have been
+allocated for your proposal "Chacha/Poly Salsa/Poly Algorithms".
+
+Key types:
+
+ #define CKK_X2RATCHET 0x0000003fUL
+
+Mechanisms:
+
+ #define CKM_X3DH_INITIALIZE      0x00004023UL
+ #define CKM_X3DH_RESPOND         0x00004024UL
+ #define CKM_X2RATCHET_INITIALIZE 0x00004025UL
+ #define CKM_X2RATCHET_RESPOND    0x00004026UL
+ #define CKM_X2RATCHET_ENCRYPT    0x00004027UL
+ #define CKM_X2RATCHET_DECRYPT    0x00004028UL
+
+This represents the following changes to your original proposal:
+    CKM_X3DH_INITIALIZE was allocated 0x4023 because no number was proposed
+    CKM_X3DH_RESPOND was allocated 0x4024 because no number was proposed
+    CKM_X2RATCHET_INITIALIZE was allocated 0x4025 because no number was proposed
+    CKM_X2RATCHET_RESPOND was allocated 0x4026 because no number was proposed
+    CKM_X2RATCHET_ENCRYPT was allocated 0x4027 because no number was proposed
+    CKM_X2RATCHET_DECRYPT was allocated 0x4028 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKK_X2RATCHET was allocated 0x3f because no number was proposed
+
+Please update your spec before sending it to ballot.

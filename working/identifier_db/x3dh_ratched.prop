@@ -1,0 +1,12 @@
+Chacha/Poly Salsa/Poly Algorithms
+
+Key_types
+#define CKK_X2RATCHET					tbd
+
+Mechanisms
+#define CKM_X3DH_INITIALIZE		TBD
+#define CKM_X3DH_RESPOND			TBD
+#define CKM_X2RATCHET_INITIALIZE		tbd
+#define CKM_X2RATCHET_RESPOND			tbd
+#define CKM_X2RATCHET_ENCRYPT			tbd
+#define CKM_X2RATCHET_DECRYPT			tbd

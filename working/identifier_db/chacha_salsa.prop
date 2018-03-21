@@ -1,0 +1,9 @@
+Chacha/Poly Salsa/Poly Algorithms
+
+Key_types
+#define CKK_SALSA20            TBD
+
+Mechanisms
+#define CKM_SALSA20					TBD
+#define CKM_CHACHA20_POLY1305			TBD
+#define CKM_SALSA20_POLY1305			TBD

@@ -107,7 +107,7 @@ while (<$source>) {
 # output results
 # first the message to the user.
 open(my $DEST, ">", $dest_file) or die "Can't write $dest_file: $!";
-printf $DEST "In accourdance to our standing rules, the following identifiers have been\nallocated for your proposal \"$proposal\".\n";
+printf $DEST "In accordance to our standing rules, the following identifiers have been\nallocated for your proposal \"$proposal\".\n";
 
 for $type (split(" ",$source_type_order)) {
      my $print_type =ucfirst($type);

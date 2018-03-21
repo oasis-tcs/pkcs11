@@ -1,0 +1,11 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "XEDDSA (embedded in your xedh spec)".
+
+Mechanisms:
+
+ #define CKM_XEDDSA 0x00004029UL
+
+This represents the following changes to your original proposal:
+    CKM_XEDDSA was allocated 0x4029 because no number was proposed
+
+Please update your spec before sending it to ballot.

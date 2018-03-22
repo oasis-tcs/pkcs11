@@ -69,6 +69,13 @@ that only approved and spec are in the header. The output include:
    in favor of the 'official' name. The aliases may show up in the header.
    2) Entries of the form CK?_VENDOR_DEFINED and have the value 0x80000000UL
    are ignored.
+
+----------------------------------------------------------------------
+How to lookup an identifier in the database:
+
+./lookup identifier
+
+if identifier is a type or disposition, it does the same as ./verify.pl.
 ----------------------------------------------------------------------
 
 Format of raw_ids.db:

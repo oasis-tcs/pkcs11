@@ -38,7 +38,7 @@ How to allocate identifiers for a new proposal:
 
 -----------------------------------------------------------------
 
-How to mark identifiers approved once the proposal passes the budget.
+How to mark identifiers approved once the proposal passes the ballot.
 
 run ./approve_proposal.pl myproposal.result
 
@@ -50,12 +50,25 @@ How to examine the database:
 ./verify.pl will check the database for invalid and duplicate entries.
 In addition, you can supply any of the following keywords:
 
+help: get a list of the commands.
 dump: displays the entire database values.
 types: list the valid types currently in the database as well as the next
   unallocated identifer, or the unallocated flag bits.
 <type> list all identifiers of type <type>
 <dispositon> list all identifiers of a particular dispostion (proposed, approved, spec) ect.
-
+header [full] [path]: verify that the pkcs11t.h header is consistant with the
+database. If full is specified, then it expects identifiers that are 
+disposition=proposed to be in the header, othersize './verify.pl header' checks
+that only approved and spec are in the header. The output include:
+ - Entries that are in the database, but missing from the header.
+ - Entries that are in both the database and the header, but their value
+   is inconsistant.
+  - Entries that are in the header, but not in the database. In this last
+   case there are some special entries that help reduce the noise of false
+   positives. 1) the aliases.db contain a list of entries that are deprecated
+   in favor of the 'official' name. The aliases may show up in the header.
+   2) Entries of the form CK?_VENDOR_DEFINED and have the value 0x80000000UL
+   are ignored.
 ----------------------------------------------------------------------
 
 Format of raw_ids.db:

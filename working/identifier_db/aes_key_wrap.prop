@@ -1,5 +1,4 @@
 AES Key Wrap Update
 
-
 Mechanisms
-#define CKM_AES_KEY_WRAP_KPW	0x0000210BUL
+#define CKM_AES_KEY_WRAP_KWP	0x0000210BUL

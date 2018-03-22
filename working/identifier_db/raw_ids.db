@@ -443,10 +443,10 @@ CKM_ECDSA_SHA224,0x00001043,mechanisms,spec
 CKM_ECDSA_SHA256,0x00001044,mechanisms,spec
 CKM_ECDSA_SHA384,0x00001045,mechanisms,spec
 CKM_ECDSA_SHA512,0x00001046,mechanisms,spec
-CKM_ECDSA_SHA3_224,0x00001047,mechanisms,proposed
-CKM_ECDSA_SHA3_256,0x00001048,mechanisms,proposed
-CKM_ECDSA_SHA3_384,0x00001049,mechanisms,proposed
-CKM_ECDSA_SHA3_512,0x0000104a,mechanisms,proposed
+CKM_ECDSA_SHA3_224,0x00001047,mechanisms,approved
+CKM_ECDSA_SHA3_256,0x00001048,mechanisms,approved
+CKM_ECDSA_SHA3_384,0x00001049,mechanisms,approved
+CKM_ECDSA_SHA3_512,0x0000104a,mechanisms,approved
 CKM_ECDH1_DERIVE,0x00001050,mechanisms,spec
 CKM_ECDH1_COFACTOR_DERIVE,0x00001051,mechanisms,spec
 CKM_ECMQV_DERIVE,0x00001052,mechanisms,spec

@@ -22,7 +22,7 @@ my %conflict_old_number = ();
 my %conflict_new_number = ();
 
 if ($source_file eq "" or $dest_file eq "") {
-    die "usage: allocate.pl <source_file> <dest_file>";
+    die "usage: process_proposal.pl <source_file> <dest_file>";
 }
 
 open(my $database, "<", $database_file) or die "Can't open $database_file: $!";

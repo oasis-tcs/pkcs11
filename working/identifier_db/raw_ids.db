@@ -719,6 +719,7 @@ CKF_SIGN_RECOVER,0x00001000,mechanisms_flags,spec
 CKF_EC_ECPARAMETERS,0x00400000,mechanisms_flags,spec
 CKF_DECRYPT,0x00000200,mechanisms_flags,spec
 CKF_DERIVE,0x00080000,mechanisms_flags,spec
+CKF_FIND_OBJECTS,0x00000040,mechanisms_flags,proposed
 CKF_GENERATE_KEY_PAIR,0x00010000,mechanisms_flags,spec
 CKF_MESSAGE_SIGN,0x00000008,mechanisms_flags,approved
 CKF_VERIFY,0x00002000,mechanisms_flags,spec

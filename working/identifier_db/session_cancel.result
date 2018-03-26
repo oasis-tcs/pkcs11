@@ -1,0 +1,8 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "C_SessionCancel".
+
+Mechanisms flags:
+
+ #define CKF_FIND_OBJECTS 0x00000040UL
+
+This represents the following changes to your original proposal:

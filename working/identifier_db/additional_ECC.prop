@@ -1,0 +1,11 @@
+Additional ECC Curves
+
+Mechanisms
+#define CKM_EC_EDWARDS_KEY_PAIR_GEN 0x1055
+#define CKM_EC_MONTGOMERY_KEY_PAIR_GEN 0x1056
+#define CKM_EDDSA	            0x1057
+
+Key Types
+#define CKK_EC_EDWARDS		TBD
+#define CKK_EC_MONTGOMERY	TBD
+

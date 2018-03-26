@@ -1,0 +1,19 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Additional ECC Curves".
+
+Mechanisms:
+
+ #define CKM_EC_EDWARDS_KEY_PAIR_GEN    0x00001055UL
+ #define CKM_EC_MONTGOMERY_KEY_PAIR_GEN 0x00001056UL
+ #define CKM_EDDSA                      0x00001057UL
+
+Key types:
+
+ #define CKK_EC_EDWARDS    0x00000040UL
+ #define CKK_EC_MONTGOMERY 0x00000041UL
+
+This represents the following changes to your original proposal:
+    CKK_EC_EDWARDS was allocated 0x40 because no number was proposed
+    CKK_EC_MONTGOMERY was allocated 0x41 because no number was proposed
+
+Please update your spec before sending it to ballot.

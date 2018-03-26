@@ -1,0 +1,23 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "P800 Flexible Symmetric KDF (Darren Johnson)".
+
+Mechanisms:
+
+ #define CKM_SP800_108_COUNTER_KDF         0x000003acUL
+ #define CKM_SP800_108_FEEDBACK_KDF        0x000003adUL
+ #define CKM_SP800_108_DOUBLE_PIPELINE_KDF 0x000003aeUL
+
+Sp800 type:
+
+ #define CK_SP800_108_ITERATION_VARIABLE 0x00000001UL
+ #define CK_SP800_108_OPTIONAL_COUNTER   0x00000002UL
+ #define CK_SP800_108_DKM_LENGTH         0x00000003UL
+ #define CK_SP800_108_BYTE_ARRAY         0x00000004UL
+
+This represents the following changes to your original proposal:
+    CK_SP800_108_ITERATION_VARIABLE was allocated 0x1 because no number was proposed
+    CK_SP800_108_OPTIONAL_COUNTER was allocated 0x2 because no number was proposed
+    CK_SP800_108_DKM_LENGTH was allocated 0x3 because no number was proposed
+    CK_SP800_108_BYTE_ARRAY was allocated 0x4 because no number was proposed
+
+Please update your spec before sending it to ballot.

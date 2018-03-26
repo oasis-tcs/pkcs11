@@ -688,6 +688,9 @@ CKM_PBE_SHA1_DES3_EDE_CBC,0x000003a8,mechanisms,spec
 CKM_PBE_SHA1_DES2_EDE_CBC,0x000003a9,mechanisms,spec
 CKM_PBE_SHA1_RC2_128_CBC,0x000003aa,mechanisms,spec
 CKM_PBE_SHA1_RC2_40_CBC,0x000003ab,mechanisms,spec
+CKM_SP800_108_COUNTER_KDF,0x000003ac,mechanisms,proposed
+CKM_SP800_108_FEEDBACK_KDF,0x000003ad,mechanisms,proposed
+CKM_SP800_108_DOUBLE_PIPELINE_KDF,0x000003ae,mechanisms,proposed
 CKM_PKCS5_PBKD2,0x000003b0,mechanisms,spec
 CKM_SHA3_256_RSA_PKCS,0x00000060,mechanisms,approved
 CKM_PBA_SHA1_WITH_SHA1_HMAC,0x000003c0,mechanisms,spec
@@ -804,6 +807,10 @@ CKF_DONT_BLOCK,0x00000001,slot_event_flags,spec
 CKF_TOKEN_PRESENT,0x00000001,slot_info_flags,spec
 CKF_REMOVABLE_DEVICE,0x00000002,slot_info_flags,spec
 CKF_HW_SLOT,0x00000004,slot_info_flags,spec
+CK_SP800_108_ITERATION_VARIABLE,0x00000001,sp800_type,proposed
+CK_SP800_108_OPTIONAL_COUNTER,0x00000002,sp800_type,proposed
+CK_SP800_108_DKM_LENGTH,0x00000003,sp800_type,proposed
+CK_SP800_108_BYTE_ARRAY,0x00000004,sp800_type,proposed
 CKF_RNG,0x00000001,token_info_flags,spec
 CKF_TOKEN_INITIALIZED,0x00000400,token_info_flags,spec
 CKF_SO_PIN_COUNT_LOW,0x00100000,token_info_flags,spec

@@ -10,7 +10,9 @@ my $source_file=$ARGV[0];
 my $dest_file=$ARGV[1];
 glob %types = ();
 glob %database_name = ();
+glob %database_index = ();
 glob %database_number = ();
+glob %database_type = ();
 glob %database_disposition = ();
 glob %types_max = ();
 glob %types_bits = ();
@@ -42,6 +44,9 @@ while (<$database>){
     }
     $types_bits{$type} |= $number;
     $database_name{$index} = $name;
+    $database_index{$name} = $index;
+    $database_number{$index} = $number;
+    $database_type{$index} = $type;
     $database_disposition{$index} = $disposition;
     #printf "#define $name 0x%08xUL /* $type - $disposition */\n", $number;
 }
@@ -61,14 +66,25 @@ while (<$source>) {
     }
     @db = split(" ");
     if ($db[0] ne "#define") { # lines without a #define are a new type 
+        my $new = 0;
 	my $proposed_type=lc $_;
+
+        if ( lc $db[0] eq "new") {
+	    $propsed_type =~ s/$db[0] //;
+	    $new = 1;
+ 	}
 	$proposed_type =~ s/ /_/g;
 	$proposed_type =~ s/:$//;
-	if (!exists $types{$proposed_type} ) {
+	if (!$new && !exists $types{$proposed_type} ) {
 	    printf "unknown type: $db[0]\n";
 	    print_types();
 	    die "unknown type: $db[0]\n";
 	}
+	if ($new && exists $types{$proposed_type} ) {
+	    printf "N type $db[0] already exits\n";
+	    print_type();
+	    die "New type $db[0] already exists\n";
+        }
 	$type = $proposed_type;
         $source_type_order=$source_type_order." ".$type;
 	printf "    Type = $type\n";
@@ -80,6 +96,31 @@ while (<$source>) {
     $name=$db[1];
     $number=hex($db[2]);
     printf "        processing $name = 0x%08x (%d) (type=$type)\n",$number,$number;
+    # first see if the name already exists in the database.
+    if (exists $database_index{$name}) {
+	$index = $database_index{$name};
+	# if the types mismatch blow up.
+	if ($type ne $database_type{$index}) {
+		printf "		$type doesn't match type for $name\n";
+		die "Type missmatch $type, $datbase_type{$index} for $name\n";
+	}
+	#if the numbers mismatch, treat it as a conflict or 'new' allocation
+	if ($number == $database_number{$index}) {
+	    printf "		$name already defined\n";
+	} else {
+	    printf "		$name already defined, using old value 0x%08x\n"		,$database_number{$index};
+	    $conflict_name{$type} = $conflict_name{$type}." ".$name;
+	    $conflict_old_number{$name} = $number;
+	    $number = $database_number{$index};
+	    $conflict_new_number{$name} = $number;
+	}
+	$source_types{$type}=$source_types{$type}." ".$number;
+	$source_name{$index} = $name;
+	if ($source_max_len{$type} < length $name) {
+	    $source_max_len{$type} = length $name;
+	}
+	next;
+    }
     # see if the proposed number conflicts. If it does pick a new one
     $index=$type."_".$number;
     if (exists $database_name{$index} or $number == 0) {

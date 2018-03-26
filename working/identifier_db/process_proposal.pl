@@ -76,7 +76,7 @@ while (<$source>) {
 	my $proposed_type=lc $_;
 
         if ( lc $db[0] eq "new") {
-	    $propsed_type =~ s/$db[0] //;
+	    $proposed_type =~ s/new //;
 	    $new = 1;
  	}
 	$proposed_type =~ s/ /_/g;
@@ -86,11 +86,6 @@ while (<$source>) {
 	    print_types();
 	    die "unknown type: $db[0]\n";
 	}
-	if ($new && exists $types{$proposed_type} ) {
-	    printf "N type $db[0] already exits\n";
-	    print_type();
-	    die "New type $db[0] already exists\n";
-        }
 	$type = $proposed_type;
         $source_type_order=$source_type_order." ".$type;
 	printf "    Type = $type\n";

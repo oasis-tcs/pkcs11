@@ -83,11 +83,11 @@ while (<$source>) {
     printf "        processing $name = 0x%08x (%d) (type=$type)",$number,$number;
     # see if the proposed number conflicts. If it does pick a new one
     $index=$type."_".$number;
-    if ($number == 0) {
-	printf "\n";
-	die "invalid result file, no allocated number";
-    }
-    if (!exists $database_name{$index} or $number == 0) {
+    #if ($number == 0) {
+    #	printf "\n";
+    #	die "invalid result file, no allocated number";
+    #}
+    if (!exists $database_name{$index}) {
 	printf "\n";
 	die "proposal has not been allocated";
     }

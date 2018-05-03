@@ -18,6 +18,7 @@ glob %header_present = ();
 glob %aliases= ();
 glob %types_max = ();
 glob %types_bits = ();
+glob $verifyHeaderFull=0;
 
 
 if ($ARGV[0] eq "help") {
@@ -41,7 +42,7 @@ if ($ARGV[0] eq "header") {
 
     if ($header_file eq "full") {
 	$header_file = $ARGV[2];
-        $verifyHeaderFull = 0;
+        $verifyHeaderFull = 1;
     }
     if ($header_file eq "") {
 	$header_file =  $default_header;

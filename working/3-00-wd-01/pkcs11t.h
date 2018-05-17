@@ -2144,5 +2144,192 @@ typedef struct CK_SEED_CBC_ENCRYPT_DATA_PARAMS {
 typedef CK_SEED_CBC_ENCRYPT_DATA_PARAMS CK_PTR \
                                         CK_SEED_CBC_ENCRYPT_DATA_PARAMS_PTR;
 
+/*
+ * New PKCS 11 v3.0 data structures.
+ */
+
+typedef CK_ULONG CK_PROFILE_ID;
+
+/* Typedefs for Flexible KDF */
+typedef CK_ULONG CK_PRF_DATA_TYPE;
+typedef CK_MECHANISM_TYPE CK_SP800_108_PRF_TYPE;
+#define CK_SP800_108_ITERATION_VARIABLE 0x00000001UL
+#define CK_SP800_108_OPTIONAL_COUNTER   0x00000002UL
+#define CK_SP800_108_DKM_LENGTH         0x00000003UL
+#define CK_SP800_108_BYTE_ARRAY         0x00000004UL
+
+typedef struct CK_PRF_DATA_PARAM
+{
+   CK_PRF_DATA_TYPE    type;
+   CK_VOID_PTR         pValue;
+   CK_ULONG            ulValueLen;
+} CK_PRF_DATA_PARAM;
+
+typedef CK_PRF_DATA_PARAM CK_PTR CK_PRF_DATA_PARAM_PTR;
+
+
+typedef struct CK_SP800_108_COUNTER_FORMAT
+{ 
+   CK_BBOOL           bLittleEndian;
+   CK_ULONG		ulWidthInBits;
+} CK_SP800_108_COUNTER_FORMAT;
+
+typedef CK_SP800_108_COUNTER_FORMAT CK_PTR CK_SP800_108_COUNTER_FORMAT_PTR;
+
+typedef CK_ULONG CK_SP800_108_DKM_LENGTH_METHOD;
+
+typedef struct CK_SP800_108_DKM_LENGTH_FORMAT
+{ 
+   CK_SP800_108_DKM_LENGTH_METHOD  dkmLengthMethod;
+   CK_BBOOL                        bLittleEndian;
+   CK_ULONG		             ulWidthInBits;
+} CK_SP800_108_DKM_LENGTH_FORMAT;
+
+typedef CK_SP800_108_DKM_LENGTH_FORMAT \
+                                CK_PTR CK_SP800_108_DKM_LENGTH_FORMAT_PTR;
+
+typedef struct CK_DERIVED_KEY
+{
+   CK_ATTRIBUTE_PTR     pTemplate;
+   CK_ULONG             ulAttributeCount;
+   CK_OBJECT_HANDLE_PTR phKey;
+} CK_DERIVED_KEY;
+
+typedef CK_DERIVED_KEY CK_PTR CK_DERIVED_KEY_PTR;
+
+typedef struct CK_SP800_108_KDF_PARAMS
+{
+   CK_PRF_TYPE            prfType;
+   CK_ULONG               ulNumberOfDataParams;
+   CK_PRF_DATA_PARAM_PTR  pDataParams;
+   CK_ULONG             ulAdditionalDerivedKeys;
+   CK_DERIVED_KEY       pAdditionalDerivedKeys;
+} CK_SP800_108_KDF_PARAMS;
+
+typedef CK_SP800_108_KDF_PARAMS CK_PTR CK_SP800_108_KDF_PARAMS_PTR;
+
+typedef struct CK_SP800_108_FEEDBACK_KDF_PARAMS
+{
+   CK_PRF_TYPE            prfType;
+   CK_ULONG               ulNumberOfDataParams;
+   CK_PRF_DATA_PARAM_PTR  pDataParams;
+   CK_ULONG               ulIVLen;
+   CK_BYTE_PTR            pIV;
+   CK_ULONG             ulAdditionalDerivedKeys;
+   CK_DERIVED_KEY       pAdditionalDerivedKeys;
+} CK_SP800_108_FEEDBACK_KDF_PARAMS;
+
+typedef CK_SP800_108_FEEDBACK_KDF_PARAMS \
+                               CK_PTR CK_SP800_108_FEEDBACK_KDF_PARAMS_PTR;
+
+/* EDDSA */
+typedef struct CK_EDDSA_PARAMS {
+	CK_BBOOL phFlag;
+	CK_ULONG ulContextDataLen;
+	CK_BYTE_PTR pContextData;
+} CK_EDDSA_PARAMS;
+
+typedef CK_EDDSA_PARAMS CK_PTR CK_EDDSA_PARAMS_PTR;
+
+/* Extended ChaCha20/Salsa20 support*/
+typedef struct CK_CHACHA20_PARAMS {
+	CK_BYTE_PTR	pBlockCounter;
+	CK_ULONG	blockCounterBits;
+	CK_BYTE_PTR	pNonce;
+	CK_ULONG	ulNonceBits;
+} CK_CHACHA20_PARAMS;
+
+/* need typedef CK_CHACHA20_PARAMS CK_PTR CK_CHACHA20_PARAMS_PTR? */
+
+typedef struct CK_SALSA20_PARAMS {
+	CK_BYTE_PTR	pBlockCounter;
+	CK_BYTE_PTR	pNonce;
+	CK_ULONG	ulNonceBits;
+} CK_SALSA20_PARAMS;
+
+/* need typedef CK_CHACHA20_PARAMS CK_PTR CK_CHACHA20_PARAMS_PTR? */
+
+typedef struct CK_SALSA20_CHACHA20_POLY1305_PARAMS {
+  CK_BYTE_PTR	pNonce;
+  CK_ULONG	ulNonceLen;
+  CK_BYTE_PTR pAAD;
+  CK_ULONG ulAADLen;
+} CK_SALSA20_CHACHA20_POLY1305_PARAMS;
+
+typedef CK_SALSA20_CHACHA20_POLY1305_PARAMS \
+                                CK_PTR CK_SALSA20_CHACHA20_POLY1305_PARAMS_PTR;
+
+typedef struct CK_SALSA20_CHACHA20_POLY1305_MSG_PARAMS {
+  CK_BYTE_PTR	pNonce;
+  CK_ULONG	ulNonceLen;
+  CK_BYTE_PTR pTag;
+} CK_SALSA20_CHACHA20_POLY1305_MSG_PARAMS;
+
+typedef CK_SALSA20_CHACHA20_POLY1305_MSG_PARAMS \
+			CK_PTR CK_SALSA20_CHACHA20_POLY1305_MSG_PARAMS_PTR;
+
+
+/* X3dh, ratchet */
+typedef struct CK_X3DH_INITIATE_PARAMS {
+	CK_X3DH_KDF_TYPE kdf;
+	CK_OBJECT_HANDLE pPeer_identity;
+	CK_OBJECT_HANDLE pPeer_prekey;
+	CK_BYTE_PTR pPrekey_signature;
+	CK_BYTE_PTR pOnetime_key;
+	CK_OBJECT_HANDLE pOwn_identity;
+	CK_OBJECT_HANDLE pOwn_ephemeral;
+} CK_X3DH_INITIATE_PARAMS;
+
+typedef struct CK_X3DH_RESPOND_PARAMS {
+	CK_X3DH_KDF_TYPE kdf;
+	CK_BYTE_PTR pIdentity_id;
+	CK_BYTE_PTR pPrekey_id;
+	CK_BYTE_PTR pOnetime_id;
+	CK_OBJECT_HANDLE pInitiator_identity;
+	CK_BYTE_PTR pInitiator_ephemeral;
+} CK_X3DH_RESPOND_PARAMS;
+
+typedef CK_ULONG CK_X3DH_KDF_TYPE;
+typedef CK_X3DH_KDF_TYPE CK_PTR CK_X3DH_KDF_TYPE_PTR;
+
+typedef struct CK_X2RATCHET_INITIALIZE_PARAMS {
+	CK_BYTE_PTR 		sk;
+	CK_OBJECT_HANDLE	peer_public_prekey;
+	CK_OBJECT_HANDLE	peer_public_identity;
+	CK_OBJECT_HANDLE	own_public_identity;
+	CK_BBOOL 		bEncryptedHeader;
+	CK_ULONG 		eCurve;
+	CK_MECHANISM_TYPE 	aeadMechanism;
+	CK_X2RATCHET_KDF _TYPE 	kdfMechanism;
+} CK_X2RATCHET_INITIALIZE_PARAMS;
+
+typedef CK_X2RATCHET_INITIALIZE_PARAMS \
+                              CK_PTR CK_X2RATCHET_INITIALIZE_PARAMS_PTR;
+
+typedef struct CK_X2RATCHET_RESPOND_PARAMS {
+	CK_BYTE_PTR 			sk;
+	CK_OBJECT_HANDLE		own_prekey;
+	CK_OBJECT_HANDLE		initiator_identity;
+	CK_OBJECT_HANDLE		own_public_identity;
+	CK_BBOOL 			bEncryptedHeader;
+	CK_ULONG 			eCurve;
+	CK_MECHANISM_TYPE 		aeadMechanism;
+	CK_X2RATCHET_KDF_TYPE 	kdfMechanism;
+} CK_X2RATCHET_RESPOND_PARAMS;
+typedef CK_X2RATCHET_RESPOND_PARAMS \
+				CK_PTR CK_X2RATCHET_RESPOND_PARAMS_PTR;
+
+typedef CK_ULONG CK_X2RATCHET_KDF_TYPE;
+typedef CK_X2RATCHET_KDF_TYPE CK_PTR CK_X2RATCHET_KDF_TYPE_PTR;
+
+/* XEDDSA */
+typedef struct CK_XEDDSA_PARAMS {
+	CK_XEDDSA_HASH_TYPE hash;
+} CK_XEDDSA_PARAMS;
+typedef CK_XEDDSA_PARAMS CK_PTR CK_XEDDSA_PARAMS_PTR;
+
+typedef CK_ULONG CK_XEDDSA_HASH_TYPE;
+typedef CK_XEDDSA_HASH_TYPE CK_PTR CK_XEDDSA_HASH_TYPE_PTR;
+
 #endif /* _PKCS11T_H_ */
 

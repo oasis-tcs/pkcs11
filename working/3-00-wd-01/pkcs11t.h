@@ -1303,6 +1303,19 @@ typedef CK_FUNCTION_LIST CK_PTR CK_FUNCTION_LIST_PTR;
 
 typedef CK_FUNCTION_LIST_PTR CK_PTR CK_FUNCTION_LIST_PTR_PTR;
 
+#define MAX_FUNCTION_LISTS 10
+typedef struct CK_FUNCTION_LISTS {
+      CK_CHAR *pInterface;
+      void **pFunctions;
+} CK_FUNCTION_LISTS;
+
+typedef struct CK_INTERFACES {
+     CK_ULONG ulIinterfaceCount;
+     CK_FUNCTION_LISTS *pFunctionList[MAX_FUNCTION_LISTS];
+} CK_INTERFACES;
+
+#define CKF_END_OF_MESSAGE   0x00000001UL
+
 
 /* CK_CREATEMUTEX is an application callback for creating a
  * mutex object
@@ -1986,6 +1999,23 @@ typedef struct CK_GCM_PARAMS {
 
 typedef CK_GCM_PARAMS CK_PTR CK_GCM_PARAMS_PTR;
 
+typedef CK_ULONG CK_GENERATOR_FUNCTION;
+#define CKG_NO_GENERATE      0x00000000UL
+#define CKG_GENERATE         0x00000001UL
+#define CKG_GENERATE_COUNTER 0x00000002UL
+#define CKG_GENERATE_RANDOM  0x00000003UL
+
+typedef struct CK_GCM_AEAD_PARAMS {
+    CK_BYTE_PTR       pIv;
+    CK_ULONG          ulIvLen;
+    CK_ULONG          ulIvFixedBits;
+    CK_GENERATOR_FUNCTION ivGenerator;
+    CK_BYTE_PTR       pTag;
+    CK_ULONG          ulTagBits;
+} CK_GCM_AEAD_PARAMS;
+
+typedef CK_GCM_AEAD_PARAMS CK_GCM_AEAD_PARAMS_PTR;
+
 typedef struct CK_CCM_PARAMS {
     CK_ULONG          ulDataLen;
     CK_BYTE_PTR       pNonce;
@@ -1996,6 +2026,18 @@ typedef struct CK_CCM_PARAMS {
 } CK_CCM_PARAMS;
 
 typedef CK_CCM_PARAMS CK_PTR CK_CCM_PARAMS_PTR;
+
+typedef struct CK_CCM_AEAD_PARAMS {
+    CK_ULONG          ulDataLen; /*plaintext or ciphertext*/
+    CK_BYTE_PTR       pNonce;
+    CK_ULONG          ulNonceLen;
+    CK_ULONG          ulNonceFixedBits;
+    CK_GENERATOR_FUNCTION nonceGenerator;
+    CK_BYTE_PTR       pMAC;
+    CK_ULONG          ulMACLen;
+} CK_CCM_AEAD_PARAMS;
+
+typedef CK_CCM_AEAD_PARAMS CK_CCM_AEAD_PARAMS_PTR;
 
 /* Deprecated. Use CK_GCM_PARAMS */
 typedef struct CK_AES_GCM_PARAMS {
@@ -2199,24 +2241,24 @@ typedef CK_DERIVED_KEY CK_PTR CK_DERIVED_KEY_PTR;
 
 typedef struct CK_SP800_108_KDF_PARAMS
 {
-   CK_PRF_TYPE            prfType;
+   CK_SP800_108_PRF_TYPE prfType;
    CK_ULONG               ulNumberOfDataParams;
    CK_PRF_DATA_PARAM_PTR  pDataParams;
-   CK_ULONG             ulAdditionalDerivedKeys;
-   CK_DERIVED_KEY       pAdditionalDerivedKeys;
+   CK_ULONG             ulAdditionalDerivedKeys;
+   CK_DERIVED_KEY       pAdditionalDerivedKeys;
 } CK_SP800_108_KDF_PARAMS;
 
 typedef CK_SP800_108_KDF_PARAMS CK_PTR CK_SP800_108_KDF_PARAMS_PTR;
 
 typedef struct CK_SP800_108_FEEDBACK_KDF_PARAMS
 {
-   CK_PRF_TYPE            prfType;
+   CK_SP800_108_PRF_TYPE prfType;
    CK_ULONG               ulNumberOfDataParams;
    CK_PRF_DATA_PARAM_PTR  pDataParams;
    CK_ULONG               ulIVLen;
    CK_BYTE_PTR            pIV;
-   CK_ULONG             ulAdditionalDerivedKeys;
-   CK_DERIVED_KEY       pAdditionalDerivedKeys;
+   CK_ULONG             ulAdditionalDerivedKeys;
+   CK_DERIVED_KEY       pAdditionalDerivedKeys;
 } CK_SP800_108_FEEDBACK_KDF_PARAMS;
 
 typedef CK_SP800_108_FEEDBACK_KDF_PARAMS \
@@ -2268,6 +2310,8 @@ typedef struct CK_SALSA20_CHACHA20_POLY1305_MSG_PARAMS {
 typedef CK_SALSA20_CHACHA20_POLY1305_MSG_PARAMS \
 			CK_PTR CK_SALSA20_CHACHA20_POLY1305_MSG_PARAMS_PTR;
 
+typedef CK_ULONG CK_X3DH_KDF_TYPE;
+typedef CK_X3DH_KDF_TYPE CK_PTR CK_X3DH_KDF_TYPE_PTR;
 
 /* X3dh, ratchet */
 typedef struct CK_X3DH_INITIATE_PARAMS {
@@ -2289,8 +2333,8 @@ typedef struct CK_X3DH_RESPOND_PARAMS {
 	CK_BYTE_PTR pInitiator_ephemeral;
 } CK_X3DH_RESPOND_PARAMS;
 
-typedef CK_ULONG CK_X3DH_KDF_TYPE;
-typedef CK_X3DH_KDF_TYPE CK_PTR CK_X3DH_KDF_TYPE_PTR;
+typedef CK_ULONG CK_X2RATCHET_KDF_TYPE;
+typedef CK_X2RATCHET_KDF_TYPE CK_PTR CK_X2RATCHET_KDF_TYPE_PTR;
 
 typedef struct CK_X2RATCHET_INITIALIZE_PARAMS {
 	CK_BYTE_PTR 		sk;
@@ -2300,7 +2344,7 @@ typedef struct CK_X2RATCHET_INITIALIZE_PARAMS {
 	CK_BBOOL 		bEncryptedHeader;
 	CK_ULONG 		eCurve;
 	CK_MECHANISM_TYPE 	aeadMechanism;
-	CK_X2RATCHET_KDF _TYPE 	kdfMechanism;
+	CK_X2RATCHET_KDF_TYPE 	kdfMechanism;
 } CK_X2RATCHET_INITIALIZE_PARAMS;
 
 typedef CK_X2RATCHET_INITIALIZE_PARAMS \
@@ -2319,8 +2363,8 @@ typedef struct CK_X2RATCHET_RESPOND_PARAMS {
 typedef CK_X2RATCHET_RESPOND_PARAMS \
 				CK_PTR CK_X2RATCHET_RESPOND_PARAMS_PTR;
 
-typedef CK_ULONG CK_X2RATCHET_KDF_TYPE;
-typedef CK_X2RATCHET_KDF_TYPE CK_PTR CK_X2RATCHET_KDF_TYPE_PTR;
+typedef CK_ULONG CK_XEDDSA_HASH_TYPE;
+typedef CK_XEDDSA_HASH_TYPE CK_PTR CK_XEDDSA_HASH_TYPE_PTR;
 
 /* XEDDSA */
 typedef struct CK_XEDDSA_PARAMS {
@@ -2328,8 +2372,6 @@ typedef struct CK_XEDDSA_PARAMS {
 } CK_XEDDSA_PARAMS;
 typedef CK_XEDDSA_PARAMS CK_PTR CK_XEDDSA_PARAMS_PTR;
 
-typedef CK_ULONG CK_XEDDSA_HASH_TYPE;
-typedef CK_XEDDSA_HASH_TYPE CK_PTR CK_XEDDSA_HASH_TYPE_PTR;
 
 #endif /* _PKCS11T_H_ */
 

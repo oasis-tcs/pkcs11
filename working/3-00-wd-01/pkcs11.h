@@ -4,7 +4,7 @@
  * IMPLIED OR EXPRESS WARRANTY; there is no warranty of MERCHANTABILITY, FITNESS FOR A
  * PARTICULAR PURPOSE or NONINFRINGEMENT of the rights of others.
  */
-        
+
 /* Latest version of the specification:
  * http://docs.oasis-open.org/pkcs11/pkcs11-base/v2.40/pkcs11-base-v2.40.html
  */
@@ -240,6 +240,25 @@ extern "C" {
 #define CK_PKCS11_FUNCTION_INFO(name) \
   __PASTE(CK_,name) name;
 
+/* Create the 3.0 Function list, which is the 2.0 function list with
+ * the new 3.0 function appended at the end */
+struct CK_FUNCTION_LIST_3_0 {
+
+  CK_VERSION    version;  /* Cryptoki version */
+
+/* Pile all the function pointers into the CK_FUNCTION_LIST. */
+/* pkcs11f.h has all the information about the Cryptoki
+ * function prototypes.
+ */
+#include "pkcs11f.h"
+
+};
+
+#define CK_PKCS11_2_0_ONLY 1
+
+/* The 2.0 function list returned by the token may or may not have 3.0
+ * functions at the end. Continue to define the old CK_FUNCTION_LIST without
+ * it */
 struct CK_FUNCTION_LIST {
 
   CK_VERSION    version;  /* Cryptoki version */
@@ -253,6 +272,7 @@ struct CK_FUNCTION_LIST {
 };
 
 #undef CK_PKCS11_FUNCTION_INFO
+#undef CK_PKCS11_2_0_ONLY
 
 
 #undef __PASTE

@@ -1,4 +1,4 @@
-/* Copyright (c) OASIS Open 2016. All Rights Reserved./
+/* Copyright (c) OASIS Open 2016, 2019. All Rights Reserved./
  * /Distributed under the terms of the OASIS IPR Policy,
  * [http://www.oasis-open.org/policies-guidelines/ipr], AS-IS, WITHOUT ANY
  * IMPLIED OR EXPRESS WARRANTY; there is no warranty of MERCHANTABILITY, FITNESS FOR A
@@ -939,11 +939,11 @@ CK_PKCS11_FUNCTION_INFO(C_WaitForSlotEvent)
 
 #ifndef CK_PKCS11_2_0_ONLY
 /* C_GetInterfaceLists returns all the interfaces supported by the module*/
-CK_PKCS11_FUNCTION_INFO(C_GetInterfaceLists)
+CK_PKCS11_FUNCTION_INFO(C_GetInterfaceList)
 #ifdef CK_NEED_ARG_LIST
 (
   CK_INTERFACE_PTR  pInterfacesList,  /* returned interfaces */
-  CK_LONG_PTR       pulCount;         /* numbe of interfaces returned */
+  CK_ULONG_PTR      pulCount          /* number of interfaces returned */
 );
 #endif
 
@@ -955,7 +955,7 @@ CK_PKCS11_FUNCTION_INFO(C_GetInterface)
   CK_VERSION_PTR        pVersion,       /* version of the interface */
   CK_INTERFACE_PTR_PTR  ppInterface,    /* returned interface */
   CK_FLAGS 		flags           /* flags controlling the semantics
-                                         *  of the interface */
+                                         * of the interface */
 );
 #endif
 

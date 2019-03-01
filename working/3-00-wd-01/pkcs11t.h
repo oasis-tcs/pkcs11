@@ -1,4 +1,4 @@
-/* Copyright (c) OASIS Open 2016. All Rights Reserved./
+/* Copyright (c) OASIS Open 2016, 2019. All Rights Reserved./
  * /Distributed under the terms of the OASIS IPR Policy,
  * [http://www.oasis-open.org/policies-guidelines/ipr], AS-IS, WITHOUT ANY
  * IMPLIED OR EXPRESS WARRANTY; there is no warranty of MERCHANTABILITY, FITNESS FOR A
@@ -1308,7 +1308,7 @@ typedef CK_FUNCTION_LIST_3_0_PTR CK_PTR CK_FUNCTION_LIST_3_0_PTR_PTR;
 
 typedef struct CK_INTERFACE {
       CK_CHAR     *pInterfaceName;
-      CK_VOID_ptr pFunctionsList;
+      CK_VOID_PTR pFunctionList;
       CK_FLAGS    flags;
 } CK_INTERFACE;
 

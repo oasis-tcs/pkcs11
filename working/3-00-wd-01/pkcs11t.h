@@ -1049,6 +1049,7 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_SHA512_224_KEY_GEN         0x00004008UL
 #define CKM_SHA512_256_KEY_GEN         0x00004009UL
 #define CKM_SHA512_T_KEY_GEN           0x0000400aUL
+#define CKM_NULL                       0x0000400bUL
 #define CKM_BLAKE2B_160                0x0000400cUL
 #define CKM_BLAKE2B_160_HMAC           0x0000400dUL
 #define CKM_BLAKE2B_160_HMAC_GENERAL   0x0000400eUL
@@ -1282,6 +1283,7 @@ typedef CK_ULONG          CK_RV;
 #define CKR_PUBLIC_KEY_INVALID                0x000001B9UL
 
 #define CKR_FUNCTION_REJECTED                 0x00000200UL
+#define CKR_TOKEN_RESOURCE_EXCEEDED           0x00000201UL
 
 #define CKR_VENDOR_DEFINED                    0x80000000UL
 

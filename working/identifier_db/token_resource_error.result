@@ -1,0 +1,11 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Token Resource Error".
+
+Errors:
+
+ #define CKR_TOKEN_RESOURCE_EXCEEDED 0x00000201UL
+
+This represents the following changes to your original proposal:
+    CKR_TOKEN_RESOURCE_EXCEEDED was allocated 0x201 because no number was proposed
+
+Please update your spec before sending it to ballot.

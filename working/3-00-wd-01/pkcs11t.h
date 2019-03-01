@@ -1298,21 +1298,22 @@ typedef CK_CALLBACK_FUNCTION(CK_RV, CK_NOTIFY)(
  * Cryptoki functions
  */
 typedef struct CK_FUNCTION_LIST CK_FUNCTION_LIST;
+typedef struct CK_FUNCTION_LIST_3_0 CK_FUNCTION_LIST_3_0;
 
 typedef CK_FUNCTION_LIST CK_PTR CK_FUNCTION_LIST_PTR;
+typedef CK_FUNCTION_LIST_3_0 CK_PTR CK_FUNCTION_LIST_3_0_PTR;
 
 typedef CK_FUNCTION_LIST_PTR CK_PTR CK_FUNCTION_LIST_PTR_PTR;
+typedef CK_FUNCTION_LIST_3_0_PTR CK_PTR CK_FUNCTION_LIST_3_0_PTR_PTR;
 
-#define MAX_FUNCTION_LISTS 10
-typedef struct CK_FUNCTION_LISTS {
-      CK_CHAR *pInterface;
-      void **pFunctions;
-} CK_FUNCTION_LISTS;
+typedef struct CK_INTERFACE {
+      CK_CHAR     *pInterfaceName;
+      CK_VOID_ptr pFunctionsList;
+      CK_FLAGS    flags;
+} CK_INTERFACE;
 
-typedef struct CK_INTERFACES {
-     CK_ULONG ulIinterfaceCount;
-     CK_FUNCTION_LISTS *pFunctionList[MAX_FUNCTION_LISTS];
-} CK_INTERFACES;
+typedef CK_INTERFACE CK_PTR CK_INTERFACE_PTR;
+typedef CK_INTERFACE_PTR CK_PTR CK_INTERFACE_PTR_PTR;
 
 #define CKF_END_OF_MESSAGE   0x00000001UL
 
@@ -1347,7 +1348,7 @@ typedef CK_CALLBACK_FUNCTION(CK_RV, CK_UNLOCKMUTEX)(
 );
 
 /* Get functionlist flags */
-#define CKF_FORK_SAFE_INTERFACE 0x00000001UL
+#define CKF_INTERFACE_FORK_SAFE  0x00000001UL
 
 /* CK_C_INITIALIZE_ARGS provides the optional arguments to
  * C_Initialize

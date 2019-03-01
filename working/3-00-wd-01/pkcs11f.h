@@ -938,14 +938,24 @@ CK_PKCS11_FUNCTION_INFO(C_WaitForSlotEvent)
 #endif
 
 #ifndef CK_PKCS11_2_0_ONLY
-/* C_GetFunctionLists returns multiple function list. */
-CK_PKCS11_FUNCTION_INFO(C_GetFunctionLists)
+/* C_GetInterfaceLists returns all the interfaces supported by the module*/
+CK_PKCS11_FUNCTION_INFO(C_GetInterfaceLists)
 #ifdef CK_NEED_ARG_LIST
 (
-  CK_CHAR **interface_string, /* NULL terminated array of interfaces to fetch */
-  CK_INTERFACES *interfaces,  /* returned interfaces */
-  CK_LONG flags               /* flags controlling the semantics
-                               *  of the interfaces */
+  CK_INTERFACE_PTR  pInterfacesList,  /* returned interfaces */
+  CK_LONG_PTR       pulCount;         /* numbe of interfaces returned */
+);
+#endif
+
+/* C_GetInterface returns a specific interface from the module. */
+CK_PKCS11_FUNCTION_INFO(C_GetInterface)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_UTF8CHAR_PTR       pInterfaceName, /* name of the interface */
+  CK_VERSION_PTR        pVersion,       /* version of the interface */
+  CK_INTERFACE_PTR_PTR  ppInterface,    /* returned interface */
+  CK_FLAGS 		flags           /* flags controlling the semantics
+                                         *  of the interface */
 );
 #endif
 
@@ -958,6 +968,14 @@ CK_PKCS11_FUNCTION_INFO(C_LoginUser)
   CK_ULONG          ulPinLen,  /* the length of the PIN */
   CK_UTF8CHAR_PTR   pUsername, /* the user's name */
   CK_ULONG          ulUsernameLen /*the length of the user's name */
+);
+#endif
+
+CK_PKCS11_FUNCTION_INFO(C_SessionCancel)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,  /* the session's handle */
+  CK_FLAGS          flags      /* flags control which sessions are cancelled */
 );
 #endif
 

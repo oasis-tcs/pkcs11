@@ -208,7 +208,7 @@ CKR_NEED_TO_CREATE_THREADS,0x00000009,errors,spec
 CKR_KEY_HANDLE_INVALID,0x00000060,errors,spec
 CKR_KEY_SIZE_RANGE,0x00000062,errors,spec
 CKR_KEY_TYPE_INCONSISTENT,0x00000063,errors,spec
-CKF_FORK_SAFE_INTERFACE,0x00000001,function_flags,approved
+CKF_INTERFACE_FORK_SAFE,0x00000001,function_flags,approved
 CKG_NO_GENERATE,0x00000000,generator_functions,approved
 CKG_GENERATE,0x00000001,generator_functions,approved
 CKG_GENERATE_COUNTER,0x00000002,generator_functions,approved
@@ -300,6 +300,7 @@ CKK_SALSA20,0x0000003e,key_types,approved
 CKK_X2RATCHET,0x0000003f,key_types,approved
 CKK_EC_EDWARDS,0x00000040,key_types,approved
 CKK_EC_MONTGOMERY,0x00000041,key_types,approved
+CKK_HKDF,0x00000042,key_types,proposed
 CKM_RSA_PKCS_KEY_PAIR_GEN,0x00000000,mechanisms,spec
 CKM_RSA_PKCS,0x00000001,mechanisms,spec
 CKM_RSA_X9_31_KEY_PAIR_GEN,0x0000000a,mechanisms,spec
@@ -384,6 +385,9 @@ CKM_X2RATCHET_RESPOND,0x00004026,mechanisms,approved
 CKM_X2RATCHET_ENCRYPT,0x00004027,mechanisms,approved
 CKM_X2RATCHET_DECRYPT,0x00004028,mechanisms,approved
 CKM_XEDDSA,0x00004029,mechanisms,approved
+CKM_HKDF_DERIVE,0x0000402a,mechanisms,proposed
+CKM_HKDF_DATA,0x0000402b,mechanisms,proposed
+CKM_HKDF_KEY_GEN,0x0000402c,mechanisms,proposed
 CKM_DSA,0x00000011,mechanisms,spec
 CKM_DSA_SHA1,0x00000012,mechanisms,spec
 CKM_DSA_SHA224,0x00000013,mechanisms,spec

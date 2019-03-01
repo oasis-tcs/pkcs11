@@ -1,0 +1,10 @@
+HKDF mechanisms.
+
+Mechanisms
+#define CKM_HKDF_DERIVE 0x00000000
+#define CKM_HKDF_DATA 0x00000000
+#define CKM_HKDF_KEY_GEN 0x00000000
+
+Key Types
+#define CKK_HKDF  0x00000000
+

@@ -2006,16 +2006,16 @@ typedef CK_ULONG CK_GENERATOR_FUNCTION;
 #define CKG_GENERATE_COUNTER 0x00000002UL
 #define CKG_GENERATE_RANDOM  0x00000003UL
 
-typedef struct CK_GCM_AEAD_PARAMS {
+typedef struct CK_GCM_MESSAGE_PARAMS {
     CK_BYTE_PTR       pIv;
     CK_ULONG          ulIvLen;
     CK_ULONG          ulIvFixedBits;
     CK_GENERATOR_FUNCTION ivGenerator;
     CK_BYTE_PTR       pTag;
     CK_ULONG          ulTagBits;
-} CK_GCM_AEAD_PARAMS;
+} CK_GCM_MESSAGE_PARAMS;
 
-typedef CK_GCM_AEAD_PARAMS CK_GCM_AEAD_PARAMS_PTR;
+typedef CK_GCM_MESSAGE_PARAMS CK_GCM_MESSAGE_PARAMS_PTR;
 
 typedef struct CK_CCM_PARAMS {
     CK_ULONG          ulDataLen;
@@ -2028,7 +2028,7 @@ typedef struct CK_CCM_PARAMS {
 
 typedef CK_CCM_PARAMS CK_PTR CK_CCM_PARAMS_PTR;
 
-typedef struct CK_CCM_AEAD_PARAMS {
+typedef struct CK_CCM_MESSAGE_PARAMS {
     CK_ULONG          ulDataLen; /*plaintext or ciphertext*/
     CK_BYTE_PTR       pNonce;
     CK_ULONG          ulNonceLen;
@@ -2036,9 +2036,9 @@ typedef struct CK_CCM_AEAD_PARAMS {
     CK_GENERATOR_FUNCTION nonceGenerator;
     CK_BYTE_PTR       pMAC;
     CK_ULONG          ulMACLen;
-} CK_CCM_AEAD_PARAMS;
+} CK_CCM_MESSAGE_PARAMS;
 
-typedef CK_CCM_AEAD_PARAMS CK_CCM_AEAD_PARAMS_PTR;
+typedef CK_CCM_MESSAGE_PARAMS CK_CCM_MESSAGE_PARAMS_PTR;
 
 /* Deprecated. Use CK_GCM_PARAMS */
 typedef struct CK_AES_GCM_PARAMS {

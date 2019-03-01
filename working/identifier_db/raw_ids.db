@@ -740,6 +740,7 @@ CKF_DECRYPT,0x00000200,mechanisms_flags,spec
 CKF_DERIVE,0x00080000,mechanisms_flags,spec
 CKF_FIND_OBJECTS,0x00000040,mechanisms_flags,approved
 CKF_GENERATE_KEY_PAIR,0x00010000,mechanisms_flags,spec
+CKF_EC_CURVENAME,0x04000000,mechanisms_flags,approved
 CKF_MESSAGE_SIGN,0x00000008,mechanisms_flags,approved
 CKF_VERIFY,0x00002000,mechanisms_flags,spec
 CKF_EC_OID,0x00800000,mechanisms_flags,spec

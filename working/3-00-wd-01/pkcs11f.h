@@ -938,7 +938,7 @@ CK_PKCS11_FUNCTION_INFO(C_WaitForSlotEvent)
 #endif
 
 #ifndef CK_PKCS11_2_0_ONLY
-/* C_GetInterfaceLists returns all the interfaces supported by the module*/
+/* C_GetInterfaceList returns all the interfaces supported by the module*/
 CK_PKCS11_FUNCTION_INFO(C_GetInterfaceList)
 #ifdef CK_NEED_ARG_LIST
 (

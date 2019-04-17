@@ -324,11 +324,12 @@ typedef CK_ULONG          CK_OBJECT_CLASS;
 typedef CK_OBJECT_CLASS CK_PTR CK_OBJECT_CLASS_PTR;
 
 /* Profile ID's */
-#define CKP_INVALID_ID           0x00000000UL
-#define CKP_BASELINE_PROVIDER    0x00000001UL
-#define CKP_EXTENDED_PROVIDER    0x00000002UL
-#define CKP_AUTHENTICATION_TOKEN 0x00000003UL
-#define CKP_VENDOR_DEFINED       0x80000000UL
+#define CKP_INVALID_ID                0x00000000UL
+#define CKP_BASELINE_PROVIDER         0x00000001UL
+#define CKP_EXTENDED_PROVIDER         0x00000002UL
+#define CKP_AUTHENTICATION_TOKEN      0x00000003UL
+#define CKP_PUBLIC_CERTIFICATES_TOKEN 0x00000004UL
+#define CKP_VENDOR_DEFINED            0x80000000UL
 
 /* CK_HW_FEATURE_TYPE is a value that identifies the hardware feature type
  * of an object with CK_OBJECT_CLASS equal to CKO_HW_FEATURE.
@@ -407,6 +408,7 @@ typedef CK_ULONG          CK_KEY_TYPE;
 #define CKK_X2RATCHET           0x0000003fUL
 #define CKK_EC_EDWARDS          0x00000040UL
 #define CKK_EC_MONTGOMERY       0x00000041UL
+#define CKK_HKDF                0x00000042UL
 
 #define CKK_VENDOR_DEFINED      0x80000000UL
 
@@ -1080,6 +1082,10 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_X2RATCHET_ENCRYPT          0x00004027UL
 #define CKM_X2RATCHET_DECRYPT          0x00004028UL
 #define CKM_XEDDSA                     0x00004029UL
+#define CKM_HKDF_DERIVE                0x0000402aUL
+#define CKM_HKDF_DATA                  0x0000402bUL
+#define CKM_HKDF_KEY_GEN               0x0000402cUL
+
 #define CKM_ECDSA_SHA3_224             0x00001047UL
 #define CKM_ECDSA_SHA3_256             0x00001048UL
 #define CKM_ECDSA_SHA3_384             0x00001049UL

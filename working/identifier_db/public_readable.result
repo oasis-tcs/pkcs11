@@ -1,0 +1,8 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Profile Object ".
+
+Profile id:
+
+ #define PUBLIC_CERTIFICATES_TOKEN 0x00000004UL
+
+This represents the following changes to your original proposal:

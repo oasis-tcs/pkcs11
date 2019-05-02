@@ -1155,7 +1155,7 @@ typedef struct CK_MECHANISM_INFO {
 #define CKF_EC_F_2M            0x00200000UL
 #define CKF_EC_ECPARAMETERS    0x00400000UL
 #define CKF_EC_OID             0x00800000UL
-#define CKF_EC_NAMEDCURVE      CKF_EC_OID
+#define CKF_EC_NAMEDCURVE      CKF_EC_OID   /* deprecated since PKCS#11 3.00 */
 #define CKF_EC_UNCOMPRESS      0x01000000UL
 #define CKF_EC_COMPRESS        0x02000000UL
 #define CKF_EC_CURVENAME       0x04000000UL
@@ -2382,6 +2382,21 @@ typedef struct CK_XEDDSA_PARAMS {
 } CK_XEDDSA_PARAMS;
 typedef CK_XEDDSA_PARAMS CK_PTR CK_XEDDSA_PARAMS_PTR;
 
+typedef struct CK_HKDF_PARAMS {
+   CK_BOOL bExtract;
+   CK_BOOL bExpand;
+   CK_MECHANISM_TYPE prfHashMechanism;
+   CK_ULONG ulSaltType;
+   CK_BYTE_PTR pSalt;
+   CK_ULONG ulSaltLen;
+   CK_HANDLE hSaltKey;
+   CK_BYTE_PTR pInfo;
+   CK_ULONG ulInfoLen;
+} CK_HKDF_PARAMS;
+
+#define CKF_HKDF_SALT_NULL   0x00000001UL
+#define CKF_HKDF_SALT_DATA   0x00000002UL
+#define CKF_HKDF_SALT_KEY    0x00000004UL
 
 #endif /* _PKCS11T_H_ */
 

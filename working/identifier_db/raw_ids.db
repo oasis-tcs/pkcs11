@@ -217,6 +217,9 @@ CKG_GENERATE_RANDOM,0x00000003,generator_functions,approved
 CKH_MONOTONIC_COUNTER,0x00000001,hardware_features,spec
 CKH_CLOCK,0x00000002,hardware_features,spec
 CKH_USER_INTERFACE,0x00000003,hardware_features,spec
+CKF_HKDF_SALT_NULL,0x00000001,hkdf_flags,approved
+CKF_HKDF_SALT_DATA,0x00000002,hkdf_flags,approved
+CKF_HKDF_SALT_KEY,0x00000004,hkdf_flags,approved
 CKF_LIBRARY_CANT_CREATE_OS_THREADS,0x00000001,init_flags,spec
 CKF_OS_LOCKING_OK,0x00000002,init_flags,spec
 CKD_NULL,0x00000001,kdf,spec

@@ -1,0 +1,10 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "HKDF flags".
+
+Hkdf flags:
+
+ #define CKF_HKDF_SALT_NULL 0x00000001UL
+ #define CKF_HKDF_SALT_DATA 0x00000002UL
+ #define CKF_HKDF_SALT_KEY  0x00000004UL
+
+This represents the following changes to your original proposal:

@@ -1,0 +1,13 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Add mechanisms created in previous spec but never allocated.".
+
+Mechanisms:
+
+ #define CKM_DSA_FIPS_G_GEN               0x00002005UL
+ #define CKM_EC_KEY_PAIR_GEN_W_EXTRA_BITS 0x0000140bUL
+ #define CKM_SALSA20_KEY_GEN              0x0000402dUL
+
+This represents the following changes to your original proposal:
+    CKM_SALSA20_KEY_GEN was allocated 0x402d because no number was proposed
+
+Please update your spec before sending it to ballot.

@@ -392,6 +392,7 @@ CKM_XEDDSA,0x00004029,mechanisms,approved
 CKM_HKDF_DERIVE,0x0000402a,mechanisms,proposed
 CKM_HKDF_DATA,0x0000402b,mechanisms,proposed
 CKM_HKDF_KEY_GEN,0x0000402c,mechanisms,proposed
+CKM_SALSA20_KEY_GEN,0x0000402d,mechanisms,proposed
 CKM_DSA,0x00000011,mechanisms,spec
 CKM_DSA_SHA1,0x00000012,mechanisms,spec
 CKM_DSA_SHA224,0x00000013,mechanisms,spec
@@ -540,6 +541,7 @@ CKM_X9_42_DH_HYBRID_DERIVE,0x00000032,mechanisms,spec
 CKM_X9_42_MQV_DERIVE,0x00000033,mechanisms,spec
 CKM_MD2,0x00000200,mechanisms,spec
 CKM_MD2_HMAC,0x00000201,mechanisms,spec
+CKM_EC_KEY_PAIR_GEN_W_EXTRA_BITS,0x0000140b,mechanisms,proposed
 CKM_MD2_HMAC_GENERAL,0x00000202,mechanisms,spec
 CKM_MD5,0x00000210,mechanisms,spec
 CKM_MD5_HMAC,0x00000211,mechanisms,spec
@@ -635,6 +637,7 @@ CKM_DH_PKCS_PARAMETER_GEN,0x00002001,mechanisms,spec
 CKM_X9_42_DH_PARAMETER_GEN,0x00002002,mechanisms,spec
 CKM_DSA_PROBABLISTIC_PARAMETER_GEN,0x00002003,mechanisms,spec
 CKM_DSA_SHAWE_TAYLOR_PARAMETER_GEN,0x00002004,mechanisms,spec
+CKM_DSA_FIPS_G_GEN,0x00002005,mechanisms,proposed
 CKM_SHA512_T_HMAC_GENERAL,0x00000052,mechanisms,spec
 CKM_RC5_MAC_GENERAL,0x00000334,mechanisms,spec
 CKM_RC5_CBC_PAD,0x00000335,mechanisms,spec

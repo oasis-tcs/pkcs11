@@ -1,0 +1,4 @@
+C_SessionCancel - error messages
+
+Errors
+#define CKR_OPERATION_CANCEL_FAILED 0x00000000

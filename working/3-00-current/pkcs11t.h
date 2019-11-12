@@ -2392,13 +2392,13 @@ typedef struct CK_XEDDSA_PARAMS {
 typedef CK_XEDDSA_PARAMS CK_PTR CK_XEDDSA_PARAMS_PTR;
 
 typedef struct CK_HKDF_PARAMS {
-   CK_BOOL bExtract;
-   CK_BOOL bExpand;
+   CK_BBOOL bExtract;
+   CK_BBOOL bExpand;
    CK_MECHANISM_TYPE prfHashMechanism;
    CK_ULONG ulSaltType;
    CK_BYTE_PTR pSalt;
    CK_ULONG ulSaltLen;
-   CK_HANDLE hSaltKey;
+   CK_OBJECT_HANDLE hSaltKey;
    CK_BYTE_PTR pInfo;
    CK_ULONG ulInfoLen;
 } CK_HKDF_PARAMS;

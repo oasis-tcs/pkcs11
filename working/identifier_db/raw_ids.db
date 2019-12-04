@@ -738,7 +738,7 @@ CKF_EC_F_2M,0x00200000,mechanisms_flags,spec
 CKF_EXTENSION,0x80000000,mechanisms_flags,spec
 CKF_ENCRYPT,0x00000100,mechanisms_flags,spec
 CKF_UNWRAP,0x00040000,mechanisms_flags,spec
-CKF_MULTI_MESSGE,0x00000020,mechanisms_flags,approved
+CKF_MULTI_MESSAGE,0x00000020,mechanisms_flags,approved
 CKF_GENERATE,0x00008000,mechanisms_flags,spec
 CKF_EC_COMPRESS,0x02000000,mechanisms_flags,spec
 CKF_MESSAGE_DECRYPT,0x00000004,mechanisms_flags,approved

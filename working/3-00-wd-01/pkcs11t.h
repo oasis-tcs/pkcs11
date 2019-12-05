@@ -410,6 +410,10 @@ typedef CK_ULONG          CK_KEY_TYPE;
 #define CKK_EC_MONTGOMERY       0x00000041UL
 #define CKK_HKDF                0x00000042UL
 
+#define CKK_SHA512_224_HMAC     0x00000043UL
+#define CKK_SHA512_256_HMAC     0x00000044UL
+#define CKK_SHA512_T_HMAC       0x00000045UL
+
 #define CKK_VENDOR_DEFINED      0x80000000UL
 
 
@@ -583,6 +587,24 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 #define CKA_SUPPORTED_CMS_ATTRIBUTES    0x00000503UL
 #define CKA_ALLOWED_MECHANISMS          (CKF_ARRAY_ATTRIBUTE|0x00000600UL)
 #define CKA_PROFILE_ID                  0x00000601UL
+
+#define CKA_X2RATCHET_BAG               0x00000602UL
+#define CKA_X2RATCHET_BAGSIZE           0x00000603UL
+#define CKA_X2RATCHET_BOBS1STMSG        0x00000604UL
+#define CKA_X2RATCHET_CKR               0x00000605UL
+#define CKA_X2RATCHET_CKS               0x00000606UL
+#define CKA_X2RATCHET_DHP               0x00000607UL
+#define CKA_X2RATCHET_DHR               0x00000608UL
+#define CKA_X2RATCHET_DHS               0x00000609UL
+#define CKA_X2RATCHET_HKR               0x0000060aUL
+#define CKA_X2RATCHET_HKS               0x0000060bUL
+#define CKA_X2RATCHET_ISALICE           0x0000060cUL
+#define CKA_X2RATCHET_NHKR              0x0000060dUL
+#define CKA_X2RATCHET_NHKS              0x0000060eUL
+#define CKA_X2RATCHET_NR                0x0000060fUL
+#define CKA_X2RATCHET_NS                0x00000610UL
+#define CKA_X2RATCHET_PNS               0x00000611UL
+#define CKA_X2RATCHET_RK                0x00000612UL
 
 #define CKA_VENDOR_DEFINED              0x80000000UL
 
@@ -1411,6 +1433,11 @@ typedef CK_RSA_PKCS_MGF_TYPE CK_PTR CK_RSA_PKCS_MGF_TYPE_PTR;
 #define CKG_MGF1_SHA384       0x00000003UL
 #define CKG_MGF1_SHA512       0x00000004UL
 #define CKG_MGF1_SHA224       0x00000005UL
+#define CKG_MGF1_SHA3_224     0x00000006UL
+#define CKG_MGF1_SHA3_256     0x00000007UL
+#define CKG_MGF1_SHA3_384     0x00000008UL
+#define CKG_MGF1_SHA3_512     0x00000009UL
+
 
 /* CK_RSA_PKCS_OAEP_SOURCE_TYPE  is used to indicate the source
  * of the encoding parameter when formatting a message block

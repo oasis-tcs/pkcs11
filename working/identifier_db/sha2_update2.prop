@@ -1,0 +1,7 @@
+SHA2 update 2
+
+Key Types
+#define CKK_SHA512_224_HMAC TBD
+#define CKK_SHA512_256_HMAC TBD
+#define CKK_SHA512_T_HMAC TBD
+

@@ -1073,14 +1073,14 @@ CK_PKCS11_FUNCTION_INFO(C_DecryptMessageBegin)
 CK_PKCS11_FUNCTION_INFO(C_DecryptMessageNext)
 #ifdef CK_NEED_ARG_LIST
 (
-  CK_SESSION_HANDLE hSession,   /* the session's handle */
-  CK_VOID_PTR pParameter,       /* message specific parameter */
-  CK_ULONG ulParameterLen,      /* length of message specific parameter */
-  CK_BYTE_PTR pCiphertext,      /* cipher text */
-  CK_ULONG ulCiphertextLen,     /* cipher text length */
-  CK_BYTE_PTR pPlaintext,       /* gets plain text */
-  CK_ULONG_PTR pulPlaintextLen,  /* gets plain text length */
-  CK_FLAGS flags                /* multi mode flag */
+  CK_SESSION_HANDLE hSession,        /* the session's handle */
+  CK_VOID_PTR pParameter,            /* message specific parameter */
+  CK_ULONG ulParameterLen,           /* length of message specific parameter */
+  CK_BYTE_PTR pCiphertextPart,       /* cipher text */
+  CK_ULONG ulCiphertextPartLen,      /* cipher text length */
+  CK_BYTE_PTR pPlaintextPart,        /* gets plain text */
+  CK_ULONG_PTR pulPlaintextPartLen,  /* gets plain text length */
+  CK_FLAGS flags                     /* multi mode flag */
 );
 #endif
 

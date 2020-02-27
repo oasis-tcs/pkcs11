@@ -51,7 +51,7 @@ extern "C" {
  *
  * typedef CK_BYTE CK_PTR CK_BYTE_PTR;
  *
- * If you're using windows, it might be defined by:
+ * If you're using Windows, it might be defined by:
  *
  * #define CK_PTR *
  *
@@ -69,7 +69,7 @@ extern "C" {
  *   CK_VOID_PTR pReserved
  * );
  *
- * If you're using Windows to declare a function in a Win32 cryptoki .dll, 
+ * If you're using Windows to declare a function in a Win32 Cryptoki .dll, 
  * it might be defined by:
  *
  * #define CK_DECLARE_FUNCTION(returnType, name) \

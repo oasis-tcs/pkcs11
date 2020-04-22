@@ -1,0 +1,17 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "IKE PRF derives".
+
+Mechanisms:
+
+ #define CKM_IKE2_PRF_PLUS_DERIVE 0x0000402eUL
+ #define CKM_IKE_PRF_DERIVE       0x0000402fUL
+ #define CKM_IKE1_PRF_DERIVE      0x00004030UL
+ #define CKM_IKE1_EXTENDED_DERIVE 0x00004031UL
+
+This represents the following changes to your original proposal:
+    CKM_IKE2_PRF_PLUS_DERIVE was allocated 0x402e because no number was proposed
+    CKM_IKE_PRF_DERIVE was allocated 0x402f because no number was proposed
+    CKM_IKE1_PRF_DERIVE was allocated 0x4030 because no number was proposed
+    CKM_IKE1_EXTENDED_DERIVE was allocated 0x4031 because no number was proposed
+
+Please update your spec before sending it to ballot.

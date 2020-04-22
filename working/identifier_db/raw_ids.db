@@ -414,6 +414,10 @@ CKM_HKDF_DERIVE,0x0000402a,mechanisms,spec
 CKM_HKDF_DATA,0x0000402b,mechanisms,spec
 CKM_HKDF_KEY_GEN,0x0000402c,mechanisms,spec
 CKM_SALSA20_KEY_GEN,0x0000402d,mechanisms,spec
+CKM_IKE2_PRF_PLUS_DERIVE,0x0000402e,mechanisms,proposed
+CKM_IKE_PRF_DERIVE,0x0000402f,mechanisms,proposed
+CKM_IKE1_PRF_DERIVE,0x00004030,mechanisms,proposed
+CKM_IKE1_EXTENDED_DERIVE,0x00004031,mechanisms,proposed
 CKM_DSA,0x00000011,mechanisms,spec
 CKM_DSA_SHA1,0x00000012,mechanisms,spec
 CKM_DSA_SHA224,0x00000013,mechanisms,spec

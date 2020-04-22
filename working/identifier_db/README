@@ -10,9 +10,10 @@ proposals on the OASIS PKCS #11 page.
 The tools in this directory include:
 1) sample.prop - a sample proposal
 2) ./process_proposal.pl - perl script to allocate idenifiers for a proposal.
-2) ./approve_proposal.pl - perl script to move proposed mechanisms to approved mechanisms
-4) ./verify.pl - perl script to verify the integrity of the database.
-5) raw_ids.db - database of allocated identifiers.
+3) ./approve_proposal.pl - perl script to move proposed mechanisms to approved mechanisms
+4) ./release.pl - perl script to move approved identifiers to spec identifies.
+5) ./verify.pl - perl script to verify the integrity of the database.
+6) raw_ids.db - database of allocated identifiers.
 
 -----------------------------------------------------------------
 

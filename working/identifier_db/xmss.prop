@@ -1,0 +1,21 @@
+XMSS and XMSSMT definitions
+
+Errors:
+#define CKR_KEY_EXHAUSTED 		0x00000203UL
+
+
+Key types:
+#define CKK_XMSS 				0x00000047UL
+#define CKK_XMSSMT 			0x00000048UL
+
+
+Mechanisms:
+#define CKM_XMSS_KEY_PAIR_GEN 		0x00004033UL
+#define CKM_XMSSMT_KEY_PAIR_GEN 	0x00004034UL
+#define CKM_XMSS				0x00004035UL
+#define CKM_XMSSMT 			0x00004036UL
+
+
+Attributes:
+#define CKA_XMSS_PARAMS 			0x00000615UL
+#define CKA_XMSSMT_PARAMS 		0x00000616UL

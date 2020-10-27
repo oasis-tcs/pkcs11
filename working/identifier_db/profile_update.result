@@ -1,0 +1,13 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Profile Update 3.1".
+
+Profile id:
+
+ #define CKP_COMPLETE_PROVIDER 0x00000005UL
+ #define CKP_HKDF_TLS_TOKEN    0x00000006UL
+
+This represents the following changes to your original proposal:
+    CKP_COMPLETE_PROVIDER was allocated 0x5 because no number was proposed
+    CKP_HKDF_TLS_TOKEN was allocated 0x6 because no number was proposed
+
+Please update your spec before sending it to ballot.

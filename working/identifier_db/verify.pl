@@ -6,6 +6,7 @@ sub print_types;
 sub isflag;
 
 my $database_file="raw_ids.db";
+my $system_file="system_ids.db";
 my $alias_file="aliases.db";
 my $default_header = "../3-00-wd-01/pkcs11t.h";
 glob %types = ();
@@ -169,6 +170,63 @@ while (<$database>){
     }
 }
 close($database);
+
+open(my $systembase, "<", $system_file) or die "Can't open $system_file: $!";
+while (<$systembase>){
+    chomp;
+    @db = split(",");
+    $name = $db[0];
+    $number_string = $db[1];
+    $type = $db[2];
+    $disposition = $db[3];
+    $number=hex($number_string);
+    if (exists $system_number{$name}) {
+	printf "invalid db entry: duplicate name: $name \n";
+	printf "0x%08x and 0x%08x\n >>$_\n",$databas_number{$name},$number;
+	next;
+    }
+    $system_number{$name} = $number;
+    if ($ARGV[0] eq "header") {
+	$flag_missing = 0;
+        if (($verifyHeaderFull == 1) or ($disposition ne "proposed")) {
+	    $flag_missing = 1;
+        }
+        if ($header_present{$name} == 1) {
+	    $header_found{$name} = 1;
+        }
+
+	if (($flag_missing == 1) and ($header_present{$name} == 0)) {
+	    
+	    printf " missing: #define %-20s 0x%08xUL /*  system - $disposition*/\n",
+	      $name, $number;
+	    next;
+        }
+	if ($flag_missing == 0) {
+	    if ($header_present{$name} == 1) {
+		printf " proposed in header: $header_line{$name}\n";
+		printf "  #define %-20s 0x%08xUL /* system - $disposition*/\n",
+		  $name, $number;
+	    }
+	    next;
+        }
+        if ($header_number{$name} != $number) {
+	    printf " mismatch: $name, header: $header_line{$name}\n";
+            printf "  #define %-20s 0x%08xUL /* system - $disposition db */\n",
+	           $name, $number;
+        }
+        next;
+    }
+    if ($ARGV[0] eq "dump") {
+        printf "#define %-20s 0x%08xUL /* system - $disposition */\n", $name,$number;
+    }
+    if ($ARGV[0] eq $disposition) {
+        printf "#define %-20s 0x%08xUL /* system */\n", $name,$number;
+    }
+    if ($ARGV[0] eq "system") {
+        printf "#define %-20s 0x%08xUL /* $disposition */\n", $name, $number;
+    }
+}
+close($systembase);
 
 # output results
 #

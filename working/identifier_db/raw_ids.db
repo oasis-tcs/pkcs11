@@ -47,7 +47,7 @@ CKA_X2RATCHET_NR,0x0000060f,attributes,spec
 CKA_X2RATCHET_NS,0x00000610,attributes,spec
 CKA_X2RATCHET_PNS,0x00000611,attributes,spec
 CKA_X2RATCHET_RK,0x00000612,attributes,spec
-CKA_HSS_PARAMS,0x00000613,attributes,proposed
+CKA_HSS_PARAMS,0x00000613,attributes,approved
 CKA_XMSS_PARAMS,0x00000615,attributes,proposed
 CKA_XMSSMT_PARAMS,0x00000616,attributes,proposed
 CKA_APPLICATION,0x00000010,attributes,spec
@@ -217,7 +217,7 @@ CKR_DEVICE_REMOVED,0x00000032,errors,spec
 CKR_FUNCTION_REJECTED,0x00000200,errors,spec
 CKR_TOKEN_RESOURCE_EXCEEDED,0x00000201,errors,spec
 CKR_OPERATION_CANCEL_FAILED,0x00000202,errors,spec
-CKR_KEY_EXHAUSTED,0x00000203,errors,proposed
+CKR_KEY_EXHAUSTED,0x00000203,errors,approved
 CKR_FUNCTION_FAILED,0x00000006,errors,spec
 CKR_ENCRYPTED_DATA_INVALID,0x00000040,errors,spec
 CKR_ENCRYPTED_DATA_LEN_RANGE,0x00000041,errors,spec
@@ -236,6 +236,7 @@ CKG_NO_GENERATE,0x00000000,generator_functions,spec
 CKG_GENERATE,0x00000001,generator_functions,spec
 CKG_GENERATE_COUNTER,0x00000002,generator_functions,spec
 CKG_GENERATE_RANDOM,0x00000003,generator_functions,spec
+CKG_GENERATE_RANDOM_XOR,0x00000004,generator_functions,approved
 CKH_MONOTONIC_COUNTER,0x00000001,hardware_features,spec
 CKH_CLOCK,0x00000002,hardware_features,spec
 CKH_USER_INTERFACE,0x00000003,hardware_features,spec
@@ -330,7 +331,7 @@ CKK_HKDF,0x00000042,key_types,spec
 CKK_SHA512_224_HMAC,0x00000043,key_types,spec
 CKK_SHA512_256_HMAC,0x00000044,key_types,spec
 CKK_SHA512_T_HMAC,0x00000045,key_types,spec
-CKK_HSS,0x00000046,key_types,proposed
+CKK_HSS,0x00000046,key_types,approved
 CKK_XMSS,0x00000047,key_types,proposed
 CKK_XMSSMT,0x00000048,key_types,proposed
 CKM_RSA_PKCS_KEY_PAIR_GEN,0x00000000,mechanisms,spec
@@ -421,12 +422,12 @@ CKM_HKDF_DERIVE,0x0000402a,mechanisms,spec
 CKM_HKDF_DATA,0x0000402b,mechanisms,spec
 CKM_HKDF_KEY_GEN,0x0000402c,mechanisms,spec
 CKM_SALSA20_KEY_GEN,0x0000402d,mechanisms,spec
-CKM_IKE2_PRF_PLUS_DERIVE,0x0000402e,mechanisms,proposed
-CKM_IKE_PRF_DERIVE,0x0000402f,mechanisms,proposed
-CKM_IKE1_PRF_DERIVE,0x00004030,mechanisms,proposed
-CKM_IKE1_EXTENDED_DERIVE,0x00004031,mechanisms,proposed
-CKM_HSS_KEY_PAIR_GEN,0x00004032,mechanisms,proposed
-CKM_HSS,0x00004033,mechanisms,proposed
+CKM_IKE2_PRF_PLUS_DERIVE,0x0000402e,mechanisms,approved
+CKM_IKE_PRF_DERIVE,0x0000402f,mechanisms,approved
+CKM_IKE1_PRF_DERIVE,0x00004030,mechanisms,approved
+CKM_IKE1_EXTENDED_DERIVE,0x00004031,mechanisms,approved
+CKM_HSS_KEY_PAIR_GEN,0x00004032,mechanisms,approved
+CKM_HSS,0x00004033,mechanisms,approved
 CKM_XMSS_KEY_PAIR_GEN,0x00004034,mechanisms,proposed
 CKM_XMSSMT_KEY_PAIR_GEN,0x00004035,mechanisms,proposed
 CKM_XMSS,0x00004036,mechanisms,proposed
@@ -837,8 +838,8 @@ CKP_BASELINE_PROVIDER,0x00000001,profile_id,spec
 CKP_EXTENDED_PROVIDER,0x00000002,profile_id,spec
 CKP_AUTHENTICATION_TOKEN,0x00000003,profile_id,spec
 CKP_PUBLIC_CERTIFICATES_TOKEN,0x00000004,profile_id,spec
-CKP_COMPLETE_PROVIDER,0x00000005,profile_id,proposed
-CKP_HKDF_TLS_TOKEN,0x00000006,profile_id,proposed
+CKP_COMPLETE_PROVIDER,0x00000005,profile_id,approved
+CKP_HKDF_TLS_TOKEN,0x00000006,profile_id,approved
 CKP_PKCS5_PBKD2_HMAC_SHA1,0x00000001,pseudo_random_function,spec
 CKP_PKCS5_PBKD2_HMAC_GOSTR3411,0x00000002,pseudo_random_function,spec
 CKP_PKCS5_PBKD2_HMAC_SHA224,0x00000003,pseudo_random_function,spec

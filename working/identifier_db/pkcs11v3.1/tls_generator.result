@@ -1,0 +1,8 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "TLS AEAD generator".
+
+Generator functions:
+
+ #define CKG_GENERATE_RANDOM_XOR 0x00000004UL
+
+This represents the following changes to your original proposal:

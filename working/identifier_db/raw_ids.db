@@ -236,7 +236,7 @@ CKG_NO_GENERATE,0x00000000,generator_functions,spec
 CKG_GENERATE,0x00000001,generator_functions,spec
 CKG_GENERATE_COUNTER,0x00000002,generator_functions,spec
 CKG_GENERATE_RANDOM,0x00000003,generator_functions,spec
-CKG_GENERATE_RANDOM_XOR,0x00000004,generator_functions,approved
+CKG_GENERATE_COUNTER_XOR,0x00000004,generator_functions,approved
 CKH_MONOTONIC_COUNTER,0x00000001,hardware_features,spec
 CKH_CLOCK,0x00000002,hardware_features,spec
 CKH_USER_INTERFACE,0x00000003,hardware_features,spec

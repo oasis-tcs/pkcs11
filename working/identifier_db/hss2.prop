@@ -1,0 +1,9 @@
+HSS stateful hash based signatures 2
+
+Attributes
+#define CKA_HSS_LEVELS		0x0
+#define CKA_HSS_LMS_TYPE	0x0
+#define CKA_HSS_LMOTS_TYPE	0x0
+#define CKA_HSS_LMS_TYPES	0x0
+#define CKA_HSS_LMOTS_TYPES	0x0
+#define CKA_HSS_KEYS_REMAINING	0x0

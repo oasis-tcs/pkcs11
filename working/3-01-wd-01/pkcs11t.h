@@ -609,7 +609,13 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 #define CKA_X2RATCHET_NS                0x00000610UL
 #define CKA_X2RATCHET_PNS               0x00000611UL
 #define CKA_X2RATCHET_RK                0x00000612UL
-#define CKA_HSS_PARAMS                  0x00000613UL
+/* HSS */
+#define CKA_HSS_LEVELS                  0x00000617UL
+#define CKA_HSS_LMS_TYPE                0x00000618UL
+#define CKA_HSS_LMOTS_TYPE              0x00000619UL
+#define CKA_HSS_LMS_TYPES               0x0000061aUL
+#define CKA_HSS_LMOTS_TYPES             0x0000061bUL
+#define CKA_HSS_KEYS_REMAINING          0x0000061cUL
 
 #define CKA_VENDOR_DEFINED              0x80000000UL
 
@@ -998,8 +1004,8 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_ECDH1_COFACTOR_DERIVE      0x00001051UL
 #define CKM_ECMQV_DERIVE               0x00001052UL
 
-#define CKM_RESERVED_0                 0x00001053UL
-#define CKM_RESERVED_1                 0x00001054UL
+#define CKM_ECDH_AES_KEY_WRAP          0x00001053UL
+#define CKM_RSA_AES_KEY_WRAP           0x00001054UL
 
 #define CKM_JUNIPER_KEY_GEN            0x00001060UL
 #define CKM_JUNIPER_ECB128             0x00001061UL
@@ -1075,6 +1081,7 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_AES_KEY_WRAP               0x00002109UL     /* WAS: 0x00001090 */
 #define CKM_AES_KEY_WRAP_PAD           0x0000210AUL     /* WAS: 0x00001091 */
 #define CKM_AES_KEY_WRAP_KWP           0x0000210BUL
+#define CKM_AES_KEY_WRAP_PKCS7         0x0000210CUL
 
 #define CKM_RSA_PKCS_TPM_1_1           0x00004001UL
 #define CKM_RSA_PKCS_OAEP_TPM_1_1      0x00004002UL

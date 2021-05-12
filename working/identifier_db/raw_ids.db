@@ -47,9 +47,14 @@ CKA_X2RATCHET_NR,0x0000060f,attributes,spec
 CKA_X2RATCHET_NS,0x00000610,attributes,spec
 CKA_X2RATCHET_PNS,0x00000611,attributes,spec
 CKA_X2RATCHET_RK,0x00000612,attributes,spec
-CKA_HSS_PARAMS,0x00000613,attributes,approved
 CKA_XMSS_PARAMS,0x00000615,attributes,proposed
 CKA_XMSSMT_PARAMS,0x00000616,attributes,proposed
+CKA_HSS_LEVELS,0x00000617,attributes,approved
+CKA_HSS_LMS_TYPE,0x00000618,attributes,approved
+CKA_HSS_LMOTS_TYPE,0x00000619,attributes,approved
+CKA_HSS_LMS_TYPES,0x0000061a,attributes,approved
+CKA_HSS_LMOTS_TYPES,0x0000061b,attributes,approved
+CKA_HSS_KEYS_REMAINING,0x0000061c,attributes,approved
 CKA_APPLICATION,0x00000010,attributes,spec
 CKA_VALUE,0x00000011,attributes,spec
 CKA_OBJECT_ID,0x00000012,attributes,spec
@@ -516,8 +521,8 @@ CKM_ECDSA_SHA3_512,0x0000104a,mechanisms,spec
 CKM_ECDH1_DERIVE,0x00001050,mechanisms,spec
 CKM_ECDH1_COFACTOR_DERIVE,0x00001051,mechanisms,spec
 CKM_ECMQV_DERIVE,0x00001052,mechanisms,spec
-CKM_RESERVED_0,0x00001053,mechanisms,spec
-CKM_RESERVED_1,0x00001054,mechanisms,spec
+CKM_ECDH_AES_KEY_WRAP,0x00001053,mechanisms,spec
+CKM_RSA_AES_KEY_WRAP,0x00001054,mechanisms,spec
 CKM_EC_EDWARDS_KEY_PAIR_GEN,0x00001055,mechanisms,spec
 CKM_EC_MONTGOMERY_KEY_PAIR_GEN,0x00001056,mechanisms,spec
 CKM_EDDSA,0x00001057,mechanisms,spec
@@ -695,6 +700,7 @@ CKM_AES_CFB1,0x00002108,mechanisms,spec
 CKM_AES_KEY_WRAP,0x00002109,mechanisms,spec
 CKM_AES_KEY_WRAP_PAD,0x0000210a,mechanisms,spec
 CKM_AES_KEY_WRAP_KWP,0x0000210b,mechanisms,spec
+CKM_AES_KEY_WRAP_PKCS7,0x0000210c,mechanisms,approved
 CKM_GENERIC_SECRET_KEY_GEN,0x00000350,mechanisms,spec
 CKM_CONCATENATE_BASE_AND_KEY,0x00000360,mechanisms,spec
 CKM_CONCATENATE_BASE_AND_DATA,0x00000362,mechanisms,spec

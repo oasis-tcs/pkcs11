@@ -1,8 +1,0 @@
-In accordance to our standing rules, the following identifiers have been
-allocated for your proposal "AES Key Wrap Update 2".
-
-Mechanisms:
-
- #define CKM_AES_KEY_WRAP_PKCS7 0x0000210cUL
-
-This represents the following changes to your original proposal:

@@ -1,8 +1,0 @@
-In accordance to our standing rules, the following identifiers have been
-allocated for your proposal "Add EC Curvename".
-
-Mechanisms flags:
-
- #define CKF_EC_CURVENAME 0x04000000UL
-
-This represents the following changes to your original proposal:

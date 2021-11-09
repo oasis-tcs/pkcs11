@@ -1,8 +1,0 @@
-AES XTS
-
-Key_types
-#define CKK_AES_XTS		0x0000002A
-
-Mechanisms
-#define CKM_AES_XTS		0x00001071
-#define CKM_AES_XTS_KEY_GEN	0x00001072

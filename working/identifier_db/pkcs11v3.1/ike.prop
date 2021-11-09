@@ -1,8 +1,0 @@
-IKE PRF derives
-
-Mechanisms
-#define CKM_IKE2_PRF_PLUS_DERIVE  0x0
-#define CKM_IKE_PRF_DERIVE        0x0
-#define CKM_IKE1_PRF_DERIVE       0x0
-#define CKM_IKE1_EXTENDED_DERIVE  0x0
-

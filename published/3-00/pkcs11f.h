@@ -1,12 +1,8 @@
-/* Copyright (c) OASIS Open 2016, 2019. All Rights Reserved./
+/* Copyright (c) OASIS Open 2016-2020. All Rights Reserved.
  * /Distributed under the terms of the OASIS IPR Policy,
  * [http://www.oasis-open.org/policies-guidelines/ipr], AS-IS, WITHOUT ANY
  * IMPLIED OR EXPRESS WARRANTY; there is no warranty of MERCHANTABILITY, FITNESS FOR A
  * PARTICULAR PURPOSE or NONINFRINGEMENT of the rights of others.
- */
-
-/* Latest version of the specification:
- * http://docs.oasis-open.org/pkcs11/pkcs11-base/v2.40/pkcs11-base-v2.40.html
  */
 
 /* This header file contains pretty much everything about all the
@@ -1073,14 +1069,14 @@ CK_PKCS11_FUNCTION_INFO(C_DecryptMessageBegin)
 CK_PKCS11_FUNCTION_INFO(C_DecryptMessageNext)
 #ifdef CK_NEED_ARG_LIST
 (
-  CK_SESSION_HANDLE hSession,        /* the session's handle */
-  CK_VOID_PTR pParameter,            /* message specific parameter */
-  CK_ULONG ulParameterLen,           /* length of message specific parameter */
-  CK_BYTE_PTR pCiphertextPart,       /* cipher text */
-  CK_ULONG ulCiphertextPartLen,      /* cipher text length */
-  CK_BYTE_PTR pPlaintextPart,        /* gets plain text */
-  CK_ULONG_PTR pulPlaintextPartLen,  /* gets plain text length */
-  CK_FLAGS flags                     /* multi mode flag */
+  CK_SESSION_HANDLE hSession,   /* the session's handle */
+  CK_VOID_PTR pParameter,       /* message specific parameter */
+  CK_ULONG ulParameterLen,      /* length of message specific parameter */
+  CK_BYTE_PTR pCiphertext,      /* cipher text */
+  CK_ULONG ulCiphertextLen,     /* cipher text length */
+  CK_BYTE_PTR pPlaintext,       /* gets plain text */
+  CK_ULONG_PTR pulPlaintextLen,  /* gets plain text length */
+  CK_FLAGS flags                /* multi mode flag */
 );
 #endif
 

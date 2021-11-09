@@ -1,4 +1,0 @@
-C_SessionCancel
-
-Mechanisms flags
-#define CKF_FIND_OBJECTS 0x00000040

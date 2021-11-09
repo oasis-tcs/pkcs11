@@ -1,4 +1,0 @@
-NULL mechanism
-
-Mechanisms
-#define CKM_NULL		0x00000000

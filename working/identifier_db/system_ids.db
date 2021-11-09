@@ -1,5 +1,0 @@
-CKF_ARRAY_ATTRIBUTE,0x40000000,system_values,spec
-CK_INVALID_HANDLE,0x00000000,system_values,spec
-CK_EFFECTIVELY_INFINITE,0x00000000,system_values,spec
-CK_FALSE,0x00000000,system_values,spec
-CK_TRUE,0x00000001,system_values,spec

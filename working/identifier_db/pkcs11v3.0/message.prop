@@ -1,9 +1,0 @@
-AEAD Message based encryption proposal
-
-Mechanisms_flags
-#define CKF_MESSAGE_ENCRYPT 0x00100000
-#define CKF_MESSAGE_DECRYPT 0x00200000
-#define CKF_MESSAGE_SIGN 0x00400000
-#define CKF_MESSAGE_VERIFY 0x00800000
-#define CKF_MULTI_MESSGE 0x01000000
-

@@ -1,8 +1,0 @@
-SHA3 ECDSA
-
-Mechanisms
-#define CKM_ECDSA_SHA3_224               0x00001047UL
-#define CKM_ECDSA_SHA3_256               0x00001048UL
-#define CKM_ECDSA_SHA3_384               0x00001049UL
-#define CKM_ECDSA_SHA3_512               0x0000104aUL
-

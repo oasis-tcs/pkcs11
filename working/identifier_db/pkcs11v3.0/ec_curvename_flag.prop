@@ -1,4 +1,0 @@
-Add EC Curvename
-
-Mechanisms Flags
-#define CKF_EC_CURVENAME 0x04000000UL

@@ -69,7 +69,7 @@ extern "C" {
  *   CK_VOID_PTR pReserved
  * );
  *
- * If you're using Windows to declare a function in a Win32 Cryptoki .dll, 
+ * If you're using Windows to declare a function in a Win32 Cryptoki .dll,
  * it might be defined by:
  *
  * #define CK_DECLARE_FUNCTION(returnType, name) \

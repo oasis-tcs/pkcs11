@@ -1,4 +1,0 @@
-TLS AEAD generator
-
-Generator Functions
-#define CKG_GENERATE_RANDOM_XOR 	0x4

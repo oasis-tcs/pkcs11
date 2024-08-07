@@ -8,7 +8,7 @@ sub isflag;
 my $database_file="raw_ids.db";
 my $system_file="system_ids.db";
 my $alias_file="aliases.db";
-my $default_header = "../3-01-wd-01/pkcs11t.h";
+my $default_header = "../headers/pkcs11t.h";
 glob %types = ();
 glob %database_name = ();
 glob %database_number = ();

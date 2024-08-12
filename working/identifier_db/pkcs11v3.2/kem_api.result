@@ -1,0 +1,22 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Defines needed for the new KEM API".
+
+Mechanisms:
+
+ #define CKF_ENCAPSULATE 0x0000403aUL
+ #define CKF_DECAPSULATE 0x0000403bUL
+
+Attributes:
+
+ #define CKA_ENCAPSULATE_TEMPLATE 0x00000630UL
+ #define CKA_DECAPSULATE_TEMPLATE 0x00000631UL
+
+This represents the following changes to your original proposal:
+    CKF_ENCAPSULATE was allocated 0x403a because no number was proposed
+    CKF_DECAPSULATE was allocated 0x403b because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKA_ENCAPSULATE_TEMPLATE was allocated 0x630 because no number was proposed
+    CKA_DECAPSULATE_TEMPLATE was allocated 0x631 because no number was proposed
+
+Please update your spec before sending it to ballot.

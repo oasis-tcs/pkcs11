@@ -1,0 +1,37 @@
+Validation Indicators (FIPS 140-3)
+
+New Indicator Flags
+#define CKS_LAST_VALIDATION_OK 0x00000001
+
+New Validation Types
+#define CKV_TYPE_UNSPECIFIED 0x00000000
+#define CKV_TYPE_SOFTWARE    0x00000001
+#define CKV_TYPE_HARDWARE    0x00000002
+#define CKV_TYPE_FIRMWARE    0x00000003
+#define CKV_TYPE_HYBRID      0x00000004
+
+New Validation Authority Type
+#define CKV_AUTHORITY_TYPE_UNSPECIFIED     0x00000000
+#define CKV_AUTHORITY_TYPE_NIST_CMVP       0x00000001
+#define CKV_AUTHORITY_TYPE_COMMON_CRITERIA 0x00000002
+
+Objects
+#define CKO_VALIDATION TBD
+
+Attributes
+#define CKA_VALIDATION_FLAGS                  TBD
+#define CKA_VALIDATION_TYPE                   TBD
+#define CKA_VALIDATION_VERSION                TBD
+#define CKA_VALIDATION_LEVEL                  TBD
+#define CKA_VALIDATION_MODULE_ID              TBD
+#define CKA_VALIDATION_FLAG                   TBD
+#define CKA_VALIDATION_AUTHORITY_TYPE         TBD
+#define CKA_VALIDATION_COUNTRY                TBD
+#define CKA_VALIDATION_CERTIFICATE_IDENTIFIER TBD
+#define CKA_VALIDATION_CERTIFICATE_URI        TBD
+#define CKA_VALIDATION_VENDOR URI             TBD
+#define CKA_VALIDATION_PROFILE                TBD
+
+Errors
+#define CKR_OPERATION_NOT_VALIDATED TBD
+

@@ -1,0 +1,9 @@
+Defines needed for the new KEM API
+
+Mechanisms
+#define CKF_ENCAPSULATE TBD
+#define CKF_DECAPSULATE TBD
+
+Attributes
+#define CKA_ENCAPSULATE_TEMPLATE TBD
+#define CKA_DECAPSULATE_TEMPLATE TBD

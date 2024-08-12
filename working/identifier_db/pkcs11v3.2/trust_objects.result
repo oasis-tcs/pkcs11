@@ -1,0 +1,49 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Add Trust objects to map trust values to certificates".
+
+Objects:
+
+ #define CKO_TRUST 0x0000000bUL
+
+Attributes:
+
+ #define CKA_TRUST_SERVER_AUTH      0x00000629UL
+ #define CKA_TRUST_CLIENT_AUTH      0x0000062aUL
+ #define CKA_TRUST_CODE_SIGNING     0x0000062bUL
+ #define CKA_TRUST_EMAIL_PROTECTION 0x0000062cUL
+ #define CKA_TRUST_IPSEC_IKE        0x0000062dUL
+ #define CKA_TRUST_TIME_STAMPING    0x0000062eUL
+ #define CKA_TRUST_OCSP_SIGNING     0x0000062fUL
+
+Trust states:
+
+ #define CKT_TRUST_UNKNOWN          0x00000001UL
+ #define CKT_TRUSTED                0x00000002UL
+ #define CKT_TRUST_ANCHOR           0x00000003UL
+ #define CKT_NOT_TRUSTED            0x00000004UL
+ #define CK_TRUST_MUST_VERIFY_TRUST 0x00000005UL
+
+This represents the following changes to your original proposal:
+    CKT_TRUST_UNKNOWN was allocated 0x1 because no number was proposed
+    CKT_TRUSTED was changed to 0x2 because the proposed 0x1
+     conflicted with CKT_TRUST_UNKNOWN
+    CKT_TRUST_ANCHOR was changed to 0x3 because the proposed 0x2
+     conflicted with CKT_TRUSTED
+    CKT_NOT_TRUSTED was changed to 0x4 because the proposed 0x3
+     conflicted with CKT_TRUST_ANCHOR
+    CK_TRUST_MUST_VERIFY_TRUST was changed to 0x5 because the proposed 0x4
+     conflicted with CKT_NOT_TRUSTED
+
+Please update your spec before sending it to ballot.
+    CKO_TRUST was allocated 0xb because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKA_TRUST_SERVER_AUTH was allocated 0x629 because no number was proposed
+    CKA_TRUST_CLIENT_AUTH was allocated 0x62a because no number was proposed
+    CKA_TRUST_CODE_SIGNING was allocated 0x62b because no number was proposed
+    CKA_TRUST_EMAIL_PROTECTION was allocated 0x62c because no number was proposed
+    CKA_TRUST_IPSEC_IKE was allocated 0x62d because no number was proposed
+    CKA_TRUST_TIME_STAMPING was allocated 0x62e because no number was proposed
+    CKA_TRUST_OCSP_SIGNING was allocated 0x62f because no number was proposed
+
+Please update your spec before sending it to ballot.

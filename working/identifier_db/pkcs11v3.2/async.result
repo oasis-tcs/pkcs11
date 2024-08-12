@@ -1,0 +1,8 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Asynchronous Operations".
+
+Session flags:
+
+ #define CKF_ASYNC_SESSION 0x00000008UL
+
+This represents the following changes to your original proposal:

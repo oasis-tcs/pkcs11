@@ -1,0 +1,4 @@
+Asynchronous Operations
+
+Session_flags:
+#define CKF_ASYNC_SESSION 0x00000008

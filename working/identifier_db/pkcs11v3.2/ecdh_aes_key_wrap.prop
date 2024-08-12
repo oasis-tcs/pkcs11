@@ -1,0 +1,5 @@
+Separate the two semantics of combined ECDH and AES key wrap into new mechanisms.
+
+Mechanisms
+#define CKM_ECDH_X_AES_KEY_WRAP      TBD
+#define CKM_ECDH_COF_AES_KEY_WRAP    TBD

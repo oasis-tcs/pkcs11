@@ -77,6 +77,7 @@ How to lookup an identifier in the database:
 ./lookup identifier
 
 if identifier is a type or disposition, it does the same as ./verify.pl.
+identifier could also be a hex value, in which case it does a reverse lookup.
 ----------------------------------------------------------------------
 
 Format of raw_ids.db:
@@ -94,5 +95,35 @@ each line is a record.
     approved - the proposal with this identifer has been approved by the TC.
 
 ------------------------------------------------------------------------
+
+How to verify the header file against the spec:
+
+./parse_doc.pl [commands...] [doc_file] [header_file]
+ parse a doc text file and/or a header file and output according
+ to the command:
+    verbose:  output inconsistancies in the doc_file
+    table:  the first two columns of every table in the doc_file
+    defines:  all the defines in both the doc_file and header_file
+    typedefs:  all the typedefs in both the doc_file and header_file
+    structs:  all the structs in both the doc_file and header_file
+    doc_defines:  all the defines in the doc_file
+    doc_typedefs:  all the typedefs in the doc_file
+    doc_structs:  all the structs in the doc_file
+    doc_all:  all the parsed values in the doc_file
+    header_defines:  all the defines in the header_file
+    header_typedefs:  all the typedefs in the header_file
+    header_structs:  all the structs in the header_file
+    header_all:  all the parsed values in the doc_file
+    diff_defines:  the differences betweeen the defines in the doc_file and the header_file
+    diff_typedefs: the differences between the typedefs in doc_file and header_file
+    diff_structs:  the differences between the structs in doc_file andthe header_file
+    diff_all:  all the diffs
+if both files are required, the doc_file must be first, if no
+commands are supplied, then diff_all is assumed
+
+Between ./verify.pl and ./parse_doc.pl it's possible to make sure all the
+defines in the document have been allocated, all the defines that are allocated
+or in the document, and the headers are up to date with both.
+
 
 

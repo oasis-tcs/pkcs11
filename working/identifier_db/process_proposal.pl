@@ -124,7 +124,7 @@ while (<$source>) {
     }
     # see if the proposed number conflicts. If it does pick a new one
     $index=$type."_".$number;
-    if (exists $database_name{$index} or $number == 0) {
+    if (exists $database_name{$index} or (($number == 0) && ($db[2] ne '0x0000000UL'))) {
 	$conflict_name{$type}=$conflict_name{$type}." ".$name;
 	$conflict_old_number{$name}=$number;
     	$number = find_number($type);

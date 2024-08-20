@@ -1,13 +1,13 @@
 New defines to support ML-KEM
 
 Mechanisms
-#define CKM_ML_KEM_KEY_PAIR_GEN TBD
-#define CKM_ML_KEM              TBD
+#define CKM_ML_KEM_KEY_PAIR_GEN TBD opt
+#define CKM_ML_KEM              TBD opt
 
-new MLKEM params
+New MLKEM Params
 #define CKP_ML_KEM_512  0x00000001
 #define CKP_ML_KEM_768  0x00000002
 #define CKP_ML_KEM_1024 0x00000003
 
-Attribute
+Attributes
 #define CKA_PARAMETER_SET TBD

@@ -96,7 +96,12 @@ while (<$source>) {
     }
     $name=$db[1];
     $number=hex($db[2]);
-    printf "        processing $name = 0x%08x (%d) (type=$type)\n",$number,$number;
+    if ($number == 0) {
+        printf "        processing $name = %s (0) (type=$type)\n", $db[2];
+    } else {
+        printf "        processing $name = 0x%08x (%d) (type=$type)\n",$number,$number;
+    }
+
     # first see if the name already exists in the database.
     if (exists $database_index{$name}) {
 	$index = $database_index{$name};
@@ -124,10 +129,11 @@ while (<$source>) {
     }
     # see if the proposed number conflicts. If it does pick a new one
     $index=$type."_".$number;
-    if (exists $database_name{$index} or (($number == 0) && ($db[2] ne '0x0000000UL'))) {
+    $test=$db[2];
+    if (exists $database_name{$index} or (($number == 0) && ( $test !~ /^\s*0x0+([Uu][Ll])+\s*$/))) {
 	$conflict_name{$type}=$conflict_name{$type}." ".$name;
 	$conflict_old_number{$name}=$number;
-    	$number = find_number($type);
+    	$number = find_number($type, $db[3]);
 	$conflict_new_number{$name}=$number;
 	if ($conflict_old_number{$name} == 0) {
      	    printf "            allocating new value is 0x%08x\n",$number;
@@ -208,10 +214,31 @@ sub isflag
   return substr($type,-6) eq "_flags";
 }
 
+
+sub find_hole
+{
+    printf "allocating by finding a hole with type=$type, max=0x%0x\n",$types_max{$type};
+    for ($i=0; $i <= $types_max{$type}; $i++) {
+        $index=$type."_".$i;
+        print " $index";
+        if (!exists $database_name{$index}) {
+            printf "\n ---- found 0x%08x ($index)\n", $i;
+            return $i;
+        }
+    }
+    $types_max{$type}++;
+    printf "\n ---- no hole, using 0x%08x\n", $types_max{$type};
+    return $types_max{$type};
+}
+
 sub find_number
 {
-  my ($type) = @_;
+  my ($type, $opt) = @_;
   if (!isflag($type)) {
+      print "find number type=$type, opt=$opt\n";
+      if ($opt eq "opt") {
+          return find_hole($type);
+      }
       $types_max{$type}++;
       return $types_max{$type};
   }

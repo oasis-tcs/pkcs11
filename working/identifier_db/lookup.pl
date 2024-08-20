@@ -38,19 +38,60 @@ while (<$database>){
 }
 close($database);
 
+my $found=0;
 if (exists $database_index{$search_name}) {
     print_entry($database_index{$search_name});
+    $found=1;
 }
 if (exists $type_list{$search_name}) {
     for $index ( sort split(" ",$type_list{$search_name}) ) {
 	print_entry($index);
     }
+    $found=1;
 }
 if (exists $disposition_list{$search_name}) {
     for $index ( sort split(" ",$disposition_list{$search_name}) ) {
 	print_entry($index);
     }
+    $found=1;
 }
+
+# lookup names by value
+$val=hex($search_name);
+$test=$search_name;
+if (($val != 0) or ($test =~ /^\s*(0x)?0+\s*$/)) {
+    for $i (keys %type_list) {
+        $index=$i."_".$val;
+        if (exists $database_name{$index}) {
+            print_entry($index);
+            $found=1;
+        }
+    }
+}
+
+if ($search_name eq "") {
+    print "./lookup.pl identifier\n";
+    print "  idenifier could be a \n";
+    print "   PKCS #11 identifier\n";
+    print "   a number (hex value)\n";
+    print "   disposition:";
+    for $i (keys %disposition_list) {
+        print " $i";
+    }
+    print "\n";
+    print "   or a type:";
+    for $i (keys %type_list) {
+        print " $i";
+    }
+    print "\n";
+    exit 1;
+} 
+
+if ($found == 0) {
+    print "Identifer '$search_name' not found\n";
+    exit 1;
+}
+exit 0;
 
 sub print_entry
 {

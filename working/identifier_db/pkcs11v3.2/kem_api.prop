@@ -1,6 +1,6 @@
 Defines needed for the new KEM API
 
-Mechanisms
+Mechanisms Flags
 #define CKF_ENCAPSULATE TBD
 #define CKF_DECAPSULATE TBD
 

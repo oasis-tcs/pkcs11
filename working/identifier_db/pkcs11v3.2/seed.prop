@@ -1,0 +1,7 @@
+Random Seeding
+
+Session Flags
+#define CKF_SEED_RANDOM_REQUIRED 0x02000000
+
+Errors
+#define CKR_SEED_RANDOM_REQUIRED TBD

@@ -12,8 +12,8 @@ Attributes
 #define CKA_TRUST_TIME_STAMPING    TBD
 #define CKA_TRUST_OCSP_SIGNING     TBD
 
-Trust States
-#define CKT_TRUST_UNKNOWN          0x00000000
+New Trust States
+#define CKT_TRUST_UNKNOWN          0x00000000UL
 #define CKT_TRUSTED                0x00000001
 #define CKT_TRUST_ANCHOR           0x00000002
 #define CKT_NOT_TRUSTED            0x00000003

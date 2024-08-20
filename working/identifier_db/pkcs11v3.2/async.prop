@@ -1,4 +1,9 @@
 Asynchronous Operations
 
-Session_flags:
+Session Flags
 #define CKF_ASYNC_SESSION 0x00000008
+#define CKF_ASYNC_SESSION_SUPPORTED 0x04000000
+
+Errors
+#define CKR_PENDING TBD
+#define CKF_SESSION_ASYNC_NOT_SUUPPORTED TBD

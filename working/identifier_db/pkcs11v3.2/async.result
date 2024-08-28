@@ -4,6 +4,9 @@ allocated for your proposal "Asynchronous Operations".
 Session flags:
 
  #define CKF_ASYNC_SESSION           0x00000008UL
+
+Token flags:
+
  #define CKF_ASYNC_SESSION_SUPPORTED 0x04000000UL
 
 Errors:

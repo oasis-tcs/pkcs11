@@ -1,7 +1,7 @@
 In accordance to our standing rules, the following identifiers have been
 allocated for your proposal "Random Seeding".
 
-Session flags:
+Token flags:
 
  #define CKF_SEED_RANDOM_REQUIRED 0x02000000UL
 

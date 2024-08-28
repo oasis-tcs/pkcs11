@@ -2,6 +2,8 @@ Asynchronous Operations
 
 Session Flags
 #define CKF_ASYNC_SESSION 0x00000008
+
+Token Flags
 #define CKF_ASYNC_SESSION_SUPPORTED 0x04000000
 
 Errors

@@ -3,8 +3,34 @@ Defines for Post Quantum Signature algorithms
 Mechanisms
 #define CKM_ML_DSA_KEY_PAIR_GEN  TBD opt
 #define CKM_ML_DSA               TBD opt
+#define CKM_ML_DSA_DETERMINISTIC TBD opt
+#define CKM_ML_DSA_PREHASH       TBD opt
+#define CKM_ML_DSA_PREHASH_DETERMINISTIC   TBD opt
+#define CKM_ML_DSA_PREHASH_SHA224   TBD opt
+#define CKM_ML_DSA_PREHASH_SHA256   TBD opt
+#define CKM_ML_DSA_PREHASH_SHA384   TBD opt
+#define CKM_ML_DSA_PREHASH_SHA512   TBD opt
+#define CKM_ML_DSA_PREHASH_SHA3_224   TBD opt
+#define CKM_ML_DSA_PREHASH_SHA3_256   TBD opt
+#define CKM_ML_DSA_PREHASH_SHA3_384   TBD opt
+#define CKM_ML_DSA_PREHASH_SHA3_512   TBD opt
+#define CKM_ML_DSA_PREHASH_SHAKE128   TBD opt
+#define CKM_ML_DSA_PREHASH_SHAKE256  TBD opt
 #define CKM_SLH_DSA_KEY_PAIR_GEN TBD opt
 #define CKM_SLH_DSA              TBD opt
+#define CKM_SLH_DSA_DETERMINISTIC              TBD opt
+#define CKM_SLH_DSA_PREHASH      TBD opt
+#define CKM_SLH_DSA_PREHASH_DETERMINISTIC      TBD opt
+#define CKM_SLH_DSA_PREHASH_SHA224   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHA256   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHA384   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHA512   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHA3_224   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHA3_256   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHA3_384   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHA3_512   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHAKE128   TBD opt
+#define CKM_SLH_DSA_PREHASH_SHAKE256  TBD opt
 #define CKM_FN_DSA_KEY_PAIR_GEN  TBD opt
 #define CKM_FN_DSA           TBD opt
 

@@ -1,0 +1,65 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Validation Indicators (FIPS 140-3)".
+
+Indicator flags:
+
+ #define CKS_LAST_VALIDATION_OK 0x00000001UL
+
+Validation types:
+
+ #define CKV_TYPE_UNSPECIFIED 0x00000000UL
+ #define CKV_TYPE_SOFTWARE    0x00000001UL
+ #define CKV_TYPE_HARDWARE    0x00000002UL
+ #define CKV_TYPE_FIRMWARE    0x00000003UL
+ #define CKV_TYPE_HYBRID      0x00000004UL
+
+Validation authority type:
+
+ #define CKV_AUTHORITY_TYPE_UNSPECIFIED     0x00000000UL
+ #define CKV_AUTHORITY_TYPE_NIST_CMVP       0x00000001UL
+ #define CKV_AUTHORITY_TYPE_COMMON_CRITERIA 0x00000002UL
+
+Objects:
+
+ #define CKO_VALIDATION 0x0000000aUL
+
+Attributes:
+
+ #define CKA_VALIDATION_FLAGS                  0x0000061eUL
+ #define CKA_VALIDATION_TYPE                   0x0000061fUL
+ #define CKA_VALIDATION_VERSION                0x00000620UL
+ #define CKA_VALIDATION_LEVEL                  0x00000621UL
+ #define CKA_VALIDATION_MODULE_ID              0x00000622UL
+ #define CKA_VALIDATION_FLAG                   0x00000623UL
+ #define CKA_VALIDATION_AUTHORITY_TYPE         0x00000624UL
+ #define CKA_VALIDATION_COUNTRY                0x00000625UL
+ #define CKA_VALIDATION_CERTIFICATE_IDENTIFIER 0x00000626UL
+ #define CKA_VALIDATION_CERTIFICATE_URI        0x00000627UL
+ #define CKA_VALIDATION_VENDOR                 0x00000628UL
+ #define CKA_VALIDATION_PROFILE                0x00000629UL
+
+Errors:
+
+ #define CKR_OPERATION_NOT_VALIDATED 0x00000207UL
+
+This represents the following changes to your original proposal:
+    CKA_VALIDATION_FLAGS was allocated 0x61e because no number was proposed
+    CKA_VALIDATION_TYPE was allocated 0x61f because no number was proposed
+    CKA_VALIDATION_VERSION was allocated 0x620 because no number was proposed
+    CKA_VALIDATION_LEVEL was allocated 0x621 because no number was proposed
+    CKA_VALIDATION_MODULE_ID was allocated 0x622 because no number was proposed
+    CKA_VALIDATION_FLAG was allocated 0x623 because no number was proposed
+    CKA_VALIDATION_AUTHORITY_TYPE was allocated 0x624 because no number was proposed
+    CKA_VALIDATION_COUNTRY was allocated 0x625 because no number was proposed
+    CKA_VALIDATION_CERTIFICATE_IDENTIFIER was allocated 0x626 because no number was proposed
+    CKA_VALIDATION_CERTIFICATE_URI was allocated 0x627 because no number was proposed
+    CKA_VALIDATION_VENDOR was allocated 0x628 because no number was proposed
+    CKA_VALIDATION_PROFILE was allocated 0x629 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKR_OPERATION_NOT_VALIDATED was allocated 0x207 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKO_VALIDATION was allocated 0xa because no number was proposed
+
+Please update your spec before sending it to ballot.

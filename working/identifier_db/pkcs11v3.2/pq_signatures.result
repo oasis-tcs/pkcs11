@@ -1,0 +1,106 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Defines for Post Quantum Signature algorithms".
+
+Mechanisms:
+
+ #define CKM_ML_DSA_KEY_PAIR_GEN           0x0000001cUL
+ #define CKM_ML_DSA                        0x0000001dUL
+ #define CKM_ML_DSA_DETERMINISTIC          0x0000001eUL
+ #define CKM_ML_DSA_PREHASH                0x0000001fUL
+ #define CKM_ML_DSA_PREHASH_DETERMINISTIC  0x00000022UL
+ #define CKM_ML_DSA_PREHASH_SHA224         0x00000023UL
+ #define CKM_ML_DSA_PREHASH_SHA256         0x00000024UL
+ #define CKM_ML_DSA_PREHASH_SHA384         0x00000025UL
+ #define CKM_ML_DSA_PREHASH_SHA512         0x00000026UL
+ #define CKM_ML_DSA_PREHASH_SHA3_224       0x00000027UL
+ #define CKM_ML_DSA_PREHASH_SHA3_256       0x00000028UL
+ #define CKM_ML_DSA_PREHASH_SHA3_384       0x00000029UL
+ #define CKM_ML_DSA_PREHASH_SHA3_512       0x0000002aUL
+ #define CKM_ML_DSA_PREHASH_SHAKE128       0x0000002bUL
+ #define CKM_ML_DSA_PREHASH_SHAKE256       0x0000002cUL
+ #define CKM_SLH_DSA_KEY_PAIR_GEN          0x0000002dUL
+ #define CKM_SLH_DSA                       0x0000002eUL
+ #define CKM_SLH_DSA_DETERMINISTIC         0x0000002fUL
+ #define CKM_SLH_DSA_PREHASH               0x00000034UL
+ #define CKM_SLH_DSA_PREHASH_DETERMINISTIC 0x00000035UL
+ #define CKM_SLH_DSA_PREHASH_SHA224        0x00000036UL
+ #define CKM_SLH_DSA_PREHASH_SHA256        0x00000037UL
+ #define CKM_SLH_DSA_PREHASH_SHA384        0x00000038UL
+ #define CKM_SLH_DSA_PREHASH_SHA512        0x00000039UL
+ #define CKM_SLH_DSA_PREHASH_SHA3_224      0x0000003aUL
+ #define CKM_SLH_DSA_PREHASH_SHA3_256      0x0000003bUL
+ #define CKM_SLH_DSA_PREHASH_SHA3_384      0x0000003cUL
+ #define CKM_SLH_DSA_PREHASH_SHA3_512      0x0000003dUL
+ #define CKM_SLH_DSA_PREHASH_SHAKE128      0x0000003eUL
+ #define CKM_SLH_DSA_PREHASH_SHAKE256      0x0000003fUL
+ #define CKM_FN_DSA_KEY_PAIR_GEN           0x00000054UL
+ #define CKM_FN_DSA                        0x00000055UL
+
+Mldsa params:
+
+ #define CKP_ML_DSA_44 0x00000001UL
+ #define CKP_ML_DSA_65 0x00000002UL
+ #define CKP_ML_DSA_87 0x00000003UL
+
+Fndsa params:
+
+ #define CKP_FALCON512_ROUND3  0x40000001UL
+ #define CKP_FALCON1024_ROUND3 0x40000002UL
+
+Sldsa params:
+
+ #define CKP_SLH_DSA_SHA2_128S  0x00000001UL
+ #define CKP_SLH_DSA_SHAKE_128S 0x00000002UL
+ #define CKP_SLH_DSA_SHA2_128F  0x00000003UL
+ #define CKP_SLH_DSA_SHAKE_128F 0x00000004UL
+ #define CKP_SLH_DSA_SHA2_192S  0x00000005UL
+ #define CKP_SLH_DSA_SHAKE_192S 0x00000006UL
+ #define CKP_SLH_DSA_SHA2_192F  0x00000007UL
+ #define CKP_SLH_DSA_SHAKE_192F 0x00000008UL
+ #define CKP_SLH_DSA_SHA2_256S  0x00000009UL
+ #define CKP_SLH_DSA_SHAKE_256S 0x0000000aUL
+ #define CKP_SLH_DSA_SHA2_256F  0x0000000bUL
+ #define CKP_SLH_DSA_SHAKE_256S 0x0000000cUL
+
+Attributes:
+
+ #define CKA_PARAMETER_SET 0x0000061dUL
+
+This represents the following changes to your original proposal:
+    CKA_PARAMETER_SET was allocated 0x61d because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKM_ML_DSA_KEY_PAIR_GEN was allocated 0x1c because no number was proposed
+    CKM_ML_DSA was allocated 0x1d because no number was proposed
+    CKM_ML_DSA_DETERMINISTIC was allocated 0x1e because no number was proposed
+    CKM_ML_DSA_PREHASH was allocated 0x1f because no number was proposed
+    CKM_ML_DSA_PREHASH_DETERMINISTIC was allocated 0x22 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA224 was allocated 0x23 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA256 was allocated 0x24 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA384 was allocated 0x25 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA512 was allocated 0x26 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA3_224 was allocated 0x27 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA3_256 was allocated 0x28 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA3_384 was allocated 0x29 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA3_512 was allocated 0x2a because no number was proposed
+    CKM_ML_DSA_PREHASH_SHAKE128 was allocated 0x2b because no number was proposed
+    CKM_ML_DSA_PREHASH_SHAKE256 was allocated 0x2c because no number was proposed
+    CKM_SLH_DSA_KEY_PAIR_GEN was allocated 0x2d because no number was proposed
+    CKM_SLH_DSA was allocated 0x2e because no number was proposed
+    CKM_SLH_DSA_DETERMINISTIC was allocated 0x2f because no number was proposed
+    CKM_SLH_DSA_PREHASH was allocated 0x34 because no number was proposed
+    CKM_SLH_DSA_PREHASH_DETERMINISTIC was allocated 0x35 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA224 was allocated 0x36 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA256 was allocated 0x37 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA384 was allocated 0x38 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA512 was allocated 0x39 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA3_224 was allocated 0x3a because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA3_256 was allocated 0x3b because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA3_384 was allocated 0x3c because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA3_512 was allocated 0x3d because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHAKE128 was allocated 0x3e because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHAKE256 was allocated 0x3f because no number was proposed
+    CKM_FN_DSA_KEY_PAIR_GEN was allocated 0x54 because no number was proposed
+    CKM_FN_DSA was allocated 0x55 because no number was proposed
+
+Please update your spec before sending it to ballot.

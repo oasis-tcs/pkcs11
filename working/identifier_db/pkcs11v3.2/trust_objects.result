@@ -1,0 +1,38 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Add Trust objects to map trust values to certificates".
+
+Objects:
+
+ #define CKO_TRUST 0x0000000bUL
+
+Attributes:
+
+ #define CKA_TRUST_SERVER_AUTH      0x0000062cUL
+ #define CKA_TRUST_CLIENT_AUTH      0x0000062dUL
+ #define CKA_TRUST_CODE_SIGNING     0x0000062eUL
+ #define CKA_TRUST_EMAIL_PROTECTION 0x0000062fUL
+ #define CKA_TRUST_IPSEC_IKE        0x00000630UL
+ #define CKA_TRUST_TIME_STAMPING    0x00000631UL
+ #define CKA_TRUST_OCSP_SIGNING     0x00000632UL
+
+Trust states:
+
+ #define CKT_TRUST_UNKNOWN          0x00000000UL
+ #define CKT_TRUSTED                0x00000001UL
+ #define CKT_TRUST_ANCHOR           0x00000002UL
+ #define CKT_NOT_TRUSTED            0x00000003UL
+ #define CK_TRUST_MUST_VERIFY_TRUST 0x00000004UL
+
+This represents the following changes to your original proposal:
+    CKO_TRUST was allocated 0xb because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKA_TRUST_SERVER_AUTH was allocated 0x62c because no number was proposed
+    CKA_TRUST_CLIENT_AUTH was allocated 0x62d because no number was proposed
+    CKA_TRUST_CODE_SIGNING was allocated 0x62e because no number was proposed
+    CKA_TRUST_EMAIL_PROTECTION was allocated 0x62f because no number was proposed
+    CKA_TRUST_IPSEC_IKE was allocated 0x630 because no number was proposed
+    CKA_TRUST_TIME_STAMPING was allocated 0x631 because no number was proposed
+    CKA_TRUST_OCSP_SIGNING was allocated 0x632 because no number was proposed
+
+Please update your spec before sending it to ballot.

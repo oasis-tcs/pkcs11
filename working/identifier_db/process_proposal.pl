@@ -217,17 +217,13 @@ sub isflag
 
 sub find_hole
 {
-    printf "allocating by finding a hole with type=$type, max=0x%0x\n",$types_max{$type};
     for ($i=0; $i <= $types_max{$type}; $i++) {
         $index=$type."_".$i;
-        print " $index";
         if (!exists $database_name{$index}) {
-            printf "\n ---- found 0x%08x ($index)\n", $i;
             return $i;
         }
     }
     $types_max{$type}++;
-    printf "\n ---- no hole, using 0x%08x\n", $types_max{$type};
     return $types_max{$type};
 }
 
@@ -235,7 +231,6 @@ sub find_number
 {
   my ($type, $opt) = @_;
   if (!isflag($type)) {
-      print "find number type=$type, opt=$opt\n";
       if ($opt eq "opt") {
           return find_hole($type);
       }

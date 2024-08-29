@@ -468,7 +468,7 @@ CKM_XMSS,0x00004036,mechanisms,proposed
 CKM_XMSSMT,0x00004037,mechanisms,proposed
 CKM_ECDH_X_AES_KEY_WRAP,0x00004038,mechanisms,proposed
 CKM_ECDH_COF_AES_KEY_WRAP,0x00004039,mechanisms,proposed
-CKM_PUB_FROM_PRIV_KEY,0x0000403a,mechanisms,proposed
+CKM_PUB_KEY_FROM_PRIV_KEY,0x0000403a,mechanisms,proposed
 CKM_DSA,0x00000011,mechanisms,spec
 CKM_DSA_SHA1,0x00000012,mechanisms,spec
 CKM_DSA_SHA224,0x00000013,mechanisms,spec

@@ -1,4 +1,4 @@
-/* Copyright (c) OASIS Open 2016, 2019. All Rights Reserved./
+/* Copyright (c) OASIS Open 2016, 2019, 2024. All Rights Reserved./
  * /Distributed under the terms of the OASIS IPR Policy,
  * [http://www.oasis-open.org/policies-guidelines/ipr], AS-IS, WITHOUT ANY
  * IMPLIED OR EXPRESS WARRANTY; there is no warranty of MERCHANTABILITY, FITNESS FOR A
@@ -6,7 +6,7 @@
  */
 
 /* Latest version of the specification:
- * http://docs.oasis-open.org/pkcs11/pkcs11-base/v2.40/pkcs11-base-v2.40.html
+ * http://docs.oasis-open.org/pkcs11/pkcs11-spec/v3.2/pkcs11-spec-v3.2.html
  */
 
 /* See top of pkcs11.h for information about the macros that
@@ -18,7 +18,7 @@
 #define _PKCS11T_H_ 1
 
 #define CRYPTOKI_VERSION_MAJOR          3
-#define CRYPTOKI_VERSION_MINOR          1
+#define CRYPTOKI_VERSION_MINOR          2
 #define CRYPTOKI_VERSION_AMENDMENT      0
 
 #define CK_TRUE         1
@@ -246,7 +246,19 @@ typedef struct CK_TOKEN_INFO {
  */
 #define CKF_SO_PIN_TO_BE_CHANGED     0x00800000UL
 
+/* CKF_ERROR_STATE. If it is true, the token failed a FIPS 140
+ * self-test and entered an error state. */
 #define CKF_ERROR_STATE              0x01000000UL
+
+/*
+ * CKF_SEED_RAONDOM_REQUIRED. If this is true  the token’s
+ * random number generator must be seeded or re-seeded using
+ * C_SeedRandom. */
+#define CKF_SEED_RANDOM_REQUIRED     0x02000000UL
+
+/* CKF_ASYNC_SESSION_SUPPORTED. If this is true the token 
+ * supports asynchronous sessions. */
+#define CKF_ASYNC_SESSION_SUPPORTED  0x04000000UL
 
 typedef CK_TOKEN_INFO CK_PTR CK_TOKEN_INFO_PTR;
 
@@ -285,10 +297,11 @@ typedef struct CK_SESSION_INFO {
 } CK_SESSION_INFO;
 
 /* The flags are defined in the following table:
- *      Bit Flag                Mask        Meaning
+ *      Bit Flag                    Mask         Meaning
  */
-#define CKF_RW_SESSION          0x00000002UL /* session is r/w */
-#define CKF_SERIAL_SESSION      0x00000004UL /* no parallel    */
+#define CKF_RW_SESSION              0x00000002UL /* session is r/w */
+#define CKF_SERIAL_SESSION          0x00000004UL /* no parallel    */
+#define CKF_ASYNC_SESSION           0x00000008UL /* session is async */
 
 typedef CK_SESSION_INFO CK_PTR CK_SESSION_INFO_PTR;
 
@@ -317,7 +330,9 @@ typedef CK_ULONG          CK_OBJECT_CLASS;
 #define CKO_DOMAIN_PARAMETERS 0x00000006UL
 #define CKO_MECHANISM         0x00000007UL
 #define CKO_OTP_KEY           0x00000008UL
-#define CKO_PROFILE           0x00000009UL 
+#define CKO_PROFILE           0x00000009UL
+#define CKO_VALIDATION        0x0000000aUL
+#define CKO_TRUST             0x0000000bUL
 
 #define CKO_VENDOR_DEFINED    0x80000000UL
 
@@ -417,6 +432,10 @@ typedef CK_ULONG          CK_KEY_TYPE;
 #define CKK_SHA512_256_HMAC     0x00000044UL
 #define CKK_SHA512_T_HMAC       0x00000045UL
 #define CKK_HSS                 0x00000046UL
+
+#define CKK_XMSS                0x00000047UL
+#define CKK_XMSSMT              0x00000048UL
+
 
 #define CKK_VENDOR_DEFINED      0x80000000UL
 
@@ -616,6 +635,32 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 #define CKA_HSS_LMS_TYPES               0x0000061aUL
 #define CKA_HSS_LMOTS_TYPES             0x0000061bUL
 #define CKA_HSS_KEYS_REMAINING          0x0000061cUL
+/* new post-quantum (general) */
+#define CKA_PARAMETER_SET               0x0000061dUL
+/* validation objects */
+#define CKA_VALIDATION_FLAGS            0x0000061eUL
+#define CKA_VALIDATION_TYPE             0x0000061fUL
+#define CKA_VALIDATION_VERSION          0x00000620UL
+#define CKA_VALIDATION_LEVEL            0x00000621UL
+#define CKA_VALIDATION_MODULE_ID        0x00000622UL
+#define CKA_VALIDATION_FLAG             0x00000623UL
+#define CKA_VALIDATION_AUTHORITY_TYPE   0x00000624UL
+#define CKA_VALIDATION_COUNTRY          0x00000625UL
+#define CKA_VALIDATION_CERTIFICATE_IDENTIFIER 0x00000626UL
+#define CKA_VALIDATION_CERTIFICATE_URI  0x00000627UL
+#define CKA_VALIDATION_VENDOR           0x00000628UL
+#define CKA_VALIDATION_PROFILE          0x00000629UL
+/* KEM */
+#define CKA_ENCAPSULATE_TEMPLATE        0x0000062aUL
+#define CKA_DECAPSULATE_TEMPLATE        0x0000062bUL
+/* trust objects */
+#define CKA_TRUST_SERVER_AUTH           0x0000062cUL
+#define CKA_TRUST_CLIENT_AUTH           0x0000062dUL
+#define CKA_TRUST_CODE_SIGNING          0x0000062eUL
+#define CKA_TRUST_EMAIL_PROTECTION      0x0000062fUL
+#define CKA_TRUST_IPSEC_IKE             0x00000630UL
+#define CKA_TRUST_TIME_STAMPING         0x00000631UL
+#define CKA_TRUST_OCSP_SIGNING          0x00000632UL
 
 #define CKA_VENDOR_DEFINED              0x80000000UL
 
@@ -1148,6 +1193,55 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_HSS_KEY_PAIR_GEN           0x00004032UL
 #define CKM_HSS                        0x00004033UL
 
+#define CKM_XMSS_KEY_PAIR_GEN          0x00004034UL
+#define CKM_XMSSMT_KEY_PAIR_GEN        0x00004035UL
+#define CKM_XMSS                       0x00004036UL
+#define CKM_XMSSMT                     0x00004037UL
+
+#define CKM_ECDH_X_AES_KEY_WRAP        0x00004038UL
+#define CKM_ECDH_COF_AES_KEY_WRAP      0x00004039UL
+#define CKM_PUB_KEY_FROM_PRIV_KEY      0x0000403aUL
+
+#define CKM_ML_KEM_KEY_PAIR_GEN        0x0000000fUL
+#define CKM_ML_KEM                     0x00000017UL
+
+#define CKM_ML_DSA_KEY_PAIR_GEN        0x0000001cUL
+#define CKM_ML_DSA                     0x0000001dUL
+#define CKM_ML_DSA_DETERMINISTIC       0x0000001eUL
+#define CKM_ML_DSA_PREHASH             0x0000001fUL
+#define CKM_ML_DSA_PREHASH_DETERMINISTIC 0x00000022UL
+#define CKM_ML_DSA_PREHASH_SHA224      0x00000023UL
+#define CKM_ML_DSA_PREHASH_SHA256      0x00000024UL
+#define CKM_ML_DSA_PREHASH_SHA384      0x00000025UL
+#define CKM_ML_DSA_PREHASH_SHA512      0x00000026UL
+#define CKM_ML_DSA_PREHASH_SHA3_224    0x00000027UL
+#define CKM_ML_DSA_PREHASH_SHA3_256    0x00000028UL
+#define CKM_ML_DSA_PREHASH_SHA3_384    0x00000029UL
+#define CKM_ML_DSA_PREHASH_SHA3_512    0x0000002aUL
+#define CKM_ML_DSA_PREHASH_SHAKE128    0x0000002bUL
+#define CKM_ML_DSA_PREHASH_SHAKE256    0x0000002cUL
+
+#define CKM_SLH_DSA_KEY_PAIR_GEN       0x0000002dUL
+#define CKM_SLH_DSA                    0x0000002eUL
+#define CKM_SLH_DSA_DETERMINISTIC      0x0000002fUL
+#define CKM_SLH_DSA_PREHASH            0x00000034UL
+#define CKM_SLH_DSA_PREHASH_DETERMINISTIC 0x00000035UL
+#define CKM_SLH_DSA_PREHASH_SHA224     0x00000036UL
+#define CKM_SLH_DSA_PREHASH_SHA256     0x00000037UL
+#define CKM_SLH_DSA_PREHASH_SHA384     0x00000038UL
+#define CKM_SLH_DSA_PREHASH_SHA512     0x00000039UL
+#define CKM_SLH_DSA_PREHASH_SHA3_224   0x0000003aUL
+#define CKM_SLH_DSA_PREHASH_SHA3_256   0x0000003bUL
+#define CKM_SLH_DSA_PREHASH_SHA3_384   0x0000003cUL
+#define CKM_SLH_DSA_PREHASH_SHA3_512   0x0000003dUL
+#define CKM_SLH_DSA_PREHASH_SHAKE128   0x0000003eUL
+#define CKM_SLH_DSA_PREHASH_SHAKE256   0x0000003fUL
+
+#define CKM_FN_DSA_KEY_PAIR_GEN        0x00000054UL
+#define CKM_FN_DSA                     0x00000055UL
+
+#define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE    0x00000056UL
+#define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE_DH 0x00000057UL
 
 #define CKM_VENDOR_DEFINED             0x80000000UL
 
@@ -1212,6 +1306,9 @@ typedef struct CK_MECHANISM_INFO {
 #define CKF_EC_UNCOMPRESS      0x01000000UL
 #define CKF_EC_COMPRESS        0x02000000UL
 #define CKF_EC_CURVENAME       0x04000000UL
+
+#define CKF_ENCAPSULATE        0x10000000UL
+#define CKF_DECAPSULATE        0x20000000UL
 
 #define CKF_EXTENSION          0x80000000UL
 
@@ -1346,6 +1443,12 @@ typedef CK_ULONG          CK_RV;
 #define CKR_OPERATION_CANCEL_FAILED           0x00000202UL
 #define CKR_KEY_EXHAUSTED                     0x00000203UL
 
+#define CKR_PENDING                           0x00000204UL 
+#define CKR_SESSION_ASYNC_NOT_SUPPORTED       0x00000205UL 
+#define CKR_SEED_RANDOM_REQUIRED              0x00000206UL 
+#define CKR_OPERATION_NOT_VALIDATED           0x00000207UL 
+#define CKR_TOKEN_NOT_INITIALIZED             0x00000208UL 
+
 #define CKR_VENDOR_DEFINED                    0x80000000UL
 
 
@@ -1371,9 +1474,9 @@ typedef CK_FUNCTION_LIST_PTR CK_PTR CK_FUNCTION_LIST_PTR_PTR;
 typedef CK_FUNCTION_LIST_3_0_PTR CK_PTR CK_FUNCTION_LIST_3_0_PTR_PTR;
 
 typedef struct CK_INTERFACE {
-      CK_CHAR     *pInterfaceName;
-      CK_VOID_PTR pFunctionList;
-      CK_FLAGS    flags;
+      CK_UTF8CHAR_PTR pInterfaceName;
+      CK_VOID_PTR     pFunctionList;
+      CK_FLAGS        flags;
 } CK_INTERFACE;
 
 typedef CK_INTERFACE CK_PTR CK_INTERFACE_PTR;
@@ -2088,6 +2191,18 @@ typedef struct CK_GCM_MESSAGE_PARAMS {
 
 typedef CK_GCM_MESSAGE_PARAMS CK_PTR CK_GCM_MESSAGE_PARAMS_PTR;
 
+typedef struct CK_GCM_WRAP_PARAMS {
+  CK_BYTE_PTR     pIv;
+  CK_ULONG        ulIvLen;
+  CK_ULONG        ulIvFixedBits;
+  CK_GENERATOR_FUNCTION   ivGenerator;
+  CK_BYTE_PTR     pAAD;
+  CK_ULONG        ulAADLen;
+  CK_ULONG        ulTagBits;
+} CK_GCM_WRAP_PARAMS;
+
+typedef CK_GCM_WRAP_PARAMS CK_PTR CK_GCM_WRAP_PARAMS_PTR;
+
 typedef struct CK_CCM_PARAMS {
     CK_ULONG          ulDataLen;
     CK_BYTE_PTR       pNonce;
@@ -2229,6 +2344,16 @@ typedef struct CK_TLS_MAC_PARAMS {
 
 typedef CK_TLS_MAC_PARAMS CK_PTR CK_TLS_MAC_PARAMS_PTR;
 
+typedef struct CK_TLS12_EXTENDED_MASTER_KEY_DERIVE_PARAMS {
+  CK_MECHANISM_TYPE prfHashMechanism;
+  CK_BYTE_PTR pSessionHash;
+  CK_ULONG ulSessionHashLen;
+  CK_VERSION_PTR pVersion;
+} CK_TLS12_EXTENDED_MASTER_KEY_DERIVE_PARAMS;
+
+typedef CK_TLS12_EXTENDED_MASTER_KEY_DERIVE_PARAMS CK_PTR
+        CK_TLS12_EXTENDED_MASTER_KEY_DERIVE_PARAMS_PTR;
+
 typedef struct CK_GOSTR3410_DERIVE_PARAMS {
     CK_EC_KDF_TYPE            kdf;
     CK_BYTE_PTR               pPublicData;
@@ -2285,7 +2410,7 @@ typedef CK_PRF_DATA_PARAM CK_PTR CK_PRF_DATA_PARAM_PTR;
 
 
 typedef struct CK_SP800_108_COUNTER_FORMAT
-{ 
+{
    CK_BBOOL           bLittleEndian;
    CK_ULONG		ulWidthInBits;
 } CK_SP800_108_COUNTER_FORMAT;
@@ -2297,7 +2422,7 @@ typedef CK_ULONG CK_SP800_108_DKM_LENGTH_METHOD;
 #define CK_SP800_108_DKM_LENGTH_SUM_OF_SEGMENTS 0x00000002UL
 
 typedef struct CK_SP800_108_DKM_LENGTH_FORMAT
-{ 
+{
    CK_SP800_108_DKM_LENGTH_METHOD  dkmLengthMethod;
    CK_BBOOL                        bLittleEndian;
    CK_ULONG		             ulWidthInBits;
@@ -2519,6 +2644,71 @@ typedef struct CK_IKE1_EXTENDED_DERIVE_PARAMS {
     CK_ULONG ulExtraDataLen;
 } CK_IKE1_EXTENDED_DERIVE_PARAMS;
 typedef CK_IKE1_EXTENDED_DERIVE_PARAMS CK_PTR CK_IKE1_EXTENDED_DERIVE_PARAMS_PTR;
+
+/* async */
+typedef struct CK_ASYNC_DATA {
+  CK_ULONG ulVersion;
+  CK_BYTE_PTR pValue;
+  CK_ULONG ulValue;
+  CK_OBJECT_HANDLE hObject;
+  CK_OBJECT_HANDLE hAdditionalObject;
+} CK_ASYNC_DATA;
+typedef CK_ASYNC_DATA CK_PTR CK_ASYNC_DATA_PTR;
+
+/* validation */
+#define CKS_LAST_VALIDATION_OK 0x00000001UL
+
+/* XMSS */
+typedef CK_ULONG CK_XMSSMT_OID;
+typedef CK_ULONG CK_XMSS_OID;
+/* FN-DSA values for CKA_PARAMETER_SETS */
+typedef CK_ULONG CK_FN_DSA_PARAMETER_SET_TYPE;
+#define CKP_FALCON512_ROUND3   0x40000001UL
+#define CKP_FALCON1024_ROUND3  0x40000002UL
+/* ML-DSA values for CKA_PARAMETER_SETS */
+typedef CK_ULONG CK_ML_DSA_PARAMETER_SET_TYPE;
+#define CKP_ML_DSA_44          0x00000001UL
+#define CKP_ML_DSA_65          0x00000002UL
+#define CKP_ML_DSA_87          0x00000003UL
+/* SLH-DSA values for CKA_PARAMETER_SETS */
+typedef CK_ULONG CK_SLH_DSA_PARAMETER_SET_TYPE;
+#define CKP_SLH_DSA_SHA2_128S  0x00000001UL
+#define CKP_SLH_DSA_SHAKE_128S 0x00000002UL
+#define CKP_SLH_DSA_SHA2_128F  0x00000003UL
+#define CKP_SLH_DSA_SHAKE_128F 0x00000004UL
+#define CKP_SLH_DSA_SHA2_192S  0x00000005UL
+#define CKP_SLH_DSA_SHAKE_192S 0x00000006UL
+#define CKP_SLH_DSA_SHA2_192F  0x00000007UL
+#define CKP_SLH_DSA_SHAKE_192F 0x00000008UL
+#define CKP_SLH_DSA_SHA2_256S  0x00000009UL
+#define CKP_SLH_DSA_SHAKE_256S 0x0000000aUL
+#define CKP_SLH_DSA_SHA2_256F  0x0000000bUL
+#define CKP_SLH_DSA_SHAKE_256F 0x0000000cUL
+
+/* ML-KEM values for CKA_PARAMETER_SETS */
+typedef CK_ULONG CK_ML_KEM_PARAMETER_SET_TYPE;
+#define CKP_ML_KEM_512         0x00000001UL
+#define CKP_ML_KEM_768         0x00000002UL
+#define CKP_ML_KEM_1024        0x00000003UL
+
+/* Trust values for CKA_TRUST_* */
+typedef CK_ULONG CK_TRUST;
+#define CKT_TRUST_UNKNOWN          0x00000000UL
+#define CKT_TRUSTED                0x00000001UL
+#define CKT_TRUST_ANCHOR           0x00000002UL
+#define CKT_NOT_TRUSTED            0x00000003UL
+#define CK_TRUST_MUST_VERIFY_TRUST 0x00000004UL
+
+/* Validation: CKA_VALIDATION_AUTHORITY_TYPE */
+#define CKV_AUTHORITY_TYPE_UNSPECIFIED     0x00000000UL
+#define CKV_AUTHORITY_TYPE_NIST_CMVP       0x00000001UL
+#define CKV_AUTHORITY_TYPE_COMMON_CRITERIA 0x00000002UL
+/* Validation: CKA_VALIDATION_TYPE */
+#define CKV_TYPE_UNSPECIFIED 0x00000000UL
+#define CKV_TYPE_SOFTWARE    0x00000001UL
+#define CKV_TYPE_HARDWARE    0x00000002UL
+#define CKV_TYPE_FIRMWARE    0x00000003UL
+#define CKV_TYPE_HYBRID      0x00000004UL
 
 #endif /* _PKCS11T_H_ */
 

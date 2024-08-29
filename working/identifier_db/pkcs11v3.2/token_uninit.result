@@ -1,11 +1,11 @@
 In accordance to our standing rules, the following identifiers have been
-allocated for your proposal "Add CKR_TOKEN_UNINITIALIZED".
+allocated for your proposal "Add CKR_TOKEN_NOT_INITIALIZED".
 
 Errors:
 
- #define CKR_TOKEN_UNINITIALIZED 0x00000208UL
+ #define CKR_TOKEN_NOT_INITIALIZED 0x00000208UL
 
 This represents the following changes to your original proposal:
-    CKR_TOKEN_UNINITIALIZED was allocated 0x208 because no number was proposed
+    CKR_TOKEN_NOT_INITIALIZED was allocated 0x208 because no number was proposed
 
 Please update your spec before sending it to ballot.

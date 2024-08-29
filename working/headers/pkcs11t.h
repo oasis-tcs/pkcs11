@@ -256,7 +256,7 @@ typedef struct CK_TOKEN_INFO {
  * C_SeedRandom. */
 #define CKF_SEED_RANDOM_REQUIRED     0x02000000UL
 
-/* CKF_ASYNC_SESSION_SUPPORTED. If this is true the token 
+/* CKF_ASYNC_SESSION_SUPPORTED. If this is true the token
  * supports asynchronous sessions. */
 #define CKF_ASYNC_SESSION_SUPPORTED  0x04000000UL
 
@@ -435,6 +435,10 @@ typedef CK_ULONG          CK_KEY_TYPE;
 
 #define CKK_XMSS                0x00000047UL
 #define CKK_XMSSMT              0x00000048UL
+#define CKK_ML_KEM              0x00000049UL
+#define CKK_ML_DSA              0x0000004aUL
+#define CKK_SLH_DSA             0x0000004bUL
+#define CKK_FN_DSA              0x0000004cUL
 
 
 #define CKK_VENDOR_DEFINED      0x80000000UL
@@ -661,6 +665,10 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 #define CKA_TRUST_IPSEC_IKE             0x00000630UL
 #define CKA_TRUST_TIME_STAMPING         0x00000631UL
 #define CKA_TRUST_OCSP_SIGNING          0x00000632UL
+#define CKA_ENCAPSULATE                 0x00000633UL
+#define CKA_DECAPSULATE                 0x00000634UL
+#define CKA_HASH_OF_CERTIFICATE         0x00000635UL
+
 
 #define CKA_VENDOR_DEFINED              0x80000000UL
 
@@ -1443,11 +1451,11 @@ typedef CK_ULONG          CK_RV;
 #define CKR_OPERATION_CANCEL_FAILED           0x00000202UL
 #define CKR_KEY_EXHAUSTED                     0x00000203UL
 
-#define CKR_PENDING                           0x00000204UL 
-#define CKR_SESSION_ASYNC_NOT_SUPPORTED       0x00000205UL 
-#define CKR_SEED_RANDOM_REQUIRED              0x00000206UL 
-#define CKR_OPERATION_NOT_VALIDATED           0x00000207UL 
-#define CKR_TOKEN_NOT_INITIALIZED             0x00000208UL 
+#define CKR_PENDING                           0x00000204UL
+#define CKR_SESSION_ASYNC_NOT_SUPPORTED       0x00000205UL
+#define CKR_SEED_RANDOM_REQUIRED              0x00000206UL
+#define CKR_OPERATION_NOT_VALIDATED           0x00000207UL
+#define CKR_TOKEN_NOT_INITIALIZED             0x00000208UL
 
 #define CKR_VENDOR_DEFINED                    0x80000000UL
 

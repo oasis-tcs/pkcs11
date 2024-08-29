@@ -1,0 +1,28 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Supplimentary defines missing from the inital proposals".
+
+Attributes:
+
+ #define CKA_ENCAPSULATE         0x00000633UL
+ #define CKA_DECAPSULATE         0x00000634UL
+ #define CKA_HASH_OF_CERTIFICATE 0x00000635UL
+
+Key types:
+
+ #define CKK_ML_KEM  0x00000049UL
+ #define CKK_ML_DSA  0x0000004aUL
+ #define CKK_SLH_DSA 0x0000004bUL
+ #define CKK_FN_DSA  0x0000004cUL
+
+This represents the following changes to your original proposal:
+    CKA_ENCAPSULATE was allocated 0x633 because no number was proposed
+    CKA_DECAPSULATE was allocated 0x634 because no number was proposed
+    CKA_HASH_OF_CERTIFICATE was allocated 0x635 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKK_ML_KEM was allocated 0x49 because no number was proposed
+    CKK_ML_DSA was allocated 0x4a because no number was proposed
+    CKK_SLH_DSA was allocated 0x4b because no number was proposed
+    CKK_FN_DSA was allocated 0x4c because no number was proposed
+
+Please update your spec before sending it to ballot.

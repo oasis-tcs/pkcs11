@@ -1,0 +1,368 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Asynchronous Operations".
+
+Session flags:
+
+ #define CKF_ASYNC_SESSION           0x00000008UL
+
+Token flags:
+
+ #define CKF_ASYNC_SESSION_SUPPORTED 0x04000000UL
+
+Errors:
+
+ #define CKR_PENDING                     0x00000204UL
+ #define CKR_SESSION_ASYNC_NOT_SUPPORTED 0x00000205UL
+
+This represents the following changes to your original proposal:
+    CKR_PENDING was allocated 0x204 because no number was proposed
+    CKR_SESSION_ASYNC_NOT_SUPPORTED was allocated 0x205 because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Separate the two semantics of combined ECDH and AES key wrap into new mechanisms.".
+
+Mechanisms:
+
+ #define CKM_ECDH_X_AES_KEY_WRAP   0x00004038UL
+ #define CKM_ECDH_COF_AES_KEY_WRAP 0x00004039UL
+
+This represents the following changes to your original proposal:
+    CKM_ECDH_X_AES_KEY_WRAP was allocated 0x4038 because no number was proposed
+    CKM_ECDH_COF_AES_KEY_WRAP was allocated 0x4039 because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Validation Indicators (FIPS 140-3)".
+
+Indicator flags:
+
+ #define CKS_LAST_VALIDATION_OK 0x00000001UL
+
+Validation types:
+
+ #define CKV_TYPE_UNSPECIFIED 0x00000000UL
+ #define CKV_TYPE_SOFTWARE    0x00000001UL
+ #define CKV_TYPE_HARDWARE    0x00000002UL
+ #define CKV_TYPE_FIRMWARE    0x00000003UL
+ #define CKV_TYPE_HYBRID      0x00000004UL
+
+Validation authority type:
+
+ #define CKV_AUTHORITY_TYPE_UNSPECIFIED     0x00000000UL
+ #define CKV_AUTHORITY_TYPE_NIST_CMVP       0x00000001UL
+ #define CKV_AUTHORITY_TYPE_COMMON_CRITERIA 0x00000002UL
+
+Objects:
+
+ #define CKO_VALIDATION 0x0000000aUL
+
+Attributes:
+
+ #define CKA_VALIDATION_FLAGS                  0x0000061eUL
+ #define CKA_VALIDATION_TYPE                   0x0000061fUL
+ #define CKA_VALIDATION_VERSION                0x00000620UL
+ #define CKA_VALIDATION_LEVEL                  0x00000621UL
+ #define CKA_VALIDATION_MODULE_ID              0x00000622UL
+ #define CKA_VALIDATION_FLAG                   0x00000623UL
+ #define CKA_VALIDATION_AUTHORITY_TYPE         0x00000624UL
+ #define CKA_VALIDATION_COUNTRY                0x00000625UL
+ #define CKA_VALIDATION_CERTIFICATE_IDENTIFIER 0x00000626UL
+ #define CKA_VALIDATION_CERTIFICATE_URI        0x00000627UL
+ #define CKA_VALIDATION_VENDOR                 0x00000628UL
+ #define CKA_VALIDATION_PROFILE                0x00000629UL
+
+Errors:
+
+ #define CKR_OPERATION_NOT_VALIDATED 0x00000207UL
+
+This represents the following changes to your original proposal:
+    CKA_VALIDATION_FLAGS was allocated 0x61e because no number was proposed
+    CKA_VALIDATION_TYPE was allocated 0x61f because no number was proposed
+    CKA_VALIDATION_VERSION was allocated 0x620 because no number was proposed
+    CKA_VALIDATION_LEVEL was allocated 0x621 because no number was proposed
+    CKA_VALIDATION_MODULE_ID was allocated 0x622 because no number was proposed
+    CKA_VALIDATION_FLAG was allocated 0x623 because no number was proposed
+    CKA_VALIDATION_AUTHORITY_TYPE was allocated 0x624 because no number was proposed
+    CKA_VALIDATION_COUNTRY was allocated 0x625 because no number was proposed
+    CKA_VALIDATION_CERTIFICATE_IDENTIFIER was allocated 0x626 because no number was proposed
+    CKA_VALIDATION_CERTIFICATE_URI was allocated 0x627 because no number was proposed
+    CKA_VALIDATION_VENDOR was allocated 0x628 because no number was proposed
+    CKA_VALIDATION_PROFILE was allocated 0x629 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKR_OPERATION_NOT_VALIDATED was allocated 0x207 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKO_VALIDATION was allocated 0xa because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Defines needed for the new KEM API".
+
+Mechanisms flags:
+
+ #define CKF_ENCAPSULATE 0x10000000UL
+ #define CKF_DECAPSULATE 0x20000000UL
+
+Attributes:
+
+ #define CKA_ENCAPSULATE_TEMPLATE 0x0000062aUL
+ #define CKA_DECAPSULATE_TEMPLATE 0x0000062bUL
+
+This represents the following changes to your original proposal:
+    CKA_ENCAPSULATE_TEMPLATE was allocated 0x62a because no number was proposed
+    CKA_DECAPSULATE_TEMPLATE was allocated 0x62b because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKF_ENCAPSULATE was allocated 0x80 because no number was proposed
+    CKF_DECAPSULATE was allocated 0x8000000 because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "New defines to support ML-KEM".
+
+Mechanisms:
+
+ #define CKM_ML_KEM_KEY_PAIR_GEN 0x0000000fUL
+ #define CKM_ML_KEM              0x00000017UL
+
+Mlkem params:
+
+ #define CKP_ML_KEM_512  0x00000001UL
+ #define CKP_ML_KEM_768  0x00000002UL
+ #define CKP_ML_KEM_1024 0x00000003UL
+
+Attributes:
+
+ #define CKA_PARAMETER_SET 0x0000061dUL
+
+This represents the following changes to your original proposal:
+    CKM_ML_KEM_KEY_PAIR_GEN was allocated 0xf because no number was proposed
+    CKM_ML_KEM was allocated 0x17 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKA_PARAMETER_SET was allocated 0x61d because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Defines for Post Quantum Signature algorithms".
+
+Mechanisms:
+
+ #define CKM_ML_DSA_KEY_PAIR_GEN           0x0000001cUL
+ #define CKM_ML_DSA                        0x0000001dUL
+ #define CKM_ML_DSA_DETERMINISTIC          0x0000001eUL
+ #define CKM_ML_DSA_PREHASH                0x0000001fUL
+ #define CKM_ML_DSA_PREHASH_DETERMINISTIC  0x00000022UL
+ #define CKM_ML_DSA_PREHASH_SHA224         0x00000023UL
+ #define CKM_ML_DSA_PREHASH_SHA256         0x00000024UL
+ #define CKM_ML_DSA_PREHASH_SHA384         0x00000025UL
+ #define CKM_ML_DSA_PREHASH_SHA512         0x00000026UL
+ #define CKM_ML_DSA_PREHASH_SHA3_224       0x00000027UL
+ #define CKM_ML_DSA_PREHASH_SHA3_256       0x00000028UL
+ #define CKM_ML_DSA_PREHASH_SHA3_384       0x00000029UL
+ #define CKM_ML_DSA_PREHASH_SHA3_512       0x0000002aUL
+ #define CKM_ML_DSA_PREHASH_SHAKE128       0x0000002bUL
+ #define CKM_ML_DSA_PREHASH_SHAKE256       0x0000002cUL
+ #define CKM_SLH_DSA_KEY_PAIR_GEN          0x0000002dUL
+ #define CKM_SLH_DSA                       0x0000002eUL
+ #define CKM_SLH_DSA_DETERMINISTIC         0x0000002fUL
+ #define CKM_SLH_DSA_PREHASH               0x00000034UL
+ #define CKM_SLH_DSA_PREHASH_DETERMINISTIC 0x00000035UL
+ #define CKM_SLH_DSA_PREHASH_SHA224        0x00000036UL
+ #define CKM_SLH_DSA_PREHASH_SHA256        0x00000037UL
+ #define CKM_SLH_DSA_PREHASH_SHA384        0x00000038UL
+ #define CKM_SLH_DSA_PREHASH_SHA512        0x00000039UL
+ #define CKM_SLH_DSA_PREHASH_SHA3_224      0x0000003aUL
+ #define CKM_SLH_DSA_PREHASH_SHA3_256      0x0000003bUL
+ #define CKM_SLH_DSA_PREHASH_SHA3_384      0x0000003cUL
+ #define CKM_SLH_DSA_PREHASH_SHA3_512      0x0000003dUL
+ #define CKM_SLH_DSA_PREHASH_SHAKE128      0x0000003eUL
+ #define CKM_SLH_DSA_PREHASH_SHAKE256      0x0000003fUL
+ #define CKM_FN_DSA_KEY_PAIR_GEN           0x00000054UL
+ #define CKM_FN_DSA                        0x00000055UL
+
+Mldsa params:
+
+ #define CKP_ML_DSA_44 0x00000001UL
+ #define CKP_ML_DSA_65 0x00000002UL
+ #define CKP_ML_DSA_87 0x00000003UL
+
+Fndsa params:
+
+ #define CKP_FALCON512_ROUND3  0x40000001UL
+ #define CKP_FALCON1024_ROUND3 0x40000002UL
+
+Sldsa params:
+
+ #define CKP_SLH_DSA_SHA2_128S  0x00000001UL
+ #define CKP_SLH_DSA_SHAKE_128S 0x00000002UL
+ #define CKP_SLH_DSA_SHA2_128F  0x00000003UL
+ #define CKP_SLH_DSA_SHAKE_128F 0x00000004UL
+ #define CKP_SLH_DSA_SHA2_192S  0x00000005UL
+ #define CKP_SLH_DSA_SHAKE_192S 0x00000006UL
+ #define CKP_SLH_DSA_SHA2_192F  0x00000007UL
+ #define CKP_SLH_DSA_SHAKE_192F 0x00000008UL
+ #define CKP_SLH_DSA_SHA2_256S  0x00000009UL
+ #define CKP_SLH_DSA_SHAKE_256S 0x0000000aUL
+ #define CKP_SLH_DSA_SHA2_256F  0x0000000bUL
+ #define CKP_SLH_DSA_SHAKE_256F 0x0000000cUL
+
+Attributes:
+
+ #define CKA_PARAMETER_SET 0x0000061dUL
+
+This represents the following changes to your original proposal:
+    CKA_PARAMETER_SET was allocated 0x61d because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKM_ML_DSA_KEY_PAIR_GEN was allocated 0x1c because no number was proposed
+    CKM_ML_DSA was allocated 0x1d because no number was proposed
+    CKM_ML_DSA_DETERMINISTIC was allocated 0x1e because no number was proposed
+    CKM_ML_DSA_PREHASH was allocated 0x1f because no number was proposed
+    CKM_ML_DSA_PREHASH_DETERMINISTIC was allocated 0x22 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA224 was allocated 0x23 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA256 was allocated 0x24 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA384 was allocated 0x25 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA512 was allocated 0x26 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA3_224 was allocated 0x27 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA3_256 was allocated 0x28 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA3_384 was allocated 0x29 because no number was proposed
+    CKM_ML_DSA_PREHASH_SHA3_512 was allocated 0x2a because no number was proposed
+    CKM_ML_DSA_PREHASH_SHAKE128 was allocated 0x2b because no number was proposed
+    CKM_ML_DSA_PREHASH_SHAKE256 was allocated 0x2c because no number was proposed
+    CKM_SLH_DSA_KEY_PAIR_GEN was allocated 0x2d because no number was proposed
+    CKM_SLH_DSA was allocated 0x2e because no number was proposed
+    CKM_SLH_DSA_DETERMINISTIC was allocated 0x2f because no number was proposed
+    CKM_SLH_DSA_PREHASH was allocated 0x34 because no number was proposed
+    CKM_SLH_DSA_PREHASH_DETERMINISTIC was allocated 0x35 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA224 was allocated 0x36 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA256 was allocated 0x37 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA384 was allocated 0x38 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA512 was allocated 0x39 because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA3_224 was allocated 0x3a because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA3_256 was allocated 0x3b because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA3_384 was allocated 0x3c because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHA3_512 was allocated 0x3d because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHAKE128 was allocated 0x3e because no number was proposed
+    CKM_SLH_DSA_PREHASH_SHAKE256 was allocated 0x3f because no number was proposed
+    CKM_FN_DSA_KEY_PAIR_GEN was allocated 0x54 because no number was proposed
+    CKM_FN_DSA was allocated 0x55 because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Public Key From Private Derive".
+
+Mechanisms:
+
+ #define CKM_PUB_KEY_FROM_PRIV_KEY 0x0000403aUL
+
+This represents the following changes to your original proposal:
+    CKM_PUB_KEY_FROM_PRIV_KEY was allocated 0x403a because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Random Seeding".
+
+Token flags:
+
+ #define CKF_SEED_RANDOM_REQUIRED 0x02000000UL
+
+Errors:
+
+ #define CKR_SEED_RANDOM_REQUIRED 0x00000206UL
+
+This represents the following changes to your original proposal:
+    CKR_SEED_RANDOM_REQUIRED was allocated 0x206 because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "TLS 1.2 Extended Master Secret ".
+
+Mechanisms:
+
+ #define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE    0x00000056UL
+ #define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE_DH 0x00000057UL
+
+This represents the following changes to your original proposal:
+    CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE was allocated 0x56 because no number was proposed
+    CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE_DH was allocated 0x57 because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Add CKR_TOKEN_NOT_INITIALIZED".
+
+Errors:
+
+ #define CKR_TOKEN_NOT_INITIALIZED 0x00000208UL
+
+This represents the following changes to your original proposal:
+    CKR_TOKEN_NOT_INITIALIZED was allocated 0x208 because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Add Trust objects to map trust values to certificates".
+
+Objects:
+
+ #define CKO_TRUST 0x0000000bUL
+
+Attributes:
+
+ #define CKA_TRUST_SERVER_AUTH      0x0000062cUL
+ #define CKA_TRUST_CLIENT_AUTH      0x0000062dUL
+ #define CKA_TRUST_CODE_SIGNING     0x0000062eUL
+ #define CKA_TRUST_EMAIL_PROTECTION 0x0000062fUL
+ #define CKA_TRUST_IPSEC_IKE        0x00000630UL
+ #define CKA_TRUST_TIME_STAMPING    0x00000631UL
+ #define CKA_TRUST_OCSP_SIGNING     0x00000632UL
+
+Trust states:
+
+ #define CKT_TRUST_UNKNOWN          0x00000000UL
+ #define CKT_TRUSTED                0x00000001UL
+ #define CKT_TRUST_ANCHOR           0x00000002UL
+ #define CKT_NOT_TRUSTED            0x00000003UL
+ #define CK_TRUST_MUST_VERIFY_TRUST 0x00000004UL
+
+This represents the following changes to your original proposal:
+    CKO_TRUST was allocated 0xb because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKA_TRUST_SERVER_AUTH was allocated 0x62c because no number was proposed
+    CKA_TRUST_CLIENT_AUTH was allocated 0x62d because no number was proposed
+    CKA_TRUST_CODE_SIGNING was allocated 0x62e because no number was proposed
+    CKA_TRUST_EMAIL_PROTECTION was allocated 0x62f because no number was proposed
+    CKA_TRUST_IPSEC_IKE was allocated 0x630 because no number was proposed
+    CKA_TRUST_TIME_STAMPING was allocated 0x631 because no number was proposed
+    CKA_TRUST_OCSP_SIGNING was allocated 0x632 because no number was proposed
+
+Please update your spec before sending it to ballot.
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "XMSS and XMSSMT definitions".
+
+Errors:
+
+ #define CKR_KEY_EXHAUSTED 0x00000203UL
+
+Key types:
+
+ #define CKK_XMSS   0x00000047UL
+ #define CKK_XMSSMT 0x00000048UL
+
+Mechanisms:
+
+ #define CKM_XMSS_KEY_PAIR_GEN   0x00004034UL
+ #define CKM_XMSSMT_KEY_PAIR_GEN 0x00004035UL
+ #define CKM_XMSS                0x00004036UL
+ #define CKM_XMSSMT              0x00004037UL
+
+Attributes:
+
+ #define CKA_PARAMETER_SET 0x0000061dUL
+
+This represents the following changes to your original proposal:
+    CKA_PARAMETER_SET was allocated 0x61d because no number was proposed
+
+Please update your spec before sending it to ballot.

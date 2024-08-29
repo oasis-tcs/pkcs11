@@ -949,7 +949,7 @@ CKS_RW_SO_FUNCTIONS,0x00000004,session_states,spec
 CKP_SLH_DSA_SHA2_128S,0x00000001,sldsa_params,proposed
 CKP_SLH_DSA_SHAKE_256S,0x0000000a,sldsa_params,proposed
 CKP_SLH_DSA_SHA2_256F,0x0000000b,sldsa_params,proposed
-CKP_SLH_DSA_SHAKE_256S,0x0000000c,sldsa_params,proposed
+CKP_SLH_DSA_SHAKE_256F,0x0000000c,sldsa_params,proposed
 CKP_SLH_DSA_SHAKE_128S,0x00000002,sldsa_params,proposed
 CKP_SLH_DSA_SHA2_128F,0x00000003,sldsa_params,proposed
 CKP_SLH_DSA_SHAKE_128F,0x00000004,sldsa_params,proposed

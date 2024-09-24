@@ -264,8 +264,6 @@ CKR_NEED_TO_CREATE_THREADS,0x00000009,errors,spec
 CKR_KEY_HANDLE_INVALID,0x00000060,errors,spec
 CKR_KEY_SIZE_RANGE,0x00000062,errors,spec
 CKR_KEY_TYPE_INCONSISTENT,0x00000063,errors,spec
-CKP_FALCON512_ROUND3,0x40000001,fndsa_params,proposed
-CKP_FALCON1024_ROUND3,0x40000002,fndsa_params,proposed
 CKF_INTERFACE_FORK_SAFE,0x00000001,function_flags,spec
 CKG_NO_GENERATE,0x00000000,generator_functions,spec
 CKG_GENERATE,0x00000001,generator_functions,spec
@@ -373,7 +371,6 @@ CKK_XMSSMT,0x00000048,key_types,proposed
 CKK_ML_KEM,0x00000049,key_types,proposed
 CKK_ML_DSA,0x0000004a,key_types,proposed
 CKK_SLH_DSA,0x0000004b,key_types,proposed
-CKK_FN_DSA,0x0000004c,key_types,proposed
 CKM_RSA_PKCS_KEY_PAIR_GEN,0x00000000,mechanisms,spec
 CKM_RSA_PKCS,0x00000001,mechanisms,spec
 CKM_RSA_X9_31_KEY_PAIR_GEN,0x0000000a,mechanisms,spec
@@ -762,7 +759,6 @@ CKM_IDEA_CBC,0x00000342,mechanisms,spec
 CKM_IDEA_MAC,0x00000343,mechanisms,spec
 CKM_IDEA_MAC_GENERAL,0x00000344,mechanisms,spec
 CKM_IDEA_CBC_PAD,0x00000345,mechanisms,spec
-CKM_FN_DSA_KEY_PAIR_GEN,0x00000054,mechanisms,proposed
 CKM_AES_OFB,0x00002104,mechanisms,spec
 CKM_AES_CFB64,0x00002105,mechanisms,spec
 CKM_AES_CFB8,0x00002106,mechanisms,spec
@@ -773,7 +769,6 @@ CKM_AES_KEY_WRAP_PAD,0x0000210a,mechanisms,spec
 CKM_AES_KEY_WRAP_KWP,0x0000210b,mechanisms,spec
 CKM_AES_KEY_WRAP_PKCS7,0x0000210c,mechanisms,spec
 CKM_GENERIC_SECRET_KEY_GEN,0x00000350,mechanisms,spec
-CKM_FN_DSA,0x00000055,mechanisms,proposed
 CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE,0x00000056,mechanisms,proposed
 CKM_CONCATENATE_BASE_AND_KEY,0x00000360,mechanisms,spec
 CKM_CONCATENATE_BASE_AND_DATA,0x00000362,mechanisms,spec

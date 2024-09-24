@@ -33,19 +33,12 @@ Mechanisms:
  #define CKM_SLH_DSA_PREHASH_SHA3_512      0x0000003dUL
  #define CKM_SLH_DSA_PREHASH_SHAKE128      0x0000003eUL
  #define CKM_SLH_DSA_PREHASH_SHAKE256      0x0000003fUL
- #define CKM_FN_DSA_KEY_PAIR_GEN           0x00000054UL
- #define CKM_FN_DSA                        0x00000055UL
 
 Mldsa params:
 
  #define CKP_ML_DSA_44 0x00000001UL
  #define CKP_ML_DSA_65 0x00000002UL
  #define CKP_ML_DSA_87 0x00000003UL
-
-Fndsa params:
-
- #define CKP_FALCON512_ROUND3  0x40000001UL
- #define CKP_FALCON1024_ROUND3 0x40000002UL
 
 Sldsa params:
 
@@ -100,7 +93,5 @@ Please update your spec before sending it to ballot.
     CKM_SLH_DSA_PREHASH_SHA3_512 was allocated 0x3d because no number was proposed
     CKM_SLH_DSA_PREHASH_SHAKE128 was allocated 0x3e because no number was proposed
     CKM_SLH_DSA_PREHASH_SHAKE256 was allocated 0x3f because no number was proposed
-    CKM_FN_DSA_KEY_PAIR_GEN was allocated 0x54 because no number was proposed
-    CKM_FN_DSA was allocated 0x55 because no number was proposed
 
 Please update your spec before sending it to ballot.

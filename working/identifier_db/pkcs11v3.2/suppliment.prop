@@ -9,4 +9,3 @@ Key Types
 #define CKK_ML_KEM TBD // missing from ML Kem proposal
 #define CKK_ML_DSA TBD // missing from PQ signature proposal
 #define CKK_SLH_DSA TBD // missing from PQ signature proposal
-#define CKK_FN_DSA TBD // missing from PQ signature proposal

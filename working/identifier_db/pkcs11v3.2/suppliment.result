@@ -23,6 +23,5 @@ Please update your spec before sending it to ballot.
     CKK_ML_KEM was allocated 0x49 because no number was proposed
     CKK_ML_DSA was allocated 0x4a because no number was proposed
     CKK_SLH_DSA was allocated 0x4b because no number was proposed
-    CKK_FN_DSA was allocated 0x4c because no number was proposed
 
 Please update your spec before sending it to ballot.

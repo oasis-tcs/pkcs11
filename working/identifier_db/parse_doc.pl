@@ -2,8 +2,9 @@
 #
 # get the source file
 # read the database
-#sub find_number;
-#sub print_types;
+use File::Basename;
+use File::Spec;
+sub process_header;
 
 glob $print_doc_tables=0;
 glob $print_doc_defines=0;
@@ -16,6 +17,7 @@ glob $print_diff_defines=0;
 glob $print_diff_typedefs=0;
 glob $print_diff_struct=0;
 glob $verbose=0;
+glob $verbose2=0;
 
 glob $table_number=0;
 glob $current_row_count=0;
@@ -29,12 +31,14 @@ glob $typedef_count=0;
 glob $header_typedef_count=0;
 glob %typedef_struct_name = ();
 glob %typedef_struct_count = ();
+glob %typedef_present=();
 glob %struct_value = ();
 glob %table_entry = ();
 glob %table_col_count = ();
 glob %header_typedef_struct_name = ();
 glob %header_typedef_struct_count = ();
 glob %header_struct_value = ();
+glob %header_typedef_present = ();
 glob @table_name = ();
 glob @table_count = ();
 glob @table_index = ();
@@ -140,6 +144,11 @@ foreach (@ARGV) {
         $verbose=1;
         next;
     }
+    if ($arg eq "verbose2") {
+        $verbose=1;
+        $verbose2=1;
+        next;
+    }
     if ($doc_file eq "")  {
         $doc_file=$arg;
         next;
@@ -169,11 +178,6 @@ if (($print_doc_defines == 0) &&
         $print_diff_struct=1;
 }
 
-if ($doc_file eq "") {
-    usage();
-    exit;
-}
-
 $need_header=0;
 $need_doc=0;
 if (($print_doc_defines == 1) ||
@@ -195,27 +199,53 @@ if (($print_header_defines == 1) ||
     $need_header=1;
 }
 
-if ($need_doc==1 && $need_header==1 &&  $header_file eq "") {
-    usage();
-    exit;
-}
 
 if ($need_doc==0 && $need_header==1 &&  $header_file eq "") {
     $header_file=$doc_file;
     $doc_file="";
 }
 
+if ($need_doc==1 && $doc_file eq "") {
+    foreach $file (<./pkcs11-spec-v*.txt>) {
+        if ($doc_file eq "") {
+            $doc_file=$file;
+        } else {
+            if ($doc_file lt $file) {
+                $doc_file=$file;
+            }
+        }
+    }
+    if ($doc_file eq "") {
+        print "No pkcs11-spec-v*.txt file found, and no doc file supplied on command line\n";
+        usage();
+        exit;
+    }
+}
+
+if ($need_header==1 &&  $header_file eq "") {
+    $header_file="../headers/pkcs11t.h";
+}
+
+if ($need_header==1) {
+    my ($header_name, $header_path) = fileparse($header_file);
+    my @dirs = File::Spec->splitdir($header_path);
+    if ($header_name eq "") {
+        $header_name=File::Spec->catfile(@dirs, "pkcs11t.h");
+    }
+    $function_header_file=File::Spec->catfile(@dirs, "pkcs11.h");
+}
+
 if ($verbose == 1) {
-    print  "doc_file=$doc_file header_file=$header_file";
-    print " \$print_doc_defines=$print_doc_defines";
-    print " \$print_doc_structs=$print_doc_structs";
-    print " \$print_doc_typedefs=$print_doc_typedefs";
-    print " \$print_doc_tables= $print_doc_tables";
-    print " \$print_header_defines=$print_header_defines";
-    print " \$print_header_structs=$print_header_structs";
-    print " \$print_header_typedefs=$print_header_typedefs";
-    print " \$print_diff_defines=$print_diff_defines";
-    print " \$print_diff_typedefs=$print_diff_typedefs";
+    print  "doc_file=$doc_file header_file=$header_file function_header_file=$function_header_file\n";
+    print " \$print_doc_defines=$print_doc_defines\n";
+    print " \$print_doc_structs=$print_doc_structs\n";
+    print " \$print_doc_typedefs=$print_doc_typedefs\n";
+    print " \$print_doc_tables= $print_doc_tables\n";
+    print " \$print_header_defines=$print_header_defines\n";
+    print " \$print_header_structs=$print_header_structs\n";
+    print " \$print_header_typedefs=$print_header_typedefs\n";
+    print " \$print_diff_defines=$print_diff_defines\n";
+    print " \$print_diff_typedefs=$print_diff_typedefs\n";
     print " \$print_diff_struct=$print_diff_struct\n";
 }
 
@@ -348,8 +378,8 @@ MoreParsing:
             if ($verbose == 1) {
                 $test=$_;
                 if ($test =~ /^\s*Table\s+(\d+):\s*(.*)/) {
-                    printf "%d line %d: inconsistent Table Title(%s) in table %d. Should have a comma rather than a colon\n",
-                           $doc_file, $line, $_, $table_number;
+                    printf "%s line %d: inconsistent Table Title(%s) in table %d. Should have a comma rather than a colon\n",
+                           $doc_file, $line, $entry, $table_number;
                 }
             }
             next;
@@ -446,7 +476,7 @@ MoreParsing:
         if ($test =~ /(CK_SECURITY_DOMAIN_$idspec)/) {
             $name=$1;
             if (($verbose == 1) && ($doc_present{$name} == 0)) {
-                    printf "%d line %d: %s in unlabelled table %d.\n",
+                    printf "%s line %d: %s in unlabelled table.\n",
                            $doc_file, $line, $name;
             }
             $doc_found{$name}=0;
@@ -460,130 +490,13 @@ MoreParsing:
 
 # read the same stuff out of the header file
 if ($header_file ne "") {
-    open(my $header, "<", $header_file) or die "Can't open $header_file: $!";
-    while (<$header>) {
-        chomp;   # clear out new line 
-        $entry=$_;
-        # remove comments first
-        $entry=~s/\/\*.*\*\///g;
-        # strip trailing and leading blanks
-        $entry=~s/^\s+|\s+$//;
-        # normalize spacing to just one space to aid comparisons
-        $entry=~s/\s+/ /g;
-        next if /^$/; # skip blank line 
-        if ($inMultiline == 1) {
-            $entry=~s/\\$//;
-            $entry=~s/^\s+|\s+$//;
-            $header_typedef_names[$header_typedef_count]=$header_typedef_names[$header_typedef_count]." ".$entry;
-            if ($entry =~ ".*;" ) {
-                $inMultiline=0;
-                $header_typedef_count++;
-            }
-            next;
-        }
-        if ($expectStruct == 1) {
-            $expectStruct=0;
-            if ($entry eq "\{" ) {
-                $inStruct == 1;
-                next;
-            }
-            printf "%s: missing \{ in struct (%s) skipping\n", $header_file, $struct_name;
-            # fall through and see if something else comes up
-        }
-        if ($inStruct == 1) {
-            $entry_index=$struct_name."_".$current_row_count;
-            $test=$_;
-            if ($test =~ /\}\s+($idspec)/) {
-                $header_typedef_struct_name{$struct_name}=$1;
-                $header_typedef_struct_count{$struct_name}=$current_row_count;
-                $inStruct=0;
-                $current_row_count=0;
-                next;
-            }
-            # normalize
-            $entry=~s/^\s+|\s+$//;
-            $header_struct_value{$entry_index}=$entry;
-            $current_row_count++;
-            next;
-        }
-        @db = split(" ");
-        if ($db[0] eq "#define") { # handle #defines
-            $name=$db[1];
-            $number=hex($db[2]);
-            $comment=$db[4];
-            if ($comment eq "Deprecated") {
-                next; # skip deprecated defines 
-            }
-            $test=$number;
-            if ($test =~ /^CK$idspec/) {
-                next; # skip aliases
-            }
-            # Some attributes have the CKF_ARRAY_ATTRIBUTE flag
-            if (($number == 0) and (substr($db[2],1,19) eq "CKF_ARRAY_ATTRIBUTE")) {
-                $number=hex(substr($db[2],21));
-            }
-            # handle a substitution 
-            if (($number == 0xc) and (substr($db[2],0,2) eq "CK")) {
-                $number = $header_number{$db[2]};
-            }
-            $header_number{$name} = $number;
-            $header_found{$name} = 0;
-            $header_present{$name} = 1;
-            $header_line{$name} = $_;
-            # give VENDER_DEFINED a pass 
-            if (($number == 0x80000000) && (substr($name,4) eq "VENDOR_DEFINED")) {
-                $header_found{$name} = 1;
-            }
-            next;
-        }
-        if ($db[0] eq "typedef") {
-            if ($db[1] eq "struct") {
-                if (($db[3] ne "") && ($db[3] ne "\{")) {
-                    # skip normal typedefs alias;
-                    $header_typedef_names[$header_typedef_count]=$entry;
-                    $test=$entry;
-                    if ($test !~ /.*;$/) {
-                        $entry =~ s/\\$//;
-                        $entry=~s/^\s+|\s+$//;
-                        $header_typedef_names[$header_typedef_count]=$entry;
-                        $inMultiline=1;
-                        next;
-                    }
-                    $header_typedef_count++;
-                    next;
-                }
-                $name=$db[2];
-                $inStruct=1;
-                $expectStruct=0;
-                if ($name =~ /($idspec)\{/ ) {
-                    $name=$1
-                } else {
-                    if ($db[3] ne "\{") {
-                         #print "no '\{' on line entry=$entry, name=$name, db[2]=$db[2] db[3]=$db[3]\n";
-                        $expectStruct=1;
-                        $inStruct=0;
-                    }
-                }
-                $struct_name=$name;
-                $current_row_count=0;
-                next;
-            }
-            $test=$entry;
-            if ($test !~ /.*\;$/) {
-                # handle callbacks multiline
-                $entry =~ s/\\$//;
-                $entry=~s/^\s+|\s+$//;
-                $header_typedef_names[$header_typedef_count]=$entry;
-                $inMultiline=1;
-                next;
-            }
-            $header_typedef_names[$header_typedef_count]=$entry;
-            $header_typedef_count++;
-            next;
-        }
-    }
-    close ($header);
+    process_header($header_file, 0);
 }
+
+# read the same stuff out of the function header file
+#if ($function_header_file ne "") {
+#    process_header($function_header_file, 1);
+#}
 
 # extract the defines from the tables
 foreach (@table_index) {
@@ -617,6 +530,14 @@ foreach (@table_index) {
             $doc_present{$name}=1;
         }
     }
+}
+
+# build the typedef tables
+for my $i (0..($typedef_count-1)) {
+    $typedef_present{$typedef_names[$i]}=1;
+}
+for my $i (0..($header_typedef_count-1)) {
+    $header_typedef_present{$header_typedef_names[$i]}=1;
 }
 
 
@@ -666,6 +587,146 @@ if ($print_diff_typedefs) {
 if ($print_diff_struct) {
     print_diff_struct();
     printf "\n";
+}
+
+sub process_header
+{
+    my ($l_header_file, $l_verbose)=@_;
+    print "Processing header $l_header_file...\n";
+
+    open(my $header, "<", $l_header_file) or die "Can't open $l_header_file: $!";
+    while (<$header>) {
+        chomp;   # clear out new line 
+        $entry=$_;
+        # remove comments first
+        $entry=~s/\/\*.*\*\///g;
+        # strip trailing and leading blanks
+        $entry=~s/^\s+|\s+$//;
+        # normalize spacing to just one space to aid comparisons
+        $entry=~s/\s+/ /g;
+        next if /^$/; # skip blank line 
+        if ($l_verbose != 0) {
+            print "processing \$entry=<$entry> \$inMultiline=$inMultiLine \$expectStruct=$expectStruct \$inStruct=$inStruct\n";
+        }
+        if ($inMultiline == 1) {
+            $entry=~s/\\$//;
+            $entry=~s/^\s+|\s+$//;
+            $header_typedef_names[$header_typedef_count]=$header_typedef_names[$header_typedef_count]." ".$entry;
+            if ($entry =~ ".*;" ) {
+                $inMultiline=0;
+                $header_typedef_count++;
+            }
+            next;
+        }
+        if ($expectStruct == 1) {
+            $expectStruct=0;
+            if ($entry eq "\{" ) {
+                $inStruct == 1;
+                next;
+            }
+            printf "%s: missing \{ in struct (%s) skipping\n", $l_header_file, $struct_name;
+            # fall through and see if something else comes up
+        }
+        if ($inStruct == 1) {
+            $entry_index=$struct_name."_".$current_row_count;
+            $test=$_;
+            if ($test =~ /\}\s+($idspec)/) {
+                $header_typedef_struct_name{$struct_name}=$1;
+                $header_typedef_struct_count{$struct_name}=$current_row_count;
+                $inStruct=0;
+                $current_row_count=0;
+                next;
+            }
+            # normalize
+            $entry=~s/^\s+|\s+$//;
+            $header_struct_value{$entry_index}=$entry;
+            $current_row_count++;
+            next;
+        }
+        @db = split(" ");
+        if ($db[0] eq "#define") { # handle #defines
+            if ($l_verbose != 0) { print "    is a define\n"; }
+            $name=$db[1];
+            $number=hex($db[2]);
+            $comment=$db[4];
+            if ($comment eq "Deprecated") {
+                if ($l_verbose != 0) { print "    Deprecated\n"; }
+                next; # skip deprecated defines 
+            }
+            $test=$number;
+            if ($test =~ /^CK$idspec/) {
+                if ($l_verbose != 0) { print "    alias\n"; }
+                next; # skip aliases
+            }
+            # Some attributes have the CKF_ARRAY_ATTRIBUTE flag
+            if (($number == 0) and (substr($db[2],1,19) eq "CKF_ARRAY_ATTRIBUTE")) {
+                $number=hex(substr($db[2],21));
+            }
+            # handle a substitution 
+            if (($number == 0xc) and (substr($db[2],0,2) eq "CK")) {
+                if ($l_verbose != 0) { print "    substitution\n"; }
+                $number = $header_number{$db[2]};
+            }
+            $header_number{$name} = $number;
+            $header_found{$name} = 0;
+            $header_present{$name} = 1;
+            $header_line{$name} = $_;
+            # give VENDER_DEFINED a pass 
+            if (($number == 0x80000000) && (substr($name,4) eq "VENDOR_DEFINED")) {
+                if ($l_verbose != 0) { print "    vendor_defined\n"; }
+                $header_found{$name} = 1;
+            }
+            next;
+        }
+        if ($db[0] eq "typedef") {
+            if ($l_verbose != 0) { print "    is a typedef\n"; }
+            if ($db[1] eq "struct") {
+                if ($l_verbose != 0) { print "    is a struct\n"; }
+                if (($db[3] ne "") && ($db[3] ne "\{")) {
+                    # skip normal typedefs alias;
+                    $header_typedef_names[$header_typedef_count]=$entry;
+                    $test=$entry;
+                    if ($test !~ /.*;$/) {
+                        $entry =~ s/\\$//;
+                        $entry=~s/^\s+|\s+$//;
+                        $header_typedef_names[$header_typedef_count]=$entry;
+                        $inMultiline=1;
+                        next;
+                    }
+                    $header_typedef_count++;
+                    next;
+                }
+                $name=$db[2];
+                $inStruct=1;
+                $expectStruct=0;
+                if ($name =~ /($idspec)\{/ ) {
+                    $name=$1
+                } else {
+                    if ($db[3] ne "\{") {
+                         #print "no '\{' on line entry=$entry, name=$name, db[2]=$db[2] db[3]=$db[3]\n";
+                        $expectStruct=1;
+                        $inStruct=0;
+                    }
+                }
+                $struct_name=$name;
+                $current_row_count=0;
+                next;
+            }
+            $test=$entry;
+            if ($test !~ /.*\;$/) {
+                # handle callbacks multiline
+                $entry =~ s/\\$//;
+                $entry=~s/^\s+|\s+$//;
+                $header_typedef_names[$header_typedef_count]=$entry;
+                $inMultiline=1;
+                next;
+            }
+            $header_typedef_names[$header_typedef_count]=$entry;
+            $header_typedef_count++;
+            next;
+        }
+    }
+    close ($header);
 }
 
 sub get_name
@@ -858,7 +919,7 @@ sub print_diff_defines
     foreach (sort keys %header_number)  {
         $name=$_;
         if ($doc_present{$name} == 0) {
-            if ($verbose == 1) {
+            if ($verbose2 == 1) {
                 printf "#define %-40s 0x%08xUL missing from doc %s (may not be and error)\n",
                        $name, $header_number{$name}, $doc_file;
             } else {
@@ -866,7 +927,7 @@ sub print_diff_defines
             }
         }
     }
-    if (($verbose == 0) && ($missing_in_doc != 0)) {
+    if (($verbose2 == 0) && ($missing_in_doc != 0)) {
         printf"%d defines in header (%s) and not in doc (%s)\n",
                 $missing_in_doc, $header_file, $doc_file;
     }
@@ -878,6 +939,13 @@ sub print_diff_struct
     foreach (sort keys %typedef_struct_name)  {
         $index=$_;
         if ( $header_typedef_struct_name{$index} eq "" ) {
+            $test=$index;
+            # the actual struct is in pkcs11.h and pkcs11f.h, if we have the typedef, treat is as fine
+            if ($test =~ /^CK_FUNCTION_LIST\w*$/) {
+                if ($header_typedef_present{"typedef struct $index $index;"} == 1) {
+                    next;
+                }
+            }
             printf "missing struct '%s' in header %s\n", $index, $header_file;
             next;
         }
@@ -901,14 +969,14 @@ sub print_diff_struct
     foreach (sort keys %header_typedef_struct_name)  {
         $index=$_;
         if ( $typedef_struct_name{$index} eq "" ) {
-            if ($verbose == 1) {
+            if ($verbose2 == 1) {
                 printf "struct '%s' missing in doc %s\n", $index, $doc_file;
             } else {
                 $missing_structs++;
             }
         }
     }
-    if (($verbose == 0) and ($missing_structs !=0)) {
+    if (($verbose2 == 0) and ($missing_structs !=0)) {
         printf"%d structs in header (%s) and not in doc (%s)\n",
                 $missing_structs, $header_file, $doc_file;
     }
@@ -936,14 +1004,14 @@ sub print_diff_typedefs
         $name=$_;
         if ($typedef_present{$name} == 0) {
             $test=$name;
-            if (($test =~/typedef.*\sCK_PTR\s.*_PTR;$/) and $verbose == 0) {
+            if (($test =~/typedef.*\sCK_PTR\s.*_PTR;$/) and $verbose2 == 0 ) {
                 $ckptr_count++;
             } else {
                 printf "typedef (%s) missing from doc %s\n", $name, $doc_file;
             }
         }
     }
-    if (($verbose == 0) && ($ckptr_count != 0)) {
+    if (($verbose2 == 0) && ($ckptr_count != 0)) {
         printf(" %d occurances of (typedef {ID} CK_PTR {ID}_PTR;) missing from %s\n", $ckptr_count, $doc_file);
     }
 }
@@ -954,6 +1022,7 @@ sub usage
     print " parse a doc text file and/or a header file and output according\n";
     print " to the command:\n";
     print "    verbose:  output inconsistancies in the doc_file\n";
+    print "    verbose2:  output objects in the header_file that are not in the doc_file\n";
     print "    table:  the first two columns of every table in the doc_file\n";
     print "    defines:  all the defines in both the doc_file and header_file\n";
     print "    typedefs:  all the typedefs in both the doc_file and header_file\n";

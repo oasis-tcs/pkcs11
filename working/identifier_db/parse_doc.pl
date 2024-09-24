@@ -1004,7 +1004,18 @@ sub print_diff_typedefs
         $name=$_;
         if ($typedef_present{$name} == 0) {
             $test=$name;
-            if (($test =~/typedef.*\sCK_PTR\s.*_PTR;$/) and $verbose2 == 0 ) {
+            if ($test =~ /typedef struct CK_FUNCTION_LIST\w* CK_FUNCTION_LIST\w*;/) {
+                my @names=split(/[ ;]/,$name);
+                if ($names[2] ne $names[3]) {
+                    printf "%s: inconsistent function list declaration:\n $name\n $names[2] ne $names[3]\n", $header_file;
+                    next;
+                }
+                if ($typedef_struct_name{$names[2]} ne "" ) {
+                    next;
+                }
+            }
+            $test=$name;
+            if (($test =~ /typedef.*\sCK_PTR\s.*_PTR;$/) and $verbose2 == 0 ) {
                 $ckptr_count++;
             } else {
                 printf "typedef (%s) missing from doc %s\n", $name, $doc_file;

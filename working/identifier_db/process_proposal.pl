@@ -3,6 +3,7 @@
 # get the source file
 # read the database
 use File::Basename;
+use File::Spec;
 sub find_number;
 sub print_types;
 
@@ -29,7 +30,9 @@ if ($source_file eq "") {
 }
 
 if ($dest_file eq "") {
-    $dest_file = basename($source_file,".prop").".result";
+    my ($file, $path) = fileparse($source_file,".prop");
+    my @dirs=File::Spec->splitdir($path);
+    $dest_file = File::Spec->catfile(@dirs, $file.".result");
 }
 print "source=$source_file dest=$dest_file\n";
 

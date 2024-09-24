@@ -20,7 +20,7 @@ my %conflict_old_number = ();
 my %conflict_new_number = ();
 
 if ($source_file eq "" ) {
-    die "usage: approve.pl <source_file> <dest_file>";
+    die "usage: approve.pl <source_file>";
 }
 
 open(my $database, "<", $database_file) or die "Can't open $database_file: $!";

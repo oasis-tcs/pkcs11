@@ -96,6 +96,14 @@ while (<$source>) {
 	die "$name != $database_name{$index} inconsistent database/proposal result";
     }
     if ($database_disposition{$index} ne "proposed") {
+        if ($database_disposition{$index} eq "approved") {
+            printf " warning: already in approved state\n";
+            next;
+        }
+        if ($database_disposition{$index} eq "spec") {
+            printf " warning: already in spec state\n";
+            next;
+        }
 	printf "\n";
 	die " entry is not in proposed state (disposition = $database_disposition{$index})";
     }

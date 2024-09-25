@@ -52,6 +52,10 @@ glob $Command="./parse_doc.pl";  # get from the evironment?
 
 foreach (@ARGV) {
     $arg=$_;
+    if ($arg eq "help") {
+        usage();
+        exit;
+    }
     if ($arg eq "table") {
         $print_doc_tables=1;
         next;

@@ -339,14 +339,14 @@ typedef CK_ULONG          CK_OBJECT_CLASS;
 typedef CK_OBJECT_CLASS CK_PTR CK_OBJECT_CLASS_PTR;
 
 /* Profile ID's */
-#define CKP_INVALID_ID                0x00000000UL
-#define CKP_BASELINE_PROVIDER         0x00000001UL
-#define CKP_EXTENDED_PROVIDER         0x00000002UL
-#define CKP_AUTHENTICATION_TOKEN      0x00000003UL
-#define CKP_PUBLIC_CERTIFICATES_TOKEN 0x00000004UL
-#define CKP_COMPLETE_PROVIDER         0x00000005UL
-#define CKP_HKDF_TLS_TOKEN            0x00000006UL
-#define CKP_VENDOR_DEFINED            0x80000000UL
+#define CKP_INVALID_ID                0x00000000UL  /* Profile */
+#define CKP_BASELINE_PROVIDER         0x00000001UL  /* Profile */
+#define CKP_EXTENDED_PROVIDER         0x00000002UL  /* Profile */
+#define CKP_AUTHENTICATION_TOKEN      0x00000003UL  /* Profile */
+#define CKP_PUBLIC_CERTIFICATES_TOKEN 0x00000004UL  /* Profile */
+#define CKP_COMPLETE_PROVIDER         0x00000005UL  /* Profile */
+#define CKP_HKDF_TLS_TOKEN            0x00000006UL  /* Profile */
+#define CKP_VENDOR_DEFINED            0x80000000UL  /* Profile */
 
 
 /* CK_HW_FEATURE_TYPE is a value that identifies the hardware feature type
@@ -370,38 +370,38 @@ typedef CK_ULONG          CK_KEY_TYPE;
 #define CKK_ECDSA               0x00000003UL /* Deprecated */
 #define CKK_EC                  0x00000003UL
 #define CKK_X9_42_DH            0x00000004UL
-#define CKK_KEA                 0x00000005UL
+#define CKK_KEA                 0x00000005UL /* Historical */
 #define CKK_GENERIC_SECRET      0x00000010UL
-#define CKK_RC2                 0x00000011UL
-#define CKK_RC4                 0x00000012UL
-#define CKK_DES                 0x00000013UL
+#define CKK_RC2                 0x00000011UL /* Historical */
+#define CKK_RC4                 0x00000012UL /* Historical */
+#define CKK_DES                 0x00000013UL /* Historical */
 #define CKK_DES2                0x00000014UL
 #define CKK_DES3                0x00000015UL
-#define CKK_CAST                0x00000016UL
-#define CKK_CAST3               0x00000017UL
+#define CKK_CAST                0x00000016UL /* Historical */
+#define CKK_CAST3               0x00000017UL /* Historical */
 #define CKK_CAST5               0x00000018UL /* Deprecated */
-#define CKK_CAST128             0x00000018UL
-#define CKK_RC5                 0x00000019UL
-#define CKK_IDEA                0x0000001AUL
-#define CKK_SKIPJACK            0x0000001BUL
-#define CKK_BATON               0x0000001CUL
-#define CKK_JUNIPER             0x0000001DUL
-#define CKK_CDMF                0x0000001EUL
+#define CKK_CAST128             0x00000018UL /* Historical */
+#define CKK_RC5                 0x00000019UL /* Historical */
+#define CKK_IDEA                0x0000001AUL /* Historical */
+#define CKK_SKIPJACK            0x0000001BUL /* Historical */
+#define CKK_BATON               0x0000001CUL /* Historical */
+#define CKK_JUNIPER             0x0000001DUL /* Historical */
+#define CKK_CDMF                0x0000001EUL /* Historical */
 #define CKK_AES                 0x0000001FUL
 #define CKK_BLOWFISH            0x00000020UL
 #define CKK_TWOFISH             0x00000021UL
 #define CKK_SECURID             0x00000022UL
-#define CKK_HOTP                0x00000023UL
-#define CKK_ACTI                0x00000024UL
+#define CKK_HOTP                0x00000023UL /* Historical */
+#define CKK_ACTI                0x00000024UL /* Historical */
 #define CKK_CAMELLIA            0x00000025UL
 #define CKK_ARIA                0x00000026UL
 
 /* the following definitions were added in the 2.30 header file,
  * but never defined in the spec. */
-#define CKK_MD5_HMAC            0x00000027UL
+#define CKK_MD5_HMAC            0x00000027UL /* Historical */
 #define CKK_SHA_1_HMAC          0x00000028UL
-#define CKK_RIPEMD128_HMAC      0x00000029UL
-#define CKK_RIPEMD160_HMAC      0x0000002AUL
+#define CKK_RIPEMD128_HMAC      0x00000029UL /* Historical */
+#define CKK_RIPEMD160_HMAC      0x0000002AUL /* Historical */
 #define CKK_SHA256_HMAC         0x0000002BUL
 #define CKK_SHA384_HMAC         0x0000002CUL
 #define CKK_SHA512_HMAC         0x0000002DUL
@@ -768,23 +768,23 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_SHA3_224_RSA_PKCS          0x00000066UL
 #define CKM_SHA3_224_RSA_PKCS_PSS      0x00000067UL
 
-#define CKM_RC2_KEY_GEN                0x00000100UL
-#define CKM_RC2_ECB                    0x00000101UL
-#define CKM_RC2_CBC                    0x00000102UL
-#define CKM_RC2_MAC                    0x00000103UL
+#define CKM_RC2_KEY_GEN                0x00000100UL /* Historical */
+#define CKM_RC2_ECB                    0x00000101UL /* Historical */
+#define CKM_RC2_CBC                    0x00000102UL /* Historical */
+#define CKM_RC2_MAC                    0x00000103UL /* Historical */
 
-#define CKM_RC2_MAC_GENERAL            0x00000104UL
-#define CKM_RC2_CBC_PAD                0x00000105UL
+#define CKM_RC2_MAC_GENERAL            0x00000104UL /* Historical */
+#define CKM_RC2_CBC_PAD                0x00000105UL /* Historical */
 
-#define CKM_RC4_KEY_GEN                0x00000110UL
-#define CKM_RC4                        0x00000111UL
-#define CKM_DES_KEY_GEN                0x00000120UL
-#define CKM_DES_ECB                    0x00000121UL
-#define CKM_DES_CBC                    0x00000122UL
-#define CKM_DES_MAC                    0x00000123UL
+#define CKM_RC4_KEY_GEN                0x00000110UL /* Historical */
+#define CKM_RC4                        0x00000111UL /* Historical */
+#define CKM_DES_KEY_GEN                0x00000120UL /* Historical */
+#define CKM_DES_ECB                    0x00000121UL /* Historical */
+#define CKM_DES_CBC                    0x00000122UL /* Historical */
+#define CKM_DES_MAC                    0x00000123UL /* Historical */
 
-#define CKM_DES_MAC_GENERAL            0x00000124UL
-#define CKM_DES_CBC_PAD                0x00000125UL
+#define CKM_DES_MAC_GENERAL            0x00000124UL /* Historical */
+#define CKM_DES_CBC_PAD                0x00000125UL /* Historical */
 
 #define CKM_DES2_KEY_GEN               0x00000130UL
 #define CKM_DES3_KEY_GEN               0x00000131UL
@@ -796,39 +796,39 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_DES3_CBC_PAD               0x00000136UL
 #define CKM_DES3_CMAC_GENERAL          0x00000137UL
 #define CKM_DES3_CMAC                  0x00000138UL
-#define CKM_CDMF_KEY_GEN               0x00000140UL
-#define CKM_CDMF_ECB                   0x00000141UL
-#define CKM_CDMF_CBC                   0x00000142UL
-#define CKM_CDMF_MAC                   0x00000143UL
-#define CKM_CDMF_MAC_GENERAL           0x00000144UL
-#define CKM_CDMF_CBC_PAD               0x00000145UL
+#define CKM_CDMF_KEY_GEN               0x00000140UL /* Historical */
+#define CKM_CDMF_ECB                   0x00000141UL /* Historical */
+#define CKM_CDMF_CBC                   0x00000142UL /* Historical */
+#define CKM_CDMF_MAC                   0x00000143UL /* Historical */
+#define CKM_CDMF_MAC_GENERAL           0x00000144UL /* Historical */
+#define CKM_CDMF_CBC_PAD               0x00000145UL /* Historical */
 
 #define CKM_DES_OFB64                  0x00000150UL
 #define CKM_DES_OFB8                   0x00000151UL
 #define CKM_DES_CFB64                  0x00000152UL
 #define CKM_DES_CFB8                   0x00000153UL
 
-#define CKM_MD2                        0x00000200UL
+#define CKM_MD2                        0x00000200UL /* Historical */
 
-#define CKM_MD2_HMAC                   0x00000201UL
-#define CKM_MD2_HMAC_GENERAL           0x00000202UL
+#define CKM_MD2_HMAC                   0x00000201UL /* Historical */
+#define CKM_MD2_HMAC_GENERAL           0x00000202UL /* Historical */
 
-#define CKM_MD5                        0x00000210UL
+#define CKM_MD5                        0x00000210UL /* Historical */
 
-#define CKM_MD5_HMAC                   0x00000211UL
-#define CKM_MD5_HMAC_GENERAL           0x00000212UL
+#define CKM_MD5_HMAC                   0x00000211UL /* Historical */
+#define CKM_MD5_HMAC_GENERAL           0x00000212UL /* Historical */
 
 #define CKM_SHA_1                      0x00000220UL
 
 #define CKM_SHA_1_HMAC                 0x00000221UL
 #define CKM_SHA_1_HMAC_GENERAL         0x00000222UL
 
-#define CKM_RIPEMD128                  0x00000230UL
-#define CKM_RIPEMD128_HMAC             0x00000231UL
-#define CKM_RIPEMD128_HMAC_GENERAL     0x00000232UL
-#define CKM_RIPEMD160                  0x00000240UL
-#define CKM_RIPEMD160_HMAC             0x00000241UL
-#define CKM_RIPEMD160_HMAC_GENERAL     0x00000242UL
+#define CKM_RIPEMD128                  0x00000230UL /* Historical */
+#define CKM_RIPEMD128_HMAC             0x00000231UL /* Historical */
+#define CKM_RIPEMD128_HMAC_GENERAL     0x00000232UL /* Historical */
+#define CKM_RIPEMD160                  0x00000240UL /* Historical */
+#define CKM_RIPEMD160_HMAC             0x00000241UL /* Historical */
+#define CKM_RIPEMD160_HMAC_GENERAL     0x00000242UL /* Historical */
 
 #define CKM_SHA256                     0x00000250UL
 #define CKM_SHA256_HMAC                0x00000251UL
@@ -867,43 +867,43 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_SHA3_512_KEY_GEN           0x000002d3UL
 
 
-#define CKM_CAST_KEY_GEN               0x00000300UL
-#define CKM_CAST_ECB                   0x00000301UL
-#define CKM_CAST_CBC                   0x00000302UL
-#define CKM_CAST_MAC                   0x00000303UL
-#define CKM_CAST_MAC_GENERAL           0x00000304UL
-#define CKM_CAST_CBC_PAD               0x00000305UL
-#define CKM_CAST3_KEY_GEN              0x00000310UL
-#define CKM_CAST3_ECB                  0x00000311UL
-#define CKM_CAST3_CBC                  0x00000312UL
-#define CKM_CAST3_MAC                  0x00000313UL
-#define CKM_CAST3_MAC_GENERAL          0x00000314UL
-#define CKM_CAST3_CBC_PAD              0x00000315UL
+#define CKM_CAST_KEY_GEN               0x00000300UL /* Historical */
+#define CKM_CAST_ECB                   0x00000301UL /* Historical */
+#define CKM_CAST_CBC                   0x00000302UL /* Historical */
+#define CKM_CAST_MAC                   0x00000303UL /* Historical */
+#define CKM_CAST_MAC_GENERAL           0x00000304UL /* Historical */
+#define CKM_CAST_CBC_PAD               0x00000305UL /* Historical */
+#define CKM_CAST3_KEY_GEN              0x00000310UL /* Historical */
+#define CKM_CAST3_ECB                  0x00000311UL /* Historical */
+#define CKM_CAST3_CBC                  0x00000312UL /* Historical */
+#define CKM_CAST3_MAC                  0x00000313UL /* Historical */
+#define CKM_CAST3_MAC_GENERAL          0x00000314UL /* Historical */
+#define CKM_CAST3_CBC_PAD              0x00000315UL /* Historical */
 /* Note that CAST128 and CAST5 are the same algorithm */
-#define CKM_CAST5_KEY_GEN              0x00000320UL
-#define CKM_CAST128_KEY_GEN            0x00000320UL
-#define CKM_CAST5_ECB                  0x00000321UL
-#define CKM_CAST128_ECB                0x00000321UL
+#define CKM_CAST5_KEY_GEN              0x00000320UL /* Historical */
+#define CKM_CAST128_KEY_GEN            0x00000320UL /* Historical */
+#define CKM_CAST5_ECB                  0x00000321UL /* Historical */
+#define CKM_CAST128_ECB                0x00000321UL /* Historical */
 #define CKM_CAST5_CBC                  0x00000322UL /* Deprecated */
-#define CKM_CAST128_CBC                0x00000322UL
+#define CKM_CAST128_CBC                0x00000322UL /* Historical */
 #define CKM_CAST5_MAC                  0x00000323UL /* Deprecated */
-#define CKM_CAST128_MAC                0x00000323UL
+#define CKM_CAST128_MAC                0x00000323UL /* Historical */
 #define CKM_CAST5_MAC_GENERAL          0x00000324UL /* Deprecated */
-#define CKM_CAST128_MAC_GENERAL        0x00000324UL
+#define CKM_CAST128_MAC_GENERAL        0x00000324UL /* Historical */
 #define CKM_CAST5_CBC_PAD              0x00000325UL /* Deprecated */
-#define CKM_CAST128_CBC_PAD            0x00000325UL
-#define CKM_RC5_KEY_GEN                0x00000330UL
-#define CKM_RC5_ECB                    0x00000331UL
-#define CKM_RC5_CBC                    0x00000332UL
-#define CKM_RC5_MAC                    0x00000333UL
-#define CKM_RC5_MAC_GENERAL            0x00000334UL
-#define CKM_RC5_CBC_PAD                0x00000335UL
-#define CKM_IDEA_KEY_GEN               0x00000340UL
-#define CKM_IDEA_ECB                   0x00000341UL
-#define CKM_IDEA_CBC                   0x00000342UL
-#define CKM_IDEA_MAC                   0x00000343UL
-#define CKM_IDEA_MAC_GENERAL           0x00000344UL
-#define CKM_IDEA_CBC_PAD               0x00000345UL
+#define CKM_CAST128_CBC_PAD            0x00000325UL /* Historical */
+#define CKM_RC5_KEY_GEN                0x00000330UL /* Historical */
+#define CKM_RC5_ECB                    0x00000331UL /* Historical */
+#define CKM_RC5_CBC                    0x00000332UL /* Historical */
+#define CKM_RC5_MAC                    0x00000333UL /* Historical */
+#define CKM_RC5_MAC_GENERAL            0x00000334UL /* Historical */
+#define CKM_RC5_CBC_PAD                0x00000335UL /* Historical */
+#define CKM_IDEA_KEY_GEN               0x00000340UL /* Historical */
+#define CKM_IDEA_ECB                   0x00000341UL /* Historical */
+#define CKM_IDEA_CBC                   0x00000342UL /* Historical */
+#define CKM_IDEA_MAC                   0x00000343UL /* Historical */
+#define CKM_IDEA_MAC_GENERAL           0x00000344UL /* Historical */
+#define CKM_IDEA_CBC_PAD               0x00000345UL /* Historical */
 #define CKM_GENERIC_SECRET_KEY_GEN     0x00000350UL
 #define CKM_CONCATENATE_BASE_AND_KEY   0x00000360UL
 #define CKM_CONCATENATE_BASE_AND_DATA  0x00000362UL
@@ -924,8 +924,8 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 
 #define CKM_SSL3_MD5_MAC               0x00000380UL
 #define CKM_SSL3_SHA1_MAC              0x00000381UL
-#define CKM_MD5_KEY_DERIVATION         0x00000390UL
-#define CKM_MD2_KEY_DERIVATION         0x00000391UL
+#define CKM_MD5_KEY_DERIVATION         0x00000390UL /* Historical */
+#define CKM_MD2_KEY_DERIVATION         0x00000391UL /* Historical */
 #define CKM_SHA1_KEY_DERIVATION        0x00000392UL
 
 #define CKM_SHA256_KEY_DERIVATION      0x00000393UL
@@ -945,16 +945,16 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_SHAKE_128_KEY_DERIVE CKM_SHAKE_128_KEY_DERIVATION
 #define CKM_SHAKE_256_KEY_DERIVE CKM_SHAKE_256_KEY_DERIVATION
 
-#define CKM_PBE_MD2_DES_CBC            0x000003a0UL
-#define CKM_PBE_MD5_DES_CBC            0x000003a1UL
-#define CKM_PBE_MD5_CAST_CBC           0x000003a2UL
-#define CKM_PBE_MD5_CAST3_CBC          0x000003a3UL
+#define CKM_PBE_MD2_DES_CBC            0x000003a0UL /* Historical */
+#define CKM_PBE_MD5_DES_CBC            0x000003a1UL /* Historical */
+#define CKM_PBE_MD5_CAST_CBC           0x000003a2UL /* Historical */
+#define CKM_PBE_MD5_CAST3_CBC          0x000003a3UL /* Historical */
 #define CKM_PBE_MD5_CAST5_CBC          0x000003a4UL /* Deprecated */
-#define CKM_PBE_MD5_CAST128_CBC        0x000003a4UL
+#define CKM_PBE_MD5_CAST128_CBC        0x000003a4UL /* Historical */
 #define CKM_PBE_SHA1_CAST5_CBC         0x000003a5UL /* Deprecated */
-#define CKM_PBE_SHA1_CAST128_CBC       0x000003a5UL
-#define CKM_PBE_SHA1_RC4_128           0x000003a6UL
-#define CKM_PBE_SHA1_RC4_40            0x000003a7UL
+#define CKM_PBE_SHA1_CAST128_CBC       0x000003a5UL /* Historical */
+#define CKM_PBE_SHA1_RC4_128           0x000003a6UL /* Historical */
+#define CKM_PBE_SHA1_RC4_40            0x000003a7UL /* Historical */
 #define CKM_PBE_SHA1_DES3_EDE_CBC      0x000003a8UL
 #define CKM_PBE_SHA1_DES2_EDE_CBC      0x000003a9UL
 #define CKM_PBE_SHA1_RC2_128_CBC       0x000003aaUL
@@ -998,7 +998,7 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_CAMELLIA_CBC_PAD           0x00000555UL
 #define CKM_CAMELLIA_ECB_ENCRYPT_DATA  0x00000556UL
 #define CKM_CAMELLIA_CBC_ENCRYPT_DATA  0x00000557UL
-#define CKM_CAMELLIA_CTR               0x00000558UL
+#define CKM_CAMELLIA_CTR               0x00000558UL /* Historical */
 
 #define CKM_ARIA_KEY_GEN               0x00000560UL
 #define CKM_ARIA_ECB                   0x00000561UL
@@ -1018,28 +1018,28 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_SEED_ECB_ENCRYPT_DATA      0x00000656UL
 #define CKM_SEED_CBC_ENCRYPT_DATA      0x00000657UL
 
-#define CKM_SKIPJACK_KEY_GEN           0x00001000UL
-#define CKM_SKIPJACK_ECB64             0x00001001UL
-#define CKM_SKIPJACK_CBC64             0x00001002UL
-#define CKM_SKIPJACK_OFB64             0x00001003UL
-#define CKM_SKIPJACK_CFB64             0x00001004UL
-#define CKM_SKIPJACK_CFB32             0x00001005UL
-#define CKM_SKIPJACK_CFB16             0x00001006UL
-#define CKM_SKIPJACK_CFB8              0x00001007UL
-#define CKM_SKIPJACK_WRAP              0x00001008UL
-#define CKM_SKIPJACK_PRIVATE_WRAP      0x00001009UL
-#define CKM_SKIPJACK_RELAYX            0x0000100aUL
-#define CKM_KEA_KEY_PAIR_GEN           0x00001010UL
-#define CKM_KEA_KEY_DERIVE             0x00001011UL
-#define CKM_KEA_DERIVE                 0x00001012UL
-#define CKM_FORTEZZA_TIMESTAMP         0x00001020UL
-#define CKM_BATON_KEY_GEN              0x00001030UL
-#define CKM_BATON_ECB128               0x00001031UL
-#define CKM_BATON_ECB96                0x00001032UL
-#define CKM_BATON_CBC128               0x00001033UL
-#define CKM_BATON_COUNTER              0x00001034UL
-#define CKM_BATON_SHUFFLE              0x00001035UL
-#define CKM_BATON_WRAP                 0x00001036UL
+#define CKM_SKIPJACK_KEY_GEN           0x00001000UL /* Historical */
+#define CKM_SKIPJACK_ECB64             0x00001001UL /* Historical */
+#define CKM_SKIPJACK_CBC64             0x00001002UL /* Historical */
+#define CKM_SKIPJACK_OFB64             0x00001003UL /* Historical */
+#define CKM_SKIPJACK_CFB64             0x00001004UL /* Historical */
+#define CKM_SKIPJACK_CFB32             0x00001005UL /* Historical */
+#define CKM_SKIPJACK_CFB16             0x00001006UL /* Historical */
+#define CKM_SKIPJACK_CFB8              0x00001007UL /* Historical */
+#define CKM_SKIPJACK_WRAP              0x00001008UL /* Historical */
+#define CKM_SKIPJACK_PRIVATE_WRAP      0x00001009UL /* Historical */
+#define CKM_SKIPJACK_RELAYX            0x0000100aUL /* Historical */
+#define CKM_KEA_KEY_PAIR_GEN           0x00001010UL /* Historical */
+#define CKM_KEA_KEY_DERIVE             0x00001011UL /* Historical */
+#define CKM_KEA_DERIVE                 0x00001012UL /* Historical */
+#define CKM_FORTEZZA_TIMESTAMP         0x00001020UL /* Historical */
+#define CKM_BATON_KEY_GEN              0x00001030UL /* Historical */
+#define CKM_BATON_ECB128               0x00001031UL /* Historical */
+#define CKM_BATON_ECB96                0x00001032UL /* Historical */
+#define CKM_BATON_CBC128               0x00001033UL /* Historical */
+#define CKM_BATON_COUNTER              0x00001034UL /* Historical */
+#define CKM_BATON_SHUFFLE              0x00001035UL /* Historical */
+#define CKM_BATON_WRAP                 0x00001036UL /* Historical */
 
 #define CKM_ECDSA_KEY_PAIR_GEN         0x00001040UL /* Deprecated */
 #define CKM_EC_KEY_PAIR_GEN            0x00001040UL
@@ -1059,12 +1059,12 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_ECDH_AES_KEY_WRAP          0x00001053UL
 #define CKM_RSA_AES_KEY_WRAP           0x00001054UL
 
-#define CKM_JUNIPER_KEY_GEN            0x00001060UL
-#define CKM_JUNIPER_ECB128             0x00001061UL
-#define CKM_JUNIPER_CBC128             0x00001062UL
-#define CKM_JUNIPER_COUNTER            0x00001063UL
-#define CKM_JUNIPER_SHUFFLE            0x00001064UL
-#define CKM_JUNIPER_WRAP               0x00001065UL
+#define CKM_JUNIPER_KEY_GEN            0x00001060UL /* Historical */
+#define CKM_JUNIPER_ECB128             0x00001061UL /* Historical */
+#define CKM_JUNIPER_CBC128             0x00001062UL /* Historical */
+#define CKM_JUNIPER_COUNTER            0x00001063UL /* Historical */
+#define CKM_JUNIPER_SHUFFLE            0x00001064UL /* Historical */
+#define CKM_JUNIPER_WRAP               0x00001065UL /* Historical */
 #define CKM_FASTHASH                   0x00001070UL
 
 #define CKM_AES_XTS                    0x00001071UL
@@ -1120,7 +1120,7 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_DH_PKCS_PARAMETER_GEN      0x00002001UL
 #define CKM_X9_42_DH_PARAMETER_GEN     0x00002002UL
 #define CKM_DSA_PROBABILISTIC_PARAMETER_GEN 0x00002003UL
-#define CKM_DSA_PROBABLISTIC_PARAMETER_GEN CKM_DSA_PROBABILISTIC_PARAMETER_GEN
+#define CKM_DSA_PROBABLISTIC_PARAMETER_GEN CKM_DSA_PROBABILISTIC_PARAMETER_GEN /* Depricated */
 #define CKM_DSA_SHAWE_TAYLOR_PARAMETER_GEN    0x00002004UL
 #define CKM_DSA_FIPS_G_GEN               0x00002005UL
 
@@ -1214,55 +1214,31 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 
 #define CKM_ML_DSA_KEY_PAIR_GEN        0x0000001cUL
 #define CKM_ML_DSA                     0x0000001dUL
-#define CKM_ML_DSA_DETERMINISTIC       0x0000001eUL
-#define CKM_ML_DSA_PREHASH             0x0000001fUL
-#define CKM_ML_DSA_PREHASH_DETERMINISTIC 0x00000022UL
-#define CKM_ML_DSA_PREHASH_SHA224      0x00000023UL
-#define CKM_ML_DSA_PREHASH_SHA256      0x00000024UL
-#define CKM_ML_DSA_PREHASH_SHA384      0x00000025UL
-#define CKM_ML_DSA_PREHASH_SHA512      0x00000026UL
-#define CKM_ML_DSA_PREHASH_SHA3_224    0x00000027UL
-#define CKM_ML_DSA_PREHASH_SHA3_256    0x00000028UL
-#define CKM_ML_DSA_PREHASH_SHA3_384    0x00000029UL
-#define CKM_ML_DSA_PREHASH_SHA3_512    0x0000002aUL
-#define CKM_ML_DSA_PREHASH_SHAKE128    0x0000002bUL
-#define CKM_ML_DSA_PREHASH_SHAKE256    0x0000002cUL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHA224   0x00000054UL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHA256   0x00000055UL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHA384   0x00000058UL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHA512   0x00000059UL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHA3_224 0x0000005aUL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHA3_256 0x0000005bUL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHA3_384 0x0000005cUL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHA3_512 0x0000005dUL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHAKE128 0x0000005eUL
-#define CKM_ML_DSA_DETERMINISTIC_PREHASH_SHAKE256 0x0000005fUL
+#define CKM_HASH_ML_DSA                0x0000001fUL
+#define CKM_HASH_ML_DSA_SHA224         0x00000023UL
+#define CKM_HASH_ML_DSA_SHA256         0x00000024UL
+#define CKM_HASH_ML_DSA_SHA384         0x00000025UL
+#define CKM_HASH_ML_DSA_SHA512         0x00000026UL
+#define CKM_HASH_ML_DSA_SHA3_224       0x00000027UL
+#define CKM_HASH_ML_DSA_SHA3_256       0x00000028UL
+#define CKM_HASH_ML_DSA_SHA3_384       0x00000029UL
+#define CKM_HASH_ML_DSA_SHA3_512       0x0000002aUL
+#define CKM_HASH_ML_DSA_SHAKE128       0x0000002bUL
+#define CKM_HASH_ML_DSA_SHAKE256       0x0000002cUL
 
 #define CKM_SLH_DSA_KEY_PAIR_GEN       0x0000002dUL
 #define CKM_SLH_DSA                    0x0000002eUL
-#define CKM_SLH_DSA_DETERMINISTIC      0x0000002fUL
-#define CKM_SLH_DSA_PREHASH            0x00000034UL
-#define CKM_SLH_DSA_PREHASH_DETERMINISTIC 0x00000035UL
-#define CKM_SLH_DSA_PREHASH_SHA224     0x00000036UL
-#define CKM_SLH_DSA_PREHASH_SHA256     0x00000037UL
-#define CKM_SLH_DSA_PREHASH_SHA384     0x00000038UL
-#define CKM_SLH_DSA_PREHASH_SHA512     0x00000039UL
-#define CKM_SLH_DSA_PREHASH_SHA3_224   0x0000003aUL
-#define CKM_SLH_DSA_PREHASH_SHA3_256   0x0000003bUL
-#define CKM_SLH_DSA_PREHASH_SHA3_384   0x0000003cUL
-#define CKM_SLH_DSA_PREHASH_SHA3_512   0x0000003dUL
-#define CKM_SLH_DSA_PREHASH_SHAKE128   0x0000003eUL
-#define CKM_SLH_DSA_PREHASH_SHAKE256   0x0000003fUL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHA224   0x00000068UL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHA256   0x00000069UL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHA384   0x0000006aUL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHA512   0x0000006bUL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHA3_224 0x0000006cUL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHA3_256 0x0000006dUL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHA3_384 0x0000006eUL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHA3_512 0x0000006fUL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHAKE128 0x00000070UL
-#define CKM_SLH_DSA_DETERMINISTIC_PREHASH_SHAKE256 0x00000071UL
+#define CKM_HASH_SLH_DSA               0x00000034UL
+#define CKM_HASH_SLH_DSA_SHA224        0x00000036UL
+#define CKM_HASH_SLH_DSA_SHA256        0x00000037UL
+#define CKM_HASH_SLH_DSA_SHA384        0x00000038UL
+#define CKM_HASH_SLH_DSA_SHA512        0x00000039UL
+#define CKM_HASH_SLH_DSA_SHA3_224      0x0000003aUL
+#define CKM_HASH_SLH_DSA_SHA3_256      0x0000003bUL
+#define CKM_HASH_SLH_DSA_SHA3_384      0x0000003cUL
+#define CKM_HASH_SLH_DSA_SHA3_512      0x0000003dUL
+#define CKM_HASH_SLH_DSA_SHAKE128      0x0000003eUL
+#define CKM_HASH_SLH_DSA_SHAKE256      0x0000003fUL
 
 #define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE    0x00000056UL
 #define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE_DH 0x00000057UL
@@ -2724,11 +2700,11 @@ typedef CK_ULONG CK_SIG_HEDGED_VARIANT;
 
 /* Trust values for CKA_TRUST_* */
 typedef CK_ULONG CK_TRUST;
-#define CKT_TRUST_UNKNOWN          0x00000000UL
-#define CKT_TRUSTED                0x00000001UL
-#define CKT_TRUST_ANCHOR           0x00000002UL
-#define CKT_NOT_TRUSTED            0x00000003UL
-#define CK_TRUST_MUST_VERIFY_TRUST 0x00000004UL
+#define CKT_TRUST_UNKNOWN           0x00000000UL
+#define CKT_TRUSTED                 0x00000001UL
+#define CKT_TRUST_ANCHOR            0x00000002UL
+#define CKT_NOT_TRUSTED             0x00000003UL
+#define CKT_TRUST_MUST_VERIFY_TRUST 0x00000004UL
 
 /* Validation: CKA_VALIDATION_AUTHORITY_TYPE */
 #define CKV_AUTHORITY_TYPE_UNSPECIFIED     0x00000000UL

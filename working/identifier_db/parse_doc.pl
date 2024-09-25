@@ -657,6 +657,16 @@ sub process_header
                 if ($l_verbose != 0) { print "    Deprecated\n"; }
                 next; # skip deprecated defines 
             }
+            if ($comment eq "Historical") {
+                if ($l_verbose != 0) { print "    Historical ID\n"; }
+                next; # skip historical defines, they are documented in
+                      # the historical algorithms spec.
+            } 
+            if ($comment eq "Profile") {
+                if ($l_verbose != 0) { print "    Profile ID\n"; }
+                next; # skip profile ID, they are documented
+                      # profile spec.
+            } 
             $test=$number;
             if ($test =~ /^CK$idspec/) {
                 if ($l_verbose != 0) { print "    alias\n"; }

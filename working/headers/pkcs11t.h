@@ -2665,6 +2665,26 @@ typedef CK_ASYNC_DATA CK_PTR CK_ASYNC_DATA_PTR;
 typedef CK_ULONG CK_XMSSMT_OID;
 typedef CK_ULONG CK_XMSS_OID;
 
+/* generic PQ mechanism parameters */
+typedef CK_ULONG CK_HEDGE_TYPES;
+#define CKH_HEDGE_PREFERRED        0x00000000UL
+#define CKH_HEDGE_REQUIRED         0x00000001UL
+#define CKH_DETERMINISTIC_REQUIRED 0x00000002UL
+
+typedef struct CK_SIGN_ADDITIONAL_CONTEXT {
+     CK_HEDGE_TYPE   hedgeVariant;
+     CK_BYTE_PTR     pContext;
+     CK_ULONG        ulContextLen;
+} CK_SIGN_ADDITIONAL_CONTEXT;
+
+typedef struct CK_HASH_SIGN_ADDITIONAL_CONTEXT {
+     CK_HEDGE_TYPE     hedgeVariant;
+     CK_BYTE_PTR       pContext;
+     CK_ULONG          ulContextLen;
+     CK_MECHANISM_TYPE hash;
+} CK_HASH_SIGN_ADDITIONAL_CONTEXT;
+
+
 /* ML-DSA values for CKA_PARAMETER_SETS */
 typedef CK_ULONG CK_ML_DSA_PARAMETER_SET_TYPE;
 #define CKP_ML_DSA_44          0x00000001UL
@@ -2691,12 +2711,6 @@ typedef CK_ULONG CK_ML_KEM_PARAMETER_SET_TYPE;
 #define CKP_ML_KEM_512         0x00000001UL
 #define CKP_ML_KEM_768         0x00000002UL
 #define CKP_ML_KEM_1024        0x00000003UL
-
-typedef CK_ULONG CK_SIG_HEDGED_VARIANT;
-#define CKV_PREFER_HEDGED         0x00000000UL
-#define CKV_REQUIRE_HEDGED        0x00000001UL
-#define CKV_REQUIRE_DETERMINISTIC 0x00000002UL
-
 
 /* Trust values for CKA_TRUST_* */
 typedef CK_ULONG CK_TRUST;

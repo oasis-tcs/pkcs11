@@ -29,7 +29,7 @@ Attributes
 #define CKA_VALIDATION_COUNTRY                TBD
 #define CKA_VALIDATION_CERTIFICATE_IDENTIFIER TBD
 #define CKA_VALIDATION_CERTIFICATE_URI        TBD
-#define CKA_VALIDATION_VENDOR URI             TBD
+#define CKA_VALIDATION_VENDOR_URI             TBD
 #define CKA_VALIDATION_PROFILE                TBD
 
 Errors

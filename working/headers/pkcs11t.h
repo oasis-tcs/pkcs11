@@ -667,7 +667,8 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 #define CKA_ENCAPSULATE                 0x00000633UL
 #define CKA_DECAPSULATE                 0x00000634UL
 #define CKA_HASH_OF_CERTIFICATE         0x00000635UL
-
+/* linking pubic and private keys */
+#define CKA_PUBLIC_CRC64_VALUE          0x00000636UL
 
 #define CKA_VENDOR_DEFINED              0x80000000UL
 

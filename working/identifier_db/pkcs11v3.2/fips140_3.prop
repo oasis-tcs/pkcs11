@@ -19,7 +19,7 @@ Objects
 #define CKO_VALIDATION TBD
 
 Attributes
-#define CKA_VALIDATION_FLAGS                  TBD
+#define CKA_OBJECT_VALIDATION_FLAGS           TBD   # changed Jan 16, 2025
 #define CKA_VALIDATION_TYPE                   TBD
 #define CKA_VALIDATION_VERSION                TBD
 #define CKA_VALIDATION_LEVEL                  TBD

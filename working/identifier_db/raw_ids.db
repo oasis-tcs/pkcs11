@@ -54,7 +54,7 @@ CKA_HSS_LMS_TYPES,0x0000061a,attributes,spec
 CKA_HSS_LMOTS_TYPES,0x0000061b,attributes,spec
 CKA_HSS_KEYS_REMAINING,0x0000061c,attributes,spec
 CKA_PARAMETER_SET,0x0000061d,attributes,approved
-CKA_VALIDATION_FLAGS,0x0000061e,attributes,approved
+CKA_OBJECT_VALIDATION_FLAGS,0x0000061e,attributes,approved
 CKA_VALIDATION_TYPE,0x0000061f,attributes,approved
 CKA_VALIDATION_VERSION,0x00000620,attributes,approved
 CKA_VALIDATION_LEVEL,0x00000621,attributes,approved
@@ -79,6 +79,7 @@ CKA_ENCAPSULATE,0x00000633,attributes,approved
 CKA_DECAPSULATE,0x00000634,attributes,approved
 CKA_HASH_OF_CERTIFICATE,0x00000635,attributes,approved
 CKA_PUBLIC_CRC64_VALUE,0x00000636,attributes,proposed
+CKA_SEED,0x00000637,attributes,proposed
 CKA_APPLICATION,0x00000010,attributes,spec
 CKA_VALUE,0x00000011,attributes,spec
 CKA_OBJECT_ID,0x00000012,attributes,spec

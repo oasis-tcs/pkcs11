@@ -669,6 +669,8 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 #define CKA_HASH_OF_CERTIFICATE         0x00000635UL
 /* linking pubic and private keys */
 #define CKA_PUBLIC_CRC64_VALUE          0x00000636UL
+/* new post-quantum (general) */
+#define CKA_SEED                        0x00000637UL
 
 #define CKA_VENDOR_DEFINED              0x80000000UL
 

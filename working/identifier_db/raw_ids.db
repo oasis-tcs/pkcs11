@@ -78,8 +78,8 @@ CKA_TRUST_OCSP_SIGNING,0x00000632,attributes,approved
 CKA_ENCAPSULATE,0x00000633,attributes,approved
 CKA_DECAPSULATE,0x00000634,attributes,approved
 CKA_HASH_OF_CERTIFICATE,0x00000635,attributes,approved
-CKA_PUBLIC_CRC64_VALUE,0x00000636,attributes,proposed
-CKA_SEED,0x00000637,attributes,proposed
+CKA_PUBLIC_CRC64_VALUE,0x00000636,attributes,approved
+CKA_SEED,0x00000637,attributes,approved
 CKA_APPLICATION,0x00000010,attributes,spec
 CKA_VALUE,0x00000011,attributes,spec
 CKA_OBJECT_ID,0x00000012,attributes,spec
@@ -275,9 +275,9 @@ CKG_GENERATE_COUNTER_XOR,0x00000004,generator_functions,spec
 CKH_MONOTONIC_COUNTER,0x00000001,hardware_features,spec
 CKH_CLOCK,0x00000002,hardware_features,spec
 CKH_USER_INTERFACE,0x00000003,hardware_features,spec
-CKH_HEDGE_PREFERRED,0x00000000,hedge_types,proposed
-CKH_HEDGE_REQUIRED,0x00000001,hedge_types,proposed
-CKH_DETERMINISTIC_REQUIRED,0x00000002,hedged_types,proposed
+CKH_HEDGE_PREFERRED,0x00000000,hedge_types,approved
+CKH_HEDGE_REQUIRED,0x00000001,hedge_types,approved
+CKH_DETERMINISTIC_REQUIRED,0x00000002,hedged_types,approved
 CKF_HKDF_SALT_NULL,0x00000001,hkdf_flags,spec
 CKF_HKDF_SALT_DATA,0x00000002,hkdf_flags,spec
 CKF_HKDF_SALT_KEY,0x00000004,hkdf_flags,spec
@@ -994,7 +994,7 @@ CKT_TRUST_UNKNOWN,0x00000000,trust_states,approved
 CKT_TRUSTED,0x00000001,trust_states,approved
 CKT_TRUST_ANCHOR,0x00000002,trust_states,approved
 CKT_NOT_TRUSTED,0x00000003,trust_states,approved
-CK_TRUST_MUST_VERIFY_TRUST,0x00000004,trust_states,approved
+CKT_TRUST_MUST_VERIFY_TRUST,0x00000004,trust_states,approved
 CKU_SO,0x00000000,user_types,spec
 CKU_USER,0x00000001,user_types,spec
 CKU_CONTEXT_SPECIFIC,0x00000002,user_types,spec

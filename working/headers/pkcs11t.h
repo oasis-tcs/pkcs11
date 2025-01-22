@@ -641,7 +641,7 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 /* new post-quantum (general) */
 #define CKA_PARAMETER_SET               0x0000061dUL
 /* validation objects */
-#define CKA_VALIDATION_FLAGS            0x0000061eUL
+#define CKA_OBJECT_VALIDATION_FLAGS     0x0000061eUL
 #define CKA_VALIDATION_TYPE             0x0000061fUL
 #define CKA_VALIDATION_VERSION          0x00000620UL
 #define CKA_VALIDATION_LEVEL            0x00000621UL

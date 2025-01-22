@@ -2232,6 +2232,19 @@ typedef struct CK_CCM_MESSAGE_PARAMS {
 
 typedef CK_CCM_MESSAGE_PARAMS CK_PTR CK_CCM_MESSAGE_PARAMS_PTR;
 
+typedef struct CK_CCM_WRAP_PARAMS {
+        CK_ULONG        ulDataLen; /*wrappedkey data*/
+        CK_BYTE_PTR     pNonce;
+        CK_ULONG        ulNonceLen;
+        CK_ULONG        ulNonceFixedBits;
+        CK_GENERATOR_FUNCTION   nonceGenerator;
+        CK_BYTE_PTR     pAAD;
+        CK_ULONG        ulAADLen;
+        CK_ULONG        ulMACLen;
+}       CK_CCM_WRAP_PARAMS;
+
+typedef CK_CCM_WRAP_PARAMS CK_PTR CK_CCM_WRAP_PARAMS_PTR;
+
 /* Deprecated. Use CK_GCM_PARAMS */
 typedef struct CK_AES_GCM_PARAMS {
   CK_BYTE_PTR pIv;

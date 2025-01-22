@@ -78,6 +78,7 @@ CKA_TRUST_OCSP_SIGNING,0x00000632,attributes,approved
 CKA_ENCAPSULATE,0x00000633,attributes,approved
 CKA_DECAPSULATE,0x00000634,attributes,approved
 CKA_HASH_OF_CERTIFICATE,0x00000635,attributes,approved
+CKA_PUBLIC_CRC64_VALUE,0x00000636,attributes,proposed
 CKA_APPLICATION,0x00000010,attributes,spec
 CKA_VALUE,0x00000011,attributes,spec
 CKA_OBJECT_ID,0x00000012,attributes,spec

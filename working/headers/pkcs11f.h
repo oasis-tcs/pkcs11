@@ -1202,9 +1202,9 @@ CK_PKCS11_FUNCTION_INFO(C_EncapsulateKey)
   CK_OBJECT_HANDLE hPublicKey,   /* the encapsulating key */
   CK_ATTRIBUTE_PTR pTemplate,    /* new key template */
   CK_ULONG ulAttributeCount,     /* template length */
-  CK_OBJECT_HANDLE_PTR phKey,    /* the encapsulated key */
   CK_BYTE_PTR pCiphertext,       /* the wrapped key */
   CK_ULONG_PTR pulCiphertextLen  /* the wrapped key size */
+  CK_OBJECT_HANDLE_PTR phKey,    /* the encapsulated key */
 );
 #endif
 
@@ -1214,10 +1214,10 @@ CK_PKCS11_FUNCTION_INFO(C_DecapsulateKey)
   CK_SESSION_HANDLE hSession,    /* the session's handle */
   CK_MECHANISM_PTR pMechanism,   /* the decapsulation mechanism */
   CK_OBJECT_HANDLE hPrivateKey,  /* the decapsulating key */
-  CK_BYTE_PTR pCiphertextKey,    /* the wrapped key */
-  CK_ULONG ulCiphertextLen,      /* the wrapped key size */
   CK_ATTRIBUTE_PTR pTemplate,    /* new key template */
   CK_ULONG ulAttributeCount,     /* template length */
+  CK_BYTE_PTR pCiphertext,       /* the wrapped key */
+  CK_ULONG ulCiphertextLen,      /* the wrapped key size */
   CK_OBJECT_HANDLE_PTR phKey     /* the decapsulated key */
 );
 #endif

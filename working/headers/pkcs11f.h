@@ -1203,8 +1203,8 @@ CK_PKCS11_FUNCTION_INFO(C_EncapsulateKey)
   CK_ATTRIBUTE_PTR pTemplate,    /* new key template */
   CK_ULONG ulAttributeCount,     /* template length */
   CK_BYTE_PTR pCiphertext,       /* the wrapped key */
-  CK_ULONG_PTR pulCiphertextLen  /* the wrapped key size */
-  CK_OBJECT_HANDLE_PTR phKey,    /* the encapsulated key */
+  CK_ULONG_PTR pulCiphertextLen, /* the wrapped key size */
+  CK_OBJECT_HANDLE_PTR phKey     /* the encapsulated key */
 );
 #endif
 

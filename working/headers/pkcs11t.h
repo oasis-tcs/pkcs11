@@ -65,6 +65,7 @@ typedef CK_CHAR     CK_PTR   CK_CHAR_PTR;
 typedef CK_UTF8CHAR CK_PTR   CK_UTF8CHAR_PTR;
 typedef CK_ULONG    CK_PTR   CK_ULONG_PTR;
 typedef void        CK_PTR   CK_VOID_PTR;
+typedef CK_ULONG    CK_PTR   CK_FLAGS_PTR;
 
 /* Pointer to a CK_VOID_PTR-- i.e., pointer to pointer to void */
 typedef CK_VOID_PTR CK_PTR CK_VOID_PTR_PTR;
@@ -251,7 +252,7 @@ typedef struct CK_TOKEN_INFO {
 #define CKF_ERROR_STATE              0x01000000UL
 
 /*
- * CKF_SEED_RAONDOM_REQUIRED. If this is true  the token’s
+ * CKF_SEED_RANDOM_REQUIRED. If this is true  the token’s
  * random number generator must be seeded or re-seeded using
  * C_SeedRandom. */
 #define CKF_SEED_RANDOM_REQUIRED     0x02000000UL

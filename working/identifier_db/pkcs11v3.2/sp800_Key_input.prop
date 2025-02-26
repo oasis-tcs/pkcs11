@@ -1,5 +1,0 @@
-Additional Input Key Handles For SP800-108
-
-SP800 Type
-#define CK_SP800_108_KEY_HANDLE TBD
-

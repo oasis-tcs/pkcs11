@@ -1,5 +1,0 @@
-P800 Flexible Symmetric KDF Adendum (Darren Johnson)
-
-New SP800 DKM Length Method
-#define CK_SP800_108_DKM_LENGTH_SUM_OF_KEYS TBD
-#define CK_SP800_108_DKM_LENGTH_SUM_OF_SEGMENTS		TBD

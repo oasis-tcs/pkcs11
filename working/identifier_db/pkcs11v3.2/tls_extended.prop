@@ -1,5 +1,0 @@
-TLS 1.2 Extended Master Secret 
-
-Mechanisms
-#define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE    TBD opt
-#define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE_DH TBD opt

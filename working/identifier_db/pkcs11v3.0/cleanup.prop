@@ -1,6 +1,0 @@
-Add mechanisms created in previous spec but never allocated.
-
-Mechanisms
-#define CKM_DSA_FIPS_G_GEN 0x02005
-#define CKM_EC_KEY_PAIR_GEN_W_EXTRA_BITS 0x0140B
-#define CKM_SALSA20_KEY_GEN XXXX

@@ -1,0 +1,11 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Error code for invalid parameters specified in new PQ algorithms".
+
+Errors:
+
+ #define CKR_PARAMETER_SET_NOT_SUPPORTED 0x00000209UL
+
+This represents the following changes to your original proposal:
+    CKR_PARAMETER_SET_NOT_SUPPORTED was allocated 0x209 because no number was proposed
+
+Please update your spec before sending it to ballot.

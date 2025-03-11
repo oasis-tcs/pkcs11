@@ -1,0 +1,4 @@
+Error code for invalid parameters specified in new PQ algorithms
+
+Errors
+#define CKR_PARAMETER_SET_NOT_SUPPORTED TBD

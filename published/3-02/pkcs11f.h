@@ -1296,5 +1296,35 @@ CK_PKCS11_FUNCTION_INFO(C_AsyncJoin)
 );
 #endif
 
+CK_PKCS11_FUNCTION_INFO(C_WrapKeyAuthenticated)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,
+  CK_MECHANISM_PTR pMechanism,
+  CK_OBJECT_HANDLE hWrappingKey,
+  CK_OBJECT_HANDLE hKey,
+  CK_BYTE_PTR pAssociatedData,
+  CK_ULONG ulAssociatedDataLen,
+  CK_BYTE_PTR pWrappedKey,
+  CK_ULONG_PTR pulWrappedKeyLen
+);
+#endif
+
+CK_PKCS11_FUNCTION_INFO(C_UnwrapKeyAuthenticated)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,
+  CK_MECHANISM_PTR pMechanism,
+  CK_OBJECT_HANDLE hUnwrappingKey,
+  CK_BYTE_PTR pWrappedKey,
+  CK_ULONG ulWrappedKeyLen,
+  CK_ATTRIBUTE_PTR pTemplate,
+  CK_ULONG ulAttributeCount,
+  CK_BYTE_PTR pAssociatedData,
+  CK_ULONG ulAssociatedDataLen
+  CK_OBJECT_HANDLE_PTR phKey
+);
+#endif
+
 #endif /* CK_PKCS11_3_0_ONLY */
 #endif /* CK_PKCS11_2_0_ONLY */

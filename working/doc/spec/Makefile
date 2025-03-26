@@ -18,7 +18,7 @@ html:
 pdf:
 	pandoc -s \
 		-H header.tex \
-		-f markdown-implicit_figures+mark \
+		-f markdown+mark \
 		--toc \
 		--toc-depth=6 \
 		--number-sections \

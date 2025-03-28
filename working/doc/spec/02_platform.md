@@ -23,7 +23,7 @@ Because different platforms and compilers have different ways of dealing with
 different types of pointers, the following 6 macros SHALL be set outside the
 scope of Cryptoki:
 
-* **CK_PTR**
+### CK_PTR
 
 CK_PTR is the “indirection string” a given platform and compiler uses to make
 a pointer to an object. It is used in the following fashion:
@@ -32,7 +32,7 @@ a pointer to an object. It is used in the following fashion:
 typedef CK_BYTE CK_PTR CK_BYTE_PTR;
 ~~~
 
-* **CK_DECLARE_FUNCTION**
+### CK_DECLARE_FUNCTION
 
 `CK_DECLARE_FUNCTION(returnType, name)`, when followed by a
 parentheses-enclosed list of arguments and a semicolon, declares a Cryptoki
@@ -45,7 +45,7 @@ CK_DECLARE_FUNCTION(CK_RV, C_Initialize)(
 );
 ~~~
 
-* **CK_DECLARE_FUNCTION_POINTER**
+### CK_DECLARE_FUNCTION_POINTER
 
 `CK_DECLARE_FUNCTION_POINTER(returnType, name)`, when followed by a
 parentheses-enclosed list of arguments and a semicolon, declares a variable or
@@ -71,7 +71,7 @@ typedef CK_DECLARE_FUNCTION_POINTER(CK_RV, myC_InitializeType)(
 myC_InitializeType myC_Initialize;
 ~~~
 
-* **CK_CALLBACK_FUNCTION**
+### CK_CALLBACK_FUNCTION
 
 `CK_CALLBACK_FUNCTION(returnType, name)`, when followed by a
 parentheses-enclosed list of arguments and a semicolon, declares a variable or
@@ -94,7 +94,7 @@ typedef CK_CALLBACK_FUNCTION(CK_RV, myCallbackType)(args);
 myCallbackType myCallback;
 ~~~
 
-* **NULL_PTR**
+### NULL_PTR
 
 NULL_PTR is the value of a NULL pointer. In any ANSI C environment—and in many
 others as well—NULL_PTR SHALL be defined simply as 0.

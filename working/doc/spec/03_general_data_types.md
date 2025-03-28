@@ -20,7 +20,7 @@ preprocessor directives indicated in Section 2.
 
 Cryptoki represents general information with the following types:
 
-* **CK_VERSION; CK_VERSION_PTR**
+### CK_VERSION
 
 **CK_VERSION** is a structure that describes the version of a Cryptoki
 interface, a Cryptoki library, or an SSL or TLS implementation, or the
@@ -66,7 +66,7 @@ the same major version number.
 
 **CK_VERSION_PTR** is a pointer to a **CK_VERSION**.
 
-* **CK_INFO; CK_INFO_PTR**
+### CK_INFO
 
 **CK_INFO** provides general information about Cryptoki. It is defined as
 follows:
@@ -108,7 +108,7 @@ version number of the library software itself.
 
 **CK_INFO_PTR** is a pointer to a **CK_INFO**.
 
-* **CK_NOTIFICATION**
+### CK_NOTIFICATION
 
 **CK_NOTIFICATION** holds the types of notifications that Cryptoki provides to
 an application. It is defined as follows:
@@ -135,7 +135,7 @@ _CKN_SURRENDER_
 
 Cryptoki represents slot and token information with the following types:
 
-* **CK_SLOT_ID; CK_SLOT_ID_PTR**
+### CK_SLOT_ID
 
 **CK_SLOT_ID** is a Cryptoki-assigned value that identifies a slot. It is
 defined as follows:
@@ -151,7 +151,7 @@ slot, however.
 
 **CK_SLOT_ID_PTR** is a pointer to a **CK_SLOT_ID**.
 
-* **CK_SLOT_INFO; CK_SLOT_INFO_PTR**
+### CK_SLOT_INFO
 
 **CK_SLOT_INFO** provides information about a slot. It is defined as follows:
 
@@ -204,7 +204,7 @@ not support a removable device, then that slot always has a token in it.
 
 **CK_SLOT_INFO_PTR** is a pointer to a **CK_SLOT_INFO**.
 
-* **CK_TOKEN_INFO; CK_TOKEN_INFO_PTR**
+### CK_TOKEN_INFO
 
 **CK_TOKEN_INFO** provides information about a token. It is defined as follows:
 
@@ -411,7 +411,7 @@ CK_TOKEN_INFO_PTR is a pointer to a CK_TOKEN_INFO.
 
 Cryptoki represents session information with the following types:
 
-* **CK_SESSION_HANDLE; CK_SESSION_HANDLE_PTR**
+### CK_SESSION_HANDLE
 
 **CK_SESSION_HANDLE** is a Cryptoki-assigned value that identifies a session.
 It is defined as follows:
@@ -429,7 +429,7 @@ CK_INVALID_HANDLE
 
 CK_SESSION_HANDLE_PTR is a pointer to a CK_SESSION_HANDLE.
 
-* **CK_USER_TYPE**
+### CK_USER_TYPE
 
 **CK_USER_TYPE** holds the types of Cryptoki users described in [PKCS11-UG]
 and, in addition, a context-specific type described in Section `4.10`. It is
@@ -447,7 +447,7 @@ CKU_USER
 CKU_CONTEXT_SPECIFIC
 ~~~
 
-* **CK_STATE**
+### CK_STATE
 
 **CK_STATE** holds the session state, as described in [PKCS11-UG]. It is
 defined as follows:
@@ -466,7 +466,7 @@ CKS_RW_USER_FUNCTIONS
 CKS_RW_SO_FUNCTIONS
 ~~~
 
-* **CK_SESSION_INFO; CK_SESSION_INFO_PTR**
+### CK_SESSION_INFO
 
 **CK_SESSION_INFO** provides information about a session. It is defined as
 follows:
@@ -510,7 +510,7 @@ CK_SESSION_INFO_PTR is a pointer to a CK_SESSION_INFO.
 
 Cryptoki represents object information with the following types:
 
-* **CK_OBJECT_HANDLE; CK_OBJECT_HANDLE_PTR**
+### CK_OBJECT_HANDLE
 
 **CK_OBJECT_HANDLE** is a token-specific identifier for an object. It is
 defined as follows:
@@ -537,7 +537,7 @@ CK_INVALID_HANDLE
 
 CK_OBJECT_HANDLE_PTR is a pointer to a CK_OBJECT_HANDLE.
 
-* **CK_OBJECT_CLASS; CK_OBJECT_CLASS_PTR**
+### CK_OBJECT_CLASS
 
 **CK_OBJECT_CLASS** is a value that identifies the classes (or types) of
 objects that Cryptoki recognizes. It is defined as follows:
@@ -561,7 +561,7 @@ classes through the PKCS process.
 
 CK_OBJECT_CLASS_PTR is a pointer to a CK_OBJECT_CLASS.
 
-* **CK_HW_FEATURE_TYPE**
+### CK_HW_FEATURE_TYPE
 
 **CK_HW_FEATURE_TYPE** is a value that identifies a hardware feature type of a
 device. It is defined as follows:
@@ -584,7 +584,7 @@ Feature types **CKH_VENDOR_DEFINED** and above are permanently reserved for
 token vendors. For interoperability, vendors should register their feature
 types through the PKCS process.
 
-* **CK_KEY_TYPE**
+### CK_KEY_TYPE
 
 **CK_KEY_TYPE** is a value that identifies a key type. It is defined as
 follows:
@@ -607,7 +607,7 @@ Key types **CKK_VENDOR_DEFINED** and above are permanently reserved for token
 vendors. For interoperability, vendors should register their key types through
 the PKCS process.
 
-* **CK_CERTIFICATE_TYPE**
+### CK_CERTIFICATE_TYPE
 
 **CK_CERTIFICATE_TYPE** is a value that identifies a certificate type. It is
 defined as follows:
@@ -630,7 +630,7 @@ Certificate types **CKC_VENDOR_DEFINED** and above are permanently reserved
 for token vendors. For interoperability, vendors should register their
 certificate types through the PKCS process.
 
-* **CK_CERTIFICATE_CATEGORY**
+### CK_CERTIFICATE_CATEGORY
 
 **CK_CERTIFICATE_CATEGORY** is a value that identifies a certificate category.
 It is defined as follows:
@@ -649,7 +649,7 @@ For this version of Cryptoki, the following certificate categories are defined:
 | CK_CERTIFICATE_CATEGORY_OTHER_ENTITY | 0x00000003UL | Certificate belongs to an end entity (i.e.: not a CA) |
 table: Certificate category values
 
-* **CK_ATTRIBUTE_TYPE**
+### CK_ATTRIBUTE_TYPE
 
 **CK_ATTRIBUTE_TYPE** is a value that identifies an attribute type. It is
 defined as follows:
@@ -672,7 +672,7 @@ Attribute types **CKA_VENDOR_DEFINED** and above are permanently reserved for
 token vendors. For interoperability, vendors should register their attribute
 types through the PKCS process.
 
-* **CK_ATTRIBUTE; CK_ATTRIBUTE_PTR**
+### CK_ATTRIBUTE
 
 **CK_ATTRIBUTE** is a structure that includes the type, value, and length of
 an attribute. It is defined as follows:
@@ -711,7 +711,7 @@ details.
 
 **CK_ATTRIBUTE_PTR** is a pointer to a **CK_ATTRIBUTE**.
 
-* **CK_DATE**
+### CK_DATE
 
 **CK_DATE** is a structure that defines a date. It is defined as follows:
 
@@ -746,7 +746,7 @@ methods to identify an "empty" attribute of type CK_DATE, and applications that
 needs to interoperate with these libraries therefore have to be flexible in
 what they accept as an empty value.
 
-* **CK_PROFILE_ID; CK_PROFILE_ID_PTR**
+### CK_PROFILE_ID
 
 **CK_PROFILE_ID** is an unsigend ulong value represting a specific token
 profile. It is defined as follows:
@@ -778,7 +778,7 @@ CKP_INVALID_ID
 
 CK_PROFILE_ID_PTR is a pointer to a CK_PROFILE_ID.
 
-* **CK_JAVA_MIDP_SECURITY_DOMAIN**
+### CK_JAVA_MIDP_SECURITY_DOMAIN
 
 **CK_JAVA_MIDP_SECURITY_DOMAIN** is a value that identifies the Java MIDP
 security domain of a certificate. It is defined as follows:
@@ -803,7 +803,7 @@ table: Security domain values
 Cryptoki supports the following types for describing mechanisms and parameters
 to them:
 
-* **CK_MECHANISM_TYPE; CK_MECHANISM_TYPE_PTR**
+### CK_MECHANISM_TYPE
 
 **CK_MECHANISM_TYPE** is a value that identifies a mechanism type. It is
 defined as follows:
@@ -827,7 +827,7 @@ types through the PKCS process.
 
 **CK_MECHANISM_TYPE_PTR** is a pointer to a **CK_MECHANISM_TYPE**.
 
-* **CK_MECHANISM; CK_MECHANISM_PTR**
+### CK_MECHANISM
 
 **CK_MECHANISM** is a structure that specifies a particular mechanism and any
 parameters it requires. It is defined as follows:
@@ -858,7 +858,7 @@ word-alignment errors).
 
 **CK_MECHANISM_PTR** is a pointer to a **CK_MECHANISM**.
 
-* **CK_MECHANISM_INFO; CK_MECHANISM_INFO_PTR**
+### CK_MECHANISM_INFO
 
 **CK_MECHANISM_INFO** is a structure that provides information about a
 particular mechanism. It is defined as follows:
@@ -921,7 +921,7 @@ table: Mechanism Information Flags
 
 Cryptoki represents information about functions with the following data types:
 
-* **CK_RV**
+### CK_RV
 
 **CK_RV** is a value that identifies the return value of a Cryptoki function.
 It is defined as follows:
@@ -941,7 +941,7 @@ Section `5.1` defines the meaning of each **CK_RV** value. Return values
 For interoperability, vendors should register their return values through the
 PKCS process.
 
-* **CK_NOTIFY**
+### CK_NOTIFY
 
 **CK_NOTIFY** is the type of a pointer to a function used by Cryptoki to
 perform notification callbacks. It is defined as follows:
@@ -966,7 +966,8 @@ _pApplication_
 : An application-defined value. This is the same value as was passed to
   C_OpenSession to open the session performing the callback
 
-* **CK_C_XXX**
+### CK_C_XXX
+
 Cryptoki also defines an entire family of other function pointer types. For
 each function **C_XXX** in the Cryptoki API (see Section `5` for detailed
 information about each of them), Cryptoki defines a type **CK_C_XXX**, which
@@ -974,7 +975,7 @@ is a pointer to a function with the same arguments and return value as
 **C_XXX** has. An appropriately-set variable of type CK_C_XXX may be used by
 an application to call the Cryptoki function **C_XXX**.
 
-* **CK_FUNCTION_LIST; CK_FUNCTION_LIST_PTR; CK_FUNCTION_LIST_PTR_PTR**
+### CK_FUNCTION_LIST
 
 **CK_FUNCTION_LIST** is a structure which contains a Cryptoki version and a
 function pointer to each function in the Cryptoki API. It is defined as
@@ -1084,8 +1085,7 @@ within a vendor defined interface returned via **C_GetInterfaceList** or
 **CK_FUNCTION_LIST_PTR** is a pointer to a **CK_FUNCTION_LIST**.
 **CK_FUNCTION_LIST_PTR_PTR** is a pointer to a **CK_FUNCTION_LIST_PTR**.
 
-* **CK_FUNCTION_LIST_3_0; CK_FUNCTION_LIST_3_0_PTR;
-  CK_FUNCTION_LIST_3_0_PTR_PTR**
+### CK_FUNCTION_LIST_3_0
 
 **CK_FUNCTION_LIST_3_0** is a structure which contains the same function
 pointers as in **CK_FUNCTION_LIST** and additional functions added to the end
@@ -1202,8 +1202,7 @@ This function list may be returned via **C_GetInterfaceList** or
 **CK_FUNCTION_LIST_3_0_PTR** is a pointer to a **CK_FUNCTION_LIST_3_0**.
 **CK_FUNCTION_LIST_3_0_PTR_PTR** is a pointer to a **CK_FUNCTION_LIST_3_0_PTR**.
 
-* **CK_FUNCTION_LIST_3_2; CK_FUNCTION_LIST_3_2_PTR;
-  CK_FUNCTION_LIST_3_2_PTR_PTR**
+### CK_FUNCTION_LIST_3_2
 
 **CK_FUNCTION_LIST_3_2** is a structure which contains the same function
 pointers as in **CK_FUNCTION_LIST_3_0** and additional functions added to the
@@ -1331,7 +1330,7 @@ This function list may be returned via **C_GetInterfaceList** or
 **CK_FUNCTION_LIST_3_2_PTR_PTR** is a pointer to a
 **CK_FUNCTION_LIST_3_2_PTR**.
 
-* **CK_INTERFACE; CK_INTERFACE_PTR; CK_INTERFACE_PTR_PTR**
+### CK_INTERFACE
 
 **CK_INTERFACE** is a structure which contains an interface name with a
 function list and flag. It is defined as follows:
@@ -1374,7 +1373,7 @@ table: CK_INTERFACE Flags
 **CK_INTERFACE_PTR** is a pointer to a **CK_INTERFACE**.
 **CK_INTERFACE_PTR_PTR** is a pointer to a **CK_INTERFACE_PTR**.
 
-* **CK_ASYNC_DATA, CK_ASYNC_DATA_PTR**
+### CK_ASYNC_DATA
 
 **CK_ASYNC_DATA** is a structure used by asynchronous function management
 functions. It is defined as follows:
@@ -1415,7 +1414,7 @@ The types in this section are provided solely for applications which need to
 access Cryptoki from multiple threads simultaneously. Applications which will
 not do this need not use any of these types.
 
-* **CK_CREATEMUTEX**
+### CK_CREATEMUTEX
 
 **CK_CREATEMUTEX** is the type of a pointer to an application-supplied
 function which creates a new mutex object and returns a pointer to it. It is
@@ -1436,7 +1435,7 @@ CKR_OK, CKR_GENERAL_ERROR
 CKR_HOST_MEMORY
 ~~~
 
-* **CK_DESTROYMUTEX**
+### CK_DESTROYMUTEX
 
 **CK_DESTROYMUTEX** is the type of a pointer to an application-supplied
 function which destroys an existing mutex object. It is defined as follows:
@@ -1457,7 +1456,7 @@ CKR_HOST_MEMORY
 CKR_MUTEX_BAD
 ~~~
 
-* **CK_LOCKMUTEX and CK_UNLOCKMUTEX**
+### CK_LOCKMUTEX and CK_UNLOCKMUTEX
 
 **CK_LOCKMUTEX** is the type of a pointer to an application-supplied function
 which locks an existing mutex object. **CK_UNLOCKMUTEX** is the type of a
@@ -1523,7 +1522,7 @@ CKR_MUTEX_BAD
 CKR_MUTEX_NOT_LOCKED
 ~~~
 
-* **CK_C_INITIALIZE_ARGS; CK_C_INITIALIZE_ARGS_PTR**
+### CK_C_INITIALIZE_ARGS
 
 **CK_C_INITIALIZE_ARGS** is a structure containing the optional arguments for
 the **C_Initialize** function. For this version of Cryptoki, these optional

@@ -1,0 +1,52 @@
+---
+name: Build Docs
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - 'working/doc/spec/**'
+  pull_request:
+    branches: ["master"]
+    paths:
+      - 'working/doc/spec/**'
+
+jobs:
+  build:
+    name: Automatic Docs build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    container: fedora:latest
+    steps:
+      - name: Install Dependencies
+        run: |
+           dnf -y install make pandoc \
+                  texlive-latex \
+                  texlive-luahbtex \
+                  texlive-sectsty \
+                  texlive-selnolig \
+                  texlive-unicode-math \
+                  texlive-framed \
+                  texlive-multirow \
+                  texlive-mdwtools \
+                  texlive-luacolor \
+                  texlive-lua-ul \
+                  dejavu-sans-fonts \
+                  dejavu-sans-mono-fonts
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build docs
+        run: |
+          cd working/doc/spec
+          make
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Rendered-docs
+          path: |
+            working/doc/spec/*pdf
+            working/doc/spec/*html
+

@@ -1321,7 +1321,7 @@ CK_PKCS11_FUNCTION_INFO(C_UnwrapKeyAuthenticated)
   CK_ATTRIBUTE_PTR pTemplate,
   CK_ULONG ulAttributeCount,
   CK_BYTE_PTR pAssociatedData,
-  CK_ULONG ulAssociatedDataLen
+  CK_ULONG ulAssociatedDataLen,
   CK_OBJECT_HANDLE_PTR phKey
 );
 #endif

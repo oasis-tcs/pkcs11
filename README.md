@@ -31,7 +31,7 @@
 <div>
 
 <h3>Contact</h3>
-<p>Please send questions or comments about <a href="https://www.oasis-open.org/resources/tcadmin/github-repositories-for-oasis-tc-members-chartered-work">OASIS TC GitHub repositories</a> to <a href="mailto:robin@oasis-open.org">Robin Cover</a> and <a href="mailto:chet.ensign@oasis-open.org">Chet Ensign</a>.  For questions about content in this repository, please contact the TC Chair or Co-Chairs as listed on the the PKCS 11 TC's <a href="https://www.oasis-open.org/committees/pkcs11/">home page</a>.</p>
+<p>Please send questions or comments about <a href="https://www.oasis-open.org/resources/tcadmin/github-repositories-for-oasis-tc-members-chartered-work">OASIS TC GitHub repositories</a> to <a href="mailto:tc-admin@oasis-open.org">the TC Admin</a>.  For questions about content in this repository, please contact the TC Chair or Co-Chairs as listed on the the PKCS 11 TC's <a href="https://groups.oasis-open.org/communities/tc-community-home2?CommunityKey=922ef643-1e10-4d65-a5ea-018dc7d3f0a4">home page</a>.</p>
 </div>
 
 

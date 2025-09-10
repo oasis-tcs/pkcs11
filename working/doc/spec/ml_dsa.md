@@ -14,6 +14,8 @@ the digital signature algorithm defined in [FIPS 204].
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_ML_DSA                           |     | ✓^1^|      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
+| CKM_ML_DSA_EXTERNAL_MU               |     | ✓^2^|      |     |       |     |     |      |
++--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_HASH_ML_DSA                      |     | ✓^2^|      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_HASH_ML_DSA_SHA224               |     |  ✓  |      |     |       |     |     |      |
@@ -63,6 +65,7 @@ Mechanisms:
 - CKM_HASH_ML_DSA_SHA3_512
 - CKM_HASH_ML_DSA_SHAKE128
 - CKM_HASH_ML_DSA_SHAKE256
+- CKM_ML_DSA_EXTERNAL_MU
 
 **CK_ML_DSA_PARAMETER_SET_TYPE** is used to indicate which ML-DSA parameter set
 the keys belong to.
@@ -342,5 +345,40 @@ following table. In the table, k is the length in bytes of the ML-DSA signature.
 table: HashML-DSA with hashing: Key and Data Length
 
 For these mechanisms, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
+**CK_MECHANISM_INFO** structure specify the supported range of ML-DSA public
+keys in bytes.
+
+### ExternalMu-ML-DSA Signature
+
+The ExternalMu-ML-DSA mechanism, denoted **CKM_ML_DSA_EXTERNAL_MU**, is a
+mechanism for single- and multiple-part signatures and verification for ML-DSA
+signatures, as defined in sections 5 and 6 of [FIPS-204]. The data passed in
+is the 64-byte message representative μ, normally computed in step 6 of
+algorithm 7 and step 7 of algorithm 8, but here provided by the caller instead
+of a message or message hash.
+It has an optional parameter CK_SIGN_ADDITIONAL_CONTEXT. If no parameter is
+supplied the hedgeVariant will be CKH_HEDGE_PREFERRED. On signing, if
+hedgeVariant is set to CKH_HEDGE_PREFERRED, the token may create either a
+hedged signature or a deterministic signature as specified in [FIPS 204].
+If hedgeVariant is set to CKH_HEDGE_REQUIRED, the token must produce a hedged
+signature or fail. If the hedgeVariant is set to CKH_DETERMINISTIC_REQUIRED,
+the token must produce a deterministic signature or fail. On verification the
+hedgeVariant parameter is ignored. In all cases ulContextLen will be zero and
+pContext are ignored. 
+
+Constraints on key types and the length of the data are summarized in the
+following table.
+In the table, k is the length in bytes of the ML-DSA signature.
+
+| Function             | Key type            | Input Length | Output Length |
+|----------------------|---------------------|--------------|---------------|
+| C_Sign ^1^           | ML-DSA Private Key  | 64           | k             |
+| C_Verify ^1^         | ML-DSA Public Key   | 64, k        | N/A           |
+| C_VerifySignature ^1^| ML-DSA Public Key   | 64, k        | N/A           |
+table: ExternalMu ML-DSA: Key and Data Length
+
+^1^ Single-part operations only.
+
+For these mechanisms, the ulMinKeySize and ulMaxKeySize fields of the
 **CK_MECHANISM_INFO** structure specify the supported range of ML-DSA public
 keys in bytes.

@@ -204,3 +204,231 @@ rv = C_DigestFinal(hSession, digest, &ulDigestLen);
 .
 .
 ~~~
+
+## Extensible Output Digesting Functions
+
+Cryptoki provides the following functions for extensible output functions
+(XOFs). These functions are similar to the message digesting functions,
+but can produce a variable-length output. The overall operation is split
+into an "absorb" phase, where input data is processed, and a "squeeze"
+phase, where output data is generated. Keyed XOFs such as KMAC are
+supported by passing a key handle in the mechanism parameter to the
+initialization function.
+
+### C_XoHashInit
+
+~~~{.c}
+CK_DECLARE_FUNCTION(CK_RV, C_XoHashInit)(
+    CK_SESSION_HANDLE hSession,
+    CK_MECHANISM_PTR pMechanism
+);
+~~~
+
+**C_XoHashInit** initializes an extensible output hashing operation.
+_hSession_ is the session’s handle; _pMechanism_ points to the digesting
+mechanism. For keyed XOFs, _pMechanism_ should contain the handle of the
+key to be used.
+
+After calling **C_XoHashInit**, the application can call **C_XoHashUpdate**
+zero or more times to provide the data to be hashed (the "absorb" phase),
+followed by one or more calls to **C_XoHashExtract** to retrieve the output
+(the "squeeze" phase). The extensible output hashing operation is active
+until it is explicitly terminated. To process a new message, the
+application MUST call **C_XoHashInit** again.
+
+**C_XoHashInit** can be called with _pMechanism_ set to NULL_PTR to
+terminate an active extensible output hashing operation. If an operation
+has been initialized and it cannot be cancelled,
+**CKR_OPERATION_CANCEL_FAILED** must be returned.
+
+Return values: CKR_ARGUMENTS_BAD, CKR_CRYPTOKI_NOT_INITIALIZED,
+CKR_DEVICE_ERROR, CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED,
+CKR_FUNCTION_CANCELED, CKR_FUNCTION_FAILED, CKR_GENERAL_ERROR,
+CKR_HOST_MEMORY, CKR_MECHANISM_INVALID, CKR_MECHANISM_PARAM_INVALID,
+CKR_OK, CKR_OPERATION_ACTIVE, CKR_PENDING, CKR_PIN_EXPIRED,
+CKR_SESSION_CLOSED, CKR_SESSION_HANDLE_INVALID, CKR_USER_NOT_LOGGED_IN,
+CKR_OPERATION_CANCEL_FAILED.
+
+### C_XoHash
+
+~~~{.c}
+CK_DECLARE_FUNCTION(CK_RV, C_XoHash)(
+    CK_SESSION_HANDLE hSession,
+    CK_BYTE_PTR pData,
+    CK_ULONG ulDataLen,
+    CK_BYTE_PTR pOutput,
+    CK_ULONG ulOutputLen
+);
+~~~
+
+**C_XoHash** hashes data in a single part for an extensible output function.
+_hSession_ is the session’s handle, _pData_ points to the data; _ulDataLen_
+is the length of the data; _pOutput_ points to the location that receives
+the output; _ulOutputLen_ specifies the number of bytes to be generated.
+
+The hashing operation MUST have been initialized with **C_XoHashInit**. A
+call to **C_XoHash** always terminates the active hashing operation.
+
+**C_XoHash** cannot be used to terminate a multi-part operation, and MUST
+be called after **C_XoHashInit** without intervening **C_XoHashUpdate**
+or **C_XoHashExtract** calls.
+
+**C_XoHash** is equivalent to a single call to **C_XoHashUpdate** with the
+provided data, followed by a single call to **C_XoHashFinal** with the
+provided output buffer and length.
+
+Return values: CKR_ARGUMENTS_BAD, CKR_CRYPTOKI_NOT_INITIALIZED,
+CKR_DEVICE_ERROR, CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED,
+CKR_FUNCTION_CANCELED, CKR_FUNCTION_FAILED, CKR_GENERAL_ERROR,
+CKR_HOST_MEMORY, CKR_OK, CKR_OPERATION_ACTIVE,
+CKR_OPERATION_NOT_INITIALIZED, CKR_PENDING, CKR_SESSION_CLOSED,
+CKR_SESSION_HANDLE_INVALID.
+
+### C_XoHashUpdate
+
+~~~{.c}
+CK_DECLARE_FUNCTION(CK_RV, C_XoHashUpdate)(
+    CK_SESSION_HANDLE hSession,
+    CK_BYTE_PTR pPart,
+    CK_ULONG ulPartLen
+);
+~~~
+
+**C_XoHashUpdate** continues a multiple-part extensible output hashing
+operation, processing another data part in the "absorb" phase. _hSession_
+is the session’s handle, _pPart_ points to the data part; _ulPartLen_ is
+the length of the data part.
+
+The operation MUST have been initialized with **C_XoHashInit**. This
+function may be called any number of times. A call to **C_XoHashUpdate**
+which results in an error terminates the current operation.
+
+Whether or not this function can be called after **C_XoHashExtract** has
+been called for the current operation is mechanism-specific. For example,
+the SHAKE mechanism allows interleaving "absorb" (**C_XoHashUpdate**) and
+"squeeze" (**C_XoHashExtract**) calls. If the mechanism does not support
+inputing more data after **C_XoHashExtract** has been called once, then
+this function will return **CKR_EXCEEDED_MAX_ITERATIONS**.
+
+Return values: CKR_ARGUMENTS_BAD, CKR_CRYPTOKI_NOT_INITIALIZED,
+CKR_DEVICE_ERROR, CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED,
+CKR_EXCEEDED_MAX_ITERATIONS, CKR_FUNCTION_CANCELED, CKR_FUNCTION_FAILED,
+CKR_GENERAL_ERROR, CKR_HOST_MEMORY, CKR_OK, CKR_OPERATION_ACTIVE,
+CKR_OPERATION_NOT_INITIALIZED, CKR_PENDING, CKR_SESSION_CLOSED,
+CKR_SESSION_HANDLE_INVALID.
+
+### C_XoHashExtract
+
+~~~{.c}
+CK_DECLARE_FUNCTION(CK_RV, C_XoHashExtract)(
+    CK_SESSION_HANDLE hSession,
+    CK_BYTE_PTR pOutput,
+    CK_ULONG ulOutputLen
+);
+~~~
+
+**C_XoHashExtract** continues an extensible output hashing operation by
+generating a portion of the output in the "squeeze" phase. _hSession_ is
+the session’s handle; _pOutput_ points to the location that receives the
+output data; _ulOutputLen_ specifies the number of bytes to be generated.
+
+The operation MUST have been initialized with **C_XoHashInit** and may
+have been updated with one or more calls to **C_XoHashUpdate**. The first
+call to **C_XoHashExtract** begins the "squeeze" phase. Whether or not
+further Update calls are permitted is mechanism specific. For example,
+the SHAKE mechanism allows interleaving "absorb" (**C_XoHashUpdate**)
+and "squeeze" (**C_XoHashExtract**) calls.
+
+This function may be called multiple times to generate a variable-length
+digest. Each call will continue generating output from where the previous
+call left off. The operation remains active until explicitly terminated
+by a call to **C_XoHashFinal** or a calls to **C_XoHashInit** with a NULL
+_pMechanism_.
+
+Return values: CKR_ARGUMENTS_BAD, CKR_CRYPTOKI_NOT_INITIALIZED,
+CKR_DEVICE_ERROR, CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED,
+CKR_FUNCTION_CANCELED, CKR_FUNCTION_FAILED, CKR_GENERAL_ERROR,
+CKR_HOST_MEMORY, CKR_OK, CKR_OPERATION_ACTIVE,
+CKR_OPERATION_NOT_INITIALIZED, CKR_PENDING, CKR_SESSION_CLOSED,
+CKR_SESSION_HANDLE_INVALID.
+
+### C_XoHashFinal
+
+~~~{.c}
+CK_DECLARE_FUNCTION(CK_RV, C_XoHashFinal)(
+    CK_SESSION_HANDLE hSession,
+    CK_BYTE_PTR pOutput,
+    CK_ULONG ulOutputLen
+);
+~~~
+
+**C_XoHashFinal** finishes a multiple-part extensible output hashing
+operation, optionally returning a final portion of the output. _hSession_
+is the session’s handle; _pOutput_ points to the location that receives
+the output data; _ulOutputLen_ specifies the number of bytes to be
+generated. If _ulOutputLen_ is zero, _pOutput_ is ignored.
+
+The operation MUST have been initialized with **C_XoHashInit**. A call
+to **C_XoHashFinal** always terminates the active extensible output
+hashing operation. To start another operation the application MUST call
+**C_XoHashInit** again.
+
+Return values: CKR_ARGUMENTS_BAD, CKR_CRYPTOKI_NOT_INITIALIZED,
+CKR_DEVICE_ERROR, CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED,
+CKR_FUNCTION_CANCELED, CKR_FUNCTION_FAILED, CKR_GENERAL_ERROR,
+CKR_HOST_MEMORY, CKR_OK, CKR_OPERATION_ACTIVE,
+CKR_OPERATION_NOT_INITIALIZED, CKR_PENDING, CKR_SESSION_CLOSED,
+CKR_SESSION_HANDLE_INVALID.
+
+Example:
+
+~~~{.c}
+CK_SESSION_HANDLE hSession;
+CK_OBJECT_HANDLE hKey; /* Handle to a secret key for KMAC */
+CK_BYTE customizationString[] = "My Customization";
+
+/*
+ * For C_XoHashInit with a keyed XOF like KMAC, the key handle is
+ * passed in the mechanism parameters. The following example assumes
+ * a CK_KMAC_PARAMS struct that can hold the key handle.
+ */
+CK_KMAC_PARAMS kmacParams = {
+  hKey,
+  32,   /* MAC length in bytes (256 bits) */
+  customizationString,
+  sizeof(customizationString) - 1
+};
+CK_MECHANISM mechanism = {
+  CKM_KMAC_256, &kmacParams, sizeof(kmacParams)
+};
+CK_BYTE data[] = {...};
+CK_BYTE mac[32];
+CK_RV rv;
+
+.
+.
+.
+rv = C_XoHashInit(hSession, &mechanism);
+if (rv != CKR_OK) {
+  .
+  .
+}
+
+rv = C_XoHashUpdate(hSession, data, sizeof(data));
+if (rv != CKR_OK) {
+  .
+  .
+}
+
+rv = C_XoHashExtract(hSession, mac, sizeof(mac));
+if (rv != CKR_OK) {
+  .
+  .
+}
+
+rv = C_XoHashFinal(hSession, NULL_PTR, 0);
+if (rv != CKR_OK) {
+  .
+  .
+}
+~~~

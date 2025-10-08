@@ -1,3 +1,5 @@
+INPUT_FILES = $(shell cat spec_files.txt)
+
 all: docs
 
 .PHONY: all build html pdf
@@ -13,7 +15,7 @@ html:
 		--variable toc-title:"Table of Contents" \
 		--highlight-style code.theme \
 		-o pkcs-spec-v3.3.html \
-		[0-9]*md
+		$(INPUT_FILES)
 
 pdf:
 	pandoc -s \
@@ -31,7 +33,7 @@ pdf:
 		--pdf-engine=lualatex \
 		--highlight-style code.theme \
 		-o pkcs-spec-v3.3.pdf \
-		[0-9]*md
+		$(INPUT_FILES)
 
 latex:
 	pandoc -s \
@@ -49,6 +51,6 @@ latex:
 		--pdf-engine=lualatex \
 		--highlight-style code.theme \
 		-o pkcs-spec-v3.3.latex \
-		[0-9]*md
+		$(INPUT_FILES)
 clean:
 	-rm -rf *.html *.pdf *.latex

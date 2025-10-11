@@ -1,17 +1,20 @@
 ## SHAKE
 
-+--------------------------------------+---------------------------------------------------+
-|                                      | Functions                                         |
-|                                      +-----+-----+------+-----+-------+-----+-----+------+
-| Mechanism                            | ENC | SIG | SIGR |     | GENK  | WRP |     | ENCS |
-|                                      |  &  |  &  |  &   | DIG |   &   |  &  | DRV |  &   |
-|                                      | DEC | VER | VERR |     | GENKP | UWRP|     | DECS |
-+======================================+:===:+:===:+:====:+:===:+:=====:+:===:+:===:+:====:+
-+--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
-| CKM_SHAKE_128_KEY_DERIVATION         |     |     |      |     |       |     |  ✓  |      |
-+--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
-| CKM_SHAKE_256_KEY_DERIVATION         |     |     |      |     |       |     |  ✓  |      |
-+--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
++------------------------------+---------------------------------------------------------+
+|                              | Functions                                               |
+|                              +-----+-----+------+-----+-----+-------+-----+-----+------+
+| Mechanism                    | ENC | SIG | SIGR | DIG | XOH | GENK  | WRP |     | ENCS |
+|                              |  &  |  &  |  &   |     |     |   &   |  &  | DRV |  &   |
+|                              | DEC | VER | VERR |     |     | GENKP | UWRP|     | DECS |
++==============================+:===:+:===:+:====:+:===:+:===:+:=====:+:===:+:===:+:====:+
+| CKM_SHAKE_128_KEY_DERIVATION |     |     |      |     |     |       |     |  ✓  |      |
++------------------------------+-----+-----+------+-----+-----+-------+-----+-----+------+
+| CKM_SHAKE_256_KEY_DERIVATION |     |     |      |     |     |       |     |  ✓  |      |
++------------------------------+-----+-----+------+-----+-----+-------+-----+-----+------+
+| CKM_SHAKE_128                |     |     |      |     |  ✓  |       |     |     |      |
++------------------------------+-----+-----+------+-----+-----+-------+-----+-----+------+
+| CKM_SHAKE_256                |     |     |      |     |  ✓  |       |     |     |      |
++------------------------------+-----+-----+------+-----+-----+-------+-----+-----+------+
 table: SHAKE Mechanisms vs. Functions
 
 ### Definitions
@@ -20,6 +23,8 @@ Mechanisms:
 
 - CKM_SHAKE_128_KEY_DERIVATION
 - CKM_SHAKE_256_KEY_DERIVATION
+- CKM_SHAKE_128
+- CKM_SHAKE_256
 
 ### SHAKE Key Derivation
 
@@ -58,3 +63,13 @@ This mechanism has the following rules about key sensitivity and extractability:
   **CKA_NEVER_EXTRACTABLE** attribute set to CK_TRUE, then the derived key has
   its **CKA_NEVER_EXTRACTABLE** attribute set to the opposite value from its
   **CKA_EXTRACTABLE** attribute.
+
+### SHAKE Hashing
+
+SHAKE-128 and SHAKE-256 hashing, denoted **CKM_SHAKE_128** and
+**CKM_SHAKE_256**, are extensible-output hash functions as defined in [FIPS PUB
+202]. These mechanisms are used with the Extensible Output Digesting Functions
+(**C_XoHashInit**, **C_XoHashUpdate**, **C_XoHashExtract**, and
+**C_XoHashFinal**). The output from these hash functions can be of any length.
+
+These mechanisms do not have any parameters.

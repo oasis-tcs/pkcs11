@@ -726,7 +726,7 @@ CK_DECLARE_FUNCTION(CK_RV, C_EncapsulateKey)(
     CK_ATTRIBUTE_PTR pTemplate,
     CK_ULONG ulAttributeCount,
     CK_BYTE_PTR pCiphertext, 
-    CK_ULONG_PTR pulCiphertextLen 
+    CK_ULONG_PTR pulCiphertextLen,
     CK_OBJECT_HANDLE_PTR phKey,
 );
 ~~~

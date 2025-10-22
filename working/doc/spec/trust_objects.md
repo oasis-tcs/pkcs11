@@ -115,7 +115,7 @@ CK_BYTE certificate[] = {...};
 CK_BBOOL true = CK_TRUE;
 CK_TRUST trustAnchor = CKT_TRUST_ANCHOR;
 CK_TRUST notTrusted = CKT_NOT_TRUSTED;
-CK_MECHANISM_TYPE hashMec = CKM_SHA265
+CK_MECHANISM_TYPE hashMec = CKM_SHA256
 CK_ATTRIBUTE template[] = {
   {CKA_CLASS, &class, sizeof(class)},
   {CKA_TOKEN, &true, sizeof(true)},

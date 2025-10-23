@@ -7,7 +7,7 @@ cryptographic functions.
 
 ~~~{.c}
 CK_DECLARE_FUNCTION(CK_RV, C_AsyncComplete)(
-    CK_SESSION_HANDLE hSession
+    CK_SESSION_HANDLE hSession,
     CK_UTF8CHAR_PTR pFunctionName,
     CK_ASYNC_DATA_PTR pResult
 );
@@ -95,7 +95,7 @@ if (rv == CKR_OK)
 
 ~~~{.c}
 CK_DECLARE_FUNCTION(CK_RV, C_AsyncGetID)(
-    CK_SESSION_HANDLE hSession
+    CK_SESSION_HANDLE hSession,
     CK_UTF8CHAR_PTR pFunctionName,
     CK_ULONG_PTR pulID
 );
@@ -130,7 +130,7 @@ CKR_STATE_UNSAVEABLE.
 
 ~~~{.c}
 CK_DECLARE_FUNCTION(CK_RV, C_AsyncJoin)(
-    CK_SESSION_HANDLE hSession
+    CK_SESSION_HANDLE hSession,
     CK_UTF8CHAR_PTR pFunctionName,
     CK_ULONG ulID,
     CK_BYTE_PTR pData,

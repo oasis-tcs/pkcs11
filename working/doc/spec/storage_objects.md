@@ -16,8 +16,10 @@ that follow.
 | CKA_COPYABLE     | CK_BBOOL       | CK_TRUE if object can be copied using C_CopyObject. Defaults to CK_TRUE.\
                                       Can’t be set to TRUE once it is set to FALSE. |
 | CKA_DESTROYABLE  | CK_BBOOL       | CK_TRUE if the object can be destroyed using C_DestroyObject. Default is CK_TRUE. |
-| CKA_UNIQUE_ID246 | RFC2279 string | The unique identifier assigned to the object. |
+| CKA_UNIQUE_ID ^246^ | RFC2279 string | The unique identifier assigned to the object. |
 table: Common Storage Object Attributes
+
+- Refer to Table 13 for footnotes
 
 Only the **CKA_LABEL** attribute can be modified after the object is created.
 (The **CKA_TOKEN**, **CKA_PRIVATE**, and **CKA_MODIFIABLE** attributes can

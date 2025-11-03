@@ -35,6 +35,9 @@ the digital signature algorithm defined in [FIPS 204].
 | CKM_HASH_ML_DSA_SHAKE128             |     |  ✓  |      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_HASH_ML_DSA_SHAKE256             |     |  ✓  |      |     |       |     |     |      |
++--------------------------------------+-----+-----+------+-----+-------+-----
++-----+------+
+|C_ML_DSA_EXTERNAL_MU_GEN             |     |    |      |  ✓  |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 table: ML-DSA Mechanisms vs. Functions
 
@@ -63,6 +66,7 @@ Mechanisms:
 - CKM_HASH_ML_DSA_SHA3_512
 - CKM_HASH_ML_DSA_SHAKE128
 - CKM_HASH_ML_DSA_SHAKE256
+- CKM_ML_DSA_EXTERNAL_MU_GEN
 
 **CK_ML_DSA_PARAMETER_SET_TYPE** is used to indicate which ML-DSA parameter set
 the keys belong to.
@@ -111,6 +115,17 @@ typedef struct CK_HASH_SIGN_ADDITIONAL_CONTEXT {
   CK_ULONG           ulContextLen;
   CK_MECHANISM_TYPE  hash;
 } CK_HASH_SIGN_ADDITIONAL_CONTEXT;
+~~~
+
+**CK_MU_GEN_PARAMS** is used in the mechanism parameters to supply a
+NIST defined context string in and public key to calculate an external Mu.
+
+~~~{.c}
+typedef struct CK_MU_GEN_PARAMS {
+  CK_OBJECT_HANDLE_PTR phPublicKey,
+  CK_BYTE_PTR          pContext;
+  CK_ULONG             ulContextLen;
+} CK_ME_GEN_PARAMS;
 ~~~
 
 ### ML-DSA public key objects
@@ -344,3 +359,19 @@ table: HashML-DSA with hashing: Key and Data Length
 For these mechanisms, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure specify the supported range of ML-DSA public
 keys in bytes.
+
+### ExternalMu-ML-DSA generation
+
+The ExternalMu-ML-DSA generation mechanism, denoted **CKM_ML_DSA_EXTERNAL_MU_GEN**, is a mechanism for the calculation of the ExternalMu that can be consumed by the CKM_ML_DSA_EXTERNAL_MU mechanism single- and multiple-part  and verification for ML-DSA signatures, as defined in sections 5 and 6 of [FIPS-204].  CKM_ML_DSA_EXTERNAL_MU_GEN mechanism single- and multiple-part digest operation.
+
+CKM_ML_DSA_EXTERNAL_MU_GEN  will take a mechanism params  CK_MU_GEN_PARAMS containing a handle to the public key and additional context if ulContextLen is zero then pContext is ignored. Hashing mechanism to calculte the Mu will be SHAKE256. Constraints on key types and the length of the data are summarized in the following table. ExternalMu-ML-DSA calculation.
+
+| Function          | Key type            | Input Length | Output Length |
+|-------------------|---------------------|--------------|---------------|
+| C_Digest          | ML-DSA Public Key   | any*         | 64            |
+| C_Digestupdate    | ML-DSA Public Key   | any*         | 64            |
+\* Input length will be determined by the tokens maximum memory size.
+
+For these mechanisms, the ulMinKeySize and ulMaxKeySize fields of the CK_MECHANISM_INFO structure specify the supported range of ML-DSA public keys in bytes.
+
+

@@ -1,8 +1,14 @@
 ## Hash-Based Message Authentication Codes (HMAC)
 
-HMAC mechanisms are mechanisms for signatures and verification, and for generation of HMAC keys.
-Refer to [RFC 2104] and [FIPS 198] for HMAC algorithm description. The HMAC secret key shall correspond to the PKCS #11 generic secret key type or the mechanism specific key types (see mechanism definition). Such keys for use with HMAC operations can be created using **C_CreateObject**, **C_GenerateKey**, or **C_UnwrapKey**.
-The RFC also specifies test vectors for the various hash function based HMAC mechanisms described in the respective hash mechanism descriptions. The RFC should be consulted to obtain these test vectors.
+HMAC mechanisms are mechanisms for signatures and verification, and for
+generation of HMAC keys.  Refer to [RFC 2104] and [FIPS 198] for HMAC algorithm
+description. The HMAC secret key shall correspond to the PKCS #11 generic secret
+key type or the mechanism specific key types (see mechanism definition). Such
+keys for use with HMAC operations can be created using **C_CreateObject**,
+**C_GenerateKey**, or **C_UnwrapKey**.  The RFC also specifies test vectors for
+the various hash function based HMAC mechanisms described in the respective hash
+mechanism descriptions. The RFC should be consulted to obtain these test
+vectors.
 
 +--------------------------------------+---------------------------------------------------+
 |                                      | Functions                                         |
@@ -184,12 +190,18 @@ Mechanisms:
 
 ### General-length HMAC
 
-The general-length HMAC mechanism, denoted **CKM_**\<hash>**\_HMAC_GENERAL**, where \<hash\> identifies a hash function or truncated hash function as per table 144 and as defined in [FIPS PUB 180-4]^1^, [FIPS PUB 202]^2^ or [RFC 7693]^3^ respectively, is a mechanism for signatures and verification. It uses the HMAC construction, based on the \<hash\> hash function. The keys it uses are generic secret keys and **CKK_**\<hash>**\_HMAC** keys.
+The general-length HMAC mechanism, denoted **CKM_**\<hash>**\_HMAC_GENERAL**,
+where \<hash\> identifies a hash function or truncated hash function as per
+table 144 and as defined in [FIPS PUB 180-4]^1^, [FIPS PUB 202]^2^ or [RFC
+7693]^3^ respectively, is a mechanism for signatures and verification. It uses
+the HMAC construction, based on the \<hash\> hash function. The keys it uses are
+generic secret keys and **CKK_**\<hash>**\_HMAC** keys.
 
 It has a parameter, a **CK_MAC_GENERAL_PARAMS**, which holds the length in bytes
-of the desired output. This length should be in the range 1-n, where len is the output size of the hash function in bytes as per table 144. Signatures (MACs)
-produced by this mechanism will be taken from the start of the full len-byte HMAC
-output.
+of the desired output. This length should be in the range 1-n, where len is the
+output size of the hash function in bytes as per table 144. Signatures (MACs)
+produced by this mechanism will be taken from the start of the full len-byte
+HMAC output.
 
 +-------------------------------+----------------------------+--------------------------+
 | Mechanism                     | Hash function              | Digest length in bytes   |
@@ -238,8 +250,9 @@ table 145: General-length HMAC: Key And Data Length
 
 ### HMAC
 
-The full-length HMAC mechanism, denoted **CKM_**\<hash\>**\_HMAC**, is a special case of
-the respective general-length **CKM_**\<hash\>**\_HMAC_GENERAL** mechanism in section 6.22.2.
+The full-length HMAC mechanism, denoted **CKM_**\<hash\>**\_HMAC**, is a special
+case of the respective general-length **CKM_**\<hash\>**\_HMAC_GENERAL**
+mechanism in section 6.22.2.
 
 It has no parameter, and always produces an output of length as per table 144.
 
@@ -250,8 +263,9 @@ key generation mechanism for NIST’s \<hash\>-HMAC.
 
 It does not have a parameter.
 
-The mechanism generates HMAC keys of key type **CKK_**\<hash\>**\_HMAC** with a particular length in bytes, as
-specified in the **CKA_VALUE_LEN** attribute of the template for the key.
+The mechanism generates HMAC keys of key type **CKK_**\<hash\>**\_HMAC** with a
+particular length in bytes, as specified in the **CKA_VALUE_LEN** attribute of
+the template for the key.
 
 The mechanism contributes the **CKA_CLASS**, **CKA_KEY_TYPE**, and **CKA_VALUE**
 attributes to the new key. Other attributes supported by the HMAC key

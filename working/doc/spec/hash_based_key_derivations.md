@@ -70,7 +70,12 @@ Mechanisms:
 
 ### Hash-based key derivation
 
-The hash-based key derivation mechanism, denoted **CKM_**\<hash\>**\_KEY_DERIVATION** or **CKM_**\<hash\>**\_KEY_DERIVE** where \<hash\> identifies a hash function or expansion function as per table 142 and as defined in [FIPS PUB 180-4]^1^, [FIPS PUB 202]^2^ or [RFC 7693]^3^ respectively, is a mechanism which provides the capability of deriving a secret key by digesting the value of another secret key with function \<hash\>. 
+The hash-based key derivation mechanism, denoted
+**CKM_**\<hash\>**\_KEY_DERIVATION** or **CKM_**\<hash\>**\_KEY_DERIVE** where
+\<hash\> identifies a hash function or expansion function as per table 142 and
+as defined in [FIPS PUB 180-4]^1^, [FIPS PUB 202]^2^ or [RFC 7693]^3^
+respectively, is a mechanism which provides the capability of deriving a secret
+key by digesting the value of another secret key with function \<hash\>. 
 
 +-------------------------------+----------------------------+-------------------------+
 | Mechanism                     | Hash function              | Digest length in bytes  |
@@ -113,20 +118,40 @@ The hash-based key derivation mechanism, denoted **CKM_**\<hash\>**\_KEY_DERIVAT
 +-------------------------------+----------------------------+-------------------------+
 table 142: Hash-based key derivation: mechanisms and hash / expansion functions
 
-The value of the base key is digested once, and the result is used to make the value of the derived secret key.
+The value of the base key is digested once, and the result is used to make the
+value of the derived secret key.
 
-* If no length or key type is provided in the template, then the key produced by this mechanism will be a generic secret key. Its length will be the digest length in bytes as per table 142.
-* If no key type is provided in the template, but a length is, then the key produced by this mechanism will be a generic secret key of the specified length.
-* If no length was provided in the template, but a key type is, then that key type must have a well-defined length. If it does, then the key produced by this mechanism will be of the type specified in the template. If it doesn’t, an error will be returned.
-* If both a key type and a length are provided in the template, the length must be compatible with that key type. The key produced by this mechanism will be of the specified type and length.
+* If no length or key type is provided in the template, then the key produced by
+  this mechanism will be a generic secret key. Its length will be the digest
+  length in bytes as per table 142.
+* If no key type is provided in the template, but a length is, then the key
+  produced by this mechanism will be a generic secret key of the specified
+  length.
+* If no length was provided in the template, but a key type is, then that key
+  type must have a well-defined length. If it does, then the key produced by
+  this mechanism will be of the type specified in the template. If it doesn’t, an
+  error will be returned.
+* If both a key type and a length are provided in the template, the length must
+  be compatible with that key type. The key produced by this mechanism will be
+  of the specified type and length.
 
-If a DES, DES2, or CDMF key is derived with this mechanism, the parity bits of the key will be set properly.
-If the requested type of key requires more than the digest length in bytes, an error is generated.
+If a DES, DES2, or CDMF key is derived with this mechanism, the parity bits of
+the key will be set properly.  If the requested type of key requires more than
+the digest length in bytes, an error is generated.
 
 This mechanism has the following rules about key sensitivity and extractability:
 
-* The **CKA_SENSITIVE** and **CKA_EXTRACTABLE** attributes in the template for the new key can both be specified to be either CK_TRUE or CK_FALSE. If omitted, these attributes each take on some default value.
-* If the base key has its **CKA_ALWAYS_SENSITIVE** attribute set to CK_FALSE, then the derived key will as well. If the base key has its **CKA_ALWAYS_SENSITIVE** attribute set to CK_TRUE, then the derived key has its **CKA_ALWAYS_SENSITIVE** attribute set to the same value as its **CKA_SENSITIVE attribute**.
-* Similarly, if the base key has its **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE, then the derived key will, too. 
+* The **CKA_SENSITIVE** and **CKA_EXTRACTABLE** attributes in the template for
+  the new key can both be specified to be either CK_TRUE or CK_FALSE. If
+  omitted, these attributes each take on some default value.
+* If the base key has its **CKA_ALWAYS_SENSITIVE** attribute set to CK_FALSE,
+  then the derived key will as well. If the base key has its
+  **CKA_ALWAYS_SENSITIVE** attribute set to CK_TRUE, then the derived key has
+  its **CKA_ALWAYS_SENSITIVE** attribute set to the same value as its
+  **CKA_SENSITIVE** attribute.
+* Similarly, if the base key has its **CKA_NEVER_EXTRACTABLE** attribute set to
+  CK_FALSE, then the derived key will, too. 
 
-If the base key has its **CKA_NEVER_EXTRACTABLE** attribute set to CK_TRUE, then the derived key has its **CKA_NEVER_EXTRACTABLE** attribute set to the opposite value from its **CKA_EXTRACTABLE** attribute.
+If the base key has its **CKA_NEVER_EXTRACTABLE** attribute set to CK_TRUE, then
+the derived key has its **CKA_NEVER_EXTRACTABLE** attribute set to the opposite
+value from its **CKA_EXTRACTABLE** attribute.

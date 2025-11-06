@@ -64,9 +64,10 @@ Mechanisms:
 
 ### Digest
 
-The digest mechanism, denoted **CKM_\<hash\>** where \<hash\> identifies a hash function as per table 137, is a mechanism for message
-digesting, following the hash function as per table 137, 
-defined in [FIPS PUB 180-4]^1^, [FIPS PUB 202]^2^ or [RFC 7693]^3^ respectively.
+The digest mechanism, denoted **CKM_\<hash\>** where \<hash\> identifies a hash
+function as per table 137, is a mechanism for message digesting, following the
+hash function as per table 137, defined in [FIPS PUB 180-4]^1^, [FIPS PUB
+202]^2^ or [RFC 7693]^3^ respectively.
 
 +------------------+----------------------------+-------------------------+-------------------------+
 | Mechanism        | Hash function              | Digest length in bits   | Digest length in bytes  |
@@ -112,9 +113,12 @@ table 138: Digest: Data Length
 
 ### Truncated Digest
 
-The truncated digest mechanism, denoted **CKM_SHA512_\<t\>**, is a mechanism for message
-digesting, following the Secure Hash Algorithm 
-defined in [FIPS PUB 180-4] section 5.3.6. It is based on a 512-bit message digest with a distinct initial hash value and truncated to \<t\> bits as per table 139. **CKM_SHA512_\<t\>** is the same as **CKM_SHA512_T** with a parameter value of \<t\>.
+The truncated digest mechanism, denoted **CKM_SHA512_\<t\>**, is a mechanism for
+message digesting, following the Secure Hash Algorithm defined in [FIPS PUB
+180-4] section 5.3.6. It is based on a 512-bit message digest with a distinct
+initial hash value and truncated to \<t\> bits as per table 139.
+**CKM_SHA512_\<t\>** is the same as **CKM_SHA512_T** with a parameter value of
+\<t\>.
 
 +------------------+-----------------+-------------------------+-------------------------+
 | Mechanism        | Hash function   | Truncated digest length | Truncated digest length |
@@ -130,7 +134,9 @@ table 139: Truncated digest: mechanisms and hash functions
 
 **CKM_SHA512_224** and **CKM_SHA512_256** do not have a parameter.
 
-**CKM_SHA512_T** has a parameter, a **CK_MAC_GENERAL_PARAMS**, which holds the value of t in bits. The length in bytes of the desired output should be in the range of 0-⌈t/8⌉, where 0 < t < 512, and t <> 384.
+**CKM_SHA512_T** has a parameter, a **CK_MAC_GENERAL_PARAMS**, which holds the
+value of t in bits. The length in bytes of the desired output should be in the
+range of 0-⌈t/8⌉, where 0 < t < 512, and t <> 384.
 
 Constraints on the length of input and output data are summarized in the
 following table. For single-part digesting, the data and the digest may begin at

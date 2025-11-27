@@ -14,6 +14,8 @@ the digital signature algorithm defined in [FIPS 204].
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_ML_DSA                           |     | ✓^1^|      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
+| CKM_ML_DSA_EXTERNAL_MU_GEN           |     |     |      |  ✓  |       |     |     |      |
++--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_ML_DSA_EXTERNAL_MU               |     | ✓^2^|      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_HASH_ML_DSA                      |     | ✓^2^|      |     |       |     |     |      |
@@ -65,6 +67,7 @@ Mechanisms:
 - CKM_HASH_ML_DSA_SHA3_512
 - CKM_HASH_ML_DSA_SHAKE128
 - CKM_HASH_ML_DSA_SHAKE256
+- CKM_ML_DSA_EXTERNAL_MU_GEN
 - CKM_ML_DSA_EXTERNAL_MU
 
 **CK_ML_DSA_PARAMETER_SET_TYPE** is used to indicate which ML-DSA parameter set
@@ -114,6 +117,19 @@ typedef struct CK_HASH_SIGN_ADDITIONAL_CONTEXT {
   CK_ULONG           ulContextLen;
   CK_MECHANISM_TYPE  hash;
 } CK_HASH_SIGN_ADDITIONAL_CONTEXT;
+~~~
+
+**CK_MU_GEN_PARAMS** is used in the mechanisum parameters to supply a key handle 
+or pre computed TR and a context for the generation of an External Mu for pure ML-DSA
+
+~~~{.c}
+typedef struct CK_MU_GEN_PARAMS {
+ CK_OBJECT_HANDLE hKey, //public or private.
+ CK_BYTE             TR; //pre computed TR from public key 
+ CK_ULONG            ulTRLen;
+ CK_BYTE             ctx;
+ CK_ULONG            ulctxLen;
+} CK_Mu_GEN_PARAMS;
 ~~~
 
 ### ML-DSA public key objects
@@ -348,10 +364,27 @@ For these mechanisms, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure specify the supported range of ML-DSA public
 keys in bytes.
 
+
+### ExternalMu-ML-DSA generation
+
+The ExternalMu-ML-DSA generation mechanism, denoted **CKM_ML_DSA_EXTERNAL_MU_GEN**, is a mechanism for the calculation of the ExternalMu that can be consumed by the CKM_ML_DSA_EXTERNAL_MU mechanism only single-part signature and verification for ML-DSA signatures, as defined in sections 5 and 6 of [FIPS-204].  CKM_ML_DSA_EXTERNAL_MU_GEN  mechanism can be used for single-part and multiple-part digest operations.
+
+CKM_ML_DSA_EXTERNAL_MU_GEN  will take a mechanism params  **CK_MU_GEN_PARAMS** the params supplies a key handle or a precomputed TR of the public key. If the key handles is empty then then a TR is expected. An additional context can also be supplied. Constraints on the length of the data are summarized in the following table.
+
+| Function          | Input Length | Output Length |
+|-------------------|--------------|---------------|
+| C_Digest          | any*         | 64            |
+| C_Digestupdate    | any*         | 64            |
+table: ML-DSA compute External Mu: Data Length
+
+\* Input length will be determined by the tokens maximum memory size.
+
+For these mechanisms, the ulMinKeySize and ulMaxKeySize fields of the CK_MECHANISM_INFO structure specify the supported range of ML-DSA public keys in bytes.
+
 ### ExternalMu-ML-DSA Signature
 
 The ExternalMu-ML-DSA mechanism, denoted **CKM_ML_DSA_EXTERNAL_MU**, is a
-mechanism for single- and multiple-part signatures and verification for ML-DSA
+mechanism for single-part signatures and verification for ML-DSA
 signatures, as defined in sections 5 and 6 of [FIPS-204]. The data passed in
 is the 64-byte message representative μ, normally computed in step 6 of
 algorithm 7 and step 7 of algorithm 8, but here provided by the caller instead

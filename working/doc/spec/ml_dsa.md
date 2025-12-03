@@ -124,11 +124,11 @@ or pre computed TR and a context for the generation of an External Mu for pure M
 
 ~~~{.c}
 typedef struct CK_MU_GEN_PARAMS {
- CK_OBJECT_HANDLE hKey, //public or private.
- CK_BYTE             TR; //pre computed TR from public key 
- CK_ULONG            ulTRLen;
- CK_BYTE             ctx;
- CK_ULONG            ulctxLen;
+  CK_OBJECT_HANDLE hKey, //public or private.
+  CK_BYTE_PTR         pTR; //pre computed TR from public key 
+  CK_ULONG            ulTRLen;
+  CK_BYTE_PTR         pctx;
+  CK_ULONG            ulctxLen;
 } CK_Mu_GEN_PARAMS;
 ~~~
 
@@ -374,7 +374,6 @@ CKM_ML_DSA_EXTERNAL_MU_GEN  will take a mechanism params  **CK_MU_GEN_PARAMS** t
 | Function          | Input Length | Output Length |
 |-------------------|--------------|---------------|
 | C_Digest          | any*         | 64            |
-| C_Digestupdate    | any*         | 64            |
 table: ML-DSA compute External Mu: Data Length
 
 \* Input length will be determined by the tokens maximum memory size.

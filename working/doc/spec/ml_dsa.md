@@ -373,10 +373,8 @@ CKM_ML_DSA_EXTERNAL_MU_GEN  will take a mechanism params  **CK_MU_GEN_PARAMS** t
 
 | Function          | Input Length | Output Length |
 |-------------------|--------------|---------------|
-| C_Digest          | any*         | 64            |
+| C_Digest          | any          | 64            |
 table: ML-DSA compute External Mu: Data Length
-
-\* Input length will be determined by the tokens maximum memory size.
 
 For these mechanisms, the ulMinKeySize and ulMaxKeySize fields of the CK_MECHANISM_INFO structure specify the supported range of ML-DSA public keys in bytes.
 

@@ -12,11 +12,11 @@ the digital signature algorithm defined in [FIPS 204].
 +======================================+:===:+:===:+:====:+:===:+:=====:+:===:+:===:+:====:+
 | CKM_ML_DSA_KEY_PAIR_GEN              |     |     |      |     |   ✓   |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
-| CKM_ML_DSA                           |     | ✓^1^|      |     |       |     |     |      |
+| CKM_ML_DSA                           |     |     |      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
-| CKM_ML_DSA_EXTERNAL_MU               |     | ✓^2^|      |     |       |     |     |      |
+| CKM_ML_DSA_EXTERNAL_MU               |     | ✓^1^|      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
-| CKM_HASH_ML_DSA                      |     | ✓^2^|      |     |       |     |     |      |
+| CKM_HASH_ML_DSA                      |     | ✓^1^|      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_HASH_ML_DSA_SHA224               |     |  ✓  |      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
@@ -40,10 +40,7 @@ the digital signature algorithm defined in [FIPS 204].
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 table: ML-DSA Mechanisms vs. Functions
 
-^1^ Verification is only for single part verifications or multipart
-verifications when the **C_VerifySignatureInit** interface is used
-
-^2^ Single-part operations only
+^1^ Single-part operations only
 
 ### Definitions
 
@@ -258,11 +255,9 @@ following table. In the table, k is the length in bytes of the ML-DSA signature.
 | Function          | Key type            | Input Length | Output Length |
 |-------------------|---------------------|--------------|---------------|
 | C_Sign            | ML-DSA Private Key  | any          | k             |
-| C_Verify ^1^      | ML-DSA Public Key   | any, k       | N/A           |
+| C_Verify          | ML-DSA Public Key   | any, k       | N/A           |
 | C_VerifySignature | ML-DSA Public Key   | any, k       | N/A           |
 table: ML-DSA: Key and Data Length
-
-^1^ Single-part operations only.
 
 For these mechanisms, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure specify the supported range of ML-DSA public

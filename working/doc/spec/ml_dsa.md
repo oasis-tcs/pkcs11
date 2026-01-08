@@ -369,7 +369,7 @@ keys in bytes.
 
 The ExternalMu-ML-DSA generation mechanism, denoted **CKM_ML_DSA_EXTERNAL_MU_GEN**, is a mechanism for the calculation of the ExternalMu that can be consumed by the CKM_ML_DSA_EXTERNAL_MU mechanism only single-part signature and verification for ML-DSA signatures, as defined in sections 5 and 6 of [FIPS-204].  CKM_ML_DSA_EXTERNAL_MU_GEN  mechanism can be used for single-part and multiple-part digest operations.
 
-CKM_ML_DSA_EXTERNAL_MU_GEN  will take a mechanism params  **CK_MU_GEN_PARAMS** the params supplies a key handle or a precomputed TR of the public key. If the key handles is empty then then a TR is expected. An additional context can also be supplied. Constraints on the length of the data are summarized in the following table.
+CKM_ML_DSA_EXTERNAL_MU_GEN  will take a mechanism params  **CK_MU_GEN_PARAMS**. The params supplies a key handle or a precomputed TR of the public key. If the key handle is empty then then a TR is expected. An additional context can also be supplied. Constraints on the length of the data are summarized in the following table.
 
 | Function          | Input Length | Output Length |
 |-------------------|--------------|---------------|

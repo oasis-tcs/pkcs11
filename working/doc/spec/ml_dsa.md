@@ -129,7 +129,7 @@ typedef struct CK_MU_GEN_PARAMS {
   CK_ULONG            ulTRLen;
   CK_BYTE_PTR         pctx;
   CK_ULONG            ulctxLen;
-} CK_Mu_GEN_PARAMS;
+} CK_MU_GEN_PARAMS;
 ~~~
 
 ### ML-DSA public key objects

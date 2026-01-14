@@ -36,6 +36,7 @@ the PKCS #11 attributes for public keys, use the following table.
 | digitalSignature, keyCertSign, cRLSign | CKA_VERIFY_RECOVER          |
 | keyAgreement                           | CKA_DERIVE                  |
 | keyEncipherment                        | CKA_WRAP                    |
+| keyEncipherment                        | CKA_ENCAPSULATE             |
 | nonRepudiation                         | CKA_VERIFY                  |
 | nonRepudiation                         | CKA_VERIFY_RECOVER          |
 table: Mapping of X.509 key usage flags to Cryptoki attributes for public keys

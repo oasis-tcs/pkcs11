@@ -164,6 +164,12 @@ NIST. “Special Publication 800-108 (Revised): Recommendation for Key Derivatio
 
 URL: <https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf >
 
+**[NIST SP800-185]**
+
+NIST. “Special Publication 800-185: SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash”, December 2016. 
+
+URL: <https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-185.pdf >
+
 **[NIST SP800-208]**
 
 NIST “Special Publication 800-208: Recommendation for Stateful Hash-Based Signature Schemes”, October 2020. 

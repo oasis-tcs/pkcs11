@@ -30,14 +30,14 @@ To map between ISO/IEC 9594-8 (X.509) **keyUsage** flags for public keys and
 the PKCS #11 attributes for public keys, use the following table.
 
 | **Key usage flags for public keys in X.509 public key certificates** | **Corresponding cryptoki attributes for public keys.** |
-|----------------------------------------|-----------------------------|
-| dataEncipherment                       | CKA_ENCRYPT                 |
-| digitalSignature, keyCertSign, cRLSign | CKA_VERIFY                  |
-| digitalSignature, keyCertSign, cRLSign | CKA_VERIFY_RECOVER          |
-| keyAgreement                           | CKA_DERIVE                  |
-| keyEncipherment                        | CKA_WRAP                    |
-| nonRepudiation                         | CKA_VERIFY                  |
-| nonRepudiation                         | CKA_VERIFY_RECOVER          |
+|----------------------------------------------------------------------|--------------------------------------------------------|
+| dataEncipherment                                                     | CKA_ENCRYPT                                            |
+| digitalSignature, keyCertSign, cRLSign, nonRepudiation               | CKA_VERIFY                                             |
+| digitalSignature, keyCertSign, cRLSign, nonRepudiation               | CKA_VERIFY_RECOVER                                     |
+| keyAgreement                                                         | CKA_DERIVE                                             |
+| keyEncipherment                                                      | CKA_WRAP                                               |
+| keyAgreement, keyEncipherment                                        | CKA_ENCAPSULATE                                        |
+
 table: Mapping of X.509 key usage flags to Cryptoki attributes for public keys
 
 The value of the **CKA_PUBLIC_KEY_INFO** attribute is the DER encoded value

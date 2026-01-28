@@ -600,7 +600,7 @@ CK_DECLARE_FUNCTION(CK_RV, C_UnwrapKeyAuthenticated)(
     CK_ATTRIBUTE_PTR pTemplate,
     CK_ULONG ulAttributeCount,
     CK_BYTE_PTR pAssociatedData,
-    CK_ULONG ulAssociatedDataLen
+    CK_ULONG ulAssociatedDataLen,
     CK_OBJECT_HANDLE_PTR phKey
 );
 ~~~
@@ -681,7 +681,7 @@ CK_KEY_TYPE keyType = CKK_AES;
 CK_BBOOL true = CK_TRUE;
 
 CK_ATTRIBUTE template[] = {
-  {CKA_CLASS, &keyClass, sizeof1(keyClass)},
+  {CKA_CLASS, &keyClass, sizeof(keyClass)},
   {CKA_KEY_TYPE, &keyType, sizeof(keyType)},
   {CKA_ENCRYPT, &true, sizeof(true)},
   {CKA_DECRYPT, &true, sizeof(true)}
@@ -706,9 +706,9 @@ CK_MECHANISM mechanism = {
 .
 rv = C_UnwrapKeyAuthenticated(
   hSession, &mechanism, hUnwrappingKey,
-  auth, sizeof(auth),
   wrappedKey, sizeof(wrappedKey),
-  template, 4, &hKey);
+  template, 4,
+  auth, sizeof(auth), &hKey);
 
 if (rv == CKR_OK) {
   .
@@ -726,8 +726,8 @@ CK_DECLARE_FUNCTION(CK_RV, C_EncapsulateKey)(
     CK_ATTRIBUTE_PTR pTemplate,
     CK_ULONG ulAttributeCount,
     CK_BYTE_PTR pCiphertext, 
-    CK_ULONG_PTR pulCiphertextLen,
-    CK_OBJECT_HANDLE_PTR phKey,
+    CK_ULONG_PTR pulCiphertextLen, 
+    CK_OBJECT_HANDLE_PTR phKey
 );
 ~~~
 
@@ -814,7 +814,7 @@ CK_DECLARE_FUNCTION(CK_RV, C_DecapsulateKey)(
     CK_ULONG ulAttributeCount,
     CK_BYTE_PTR pCiphertext,
     CK_ULONG ulCiphertextLen,
-    CK_OBJECT_HANDLE_PTR phKey,
+    CK_OBJECT_HANDLE_PTR phKey
 );
 ~~~
 

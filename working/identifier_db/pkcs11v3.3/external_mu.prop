@@ -1,0 +1,5 @@
+Defines external Mu Mechanisms sign and gen.
+
+mechanisms
+#define CKM_ML_DSA_EXTERNAL_MU_GEN	TBD
+#define CKM_ML_DSA_EXTERNAL_MU		TBD

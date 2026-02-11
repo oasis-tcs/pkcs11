@@ -756,6 +756,17 @@ The new key will have:
 If a call to **C_EncapsulateKey** cannot support the precise template supplied
 to it, it will fail and return without creating any key object.
 
+To partition the encapsulation keys so they can only encapsulate a subset of
+keys the attribute **CKA_ENCAPSULATE_TEMPLATE** can be used on the encapsulation
+keys to specify an attribute set that will be added to attributes of the key to
+be encapsulated. If the attributes do not conflict with the user supplied
+attribute template, in ‘pTemplate’, then the encapsulation will proceed. The
+value of this attribute is an attribute template and the size is the number of
+items in the template times the size of **CK_ATTRIBUTE**. If this attribute is
+not present on the encapsulating key then no additional attributes will be
+added. If any attribute conflict occurs on an attempt to encapsulate a key then
+the function SHALL return **CKR_KEY_HANDLE_INVALID**.
+
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID,
 CKR_CRYPTOKI_NOT_INITIALIZED, CKR_CURVE_NOT_SUPPORTED, CKR_DEVICE_ERROR,
@@ -850,6 +861,17 @@ _pMechanism_ structure at the same time that the key is decapsulated.
 
 If a call to **C_DecapsulateKey** cannot support the precise template supplied
 to it, it will fail and return without creating any key object.
+
+To partition the decapsulation keys so they can only decapsulate a subset of
+keys the attribute **CKA_DECAPSULATE_TEMPLATE** can be used on the decapsulation
+keys to specify an attribute set that will be added to attributes of the key to
+be decapsulated. If the attributes do not conflict with the user supplied
+attribute template, in ‘pTemplate’, then the decapsulation will proceed. The
+value of this attribute is an attribute template and the size is the number of
+items in the template times the size of **CK_ATTRIBUTE**. If this attribute is
+not present on the decapsulating key then no additional attributes will be
+added. If any attribute conflict occurs on an attempt to decapsulate a key then
+the function SHALL return **CKR_TEMPLATE_INCONSISTENT**.
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID, CKR_BUFFER_TOO_SMALL,

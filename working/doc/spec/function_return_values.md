@@ -512,9 +512,9 @@ may return any applicable error code.
   that cryptographic operations on certain tokens cannot be performed unless the
   normal user is logged in.
 
-* CKR_USER_PIN_NOT_INITIALIZED: This value can only be returned by **C_Login**.
-  It indicates that the normal user’s PIN has not yet been initialized with
-  **C_InitPIN**.
+* CKR_USER_PIN_NOT_INITIALIZED: This value can only be returned by **C_Login**
+  and **C_LoginUser**. It indicates that the normal user’s PIN has not yet been
+  initialized with **C_InitPIN**.
 
 * CKR_USER_TOO_MANY_TYPES: An attempt was made to have more distinct users
   simultaneously logged into the token than the token and/or library permits.

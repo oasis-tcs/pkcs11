@@ -1,0 +1,13 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Defines external Mu Mechanisms sign and gen.".
+
+Mechanisms:
+
+ #define CKM_ML_DSA_EXTERNAL_MU_GEN 0x0000403bUL
+ #define CKM_ML_DSA_EXTERNAL_MU     0x0000403cUL
+
+This represents the following changes to your original proposal:
+    CKM_ML_DSA_EXTERNAL_MU_GEN was allocated 0x403b because no number was proposed
+    CKM_ML_DSA_EXTERNAL_MU was allocated 0x403c because no number was proposed
+
+Please update your spec before sending it to ballot.

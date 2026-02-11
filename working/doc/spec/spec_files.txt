@@ -96,6 +96,7 @@ xmss_and_xmss-mt.md
 ml_dsa.md
 ml-kem.md
 slh-dsa.md
+comp_sig.md
 kmac.md
 references.md
 security_and_privacy_considerations.md

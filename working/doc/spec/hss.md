@@ -1,6 +1,6 @@
 ## HSS
 
-HSS is a mechanism for single-part signatures and verification, following the
+HSS is a mechanism for signatures and verification, following the
 digital signature algorithm defined in [RFC 8554] and [NIST SP800-208].
 
 +--------------------------------------+---------------------------------------------------+
@@ -16,7 +16,8 @@ digital signature algorithm defined in [RFC 8554] and [NIST SP800-208].
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 table: HSS Mechanisms vs. Functions
 
-^1^ Single-part operations only
+^1^ Verification is only for single part verifications or multipart
+verifications when the **C_VerifySignatureInit** interface is used.
 
 ### Definitions 
 
@@ -139,12 +140,13 @@ the new private key.
 For this mechanism, the ulMinKeySize and ulMaxKeySize fields of the
 **CK_MECHANISM_INFO** structure are not used and must be set to 0.
 
-### HSS without hashing
+### HSS Signature without hashing
 
-The HSS without hashing mechanism, denoted **CKM_HSS**, is a mechanism for
-single-part signatures and verification for HSS. (This mechanism corresponds
-only to the part of LMS that processes the hash value, which may be of any
-length; it does not compute the hash value.)
+The HSS without hashing signature mechanism, denoted **CKM_HSS**, is a mechanism
+for generating and verifying HSS signatures as defined in sections 6.2 and 6.3
+of [RFC 8554]. The data passed in is the message. Verification is only for single
+part verifications or multipart verifications when the **C_VerifySignatureInit**
+interface is used.
 
 This mechanism does not have a parameter.
 
@@ -152,11 +154,12 @@ For the purposes of these mechanisms, an HSS signature is a byte string with
 length depending on **CKA_HSS_LEVELS**, **CKA_HSS_LMS_TYPES**,
 **CKA_HSS_LMOTS_TYPES** as described in the following table.
 
-| Function     | Key type          | Input length       | Output length |
-|--------------|-------------------|--------------------|---------------|
-| C_Sign ^1^   | CKK_HSS (Private) | any                | 1296-74988^2^ |
-| C_Verify ^1^ | CKK_HSS (Public)  | any, 1296-74988^2^ | N/A           |
-table: HSS without hashing: Key and Data Length
+| Function          | Key type          | Input length       | Output length |
+|-------------------|-------------------|--------------------|---------------|
+| C_Sign            | CKK_HSS (Private) | any                | 1296-74988^2^ |
+| C_Verify ^1^      | CKK_HSS (Public)  | any, 1296-74988^2^ | N/A           |
+| C_VerifySignature | CKK_HSS (Public)  | any, 1296-74988^2^ | N//A          |
+table: HSS: Key and Data Length
 
 ^1^ Single-part operations only.
 

@@ -1,7 +1,7 @@
 ## XMSS and XMSS^MT^
 
-XMSS and XMSS^MT^ are mechanisms for single-part signatures and verification,
-following the digital signature algorithm defined in [RFC 8391].
+XMSS and XMSS^MT^ are mechanisms for signatures and verification, following
+the digital signature algorithm defined in [RFC 8391].
 
 +--------------------------------------+---------------------------------------------------+
 |                                      |Functions                                          |
@@ -20,7 +20,8 @@ following the digital signature algorithm defined in [RFC 8391].
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 table: XMSS and XMSS^MT^ Mechanisms vs. Functions
 
-^1^ Single-part operations only
+^1^ Verification is only for single part verifications or multipart
+verifications when the **C_VerifySignatureInit** interface is used.
 
 ### Definitions
 
@@ -34,7 +35,7 @@ Mechanisms:
 - CKM_XMSS
 - CKM_XMSSMT_KEY_PAIR_GEN
 - CKM_XMSSMT
-            
+
 ### XMSS public key objects
 
 XMSS public key objects (object class **CKO_PUBLIC_KEY**, key type **CKK_XMSS**)
@@ -166,7 +167,7 @@ CK_ATTRIBUTE template[] = {
 
 **CKA_SENSITIVE** MUST be true and **CKA_EXTRACTABLE** MUST be false for this
 key.
-            
+
 ### XMSS^MT^ private key objects
 
 XMSS^MT^ private key objects (object class **CKO_PRIVATE_KEY**, key type
@@ -209,7 +210,7 @@ CK_ATTRIBUTE template[] = {
 
 **CKA_SENSITIVE** MUST be true and **CKA_EXTRACTABLE** MUST be false for this
 key.
-            
+
 ### XMSS key pair generation
 
 The XMSS key pair generation mechanism, denoted **CKM_XMSS_KEY_PAIR_GEN**, is a
@@ -226,7 +227,7 @@ attributes to the new public key and the **CKA_CLASS**, **CKA_KEY_TYPE**,
 
 For this mechanism, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure are not used and must be set to 0.
-            
+
 ### XMSS^MT^ key pair generation
 
 
@@ -239,12 +240,15 @@ key.
 
 All other restrictions detailed in section [6.66.6] apply, using XMSS^MT^ types
 where necessary.
-            
+
 ### XMSS and XMSS^MT^ without hashing
 
-The XMSS and XMSS^MT^ without hashing mechanisms, denoted **CKM_XMSS** and
-**CKM_XMSSMT** respectively, are mechanisms for single-part signatures and
-verification.
+The XMSS and XMSS^MT^ without hashing signature mechanisms, denoted **CKM_XMSS** and
+**CKM_XMSSMT** respectively, are mechanisms for generating and verifying
+signatures as defined in sections 4.1.9, 4.1.10, 4.2.4 and 4.2.5 of [RFC 8391].
+The data passed in is the message M. Verification is only for single part
+verifications or multipart verifications when the **C_VerifySignatureInit**
+interface is used.
 
 These mechanisms do not have parameters.
 
@@ -253,22 +257,24 @@ string with a length depending on the oid provided.
 
 | Function     | Key type           | Input length      | Output length |
 |--------------|--------------------|-------------------|---------------|
-| C_Sign ^1^   | CKM_XMSS (Private) | any               | 2500-9732^2^  |
+| C_Sign       | CKM_XMSS (Private) | any               | 2500-9732^2^  |
 | C_Verify ^1^ | CKM_XMSS (Public)  | any, 2500-9732^2^ | N/A           |
 table: XMSS without hashing: Key and Data Length
 
-^1^ Single-part operations only.
+^1^ Verification is only for single part verifications or multipart
+verifications when the **C_VerifySignatureInit** interface is used.
 
 ^2^ Smallest and largest signature sizes from [RFC 8391], including optional
 parameter sets.
 
 | Function     | Key type             | Input length        | Output length  |
 |--------------|----------------------|---------------------|----------------|
-| C_Sign ^1^   | CKM_XMSSMT (Private) | any                 | 4963-104520^2^ |
+| C_Sign       | CKM_XMSSMT (Private) | any                 | 4963-104520^2^ |
 | C_Verify ^1^ | CKM_XMSSMT (Public)  | any, 4963-104520^2^ | N/A            |
 table: XMSS^MT^ without hashing: Key and Data Length
 
-^1^ Single-part operations only.
+^1^ Verification is only for single part verifications or multipart
+verifications when the **C_VerifySignatureInit** interface is used.
 
 ^2^ Smallest and largest signature sizes from [RFC 8391], including optional
 parameter sets.

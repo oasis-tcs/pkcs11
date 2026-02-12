@@ -758,9 +758,9 @@ to it, it will fail and return without creating any key object.
 
 To partition the encapsulation keys so they can only encapsulate a subset of
 keys the attribute **CKA_ENCAPSULATE_TEMPLATE** can be used on the encapsulation
-keys to specify an attribute set that will be added to attributes of the key to
-be encapsulated. If the attributes do not conflict with the user supplied
-attribute template, in ‘pTemplate’, then the encapsulation will proceed. The
+keys to specify an attribute set that will be compared against the attributes of
+the key to be encapsulated. If all attributes match according to the
+**C_FindObject** rules of attribute matching then the wrap will proceed. The
 value of this attribute is an attribute template and the size is the number of
 items in the template times the size of **CK_ATTRIBUTE**. If this attribute is
 not present on the encapsulating key then no additional attributes will be

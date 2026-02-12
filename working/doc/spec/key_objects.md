@@ -63,3 +63,42 @@ The **CKA_KEY_GEN_MECHANISM** attribute identifies the key generation
 mechanism used to generate the key material. It contains a valid value only
 if the **CKA_LOCAL** attribute has the value CK_TRUE. If **CKA_LOCAL** has
 the value CK_FALSE, the value of the attribute is CK_UNAVAILABLE_INFORMATION.
+
+### Template Attributes
+
+Template attributes are attributes that embed a template that is stored on a key
+object (**CKA_DERIVE_TEMPLATE**, **CKA_WRAP_TEMPLATE**, **CKA_UNWRAP_TEMPLATE**,
+**CKA_ENCAPSULATE_TEMPLATE**, **CKA_DECAPSULATE_TEMPLATE**).
+
+When a template attribute is received via **C_SetAttributeValue** (or other
+object creation functions), the **pValue** members of the **CK_ATTRIBUTE**
+structures may point to any valid memory. The internal storage representation
+of this template is token-specific. However, tokens **MUST NOT** store the
+template attribute value as received, as it contain pointers to volatile
+application memory that will become invalid on application restart. Tokens
+**MUST** process the template attribute content (deep copy) or return
+**CKR_TEMPLATE_INCONSISTENT** if unwilling to do so.
+
+Returning a template attribute via **C_GetAttributeValue** is more complex, as
+it requires the application to allocate sufficient memory for both the template
+structure and the associated data. When **C_GetAttributeValue** is called, the
+token **MUST** verify that the application has provided a buffer large enough
+to hold the template array and all data referenced by the attributes in the
+template, including any padding required for platform-specific alignment.
+
+The token uses the beginning of the provided buffer for the array of
+**CK_ATTRIBUTE** structures. It then partitions the remaining memory to store
+the values of the individual attributes. The **pValue** member of each
+**CK_ATTRIBUTE** in the array is updated to point to the corresponding value
+stored in the latter part of the buffer. Finally, the token sets the
+**ulValueLen** for the template attribute to the size of the **CK_ATTRIBUTE**
+array only, excluding the size of the additional memory used for the attribute
+values.
+
+An application may discover how much memory is required by querying the token by
+setting **pValue** to NULL_PTR as normally done to discover an attribute size.
+However, in this case the token will not return just the size of the
+**CK_ATTRIBUTE** array as it does when it fills a valid **pValue**; instead, in
+this specific case the token returns the total amount of memory needed to both
+return the array and all of the associated data. This may include extra space
+required to align pointers in memory.

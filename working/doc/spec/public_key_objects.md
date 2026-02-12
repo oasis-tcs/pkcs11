@@ -14,6 +14,7 @@ to the common attributes defined for this object class:
 | CKA_ENCAPSULATE ^8^ | CK_BBOOL   | CK_TRUE if key supports encapsulation (i.e., can be used in a KEM to create an encapsulated key and ciphertext for C_DecapsulateKey)^9^ |
 | CKA_TRUSTED ^10^    | CK_BBOOL   | The key can be trusted for the application that it was created. The wrapping key can be used to wrap keys with  CKA_WRAP_WITH_TRUSTED set to CK_TRUE. |
 | CKA_WRAP_TEMPLATE   | CK_ATTRIBUTE_PTR | For wrapping keys. The attribute template to match against any keys wrapped using this wrapping key. Keys that do not match cannot be wrapped. The number of attributes in the array is the ulValueLen component of the attribute divided by the size of CK_ATTRIBUTE. |
+| CKA_ENCAPSULATE_TEMPLATE| CK_ATTRIBUTE_PTR | For encapsulating keys. The attribute template to match against any keys encapsulated using this encapsulating key. Keys that do not match cannot be encapsulated. The number of attributes in the array is the ulValueLen component of the attribute divided by the size of CK_ATTRIBUTE. |
 | CKA_PUBLIC_KEY_INFO | Byte array | DER-encoding of the SubjectPublicKeyInfo for this public key. (MAY be empty, DEFAULT derived from the underlying public key data) |
 | CKA_PUBLIC_CRC64_VALUE ^1,4,13^ | Byte array | The CRC-64-ECMA calculated over the public key object’s CKA_VALUE attribute unless otherwise specified in the mechanism description |
 table: Common Public Key Attributes

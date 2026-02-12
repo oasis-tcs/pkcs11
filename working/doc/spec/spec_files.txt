@@ -5,6 +5,7 @@ general_data_types.md
 objects.md
 creating_objects.md
 common_attributes.md
+object_classification.md
 hardware_feature_objects.md
 storage_objects.md
 data_objects.md

@@ -58,4 +58,3 @@ Any attempt to modify the **CKA_UNIQUE_ID** attribute of an existing object or
 to specify the value of the **CKA_UNIQUE_ID** attribute in the template for an
 operation that creates one or more objects MUST fail. Operations failing for
 this reason return the error code **CKR_ATTRIBUTE_READ_ONLY**.
-

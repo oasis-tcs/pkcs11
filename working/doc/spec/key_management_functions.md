@@ -36,7 +36,7 @@ it, it will fail and return without creating an object.
 
 The object created by a successful call to **C_GenerateKey** will have its
 **CKA_LOCAL** attribute set to CK_TRUE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.4.1).
+have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID,
@@ -108,7 +108,7 @@ public/private key pair.
 The key objects created by a successful call to **C_GenerateKeyPair** will have
 their **CKA_LOCAL** attributes set to CK_TRUE. In addition, the key objects
 created will both have values for **CKA_UNIQUE_ID** generated and assigned (See
-Section 4.4.1).
+Section 4.5.1).
 
 _Note carefully the order of the arguments to **C_GenerateKeyPair**. The last
 two arguments do not have the same order as they did in the original Cryptoki
@@ -308,7 +308,7 @@ it will fail and return without creating any key object.
 
 The key object created by a successful call to **C_UnwrapKey** will have its
 **CKA_LOCAL** attribute set to CK_FALSE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.4.1).
+have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
 
 To partition the unwrapping keys so they can only unwrap a subset of keys the
 attribute **CKA_UNWRAP_TEMPLATE** can be used on the unwrapping key to specify
@@ -396,7 +396,7 @@ it will fail and return without creating any key object.
 
 The key object created by a successful call to **C_DeriveKey** will have its
 **CKA_LOCAL** attribute set to CK_FALSE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.4.1).
+have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
 
 To partition the derivation keys so they can only derive a subset of keys the
 attribute **CKA_DERIVE_TEMPLATE** can be used on the derivation keys to specify
@@ -631,7 +631,7 @@ supplied to it, it will fail and return without creating any key object.
 The key object created by a successful call to **C_UnwrapKeyAuthenticated** will
 have its **CKA_LOCAL** attribute set to CK_FALSE. In addition, the object
 created will have a value for **CKA_UNIQUE_ID** generated and assigned (see
-section 4.4.1).
+section 4.5.1).
 
 **C_UnwrapKeyAuthenticated** Primary use case:
 
@@ -751,7 +751,7 @@ The new key will have:
 * the **CKA_EXTRACTABLE** set to the value of the input template with a default
   of CK_TRUE if not provided,
 * the **CKA_LOCAL** attribute set to CK_FALSE, and
-* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.4.1.
+* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.5.1.
 
 If a call to **C_EncapsulateKey** cannot support the precise template supplied
 to it, it will fail and return without creating any key object.
@@ -843,7 +843,7 @@ The new key will have:
 * the **CKA_EXTRACTABLE** set to the value of the input template with a default
   of CK_TRUE if not provided,
 * the **CKA_LOCAL** attribute set to CK_FALSE, and
-* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.4.1.
+* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.5.1.
 
 Some mechanisms may modify, or attempt to modify, the contents of the
 _pMechanism_ structure at the same time that the key is decapsulated.

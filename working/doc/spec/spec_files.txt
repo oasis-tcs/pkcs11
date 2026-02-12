@@ -15,6 +15,7 @@ key_objects.md
 public_key_objects.md
 private_key_objects.md
 secret_key_objects.md
+otp_key_objects.md
 domain_parameter_objects.md
 mechanism_objects.md
 profile_objects.md
@@ -80,7 +81,7 @@ aria.md
 key_derivation_by_data_encryption-aria.md
 seed.md
 key_derivation_by_data_encryption-seed.md
-otp.md
+otp_mechanisms.md
 ct-kip.md
 gost_28147-89.md
 gost_r_34.11-94.md

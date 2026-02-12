@@ -14,6 +14,7 @@ information or functionality to applications.
 | CKO_PUBLIC_KEY           | Public key objects       |
 | CKO_PRIVATE_KEY          | Private key objects      |
 | CKO_SECRET_KEY           | Secret key objects       |
+| CKO_OTP_KEY              | OTP key objects          |
 | CKO_DOMAIN_PARAMETERS    | Domain parameter objects |
 table: Storage Objects
 

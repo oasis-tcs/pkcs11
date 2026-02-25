@@ -59,8 +59,9 @@ Parameter set types:
 
 ~~~{.c}
 typedef struct CK_SIGN_ADDITIONAL_CONTEXT {
-  CK_BYTE_PTR    pContext;
-  CK_ULONG       ulContextLen;
+  CK_HEDGE_TYPE hedgeVariant;
+  CK_BYTE_PTR   pContext;
+  CK_ULONG      ulContextLen;
 } CK_SIGN_ADDITIONAL_CONTEXT;
 ~~~
 
@@ -164,12 +165,12 @@ The Composite Signature key pair generation mechanism, denoted ***CKM_COMP_SIG_K
 is a key pair generation mechanism using KeyGen() as defined in section 4.1 of [COMP_SIG]
 
 It takes **CK_COMP_SIG_PARAMETER_SET_TYPE** to denote the composite component algorithms, 
-the label and the hash function. 
+the composite label and the hash function. 
 
 The mechanism generates Composite Signature public and private key pairs with a parameter set,
 as specified in the **CKA_PARAMETER_SET** attribute of the template for the public key.  
 These parameter set reference the Object ID’s as defined in [COMP_SIG] which fully specify
-the label, component algorithms and the hash function used for pre-hashing.
+the composite label, component algorithms and the hash function used for pre-hashing.
 
 The mechanism contributes the **CKA_CLASS**, **CKA_KEY_TYPE**, and **CKA_VALUE** attributes
 to the new public key and the **CKA_CLASS**, **CKA_KEY_TYPE**, **CKA_PARAMETER_SET**, and

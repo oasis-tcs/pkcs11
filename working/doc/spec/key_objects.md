@@ -71,34 +71,62 @@ object (**CKA_DERIVE_TEMPLATE**, **CKA_WRAP_TEMPLATE**, **CKA_UNWRAP_TEMPLATE**,
 **CKA_ENCAPSULATE_TEMPLATE**, **CKA_DECAPSULATE_TEMPLATE**).
 
 When a template attribute is received via **C_SetAttributeValue** (or other
-object creation functions), the **pValue** members of the **CK_ATTRIBUTE**
-structures may point to any valid memory. The internal storage representation
-of this template is token-specific. However, tokens **MUST NOT** store the
-template attribute value as received, as it contain pointers to volatile
-application memory that will become invalid on application restart. Tokens
-**MUST** process the template attribute content (deep copy) or return
-**CKR_TEMPLATE_INCONSISTENT** if unwilling to do so.
+object creation functions), the _pValue_ member of the **CK_ATTRIBUTE**
+structure points to an array of **CK_ATTRIBUTE** structures, and the
+_ulValueLen_ member specifies the length in bytes of the array. The internal
+storage representation of this template is token-specific. However, tokens
+**MUST NOT** store the template attribute value as received, as it contains
+pointers to volatile application memory that will become invalid on application
+restart. Tokens **MUST** process the template attribute content (e.g., by
+creating a deep copy) or return **CKR_TEMPLATE_INCONSISTENT** if unwilling or
+unable to do so.
 
-Returning a template attribute via **C_GetAttributeValue** is more complex, as
-it requires the application to allocate sufficient memory for both the template
-structure and the associated data. When **C_GetAttributeValue** is called, the
-token **MUST** verify that the application has provided a buffer large enough
-to hold the template array and all data referenced by the attributes in the
-template, including any padding required for platform-specific alignment.
+Returning a template attribute via **C_GetAttributeValue** may require multiple
+successuive calls, as the application nned to discover what fields are contained
+in the tempate and then allocate sufficient memory for both the template
+structure array and the associated data. When a template attribute request is
+received via **C_GetAttributeValue**, the received template **MUST** be
+validated when the _pValue_ and _ulValueLen_ fields are not NULL_PTR and 0
+respectively.
 
-The token uses the beginning of the provided buffer for the array of
-**CK_ATTRIBUTE** structures. It then partitions the remaining memory to store
-the values of the individual attributes. The **pValue** member of each
-**CK_ATTRIBUTE** in the array is updated to point to the corresponding value
-stored in the latter part of the buffer. Finally, the token sets the
-**ulValueLen** for the template attribute to the size of the **CK_ATTRIBUTE**
-array only, excluding the size of the additional memory used for the attribute
-values.
+The application **MUST** provide a valid array in the buffer. Specifically, the
+application must ensure that for each attribute in the inner template, the
+_pValue_ field is either set to NULL_PTR or contains a valid pointer to a
+location in memory that can receive at least _ulValueLen_ bytes.
 
-An application may discover how much memory is required by querying the token by
-setting **pValue** to NULL_PTR as normally done to discover an attribute size.
-However, in this case the token will not return just the size of the
-**CK_ATTRIBUTE** array as it does when it fills a valid **pValue**; instead, in
-this specific case the token returns the total amount of memory needed to both
-return the array and all of the associated data. This may include extra space
-required to align pointers in memory.
+If the application does not know ahead of time exactly which attributes the
+template attribute contains, it **MUST** set the type of all attributes in that
+template attribute to **CK_UNAVAILABLE_INFORMATION**, all _pValue_ fields to
+NULL_PTR, and all _ulValueLen_ fields to 0.
+
+If either *all* or *none* of the attribute type fields are set to
+**CK_UNAVAILABLE_INFORMATION** (i.e., all contain a valid attribute type that is
+available on the internal object's attribute template representation) and the
+array size matches the number of elements present in the internal
+representation, the template is considered valid; otherwise,
+**CKR_TEMPLATE_INCONSISTENT** **MUST** be returned.
+
+When receiving a template attribute with all attribute types set to
+**CK_UNAVAILABLE_INFORMATION**, the template attribute is modified to contain
+the correct type for each attribute as well as the attribute's data
+_ulValueLen_ length, while _pValue_ will be left pointing to NULL_PTR.
+
+On receiving a request with a valid template attribute with all matching
+attribute types correctly set, the same rules specified in the [Object
+management functions] section, **C_GetAttributeValue** function, for filling in
+the top level template in the **C_GetAttributeValue** function will be applied.
+
+The application will perform as many subsequent calls as necessary to
+**C_GetAttributeValue** to provide the necessary allocations.
+
+Implementations can limit permitted recursion (i.e., the ability to embed
+template attributes in the template attributes) and deny any recursion,
+returning **CKR_TEMPLATE_INCONSISTENT** if the template can't be accepted for
+reading or writing to the object. If an application is unwilling to retrieve a
+template attribute value recursively embedded within a template attribute while
+still retrieving the other attributes, it is permitted to simply exclude the
+attribute from the template attribute array by adequately reducing the array
+size. Implementations should support returning partial templates this way as
+long as all the remaining attributes in the template are present in the inner
+representation. Any mismatch **SHOULD** cause the implementation to return
+**CKR_TEMPLATE_INCONSISTENT**.

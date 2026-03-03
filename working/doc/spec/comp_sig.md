@@ -13,6 +13,7 @@ the digital signature algorithm defined in [COMP_SIG]
 +======================================+:===:+:===:+:====:+:===:+:=====:+:===:+:===:+:====:+
 | CKM_COMP_SIG_KEY_PAIR_GEN             |     |    |      |     |   ✓   |     |     |      |
 | CKM_COMP_SIG                          |     | ✓  |     |     |        |     |     |      |
+| CKM_COMP_SIG_EXTERNAL_HASH            |     | ✓  |     |     |        |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 table: Composite Signature Mechanisms vs. Functions
 
@@ -25,6 +26,7 @@ Mechanisms:
 
 - CKM_COMP_SIG_KEY_PAIR_GEN
 - CKM_COMP_SIG
+- CKM_COMP_SIG_EXTERNAL_HASH
 
 
 **CK_COMP_SIG_PARAMETER_SET_TYPE** is used to indicate which Composite Signature parameter set the keys belong to.
@@ -55,15 +57,9 @@ Parameter set types:
 - CKP_COMP_SIG_MLDSA87_ECDSA_P521_SHA512
 
 
-**CK_SIGN_ADDITIONAL_CONTEXT** is used in the mechanism parameters to supply a NIST-defined context string.
+**CK_SIGN_ADDITIONAL_CONTEXT** is used in the mechanism parameters to supply a NIST-defined context string.  It is
+defined in the ML-DSA section of this specification.
 
-~~~{.c}
-typedef struct CK_SIGN_ADDITIONAL_CONTEXT {
-  CK_HEDGE_TYPE hedgeVariant;
-  CK_BYTE_PTR   pContext;
-  CK_ULONG      ulContextLen;
-} CK_SIGN_ADDITIONAL_CONTEXT;
-~~~
 
 
 ### Composite Signature public key objects
@@ -188,10 +184,20 @@ and verifying Composite Signatures as defined in sections 4.2 and 4.3 of [COMP_S
 Algorithm 4.2 Sign and Algorithm 4.3 Verify, using SHA256, SHA512 or SHAKE256 as the hash
 function. The data passed in is the message M.
 
-It has an optional parameter **CK_SIGN_ADDITIONAL_CONTEXT**. If no parameter is supplied
-ulContextLen will be zero and pContext will be NULL.  Constraints on key types and the
-length of the data are summarized in the following table. In the table, k is the length
-in bytes of the Composite Signature.
+The composite signature mechanism, denoted **CKM_COMP_SIG_EXTERNAL_HASH**, is a mechanism
+for generating and verifying Composite Signatures as defined in sections 4.2 and 4.3 of 
+[COMP_SIG], Algorithm 4.2 Sign and Algorithm 4.3 Verify, using SHA256, SHA512 or SHAKE256 
+as the hash function. The data passed in is the pre-hash of the message PH(M).  The hash
+algorithm used is the hash algorithm specified in the **CK_COMP_SIG_PARAMETER_SET_TYPE**
+for the specific composite.  For example, a **CKM_COMP_SIG_EXTERNAL_HASH** with a 
+**CK_COMP_SIG_PARAMETER_SET_TYPE** of **CKP_COMP_SIG_MLDSA65_ECDSA_P256_SHA512** MUST
+require PH(M) to be 64 bytes long because PH(M) is calculated by computing the value 
+of SHA512(M). 
+
+Both signing mechanisms have an optional parameter **CK_SIGN_ADDITIONAL_CONTEXT**. If
+no parameter is supplied ulContextLen will be zero and pContext will be NULL.  Constraints
+on key types and the length of the data are summarized in the following table. In the
+table, k is the length in bytes of the Composite Signature.
 
 
 | Function          | Key Type                        | Input Length | Output Length |

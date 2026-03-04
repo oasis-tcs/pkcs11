@@ -82,7 +82,7 @@ creating a deep copy) or return **CKR_TEMPLATE_INCONSISTENT** if unwilling or
 unable to do so.
 
 Returning a template attribute via **C_GetAttributeValue** may require multiple
-successuive calls, as the application nned to discover what fields are contained
+successuive calls, as the application needs to discover what fields are contained
 in the tempate and then allocate sufficient memory for both the template
 structure array and the associated data. When a template attribute request is
 received via **C_GetAttributeValue**, the received template **MUST** be

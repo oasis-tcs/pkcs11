@@ -575,7 +575,7 @@ details). An attempt to do this will result in the error code
 **C_Login** may be called repeatedly, without intervening **C_Logout** calls, if
 (and only if) a key with the **CKA_ALWAYS_AUTHENTICATE** attribute set to
 CK_TRUE exists, and the user needs to do cryptographic operation on this key.
-See further Section 4.10.
+See further Section 4.11.
 
 Return values: CKR_ARGUMENTS_BAD, CKR_CRYPTOKI_NOT_INITIALIZED,
 CKR_DEVICE_ERROR, CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED, CKR_FUNCTION_CANCELED,
@@ -640,7 +640,7 @@ further details). An attempt to do this will result in the error code
 **C_LoginUser** may be called repeatedly, without intervening **C_Logout**
 calls, if (and only if) a key with the **CKA_ALWAYS_AUTHENTICATE** attribute set
 to CK_TRUE exists, and the user needs to do cryptographic operation on this key.
-See further Section 4.10. 
+See further Section 4.11. 
 
 Return values: CKR_ARGUMENTS_BAD, CKR_CRYPTOKI_NOT_INITIALIZED,
 CKR_DEVICE_ERROR, CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED, CKR_FUNCTION_CANCELED,
@@ -730,7 +730,7 @@ CK_DECLARE_FUNCTION(CK_RV, C_GetSessionValidationFlags)(
 ~~~
 
 **C_GetSessionValidationFlags** fetches the requested flags from the session.
-See Validation indicators (section 4.15.3.1) for meaning and semantics for these
+See Validation indicators (section 4.16.3.1) for meaning and semantics for these
 flags. Applications are responsible for the appropriate locking to protect
 session to get a meaningful result from this call.
 

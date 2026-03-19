@@ -241,9 +241,9 @@ key.
 All other restrictions detailed in section [6.66.6] apply, using XMSS^MT^ types
 where necessary.
 
-### XMSS and XMSS^MT^ without hashing
+### XMSS and XMSS^MT^
 
-The XMSS and XMSS^MT^ without hashing signature mechanisms, denoted **CKM_XMSS** and
+The XMSS and XMSS^MT^ signature mechanisms, denoted **CKM_XMSS** and
 **CKM_XMSSMT** respectively, are mechanisms for generating and verifying
 signatures as defined in sections 4.1.9, 4.1.10, 4.2.4 and 4.2.5 of [RFC 8391].
 The data passed in is the message M. Verification is only for single part

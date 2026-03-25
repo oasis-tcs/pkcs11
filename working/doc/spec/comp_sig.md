@@ -165,7 +165,7 @@ the composite label and the hash function.
 
 The mechanism generates Composite Signature public and private key pairs with a parameter set,
 as specified in the **CKA_PARAMETER_SET** attribute of the template for the public key.  
-These parameter set reference the Object ID’s as defined in [COMP_SIG] which fully specify
+This parameter set references the object identifiers defined in [COMP_SIG] which fully specify
 the composite label, component algorithms and the hash function used for pre-hashing.
 
 The mechanism contributes the **CKA_CLASS**, **CKA_KEY_TYPE**, and **CKA_VALUE** attributes
@@ -186,13 +186,12 @@ function. The data passed in is the message M.
 
 The composite signature mechanism, denoted **CKM_COMP_SIG_EXTERNAL_HASH**, is a mechanism
 for generating and verifying Composite Signatures as defined in sections 4.2 and 4.3 of 
-[COMP_SIG], Algorithm 4.2 Sign and Algorithm 4.3 Verify, using SHA256, SHA512 or SHAKE256 
-as the hash function. The data passed in is the pre-hash of the message PH(M).  The hash
-algorithm used is the hash algorithm specified in the **CK_COMP_SIG_PARAMETER_SET_TYPE**
-for the specific composite.  For example, a **CKM_COMP_SIG_EXTERNAL_HASH** with a 
-**CK_COMP_SIG_PARAMETER_SET_TYPE** of **CKP_COMP_SIG_MLDSA65_ECDSA_P256_SHA512** MUST
-require PH(M) to be 64 bytes long because PH(M) is calculated by computing the value 
-of SHA512(M). 
+[COMP_SIG] using SHA256, SHA512 or SHAKE256 as the hash function. The data passed in is
+the pre-hash of the message PH(M).  The hash algorithm used is the hash algorithm
+specified in the **CK_COMP_SIG_PARAMETER_SET_TYPE** for the specific composite.
+For example, a **CKM_COMP_SIG_EXTERNAL_HASH** with a **CK_COMP_SIG_PARAMETER_SET_TYPE**
+of **CKP_COMP_SIG_MLDSA65_ECDSA_P256_SHA512** MUST require PH(M) to be 64 bytes long
+because PH(M) is calculated by computing the value of SHA512(M). 
 
 Both signing mechanisms have an optional parameter **CK_SIGN_ADDITIONAL_CONTEXT**. If
 no parameter is supplied ulContextLen will be zero and pContext will be NULL.  Constraints

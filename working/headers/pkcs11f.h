@@ -975,7 +975,7 @@ CK_PKCS11_FUNCTION_INFO(C_SessionCancel)
 #ifdef CK_NEED_ARG_LIST
 (
   CK_SESSION_HANDLE hSession,  /* the session's handle */
-  CK_FLAGS          flags      /* flags control which sessions are cancelled */
+  CK_FLAGS          flags      /* flags control which sessions are canceled */
 );
 #endif
 
@@ -1299,30 +1299,30 @@ CK_PKCS11_FUNCTION_INFO(C_AsyncJoin)
 CK_PKCS11_FUNCTION_INFO(C_WrapKeyAuthenticated)
 #ifdef CK_NEED_ARG_LIST
 (
-  CK_SESSION_HANDLE hSession,
-  CK_MECHANISM_PTR pMechanism,
-  CK_OBJECT_HANDLE hWrappingKey,
-  CK_OBJECT_HANDLE hKey,
-  CK_BYTE_PTR pAssociatedData,
-  CK_ULONG ulAssociatedDataLen,
-  CK_BYTE_PTR pWrappedKey,
-  CK_ULONG_PTR pulWrappedKeyLen
+  CK_SESSION_HANDLE hSession,    /* the session's handle */
+  CK_MECHANISM_PTR pMechanism,   /* the wrapping mechanism */
+  CK_OBJECT_HANDLE hWrappingKey, /* wrapping key */
+  CK_OBJECT_HANDLE hKey,         /* key to be wrapped */
+  CK_BYTE_PTR pAssociatedData,   /* AEAD Associated data */
+  CK_ULONG ulAssociatedDataLen,  /* AEAD Associated data length */
+  CK_BYTE_PTR pWrappedKey,       /* gets wrapped key */
+  CK_ULONG_PTR pulWrappedKeyLen  /* gets wrapped key size */
 );
 #endif
 
 CK_PKCS11_FUNCTION_INFO(C_UnwrapKeyAuthenticated)
 #ifdef CK_NEED_ARG_LIST
 (
-  CK_SESSION_HANDLE hSession,
-  CK_MECHANISM_PTR pMechanism,
-  CK_OBJECT_HANDLE hUnwrappingKey,
-  CK_BYTE_PTR pWrappedKey,
-  CK_ULONG ulWrappedKeyLen,
-  CK_ATTRIBUTE_PTR pTemplate,
-  CK_ULONG ulAttributeCount,
-  CK_BYTE_PTR pAssociatedData,
-  CK_ULONG ulAssociatedDataLen,
-  CK_OBJECT_HANDLE_PTR phKey
+  CK_SESSION_HANDLE hSession,      /* the session's handle */
+  CK_MECHANISM_PTR pMechanism,     /* unwrapping mech. */
+  CK_OBJECT_HANDLE hUnwrappingKey, /* unwrapping key */
+  CK_BYTE_PTR pWrappedKey,         /* the wrapped key */
+  CK_ULONG ulWrappedKeyLen,        /* wrapped key len */
+  CK_ATTRIBUTE_PTR pTemplate,      /* new key template */
+  CK_ULONG ulAttributeCount,       /* template length */
+  CK_BYTE_PTR pAssociatedData,     /* AEAD Associated data */
+  CK_ULONG ulAssociatedDataLen,    /* AEAD Associated data length */
+  CK_OBJECT_HANDLE_PTR phKey       /* gets new handle */
 );
 #endif
 

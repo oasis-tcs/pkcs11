@@ -2,24 +2,31 @@
 
 All Cryptoki functions that create, modify, or copy objects take a template as
 one of their arguments, where the template specifies attribute values.
-Cryptographic functions that create objects (see Section [5.18][xxxxxxxxxxx]) may also
-contribute some additional attribute values themselves; which attributes have
-values contributed by a cryptographic function call depends on which
-cryptographic mechanism is being performed (see section [6][Mechanisms] and
-[PKCS11-Hist] for specification of mechanisms for PKCS #11). In any case, all
-the required attributes supported by an object class that do not have default
-values MUST be specified when an object is created, either in the template or
-by the function itself.
+
+Cryptographic functions that create objects (see Section [5.19][Key management
+functions]) may also contribute some additional attribute values themselves;
+which attributes have values contributed by a cryptographic function call
+depends on which cryptographic mechanism is being performed (see section
+[6][Mechanisms] and [PKCS11-Hist] for specification of mechanisms for PKCS #11).
+
+In any case, all the required attributes supported by an object class that do
+not have default values MUST be specified when an object is created, either in
+the template or by the function itself.
 
 ### Creating objects
 
 Objects may be created with the Cryptoki functions **C_CreateObject** (see
-Section [5.6.11][xxxxxxxxxxx]), **C_GenerateKey**, **C_GenerateKeyPair**,
-**C_UnwrapKey**, **C_DeriveKey**, **C_EncapsulateKey**, and
-**C_DecapsulateKey** (see Section [5.18][xxxxxxxxxxx]). In addition, copying
-an existing object (with the function **C_CopyObject**) also creates a new
-object, but we consider this type of object creation separately in Section
-[4.1.3][Copying objects].
+Section [5.7][Object management functions]), **C_GenerateKey**,
+**C_GenerateKeyPair**, **C_UnwrapKey**, **C_DeriveKey**, **C_EncapsulateKey**,
+and **C_DecapsulateKey** (see Section [5.19][Key management functions]). In
+addition, copying an existing object (with the function **C_CopyObject**) also
+creates a new object, but we consider this type of object creation separately in
+Section [4.1.3][Copying objects].
+
+Note: Generally only objects that are considered Storage Objects (Section
+[4.4][Storage Objects]) can be created on a token, other kinds of object are
+generally built-in and attempting to create new objects of those kinds will
+result in an error.
 
 Attempting to create an object with any of these functions requires an
 appropriate template to be supplied.
@@ -86,7 +93,7 @@ error codes from above that applies.
 ### Modifying objects
 
 Objects may be modified with the Cryptoki function **C_SetAttributeValue** (see
-Section [5.6.11][xxxxxxxxxxx]). The template supplied to
+`Section [5.7][Object management functions]). The template supplied to
 **C_SetAttributeValue** can contain new values for attributes which the object
 already possesses; values for attributes which the object does not yet possess;
 or both.

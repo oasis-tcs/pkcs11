@@ -312,6 +312,10 @@ verification operation is active until the application calls
 Any mechanism that supports **C_VerifyInit** must also support
 **C_VerifySignatureInit**.
 
+If the value of _ulSignatureLen_ does not match the expected length this function
+may return **CKR_SIGNATURE_LEN_RANGE** in which case no active operation is
+initiated.
+
 **C_VerifySignatureInit** can be called with _pMechanism_ set to NULL_PTR to
 terminate an active verification operation. If an active operation has been
 initialized and it cannot be cancelled, **CKR_OPERATION_CANCEL_FAILED** must be
@@ -323,7 +327,8 @@ CKR_FUNCTION_FAILED, CKR_GENERAL_ERROR, CKR_HOST_MEMORY,
 CKR_KEY_FUNCTION_NOT_PERMITTED, CKR_KEY_HANDLE_INVALID, CKR_KEY_SIZE_RANGE,
 CKR_KEY_TYPE_INCONSISTENT, CKR_MECHANISM_INVALID, CKR_MECHANISM_PARAM_INVALID,
 CKR_OK, CKR_OPERATION_ACTIVE, CKR_PIN_EXPIRED, CKR_SESSION_CLOSED,
-CKR_SESSION_HANDLE_INVALID, CKR_USER_NOT_LOGGED_IN, CKR_OPERATION_CANCEL_FAILED.
+CKR_SESSION_HANDLE_INVALID, CKR_SIGNATURE_LEN_RANGE, CKR_USER_NOT_LOGGED_IN,
+CKR_OPERATION_CANCEL_FAILED.
 
 Example: see **C_VerifySignatureFinal**.
 

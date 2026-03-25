@@ -97,6 +97,7 @@ ml_dsa.md
 ml-kem.md
 slh-dsa.md
 comp_sig.md
+comp_kem.md
 kmac.md
 references.md
 security_and_privacy_considerations.md

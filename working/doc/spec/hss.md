@@ -140,9 +140,9 @@ the new private key.
 For this mechanism, the ulMinKeySize and ulMaxKeySize fields of the
 **CK_MECHANISM_INFO** structure are not used and must be set to 0.
 
-### HSS Signature without hashing
+### HSS Signature
 
-The HSS without hashing signature mechanism, denoted **CKM_HSS**, is a mechanism
+The HSS signature mechanism, denoted **CKM_HSS**, is a mechanism
 for generating and verifying HSS signatures as defined in sections 6.2 and 6.3
 of [RFC 8554]. The data passed in is the message. Verification is only for single
 part verifications or multipart verifications when the **C_VerifySignatureInit**

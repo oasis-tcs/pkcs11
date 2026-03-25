@@ -1,4 +1,4 @@
-# KMAC
+## KMAC
 
 KMAC is a family of message authentication codes based on KECCAK, as defined
 in [NIST SP800-185].

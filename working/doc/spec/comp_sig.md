@@ -157,7 +157,7 @@ CK_ATTRIBUTE template[] = {
 
 ## Composite Signature key pair generation
 
-The Composite Signature key pair generation mechanism, denoted ***CKM_COMP_SIG_KEY_PAIR_GEN**,
+The Composite Signature key pair generation mechanism, denoted **CKM_COMP_SIG_KEY_PAIR_GEN**,
 is a key pair generation mechanism using KeyGen() as defined in section 4.1 of [COMP_SIG]
 
 It takes **CK_COMP_SIG_PARAMETER_SET_TYPE** to denote the composite component algorithms, 

@@ -36,7 +36,7 @@ it, it will fail and return without creating an object.
 
 The object created by a successful call to **C_GenerateKey** will have its
 **CKA_LOCAL** attribute set to CK_TRUE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.4.1).
+have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID,
@@ -108,7 +108,7 @@ public/private key pair.
 The key objects created by a successful call to **C_GenerateKeyPair** will have
 their **CKA_LOCAL** attributes set to CK_TRUE. In addition, the key objects
 created will both have values for **CKA_UNIQUE_ID** generated and assigned (See
-Section 4.4.1).
+Section 4.5.1).
 
 _Note carefully the order of the arguments to **C_GenerateKeyPair**. The last
 two arguments do not have the same order as they did in the original Cryptoki
@@ -308,7 +308,7 @@ it will fail and return without creating any key object.
 
 The key object created by a successful call to **C_UnwrapKey** will have its
 **CKA_LOCAL** attribute set to CK_FALSE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.4.1).
+have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
 
 To partition the unwrapping keys so they can only unwrap a subset of keys the
 attribute **CKA_UNWRAP_TEMPLATE** can be used on the unwrapping key to specify
@@ -396,7 +396,7 @@ it will fail and return without creating any key object.
 
 The key object created by a successful call to **C_DeriveKey** will have its
 **CKA_LOCAL** attribute set to CK_FALSE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.4.1).
+have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
 
 To partition the derivation keys so they can only derive a subset of keys the
 attribute **CKA_DERIVE_TEMPLATE** can be used on the derivation keys to specify
@@ -631,7 +631,7 @@ supplied to it, it will fail and return without creating any key object.
 The key object created by a successful call to **C_UnwrapKeyAuthenticated** will
 have its **CKA_LOCAL** attribute set to CK_FALSE. In addition, the object
 created will have a value for **CKA_UNIQUE_ID** generated and assigned (see
-section 4.4.1).
+section 4.5.1).
 
 **C_UnwrapKeyAuthenticated** Primary use case:
 
@@ -751,10 +751,21 @@ The new key will have:
 * the **CKA_EXTRACTABLE** set to the value of the input template with a default
   of CK_TRUE if not provided,
 * the **CKA_LOCAL** attribute set to CK_FALSE, and
-* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.4.1.
+* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.5.1.
 
 If a call to **C_EncapsulateKey** cannot support the precise template supplied
 to it, it will fail and return without creating any key object.
+
+To partition the encapsulation keys so they can only encapsulate a subset of
+keys the attribute **CKA_ENCAPSULATE_TEMPLATE** can be used on the encapsulation
+keys to specify an attribute set that will be compared against the attributes of
+the key to be encapsulated. If all attributes match according to the
+**C_FindObject** rules of attribute matching then the wrap will proceed. The
+value of this attribute is an attribute template and the size is the number of
+items in the template times the size of **CK_ATTRIBUTE**. If this attribute is
+not present on the encapsulating key then no additional attributes will be
+added. If any attribute conflict occurs on an attempt to encapsulate a key then
+the function SHALL return **CKR_KEY_HANDLE_INVALID**.
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID,
@@ -843,13 +854,24 @@ The new key will have:
 * the **CKA_EXTRACTABLE** set to the value of the input template with a default
   of CK_TRUE if not provided,
 * the **CKA_LOCAL** attribute set to CK_FALSE, and
-* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.4.1.
+* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.5.1.
 
 Some mechanisms may modify, or attempt to modify, the contents of the
 _pMechanism_ structure at the same time that the key is decapsulated.
 
 If a call to **C_DecapsulateKey** cannot support the precise template supplied
 to it, it will fail and return without creating any key object.
+
+To partition the decapsulation keys so they can only decapsulate a subset of
+keys the attribute **CKA_DECAPSULATE_TEMPLATE** can be used on the decapsulation
+keys to specify an attribute set that will be added to attributes of the key to
+be decapsulated. If the attributes do not conflict with the user supplied
+attribute template, in ‘pTemplate’, then the decapsulation will proceed. The
+value of this attribute is an attribute template and the size is the number of
+items in the template times the size of **CK_ATTRIBUTE**. If this attribute is
+not present on the decapsulating key then no additional attributes will be
+added. If any attribute conflict occurs on an attempt to decapsulate a key then
+the function SHALL return **CKR_TEMPLATE_INCONSISTENT**.
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID, CKR_BUFFER_TOO_SMALL,

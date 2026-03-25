@@ -32,7 +32,7 @@ Only session objects can be created during a read-only session. Only public
 objects can be created unless the normal user is logged in.
 
 Whenever an object is created, a value for **CKA_UNIQUE_ID** is generated and
-assigned to the new object (See Section 4.4.1).
+assigned to the new object (See Section 4.5.1).
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID,
@@ -149,7 +149,7 @@ by hObject has its **CKA_COPYABLE** attribute set to CK_FALSE, **C_CopyObject**
 will return **CKR_ACTION_PROHIBITED**.
 
 Whenever an object is copied, a new value for **CKA_UNIQUE_ID** is generated and
-assigned to the new object (See Section 4.4.1).
+assigned to the new object (See Section 4.5.1).
 
 Only session objects can be created during a read-only session. Only public
 objects can be created unless the normal user is logged in.

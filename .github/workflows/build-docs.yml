@@ -11,6 +11,13 @@ on:
     paths:
       - 'working/doc/spec/**'
 
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: 'The branch name to run the workflow on'
+        required: true
+        default: 'main'
+
 jobs:
   build:
     name: Automatic Docs build

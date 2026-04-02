@@ -1,0 +1,61 @@
+---
+name: Publish Artifact
+
+on:
+  workflow_run:
+    types:
+      - "completed"
+    workflows:
+      - "Build Docs"
+
+jobs:
+  publish-on-pr:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get PR Number
+        env:
+          WORKFLOW_RUN_EVENT: ${{ toJSON(github.event.workflow_run) }}
+        run: |
+          PR_NUMBER=$(jq -r '.pull_requests[0].number' <<< "$WORKFLOW_RUN_EVENT")
+          echo "PR_NUMBER=$PR_NUMBER" >> "$GITHUB_ENV"
+
+      - name: Get Artifacts URL
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ORG: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          WORKFLOW_RUN_EVENT: ${{ toJSON(github.event.workflow_run) }}
+        run: |
+          BUILD_DOCS_JOB_ID=$(jq -r '.id' <<< "$WORKFLOW_RUN_EVENT")
+          echo "BUILD_DOCS_JOB_ID=$BUILD_DOCS_JOB_ID" >> "$GITHUB_ENV"
+
+          ARTIFACTS_ID=$(gh api "/repos/$ORG/$REPO/actions/artifacts" --jq ".artifacts.[] |
+            select(.workflow_run.id==${BUILD_DOCS_JOB_ID}) |
+            select(.expired==false) |
+            .id")
+
+          echo "ARTIFACTS_URL=https://github.com/${ORG}/${REPO}/actions/runs/${BUILD_DOCS_JOB_ID}/artifacts/${ARTIFACTS_ID}" >> "$GITHUB_ENV"
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v4
+        id: findcomment
+        with:
+          issue-number: ${{ env.PR_NUMBER }}
+          body-includes: Docs Preview
+
+      - name: Update or Create Comment
+        uses: peter-evans/create-or-update-comment@v5
+        with:
+          issue-number: ${{ env.PR_NUMBER }}
+          comment-id: ${{ steps.findcomment.outputs.comment-id }}
+          edit-mode: replace
+          body: |-
+            ## Docs Preview
+
+            [docs](${{ env.ARTIFACTS_URL }})
+
+            This is a preview of the documents built from this PR.
+            The zip file contains an HTML and a PDF version.
+            These files are retained only for a short period of time and then discarded
+

@@ -11,7 +11,9 @@ the digital signature algorithm defined in [COMP_SIG]
 |                                      | DEC | VER | VERR |     | GENKP | UWRP|     | DECS |
 +======================================+:===:+:===:+:====:+:===:+:=====:+:===:+:===:+:====:+
 | CKM_COMP_SIG_KEY_PAIR_GEN            |     |     |      |     |   ✓   |     |     |      |
++--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_COMP_SIG                         |     |  ✓  |      |     |       |     |     |      |
++--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_COMP_SIG_EXTERNAL_HASH           |     |  ✓  |      |     |       |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 table: Composite Signature Mechanisms vs. Functions
@@ -68,10 +70,10 @@ type **CKK_COMP_SIG**) hold Composite Signature public keys.
 The following table defines the Composite Signature public key object
 attributes, in addition to the common attributes defined for this object class:
 
-| Attribute               | Data Type                       | Meaning                               |
-| ----------------------- | --------------------------------| ------------------------------------- |
-| CKA_PARAMETER_SET ^1,3^ | CK_COMP_SIG_PARAMETER_SET_TYPE  | Composite Signature parameter set     |
-| CKA_VALUE ^1,4^         | Byte array                      | Public key as defined in [COMP_SIG]   |
+| Attribute               | Data Type                      | Meaning                             |
+|-------------------------|--------------------------------|-------------------------------------|
+| CKA_PARAMETER_SET ^1,3^ | CK_COMP_SIG_PARAMETER_SET_TYPE | Composite Signature parameter set   |
+| CKA_VALUE ^1,4^         | Byte array                     | Public key as defined in [COMP_SIG] |
 table: Composite Signature Public Key Object Attributes
 
 - Refer to Table 13 for footnotes
@@ -108,10 +110,10 @@ type **CKK_COMP_SIG**) hold Composite Signature private keys.
 The following table defines the Composite Signature private key object
 attributes, in addition to the common attributes defined for this object class:
 
-| Attribute                | Data Type                      | Meaning                                     |
-| ------------------------ | ------------------------------ | ------------------------------------------- |
-| CKA_PARAMETER_SET^1,4,6^ | CK_COMP_SIG_PARAMETER_SET_TYPE | Composite Signature parameter set           |
-| CKA_VALUE^1,4,6,7^       | Byte array                     | Private key as defined in [COMP_SIG]        |
+| Attribute                | Data Type                      | Meaning                              |
+|--------------------------|--------------------------------|--------------------------------------|
+| CKA_PARAMETER_SET^1,4,6^ | CK_COMP_SIG_PARAMETER_SET_TYPE | Composite Signature parameter set    |
+| CKA_VALUE^1,4,6,7^       | Byte array                     | Private key as defined in [COMP_SIG] |
 table: Composite Signature Private Key Object Attributes
 
 - Refer to Table 13 for footnotes
@@ -205,7 +207,7 @@ data are summarized in the following table. In the table, k is the length in
 bytes of the Composite Signature.
 
 | Function          | Key Type                        | Input Length | Output Length |
-| ----------------- | ------------------------------- | ------------ | ------------- |
+|-------------------|---------------------------------|--------------|---------------|
 | C_Sign            | Composite Signature Private Key | any          | k             |
 | C_Verify ^1^      | Composite Signature Public Key  | any, k       | N/A           |
 | C_VerifySignature | Composite Signature Public Key  | any, k       | N/A           |

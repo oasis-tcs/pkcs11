@@ -73,6 +73,11 @@ URL: <http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=5389557>
 M. Ounsworth, J. Gray, M. Pala, J. Klaußner, S. Fluher. "Composite ML-KEM for use in X.509 Public Key Infrastructure", January 2026
 
 URL: <https://datatracker.ietf.org/doc/draft-ietf-lamps-pq-composite-kem/12/>
+**[COMP_SIG]**
+
+M. Ounsworth, J. Gray, M. Pala, J. Klaußner, S. Fluher. "Composite ML-DSA for use in X.509 Public Key Infrastructure", January 2026
+
+URL: <https://datatracker.ietf.org/doc/draft-ietf-lamps-pq-composite-sigs/14/>
 
 **[CHACHA]**
 

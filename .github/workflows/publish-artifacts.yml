@@ -14,11 +14,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get PR Number
+        id: get-pr-number
         env:
-          WORKFLOW_RUN_EVENT: ${{ toJSON(github.event.workflow_run) }}
+          GH_TOKEN: ${{ github.token }}
+          PR_TARGET_REPO: ${{ github.repository }}
+          PR_BRANCH: |-
+            ${{
+              (github.event.workflow_run.head_repository.owner.login != github.event.workflow_run.repository.owner.login)
+                && format('{0}:{1}', github.event.workflow_run.head_repository.owner.login, github.event.workflow_run.head_branch)
+                || github.event.workflow_run.head_branch
+            }}
         run: |
-          PR_NUMBER=$(jq -r '.pull_requests[0].number' <<< "$WORKFLOW_RUN_EVENT")
-          echo "PR_NUMBER=$PR_NUMBER" >> "$GITHUB_ENV"
+          gh pr view --repo "${PR_TARGET_REPO}" "${PR_BRANCH}" \
+            --json 'number' \
+            --jq '"number=\(.number)"' \
+            >> $GITHUB_OUTPUT
 
       - name: Get Artifacts URL
         env:
@@ -41,13 +51,15 @@ jobs:
         uses: peter-evans/find-comment@v4
         id: findcomment
         with:
-          issue-number: ${{ env.PR_NUMBER }}
+          repository: ${{ github.repository }}
+          issue-number: ${{ steps.get-pr-number.outputs.number }}
           body-includes: Docs Preview
 
       - name: Update or Create Comment
         uses: peter-evans/create-or-update-comment@v5
         with:
-          issue-number: ${{ env.PR_NUMBER }}
+          repository: ${{ github.repository }}
+          issue-number: ${{ steps.get-pr-number.outputs.number }}
           comment-id: ${{ steps.findcomment.outputs.comment-id }}
           edit-mode: replace
           body: |-

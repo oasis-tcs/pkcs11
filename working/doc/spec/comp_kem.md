@@ -126,7 +126,6 @@ CK_KEY_TYPE keyType = CKK_COMP_KEM;
 CK_UTF8CHAR label[] = “A Composite KEM private key object”;
 CK_BYTE subject[] = {...};
 CK_BYTE id[] = {123};
-CK_BYTE seed[] = {...};
 CK_BYTE value[] = {...};
 CK_BBOOL true = CK_TRUE;
 CK_ATTRIBUTE template[] = {
@@ -145,7 +144,7 @@ CK_ATTRIBUTE template[] = {
 ### Composite KEM key pair generation
 
 The Composite KEM key pair generation mechanism, denoted **CKM_COMP_KEM_KEY_PAIR_GEN**,
-is a key pair generation mechanism defined in section 3.1 of [COMP_SIG].
+is a key pair generation mechanism defined in section 3.1 of [COMP_KEM].
 
 It takes **CK_COMP_KEM_PARAMETER_SET_TYPE** to denote the composite label, the
 component algorithms and any associated parameters for the component algorithms as 

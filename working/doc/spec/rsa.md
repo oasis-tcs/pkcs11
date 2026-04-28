@@ -1055,7 +1055,3 @@ _pOAEPParams_
 **CK_RSA_AES_KEY_WRAP_PARAMS_PTR** is a pointer to a
 **CK_RSA_AES_KEY_WRAP_PARAMS**.
 
-### FIPS 186-4
-
-When *CKM_RSA_PKCS* is operated in FIPS mode, the length of the modulus SHALL
-only be 1024, 2048, or 3072 bits.

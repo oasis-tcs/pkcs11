@@ -317,7 +317,7 @@ supported by a token. _slotID_ is the ID of the token’s slot; type is the type
 of mechanism; pInfo points to the location that receives the mechanism
 information.
 
-Note: A cryptographic module may support different mechanisms and minimum and maximum key sizes, parameter sets, modes of operation and other capabilities for supported mechanisms, when operated in a mode compliant to FIPS 140 or some other certification or approval scheme than when operated in non-compliance mode. If the module does change its capabilities in when switching from non-compliance mode to compliance mode and vice versa, this ought to be reflected in its reported mechanisms, key sizes, etc. See the user guidance and security policy of a specific token for restrictions when operated in compliance mode.
+Note: A cryptographic module may support different mechanisms and minimum and maximum key sizes, parameter sets, modes of operation and other capabilities for supported mechanisms, when operated in a mode compliant to FIPS 140 or some other certification or approval scheme than when operated in non-compliance mode. If the module does change its capabilities when switching from non-compliance mode to compliance mode and vice versa, this ought to be reflected in its reported mechanisms, key sizes, etc. See the user guidance and security policy of a specific token for restrictions when operated in compliance mode.
 
 Return values: CKR_CRYPTOKI_NOT_INITIALIZED, CKR_DEVICE_ERROR,
 CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED, CKR_FUNCTION_FAILED, CKR_GENERAL_ERROR,

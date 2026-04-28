@@ -68,7 +68,7 @@ Mechanisms:
 \  
 
 CK_DSA_PARAMETER_GEN_PARAM is a structure which provides and returns parameters
-for the [NIST FIPS 186-4] parameter generating algorithms.
+for the [FIPS PUB 186-4] parameter generating algorithms.
 
 CK_DSA_PARAMETER_GEN_PARAM_PTR is a pointer to a CK_DSA_PARAMETER_GEN_PARAM.
 
@@ -269,7 +269,7 @@ CK_ATTRIBUTE template[] = {
 
 The DSA key pair generation mechanism, denoted **CKM_DSA_KEY_PAIR_GEN**, is a
 key pair generation mechanism based on the Digital Signature Algorithm defined
-in FIPS PUB 186-2.
+in [FIPS PUB 186-4].
 
 This mechanism does not have a parameter.
 
@@ -293,7 +293,7 @@ in bits.
 
 The DSA domain parameter generation mechanism, denoted
 **CKM_DSA_PARAMETER_GEN**, is a domain parameter generation mechanism based on
-the Digital Signature Algorithm defined in FIPS PUB 186-2.
+the Digital Signature Algorithm defined in [FIPS PUB 186-4].
 
 This mechanism does not have a parameter.
 
@@ -385,7 +385,7 @@ in bits.
 
 The DSA without hashing mechanism, denoted **CKM_DSA**, is a mechanism for
 single-part signatures and verification based on the Digital Signature Algorithm
-defined in FIPS PUB 186-2. (This mechanism corresponds only to the part of DSA
+defined in [FIPS PUB 186-4]. (This mechanism corresponds only to the part of DSA
 that processes the 20-byte hash value; it does not compute the hash value.)
 
 For the purposes of this mechanism, a DSA signature is a 40-byte string,
@@ -451,14 +451,4 @@ table: DSA with SHA-1: Key And Data Length
 For this mechanism, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure specify the supported range of DSA prime sizes,
 in bits.
-
-### FIPS 186-4
-
-When **CKM_DSA** is operated in FIPS mode, only the following bit lengths of p
-and q, represented by L and N, SHALL be used:
-
-L = 1024, N = 160  
-L = 2048, N = 224  
-L = 2048, N = 256  
-L = 3072, N = 256  
 

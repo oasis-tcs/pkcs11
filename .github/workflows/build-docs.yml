@@ -28,6 +28,7 @@ jobs:
                   dejavu-serif-fonts \
                   texlive-fontspec \
                   texlive-framed \
+                  texlive-geometry \
                   texlive-latex \
                   texlive-lua-ul \
                   texlive-luacolor \

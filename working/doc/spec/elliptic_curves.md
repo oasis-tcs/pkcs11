@@ -1574,14 +1574,3 @@ _pSharedData_
 
 CK_ECDH_AES_KEY_WRAP_PARAMS_PTR is a pointer to a CK_ECDH_AES_KEY_WRAP_PARAMS.
 
-### FIPS 186-4
-
-When **CKM_ECDSA** is operated in FIPS mode, the curves SHALL either be NIST
-recommended curves (with a fixed set of domain parameters) or curves with domain
-parameters generated as specified by [ANSI X9.62]. The NIST recommended curves
-are:
-
-P-192, P-224, P-256, P-384, P-521  
-K-163, B-163, K-233, B-233  
-K-283, B-283, K-409, B-409  
-K-571, B-571  

@@ -69,7 +69,7 @@ A successful call to **C_Verify** should return either the value **CKR_OK**
 (indicating that the supplied signature is invalid). If the signature can be
 seen to be invalid purely on the basis of its length, then
 **CKR_SIGNATURE_LEN_RANGE** should be returned. In any of these cases, the
-active signing operation is terminated.
+active verification operation is terminated.
 
 **C_Verify** cannot be used to terminate a multi-part operation, and MUST be
 called after **C_VerifyInit** without intervening **C_VerifyUpdate** calls.
@@ -353,7 +353,7 @@ active verification operation.
 A successful call to **C_VerifySignature** should return either the value
 **CKR_OK** (indicating that the supplied signature is valid) or
 **CKR_SIGNATURE_INVALID** (indicating that the supplied signature is invalid).
-In any of these cases, the active signing operation is terminated.
+In any of these cases, the active verification operation is terminated.
 
 **C_VerifySignature** cannot be used to terminate a multi-part operation, and
 MUST be called after **C_VerifySignatureInit** without intervening

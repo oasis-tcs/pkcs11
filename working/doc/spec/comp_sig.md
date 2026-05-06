@@ -1,7 +1,7 @@
 ## Composite Signature
 
 Composite Signatures are mechanisms for signatures and verification, following
-the digital signature algorithm defined in [COMP_SIG]
+the digital signature algorithm defined in [COMP_SIG].
 
 
 +--------------------------------------+---------------------------------------------------+
@@ -158,7 +158,7 @@ CK_ATTRIBUTE template[] = {
 ## Composite Signature key pair generation
 
 The Composite Signature key pair generation mechanism, denoted **CKM_COMP_SIG_KEY_PAIR_GEN**,
-is a key pair generation mechanism using KeyGen() as defined in section 4.1 of [COMP_SIG]
+is a key pair generation mechanism using KeyGen() as defined in section 3.1 of [COMP_SIG].
 
 It takes **CK_COMP_SIG_PARAMETER_SET_TYPE** to denote the composite component algorithms, 
 the composite label and the hash function. 
@@ -180,12 +180,11 @@ structure specify the supported range of Composite Signature public key in bytes
 ### Composite Signature
 
 The composite signature mechanism, denoted **CKM_COMP_SIG**, is a mechanism for generating
-and verifying Composite Signatures as defined in sections 4.2 and 4.3 of [COMP_SIG], 
-Algorithm 4.2 Sign and Algorithm 4.3 Verify, using SHA256, SHA512 or SHAKE256 as the hash
-function. The data passed in is the message M.
+and verifying Composite Signatures as defined in sections 3.2 and 3.3 of [COMP_SIG] using
+SHA256, SHA512 or SHAKE256 as the hash function. The data passed in is the message M.
 
 The composite signature mechanism, denoted **CKM_COMP_SIG_EXTERNAL_HASH**, is a mechanism
-for generating and verifying Composite Signatures as defined in sections 4.2 and 4.3 of 
+for generating and verifying Composite Signatures as defined in sections 3.2 and 3.3 of 
 [COMP_SIG] using SHA256, SHA512 or SHAKE256 as the hash function. The data passed in is
 the pre-hash of the message PH(M).  The hash algorithm used is the hash algorithm
 specified in the **CK_COMP_SIG_PARAMETER_SET_TYPE** for the specific composite.
@@ -206,7 +205,7 @@ table, k is the length in bytes of the Composite Signature.
 | C_VerifySignature | Composite Signature Public Key  | any, k       | N/A           |
 table: Composite Signature: Key and Data Length
 
-^1^ Single-part operations only.
+^1^ Single-part operations only when the CKM_COMP_SIG_EXTERNAL_HASH mechanism is used.
 
 For these mechanisms, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure specify the supported range of Composite Signature

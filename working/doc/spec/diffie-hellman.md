@@ -412,13 +412,13 @@ extractability1:
   **CKA_EXTRACTABLE** attribute.
 
 When this mechanism is used in **C_EncapsulateKey** and **C_DecapsulateKey**,
-the mechanism parameters _pPublicData_ and _ulPublicDataLen_ must be set to NULL
-and 0 respectively. For **C_EncapsulateKey**, an ephemeral key pair is
-generated.  The value of the generated public key is returned as the ciphertext.
-The generated private key is used with public key provided in the API to
-generate a symmetric key using Diffie Helman PKCS #3 Derive. For
-**C_DecapsulateKey**, the ciphertext is used with the private key provided in
-the API to generate a symmetric key using Diffie Helman PKCS #3 Derive.
+_pParameter_ and _ulParameterLen_ must be set to NULL and 0 respectively. For
+**C_EncapsulateKey**, an ephemeral key pair is generated.  The value of the
+generated public key is returned as the ciphertext.  The generated private key
+is used with public key provided in the API to generate a symmetric key using
+Diffie Helman PKCS #3 Derive. For **C_DecapsulateKey**, the ciphertext is used
+with the private key provided in the API to generate a symmetric key using
+Diffie Helman PKCS #3 Derive.
 
 For this mechanism, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure specify the supported range of Diffie-Hellman

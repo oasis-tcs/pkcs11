@@ -27,6 +27,11 @@ jobs:
                   dejavu-sans-fonts \
                   dejavu-sans-mono-fonts \
                   dejavu-serif-fonts \
+                  texlive-amsfonts \
+                  texlive-bookmark \
+                  texlive-booktabs \
+                  texlive-enumitem \
+                  texlive-fancyvrb \
                   texlive-fontspec \
                   texlive-framed \
                   texlive-geometry \

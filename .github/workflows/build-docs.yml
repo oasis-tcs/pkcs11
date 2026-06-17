@@ -9,6 +9,7 @@ on:
   pull_request:
     branches: ["master"]
     paths:
+      - '.github/workflows/**'
       - 'working/doc/spec/**'
 
 jobs:

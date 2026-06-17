@@ -756,6 +756,9 @@ The new key will have:
 If a call to **C_EncapsulateKey** cannot support the precise template supplied
 to it, it will fail and return without creating any key object.
 
+**C_EncapsulateKey** uses the convention described in Section 5.2 on producing
+output.
+
 To partition the encapsulation keys so they can only encapsulate a subset of
 keys the attribute **CKA_ENCAPSULATE_TEMPLATE** can be used on the encapsulation
 keys to specify an attribute set that will be compared against the attributes of

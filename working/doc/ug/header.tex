@@ -1,0 +1,31 @@
+\usepackage{sectsty}
+\sectionfont{\clearpage}
+
+\usepackage{enumitem}
+\usepackage{amsfonts}
+
+% level one
+\setlist[itemize,1]{label=$\bullet$}
+% level two
+\setlist[itemize,2]{label=$\circ$}
+% level three
+\setlist[itemize,3]{label=$\star$}
+
+
+% definitions styling
+\setlist[description]{
+    labelwidth=4cm,
+    labelsep=0.3cm,
+    leftmargin=4.3cm,
+    align=right,
+    font=\normalfont
+}
+
+\usepackage{fontspec}
+\usepackage{newunicodechar}
+\newfontface{\mathfont}{DejaVuMathTeXGyre}
+\DeclareTextFontCommand{\mathfallback}{\mathfont}
+\newcommand{\mathfallbackchar}[2][\mathfallback]{%
+    \newunicodechar{#2}{#1{#2}}%
+}
+\mathfallbackchar{𝜉}

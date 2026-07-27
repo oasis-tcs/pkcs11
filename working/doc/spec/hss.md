@@ -82,10 +82,12 @@ to the common attributes defined for this object class:
 | CKA_HSS_LMOTS_TYPES ^1,3^    | CK_ULONG_PTR | A list of encodings for the Winternitz parameter of the one-time-signature scheme of the LMS trees in the hierarchy from top to bottom. The number of encodings in the array is the ulValueLen component of the attribute divided by the size of CK_ULONG. This number must match the CKA_HSS_LEVELS attribute value. |
 | CKA_VALUE ^1,4,6,7^          | Byte array   | Vendor defined, must include state information. |
 |                              |              | Note that exporting this value is dangerous as it would allow key reuse. |
-| CKA_HSS_KEYS_REMAINING ^2,4^ | CK_ULONG     | The minimum of the following two values: 1) The number of one-time private keys remaining; 2) 2^32-1 |
+| CKA_KEYS_REMAINING ^2,4^     | CK_ULONG     | The minimum of the following two values: 1) The number of one-time private keys remaining; 2) 2^32-1 |
 table: HSS Private Key Object Attributes
 
 - Refer to Table 13 for footnotes
+
+Note: **CKA_HSS_KEYS_REMAINING** is deprecated. It is replaced by **CKA_KEYS_REMAINING**.
 
 The encodings for **CKA_HSS_LMOTS_TYPES** and **CKA_HSS_LMS_TYPES** are defined
 in [RFC 8554] and [NIST SP800-208].
@@ -134,7 +136,7 @@ attributes of the template for the private key.
 The mechanism contributes the **CKA_CLASS**, **CKA_KEY_TYPE**,
 **CKA_HSS_LEVELS**, **CKA_HSS_LMS_TYPE**, **CKA_HSS_LMOTS_TYPE**, and
 **CKA_VALUE** attributes to the new public key and the **CKA_CLASS**,
-**CKA_KEY_TYPE**, **CKA_VALUE**, and **CKA_HSS_KEYS_REMAINING** attributes to
+**CKA_KEY_TYPE**, **CKA_VALUE**, and **CKA_KEYS_REMAINING** attributes to
 the new private key.
 
 For this mechanism, the ulMinKeySize and ulMaxKeySize fields of the

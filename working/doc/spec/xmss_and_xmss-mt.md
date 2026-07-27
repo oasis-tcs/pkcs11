@@ -137,7 +137,8 @@ to the common attributes defined for this object class:
 |---------------------------|----------------------------|-------------------|
 | CKA_PARAMETER_SET ^1,4,6^ | CK_XMSS_PARAMETER_SET_TYPE | Numeric identifier of the XMSS parameter set as defined in section 6.66.2. |
 | CKA_VALUE ^1,4,6,7^       | Byte array                 | Vendor defined.   |
-|                           |                            | Note that exporting this value is dangerous as it would allow key reuse.
+|                           |                            | Note that exporting this value is dangerous as it would allow key reuse.   |
+| CKA_KEYS_REMAINING ^2,4^  | CK_ULONG                   | The minimum of the following two values: 1) The number of one-time private keys remaining; 2) 2^32-1 |
 table: XMSS Private Key Object Attributes
 
 - Refer to Table 13 for footnotes
@@ -180,7 +181,8 @@ addition to the common attributes defined for this object class:
 |---------------------------|------------------------------|-----------------|
 | CKA_PARAMETER_SET ^1,4,6^ | CK_XMSSMT_PARAMETER_SET_TYPE | Numeric identifier of the XMSS^MT^ parameter set as defined in section 6.66.3. |
 | CKA_VALUE ^1,4,6,7^       | Byte array                   | Vendor defined. |
-|                           |                              | Note that exporting this value is dangerous as it would allow key reuse.
+|                           |                              | Note that exporting this value is dangerous as it would allow key reuse.       |
+| CKA_KEYS_REMAINING ^2,4^  | CK_ULONG                     | The minimum of the following two values: 1) The number of one-time private keys remaining; 2) 2^32-1 |
 table: XMSS^MT^ Private Key Object Attributes
 
 - Refer to Table 13 for footnotes
@@ -223,7 +225,7 @@ in the **CKA_PARAMETER_SET** attribute of the template for the public key.
 
 The mechanism contributes the **CKA_CLASS**, **CKA_KEY_TYPE**, and **CKA_VALUE**
 attributes to the new public key and the **CKA_CLASS**, **CKA_KEY_TYPE**,
-**CKA_VALUE**, and **CKA_PARAMETER_SET** attributes to the new private key.
+**CKA_VALUE**, **CKA_KEYS_REMAINING** and **CKA_PARAMETER_SET** attributes to the new private key.
 
 For this mechanism, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure are not used and must be set to 0.

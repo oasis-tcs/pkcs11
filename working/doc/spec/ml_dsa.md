@@ -180,7 +180,7 @@ addition to the common attributes defined for this object class:
 |---------------------------|------------|------------------------------|
 | CKA_PARAMETER_SET ^1,4,6^ | CK_ML_DSA_PARAMETER_SET_TYPE | ML-DSA parameter set |
 | CKA_SEED ^4,6,7^          | Byte array | Seed value (𝜉) as defined in ML-DSA.Keygen in [FIPS 204] |
-| CKA_VALUE ^1,4,6,7^       | Byte array | Private key (sk) as defined in ML-DSA.Keygen-internal in [FIPS 204] |
+| CKA_VALUE ^4,6,7^         | Byte array | Private key (sk) as defined in ML-DSA.Keygen-internal in [FIPS 204] |
 table: ML-DSA Private Key Object Attributes
 
 - Refer to Table 13 for footnotes

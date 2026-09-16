@@ -240,7 +240,7 @@ The mechanism generates XMSS^MT^ public/private key pairs using an oid, as
 specified in the **CKA_PARAMETER_SET** attribute of the template for the public
 key.
 
-All other restrictions detailed in section [6.66.6] apply, using XMSS^MT^ types
+All other restrictions detailed in section [6.55.6] apply, using XMSS^MT^ types
 where necessary.
 
 ### XMSS and XMSS^MT^

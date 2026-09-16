@@ -313,8 +313,8 @@ keys in bytes.
 
 ### HashML-DSA Signature with hashing
 
-The HashML-DSA with hashing mechanism, denoted **CKM_HASH_ML_DSA_<hash>** where
-<hash> identifies a hash function as per [Table 1], is a mechanism for single-
+The HashML-DSA with hashing mechanism, denoted **CKM_HASH_ML_DSA_\<hash\>** where
+\<hash\> identifies a hash function as per [Table 248], is a mechanism for single-
 and multiple-part signatures and verification for pre-hash ML-DSA signatures as
 defined in section [5.4] of [FIPS 204], Algorithm 4 HashML-DSA.Sign and
 Algorithm 5 HashML-DSA.Verify. This mechanism computes the entire HashML-DSA

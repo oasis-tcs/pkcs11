@@ -164,7 +164,7 @@ nLen bytes in little endian order.
 ### Definitions
 
 This section defines the key types “**CKK_EC**”, “**CKK_EC_EDWARDS**” and
-“**CKK_EC_MONTGOMERY*” for type CK_KEY_TYPE as used in the **CKA_KEY_TYPE**
+“**CKK_EC_MONTGOMERY**” for type CK_KEY_TYPE as used in the **CKA_KEY_TYPE**
 attribute of key objects.
 
 Note: CKK_ECDSA is deprecated. It is replaced by CKK_EC.

@@ -303,6 +303,7 @@ following table. In the table, k is the length in bytes of the ML-DSA signature.
 |-----------------|---------------------|----------------|---------------|
 | C_Sign ^1^      | ML-DSA Private Key  | Length of hash | k             |
 | C_Verify ^1^    | ML-DSA Public Key   | any, k         | N/A           |
+| C_VerifySignature | ML-DSA Public Key   | any, k       | N/A           |
 table: HashML-DSA: Key and Data Length
 
 ^1^ Single-part operations only.

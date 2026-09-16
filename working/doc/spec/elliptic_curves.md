@@ -164,7 +164,7 @@ nLen bytes in little endian order.
 ### Definitions
 
 This section defines the key types “**CKK_EC**”, “**CKK_EC_EDWARDS**” and
-“**CKK_EC_MONTGOMERY*” for type CK_KEY_TYPE as used in the **CKA_KEY_TYPE**
+“**CKK_EC_MONTGOMERY**” for type CK_KEY_TYPE as used in the **CKA_KEY_TYPE**
 attribute of key objects.
 
 Note: CKK_ECDSA is deprecated. It is replaced by CKK_EC.
@@ -589,7 +589,7 @@ The short Weierstrass ECkey pair generation mechanism, denoted
 defined by the [ANSI X9.62] and [ANSI X9.63] standards.
 
 The short Weierstrass EC key pair generation mechanism, denoted
-CKM_EC_KEY_PAIR_GEN_W_EXTRA_BITS, is a key pair generation mechanism that uses
+**CKM_EC_KEY_PAIR_GEN_W_EXTRA_BITS**, is a key pair generation mechanism that uses
 the method defined by [FIPS PUB 186-4] Appendix B.4.1.
 
 These mechanisms do not have a parameter.

@@ -589,7 +589,7 @@ The short Weierstrass ECkey pair generation mechanism, denoted
 defined by the [ANSI X9.62] and [ANSI X9.63] standards.
 
 The short Weierstrass EC key pair generation mechanism, denoted
-CKM_EC_KEY_PAIR_GEN_W_EXTRA_BITS, is a key pair generation mechanism that uses
+**CKM_EC_KEY_PAIR_GEN_W_EXTRA_BITS**, is a key pair generation mechanism that uses
 the method defined by [FIPS PUB 186-4] Appendix B.4.1.
 
 These mechanisms do not have a parameter.

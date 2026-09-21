@@ -66,4 +66,5 @@ The following table defines the attributes common to all objects.
 | CKA_CLASS^1^          | CK_OBJECT_CLASS | Object class (type) |
 | CKA_UNIQUE_ID ^2,4,6^ | RFC2279 string  | The unique identifier assigned to the object. |
 table: Common Object Attributes
+
 - Refer to Table 13 for footnotes

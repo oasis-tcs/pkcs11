@@ -93,7 +93,7 @@ error codes from above that applies.
 ### Modifying objects
 
 Objects may be modified with the Cryptoki function **C_SetAttributeValue** (see
-`Section [5.7][Object management functions]). The template supplied to
+Section [5.7][Object management functions]). The template supplied to
 **C_SetAttributeValue** can contain new values for attributes which the object
 already possesses; values for attributes which the object does not yet possess;
 or both.
@@ -118,7 +118,7 @@ for the possibility of a template being incomplete.
 
 Unless an object's **CKA_COPYABLE** (see [Table 19]()) attribute is set to
 CK_FALSE, it may be copied with the Cryptoki function **C_CopyObject** (see
-Section [5.6.11][xxxxxxxxxx]. In the process of copying an object,
+Section [5.7][Object management functions]). In the process of copying an object,
 **C_CopyObject** also modifies the attributes of the newly-created copy
 according to an application-supplied template.
 

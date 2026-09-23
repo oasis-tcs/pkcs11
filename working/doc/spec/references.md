@@ -298,6 +298,12 @@ D. McGrew, m. Curcio, S. Fluhrer. RFC 8554: “Leighton-Micali Hash-Based Signat
 
 URL: <https://tools.ietf.org/html/rfc8554>
 
+**[RFC 9370]**
+
+CJ. Tjhai, M. Tomlinson, G. Bartlett, S. Fluhrer, D. Van Geest, O. Garcia-Morchon, V. Smyslov. RFC 9370: "Multiple Key Exchanges in the Internet Key Exchange Protocol Version 2 (IKEv2)", May 2023
+
+URL: <https://www.ietf.org/rfc/rfc9370.html>
+
 **[RIPEMD]**
 
 H. Dobbertin, A. Bosselaers, B. Preneel. “The hash function RIPEMD-160”, February 2012.

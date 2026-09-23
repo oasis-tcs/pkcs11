@@ -9,6 +9,8 @@
 +======================================+:===:+:===:+:====:+:===:+:=====:+:===:+:===:+:====:+
 | CKM_IKE2_PRF_PLUS_DERIVE             |     |     |      |     |       |     |  ✓  |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
+| CKM_IKE2_PRF_MULTI_KEY_DERIVE        |     |     |      |     |       |     |  ✓  |      |
++--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_IKE_PRF_DERIVE                   |     |     |      |     |       |     |  ✓  |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_IKE1_PRF_DERIVE                  |     |     |      |     |       |     |  ✓  |      |
@@ -22,6 +24,7 @@ table: IKE Mechanisms vs. Functions
 Mechanisms:
 
 - CKM_IKE2_PRF_PLUS_DERIVE
+- CKM_IKE2_PRF_MULTI_KEY_DERIVE
 - CKM_IKE_PRF_DERIVE
 - CKM_IKE1_PRF_DERIVE
 - CKM_IKE1_EXTENDED_DERIVE
@@ -104,13 +107,66 @@ _pNr_
 : Nr value
 
 _ulNrLen_
-: length of Nr 
+: length of Nr
 
 _hNewKey_
 : New key value to drive the rekey.
 
 **CK_IKE_PRF_DERIVE_PARAMS_PTR** is a pointer to a **CK_IKE_PRF_DERIVE_PARAMS**.
 
+#### CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS
+\  
+
+**CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS** is a structure that provides the parameters to the
+**CKM_IKE2_PRF_MULTI_KEY_DERIVE** mechanism. It is defined as follows:
+
+~~~{.c}
+typedef struct CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS {
+    CK_MECHANISM_TYPE  prfMechanism;
+    CK_BBOOL  bPrfPlus;
+    CK_BYTE_PTR  pNi;
+    CK_ULONG  ulNiLen;
+    CK_BYTE_PTR  pNr;
+    CK_ULONG  ulNrLen;
+    CK_OBJECT_HANDLE  hSK_d;
+    CK_ULONG  ulNumKeys;
+    CK_OBJECT_HANDLE  hSK[1];
+ } CK_IKE1_PRF_DERIVE_PARAMS;
+~~~
+
+The fields of the structure have the following meanings:
+
+_prfMechanism_
+: underlying MAC mechanism used to generate the prf
+
+_bPrfPlus_
+: use prf+ instead of prf
+
+_pNi_
+: Ni value
+
+_ulNiLen_
+: length of Ni
+
+_pNr_
+: Nr value
+
+_ulNrLen_
+: length of Nr
+
+_hSK_d_
+: handle to the SK_d key
+
+_ulNumKeys_
+: number of keys in the hSK array
+
+_hSK_
+: array of SK keys. The actual count is ulNumKeys.
+
+**CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS_PTR** is a pointer to a
+**CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS**.
+
+#### CK_IKE1_EXTENDED_DERIVE_PARAMS
 #### CK_IKE1_PRF_DERIVE_PARAMS
 \  
 
@@ -271,6 +327,39 @@ the prf. If **CKA_VALUE_LEN** is greater then the prf, **CKR_KEY_SIZE_RANGE** is
 returned. If it is less the key is truncated taking the left most bytes. The
 value **CKA_KEY_TYPE** must be specified in the template or
 **CKR_TEMPLATE_INCOMPLETE** is returned.
+
+### IKEv2 PRF Multi-KEY DERIVE
+
+The IKEv2 PRF Multi-Key Derive mechanism denoted **CKM_IKE2_MULTI_KEY_PRF_DERIVE** is used in
+IPSEC IKEv2 prf to generate the rekey to generate the SKEYSEED and the to generate various additional keys from the SKEYSEED.
+as defined in [RFC 9370]. It takes a
+**CK_IKE2_MULTI_KEY_PRF_DERIVE_PARAMS** as a mechanism parameter. The actual size of the mechanism paramaters depends
+on the number keys in_ulNumKeys.
+
+If bPrfPlus is false, then if **CKA_VALUE_LEN**s not specified, the resulting key will be the length of
+the prf. If **CKA_VALUE_LEN** is greater then the prf, **CKR_KEY_SIZE_RANGE** is
+returned. If it is less the key is truncated taking the left most bytes.
+
+If bPrfPlus if true, then  **CKA_VALUE_LEN** must be set in the
+template and its value must not be bigger than 255 times the size of the prf
+function output or **CKR_KEY_SIZE_RANGE** will be returned.
+
+ If **CKA_KEY_TYPE**
+is not specified, the output key type will be **CKK_GENERIC_SECRET**.
+
+This mechanism derives a key with a **CKA_VALUE** of (from [RFC 9370]):
+
+if bPrfPlus is false:
+
+~~~
+prf(SK_d, SK(0) | Ni | Nr | SK(1) | ... SK(n))
+~~~
+
+if bPrfPlus is true:
+
+~~~
+prf+(SK_d, SK(0) | Ni | Nr | SK(1) | ... SK(n))
+~~~
 
 ### IKEv2 PRF PLUS DERIVE
 

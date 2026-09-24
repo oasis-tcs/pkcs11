@@ -72,7 +72,7 @@ glob $number="\\d+";
 # future read these two from a file
 # special identifiers not match the normal matching rules, but are expected to be defined in the document
 # note CKR_VENDOR_DEFINED is handled separately so we can detect improper use in the function Return value lists.
-glob @special_identifiers = ( "CK_FALSE", "CK_TRUE", "CK_INVALID_HANDLE", "CK_EFFECTIVELY_INFINITE", "CK_UNAVAILABLE_INFORMATION", "CKA_VENDOR_DEFINED", "CKM_VENDOR_DEFINED", "TRUE", "FALSE" );
+glob @special_identifiers = ( "CK_FALSE", "CK_TRUE", "CK_INVALID_HANDLE", "CK_EFFECTIVELY_INFINITE", "CK_UNAVAILABLE_INFORMATION", "CKA_VENDOR_DEFINED", "CKM_VENDOR_DEFINED", "CKM_TLS_PRF", "TRUE", "FALSE" );
 # header specific are defines that are part of the header machinery and not meantioned in the document
 glob @header_specific = ( "CRYPTOKI_VERSION_AMENDMENT", "CRYPTOKI_VERSION_MAJOR", "CRYPTOKI_VERSION_MINOR", "_PKCS11T_H_" );
 #

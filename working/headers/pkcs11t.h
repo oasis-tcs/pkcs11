@@ -920,9 +920,12 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 
 #define CKM_SSL3_MASTER_KEY_DERIVE_DH  0x00000373UL
 #define CKM_TLS_PRE_MASTER_KEY_GEN     0x00000374UL
-#define CKM_TLS_MASTER_KEY_DERIVE      0x00000375UL
-#define CKM_TLS_KEY_AND_MAC_DERIVE     0x00000376UL
-#define CKM_TLS_MASTER_KEY_DERIVE_DH   0x00000377UL
+/* use CKM_TLS12_MASTER_KEY_DERIVE instead */
+#define CKM_TLS_MASTER_KEY_DERIVE      0x00000375UL /* Deprecated */
+/* use CKM_TLS12_KEY_AND_MAC_DERIVE instead */
+#define CKM_TLS_KEY_AND_MAC_DERIVE     0x00000376UL /* Deprecated */
+/* use CKM_TLS12_MASTER_KEY_DERIVE_DH instead */
+#define CKM_TLS_MASTER_KEY_DERIVE_DH   0x00000377UL /* Deprecated */
 
 #define CKM_TLS_PRF                    0x00000378UL
 
@@ -975,8 +978,8 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_WTLS_SERVER_KEY_AND_MAC_DERIVE  0x000003d4UL
 #define CKM_WTLS_CLIENT_KEY_AND_MAC_DERIVE  0x000003d5UL
 
-#define CKM_TLS10_MAC_SERVER                0x000003d6UL
-#define CKM_TLS10_MAC_CLIENT                0x000003d7UL
+#define CKM_TLS10_MAC_SERVER                0x000003d6UL /* Deprecated */
+#define CKM_TLS10_MAC_CLIENT                0x000003d7UL /* Deprecated */
 #define CKM_TLS12_MAC                       0x000003d8UL
 #define CKM_TLS12_KDF                       0x000003d9UL
 #define CKM_TLS12_MASTER_KEY_DERIVE         0x000003e0UL

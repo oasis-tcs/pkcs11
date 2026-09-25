@@ -2627,17 +2627,6 @@ typedef CK_HKDF_PARAMS CK_PTR CK_HKDF_PARAMS_PTR;
 #define CKF_HKDF_SALT_DATA   0x00000002UL
 #define CKF_HKDF_SALT_KEY    0x00000004UL
 
-/* HSS */
-typedef CK_ULONG                   CK_HSS_LEVELS;
-typedef CK_ULONG                   CK_LMS_TYPE;
-typedef CK_ULONG                   CK_LMOTS_TYPE;
-
-typedef struct specifiedParams {
-  CK_HSS_LEVELS levels;
-  CK_LMS_TYPE lm_type[8];
-  CK_LMOTS_TYPE lm_ots_type[8];
-} specifiedParams;
-
 /* IKE Params */
 typedef struct CK_IKE2_PRF_PLUS_DERIVE_PARAMS {
   CK_MECHANISM_TYPE prfMechanism;

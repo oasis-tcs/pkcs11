@@ -92,6 +92,7 @@ if ($ARGV[0] eq "header") {
 }
 
 open(my $database, "<", $database_file) or die "Can't open $database_file: $!";
+$num_missing=0;
 while (<$database>){
     chomp;
     @db = split(",");
@@ -142,6 +143,7 @@ while (<$database>){
 	    
 	    printf " missing: #define %-20s 0x%08xUL /*$type - $disposition*/\n",
 	      $name, $number;
+            $num_missing++;
 	    next;
         }
 	if ($flag_missing == 0) {
@@ -237,6 +239,8 @@ if ($ARGV[0] eq "dump" or $ARGV[0] eq "types") {
 if ($ARGV[0] eq "header") {
     print_not_tracked();
 }
+
+exit $num_missing;
 
 
 sub print_types

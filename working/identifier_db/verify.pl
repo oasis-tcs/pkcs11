@@ -5,10 +5,11 @@
 sub print_types;
 sub isflag;
 
-my $database_file="raw_ids.db";
-my $system_file="system_ids.db";
-my $alias_file="aliases.db";
-my $default_header = "../headers/pkcs11t.h";
+my $default_database_file="identifierdb/raw_ids.db";
+my $default_system_file="identifierdb/system_ids.db";
+my $default_alias_file="identifierdb/aliases.db";
+my $default_header = "headers/pkcs11t.h";
+my $base=".."
 glob %types = ();
 glob %database_name = ();
 glob %database_number = ();
@@ -21,8 +22,35 @@ glob %types_max = ();
 glob %types_bits = ();
 glob $verifyHeaderFull=0;
 
+glob $command=""
+glob $header_file=""
 
-if ($ARGV[0] eq "help") {
+foreach (@ARGV) {
+    $arg=$_;
+    if ($arg =~ /^base=(.*)$/) {
+       $base=$1;
+       next;
+    }
+    if ($command eq "") {
+        $command=$arg;
+        next;
+    }
+    if ($arg eq "full") {
+        $verifyHeaderFull=1;
+        next;
+    }
+    if ($header_file ne "") {
+        $command="help"
+        break;
+    }
+    $header_file=$arg;
+}
+
+my $database_file=$base."/".$default_database_file;
+my $system_file=$base."/".$default_system_file;
+my $alias_file=$base."/".$default_alias_file;
+
+if ($command eq "help") {
    print "usage: verify.pl [dump|types|{type}|{disposition}|header [full] {path}|help]\n";
    print "  no args: look for inconsistances within the database\n";
    print "  dump: dump the full database as #defines\n";
@@ -35,16 +63,11 @@ if ($ARGV[0] eq "help") {
    print "           the database. If it's not specified then proposed entries\n";
    print "           are not expected to be in the database.\n";
    print "          If {path} is not suppled, $default_header will be read.\n";
-   exit 0;
+   exit 1;
 }
 
-if ($ARGV[0] eq "header") {
-    my $header_file = $ARGV[1];
-
-    if ($header_file eq "full") {
-	$header_file = $ARGV[2];
+if ($command eq "header") {
         $verifyHeaderFull = 1;
-    }
     if ($header_file eq "") {
 	$header_file =  $default_header;
     }
@@ -129,7 +152,7 @@ while (<$database>){
     $database_name{$index} = $name;
     $database_disposition{$index} = $disposition;
     $datase_number{$name} = $number;
-    if ($ARGV[0] eq "header") {
+    if ($command eq "header") {
 	$flag_missing = 0;
         if (($verifyHeaderFull == 1) or ($disposition ne "proposed")) {
 	    $flag_missing = 1;
@@ -139,7 +162,6 @@ while (<$database>){
         }
 
 	if (($flag_missing == 1) and ($header_present{$name} == 0)) {
-	    
 	    printf " missing: #define %-20s 0x%08xUL /*$type - $disposition*/\n",
 	      $name, $number;
 	    next;
@@ -159,13 +181,13 @@ while (<$database>){
         }
         next;
     }
-    if ($ARGV[0] eq "dump") {
+    if ($command eq "dump") {
         printf "#define %-20s 0x%08xUL /* $type - $disposition */\n", $name,$number;
     }
-    if ($ARGV[0] eq $disposition) {
+    if ($command eq $disposition) {
         printf "#define %-20s 0x%08xUL /* $type */\n", $name,$number;
     }
-    if ($ARGV[0] eq $type) {
+    if ($command eq $type) {
         printf "#define %-20s 0x%08xUL /* $disposition */\n", $name, $number;
     }
 }
@@ -186,7 +208,7 @@ while (<$systembase>){
 	next;
     }
     $system_number{$name} = $number;
-    if ($ARGV[0] eq "header") {
+    if ($command eq "header") {
 	$flag_missing = 0;
         if (($verifyHeaderFull == 1) or ($disposition ne "proposed")) {
 	    $flag_missing = 1;
@@ -216,13 +238,13 @@ while (<$systembase>){
         }
         next;
     }
-    if ($ARGV[0] eq "dump") {
+    if ($command eq "dump") {
         printf "#define %-20s 0x%08xUL /* system - $disposition */\n", $name,$number;
     }
-    if ($ARGV[0] eq $disposition) {
+    if ($command eq $disposition) {
         printf "#define %-20s 0x%08xUL /* system */\n", $name,$number;
     }
-    if ($ARGV[0] eq "system") {
+    if ($command eq "system") {
         printf "#define %-20s 0x%08xUL /* $disposition */\n", $name, $number;
     }
 }
@@ -230,11 +252,11 @@ close($systembase);
 
 # output results
 #
-if ($ARGV[0] eq "dump" or $ARGV[0] eq "types") {
+if ($command eq "dump" or $command eq "types") {
     print_types();
 }
 
-if ($ARGV[0] eq "header") {
+if ($command eq "header") {
     print_not_tracked();
 }
 

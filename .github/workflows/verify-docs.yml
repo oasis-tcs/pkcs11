@@ -1,0 +1,41 @@
+---
+name: Verify Docs
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - 'working/doc/spec/**'
+      - 'working/headers/**'
+      - 'working/identifier_db/**'
+  pull_request:
+    branches: ["master"]
+    paths:
+      - '.github/workflows/**'
+      - 'working/doc/spec/**'
+      - 'working/headers/**'
+      - 'working/identifier_db/**'
+
+jobs:
+  verify:
+    name: Docs heder validation
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    container: fedora:latest
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify database
+        run: |
+           ./working/identifier_db/verify.pl base=./working
+
+      - name: Verify headers
+        run: |
+           ./working/identifier_db/verify.pl header base=./working
+
+      - name: Verify docs
+           ./working/identifier_db/parse_doc.pl base=./working
+

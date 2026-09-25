@@ -638,7 +638,8 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 #define CKA_HSS_LMOTS_TYPE              0x00000619UL
 #define CKA_HSS_LMS_TYPES               0x0000061aUL
 #define CKA_HSS_LMOTS_TYPES             0x0000061bUL
-#define CKA_HSS_KEYS_REMAINING          0x0000061cUL
+#define CKA_KEYS_REMAINING              0x0000061cUL
+#define CKA_HSS_KEYS_REMAINING          CKA_KEYS_REMAINING /* Deprecated */
 /* new post-quantum (general) */
 #define CKA_PARAMETER_SET               0x0000061dUL
 /* validation objects */

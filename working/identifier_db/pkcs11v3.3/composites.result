@@ -1,0 +1,55 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Defines Composite Kem and signature mechanisms and parameters sets".
+
+Mechanisms:
+
+ #define CKM_COMP_SIG_KEY_PAIR_GEN  0x0000403dUL
+ #define CKM_COMP_SIG               0x0000403eUL
+ #define CKM_COMP_SIG_EXTERNAL_HASH 0x0000403fUL
+ #define CKM_COMP_KEM_KEY_PAIR_GEN  0x00004040UL
+ #define CKM_COMP_KEM               0x00004041UL
+
+Comp kem params:
+
+ #define CKP_COMP_KEM_MLKEM768_RSA2048               0x00000001UL
+ #define CKP_COMP_KEM_MLKEM768_RSA3072               0x00000002UL
+ #define CKP_COMP_KEM_MLKEM768_RSA4096               0x00000003UL
+ #define CKP_COMP_KEM_MLKEM768_X25519                0x00000004UL
+ #define CKP_COMP_KEM_MLKEM768_ECDH_P256             0x00000005UL
+ #define CKP_COMP_KEM_MLKEM768_ECDH_P384             0x00000006UL
+ #define CKP_COMP_KEM_MLKEM768_ECDH_BRAINPOOLP256R1  0x00000007UL
+ #define CKP_COMP_KEM_MLKEM1024_RSA3072              0x00000008UL
+ #define CKP_COMP_KEM_MLKEM1024_ECDH_P384            0x00000009UL
+ #define CKP_COMP_KEM_MLKEM1024_ECDH_BRAINPOOLP384R1 0x0000000aUL
+ #define CKP_COMP_KEM_MLKEM1024_X448                 0x0000000bUL
+ #define CKP_COMP_KEM_MLKEM1024_ECDH_P521            0x0000000cUL
+
+Comp sig params:
+
+ #define CKP_COMP_SIG_MLDSA44_RSA2048_PSS_SHA256           0x00000001UL
+ #define CKP_COMP_SIG_MLDSA44_RSA2048_PKCS15_SHA256        0x00000002UL
+ #define CKP_COMP_SIG_MLDSA44_ED25519_SHA512               0x00000003UL
+ #define CKP_COMP_SIG_MLDSA44_ECDSA_P256_SHA256            0x00000004UL
+ #define CKP_COMP_SIG_MLDSA65_RSA3072_PSS_SHA512           0x00000005UL
+ #define CKP_COMP_SIG_MLDSA65_RSA3072_PKCS15_SHA512        0x00000006UL
+ #define CKP_COMP_SIG_MLDSA65_RSA4096_PSS_SHA512           0x00000007UL
+ #define CKP_COMP_SIG_MLDSA65_RSA4096_PKCS15_SHA512        0x00000008UL
+ #define CKP_COMP_SIG_MLDSA65_ECDSA_P256_SHA512            0x00000009UL
+ #define CKP_COMP_SIG_MLDSA65_ECDSA_P384_SHA512            0x0000000aUL
+ #define CKP_COMP_SIG_MLDSA65_ECDSA_BRAINPOOLP256R1_SHA512 0x0000000bUL
+ #define CKP_COMP_SIG_MLDSA65_ED25519_SHA512               0x0000000cUL
+ #define CKP_COMP_SIG_MLDSA87_ECDSA_P384_SHA512            0x0000000dUL
+ #define CKP_COMP_SIG_MLDSA87_ECDSA_BRAINPOOLP384R1_SHA512 0x0000000eUL
+ #define CKP_COMP_SIG_MLDSA87_ED448_SHAKE256               0x0000000fUL
+ #define CKP_COMP_SIG_MLDSA87_RSA3072_PSS_SHA512           0x00000010UL
+ #define CKP_COMP_SIG_MLDSA87_RSA4096_PSS_SHA512           0x00000011UL
+ #define CKP_COMP_SIG_MLDSA87_ECDSA_P521_SHA512            0x00000012UL
+
+This represents the following changes to your original proposal:
+    CKM_COMP_SIG_KEY_PAIR_GEN was allocated 0x403d because no number was proposed
+    CKM_COMP_SIG was allocated 0x403e because no number was proposed
+    CKM_COMP_SIG_EXTERNAL_HASH was allocated 0x403f because no number was proposed
+    CKM_COMP_KEM_KEY_PAIR_GEN was allocated 0x4040 because no number was proposed
+    CKM_COMP_KEM was allocated 0x4041 because no number was proposed
+
+Please update your spec before sending it to ballot.

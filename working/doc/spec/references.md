@@ -268,6 +268,18 @@ Masinter, L., Wing, D., Mutz, A., and K. Holtman. RFC 2534: “Media Features fo
 
 URL: <http://www.ietf.org/rfc/rfc2534.txt>
 
+**[RFC 4251]**
+
+T. Ylonen, C. Lonvick, Ed. RFC 4251: “The Secure Shell (SSH) Protocol Architecture”, January 2006.
+
+URL: <https://www.rfc-editor.org/rfc/rfc4251.txt>
+
+**[RFC 4253]**
+
+T. Ylonen, C. Lonvick, Ed. RFC 4253: “The Secure Shell (SSH) Transport Layer Protocol”, January 2006.
+
+URL: <https://www.rfc-editor.org/rfc/rfc4253.txt>
+
 **[RFC 5652]**
 
 R. Housley. RFC 5652: “Cryptographic Message Syntax”, September 2009. 

@@ -9,6 +9,11 @@ Mechanisms:
  #define CKM_COMP_KEM_KEY_PAIR_GEN  0x00004040UL
  #define CKM_COMP_KEM               0x00004041UL
 
+Key types:
+
+ #define CKK_COMP_KEM 0x0000004cUL
+ #define CKK_COMP_SIG 0x0000004dUL
+
 Comp kem params:
 
  #define CKP_COMP_KEM_MLKEM768_RSA2048               0x00000001UL
@@ -51,5 +56,9 @@ This represents the following changes to your original proposal:
     CKM_COMP_SIG_EXTERNAL_HASH was allocated 0x403f because no number was proposed
     CKM_COMP_KEM_KEY_PAIR_GEN was allocated 0x4040 because no number was proposed
     CKM_COMP_KEM was allocated 0x4041 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKK_COMP_KEM was allocated 0x4c because no number was proposed
+    CKK_COMP_SIG was allocated 0x4d because no number was proposed
 
 Please update your spec before sending it to ballot.

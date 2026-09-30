@@ -7,6 +7,10 @@ Mechanisms
 #define CKM_COMP_KEM_KEY_PAIR_GEN	TBD
 #define CKM_COMP_KEM 		        TBD
 
+Key Types
+#define CKK_COMP_KEM                    TBD
+#define CKK_COMP_SIG                    TBD
+
 New Comp KEM Params
 #define CKP_COMP_KEM_MLKEM768_RSA2048               0x00000001
 #define CKP_COMP_KEM_MLKEM768_RSA3072               0x00000002

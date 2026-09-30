@@ -1214,6 +1214,9 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 #define CKM_ECDH_COF_AES_KEY_WRAP      0x00004039UL
 #define CKM_PUB_KEY_FROM_PRIV_KEY      0x0000403aUL
 
+#define CKM_ML_DSA_EXTERNAL_MU_GEN     0x0000403bUL
+#define CKM_ML_DSA_EXTERNAL_MU         0x0000403cUL
+
 #define CKM_ML_KEM_KEY_PAIR_GEN        0x0000000fUL
 #define CKM_ML_KEM                     0x00000017UL
 
@@ -2626,17 +2629,6 @@ typedef CK_HKDF_PARAMS CK_PTR CK_HKDF_PARAMS_PTR;
 #define CKF_HKDF_SALT_NULL   0x00000001UL
 #define CKF_HKDF_SALT_DATA   0x00000002UL
 #define CKF_HKDF_SALT_KEY    0x00000004UL
-
-/* HSS */
-typedef CK_ULONG                   CK_HSS_LEVELS;
-typedef CK_ULONG                   CK_LMS_TYPE;
-typedef CK_ULONG                   CK_LMOTS_TYPE;
-
-typedef struct specifiedParams {
-  CK_HSS_LEVELS levels;
-  CK_LMS_TYPE lm_type[8];
-  CK_LMOTS_TYPE lm_ots_type[8];
-} specifiedParams;
 
 /* IKE Params */
 typedef struct CK_IKE2_PRF_PLUS_DERIVE_PARAMS {

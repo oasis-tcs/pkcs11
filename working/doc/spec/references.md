@@ -274,6 +274,12 @@ R. Housley. RFC 5652: “Cryptographic Message Syntax”, September 2009.
 
 URL: <http://www.ietf.org/rfc/rfc5652.txt>
 
+**[RFC 5723]**
+
+Y. Sheffer,  H. Tschofenig. RFC 5723: “Internet Key Exchange Protocol Version 2 (IKEv2) Session Resumption”, January 2010. 
+
+URL: <http://www.ietf.org/rfc/rfc5723.txt>
+
 **[RFC 5996]**
 
 C. Kaufman, P. Hoffman, Y. Nir, P. Eronen. RFC 5996: “Internet Key Exchange Protocol Version 2 (IKEv2)”, September 2010. 

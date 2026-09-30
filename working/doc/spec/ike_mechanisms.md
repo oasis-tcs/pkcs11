@@ -11,6 +11,8 @@
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_IKE2_PRF_MULTI_KEY_DERIVE        |     |     |      |     |       |     |  ✓  |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
+| CKM_IKE2_PRF_RESUME_DERIVE           |     |     |      |     |       |     |  ✓  |      |
++--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_IKE_PRF_DERIVE                   |     |     |      |     |       |     |  ✓  |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_IKE1_PRF_DERIVE                  |     |     |      |     |       |     |  ✓  |      |
@@ -25,6 +27,7 @@ Mechanisms:
 
 - CKM_IKE2_PRF_PLUS_DERIVE
 - CKM_IKE2_PRF_MULTI_KEY_DERIVE
+- CKM_IKE2_PRF_RESUME_DERIVE
 - CKM_IKE_PRF_DERIVE
 - CKM_IKE1_PRF_DERIVE
 - CKM_IKE1_EXTENDED_DERIVE
@@ -114,6 +117,41 @@ _hNewKey_
 
 **CK_IKE_PRF_DERIVE_PARAMS_PTR** is a pointer to a **CK_IKE_PRF_DERIVE_PARAMS**.
 
+#### CK_IKE2_PRF_RESUME_DERIVE_PARAMS
+\  
+
+**CK_IKE2_PRF_RESUME_DERIVE_PARAMS** is a structure that provides the parameters to the
+**CKM_IKE2_PRF_RESUME_DERIVE** mechanism. It is defined as follows:
+
+~~~{.c}
+typedef struct CK_IKE_PRF_RESUME_DERIVE_PARAMS {
+    CK_MECHANISM_TYPE  prfMechanism;
+    CK_BYTE_PTR  pNi;
+    CK_ULONG  ulNiLen;
+    CK_BYTE_PTR  pNr;
+    CK_ULONG  ulNrLen;
+ } CK_IKE2_PRF_DERIVE_PARAMS;
+~~~
+
+The fields of the structure have the following meanings:
+
+_prfMechanism_
+: underlying MAC mechanism used to generate the prf
+
+_pNi_
+: Ni value
+
+_ulNiLen_
+: length of Ni
+
+_pNr_
+: Nr value
+
+_ulNrLen_
+: length of Nr
+
+**CK_IKE_PRF_RESUME_DERIVE_PARAMS_PTR** is a pointer to a **CK_IKE_PRF_RESUME_DERIVE_PARAMS**.
+
 #### CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS
 \  
 
@@ -128,9 +166,8 @@ typedef struct CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS {
     CK_ULONG  ulNiLen;
     CK_BYTE_PTR  pNr;
     CK_ULONG  ulNrLen;
-    CK_OBJECT_HANDLE  hSK_d;
+    CK_OBJECT_HANDLE_PTR  phSK;
     CK_ULONG  ulNumKeys;
-    CK_OBJECT_HANDLE  hSK[1];
  } CK_IKE1_PRF_DERIVE_PARAMS;
 ~~~
 
@@ -154,14 +191,12 @@ _pNr_
 _ulNrLen_
 : length of Nr
 
-_hSK_d_
-: handle to the SK_d key
+_hSK_
+: pointer to an array of SK keys. The actual count is ulNumKeys.
 
 _ulNumKeys_
-: number of keys in the hSK array
+: number of keys in the phSK array
 
-_hSK_
-: array of SK keys. The actual count is ulNumKeys.
 
 **CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS_PTR** is a pointer to a
 **CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS**.
@@ -352,14 +387,20 @@ This mechanism derives a key with a **CKA_VALUE** of (from [RFC 9370]):
 if bPrfPlus is false:
 
 ~~~
-prf(SK_d, SK(0) | Ni | Nr | SK(1) | ... SK(n))
+prf(base_key, SK(0) | Ni | Nr | SK(1) | ... SK(n))
 ~~~
 
 if bPrfPlus is true:
 
 ~~~
-prf+(SK_d, SK(0) | Ni | Nr | SK(1) | ... SK(n))
+prf+(base_key, SK(0) | Ni | Nr | SK(1) | ... SK(n))
 ~~~
+
+In [RFC 9370] the base key from the derive is SK_d;
+
+### IKEv2 PRF Resumption Key DERIVE
+
+The IKEv2 PRF Resumption Key DERIVE mechanism, denotned **CKM_IKE2_PRF_RESUME_DERIVE** creates the resumption SKEYSEED from [RFC 5723] section 5.1. The base key is SK_d_old. The mechanism takes **CK_IKE2_PRF_RESUME_DERIVE_PARAMS** as a mechanism parameter. **CKA_VALUE_LEN** most not be set in the template and the length of the key is the length of the inderlying prf function.
 
 ### IKEv2 PRF PLUS DERIVE
 

@@ -5,11 +5,11 @@
 sub print_types;
 sub isflag;
 
-my $default_database_file="identifierdb/raw_ids.db";
-my $default_system_file="identifierdb/system_ids.db";
-my $default_alias_file="identifierdb/aliases.db";
+my $default_database_file="identifier_db/raw_ids.db";
+my $default_system_file="identifier_db/system_ids.db";
+my $default_alias_file="identifier_db/aliases.db";
 my $default_header = "headers/pkcs11t.h";
-my $base=".."
+my $base="..";
 glob %types = ();
 glob %database_name = ();
 glob %database_number = ();
@@ -22,8 +22,11 @@ glob %types_max = ();
 glob %types_bits = ();
 glob $verifyHeaderFull=0;
 
-glob $command=""
-glob $header_file=""
+glob $ret=0;
+glob $num_missing=0;
+
+glob $command="";
+glob $header_file="";
 
 foreach (@ARGV) {
     $arg=$_;
@@ -40,7 +43,7 @@ foreach (@ARGV) {
         next;
     }
     if ($header_file ne "") {
-        $command="help"
+        $header_file=$arg;
         break;
     }
     $header_file=$arg;
@@ -49,6 +52,7 @@ foreach (@ARGV) {
 my $database_file=$base."/".$default_database_file;
 my $system_file=$base."/".$default_system_file;
 my $alias_file=$base."/".$default_alias_file;
+my $default_header=$base."/".$default_header;
 
 if ($command eq "help") {
    print "usage: verify.pl [dump|types|{type}|{disposition}|header [full] {path}|help]\n";
@@ -63,11 +67,10 @@ if ($command eq "help") {
    print "           the database. If it's not specified then proposed entries\n";
    print "           are not expected to be in the database.\n";
    print "          If {path} is not suppled, $default_header will be read.\n";
-   exit 1;
+   exit 100;
 }
 
 if ($command eq "header") {
-        $verifyHeaderFull = 1;
     if ($header_file eq "") {
 	$header_file =  $default_header;
     }
@@ -115,7 +118,6 @@ if ($command eq "header") {
 }
 
 open(my $database, "<", $database_file) or die "Can't open $database_file: $!";
-$num_missing=0;
 while (<$database>){
     chomp;
     @db = split(",");
@@ -131,6 +133,7 @@ while (<$database>){
     if (isflag($type)) {
 	if ($type_bits{$type} & $number) {
 	    printf("invalid db entry: overlapping flags: $name, 0x%08x\n >>$_\n",$number);
+            $ret=200;
 	    next;
 	}
     }
@@ -138,11 +141,13 @@ while (<$database>){
     if (exists $database_name{$index}) {
 	printf "invalid db entry: duplicate value for\n";
 	printf "$database_name{$index} and $name\n >>$_\n";
+        $ret=200;
 	next;
     }
     if (exists $database_number{$name}) {
 	printf "invalid db entry: duplicate name: $name \n";
 	printf "0x%08x and 0x%08x\n >>$_\n",$databas_number{$name},$number;
+        $ret=200;
 	next;
     }
     $types{$type}=$types{$type}." ".$number;
@@ -180,6 +185,7 @@ while (<$database>){
 	    printf " mismatch: $name, header: $header_line{$name}\n";
             printf "  #define %-20s 0x%08xUL /* $type - $disposition db */\n",
 	           $name, $number;
+            $ret=300;
         }
         next;
     }
@@ -207,6 +213,7 @@ while (<$systembase>){
     if (exists $system_number{$name}) {
 	printf "invalid db entry: duplicate name: $name \n";
 	printf "0x%08x and 0x%08x\n >>$_\n",$databas_number{$name},$number;
+        $ret=400;
 	next;
     }
     $system_number{$name} = $number;
@@ -223,6 +230,7 @@ while (<$systembase>){
 	    
 	    printf " missing: #define %-20s 0x%08xUL /*  system - $disposition*/\n",
 	      $name, $number;
+            $num_missing++;
 	    next;
         }
 	if ($flag_missing == 0) {
@@ -237,6 +245,7 @@ while (<$systembase>){
 	    printf " mismatch: $name, header: $header_line{$name}\n";
             printf "  #define %-20s 0x%08xUL /* system - $disposition db */\n",
 	           $name, $number;
+            $ret=500;
         }
         next;
     }
@@ -262,7 +271,7 @@ if ($command eq "header") {
     print_not_tracked();
 }
 
-exit $num_missing;
+exit $ret+$num_missing;
 
 
 sub print_types
@@ -294,6 +303,7 @@ sub print_not_tracked
 		next;
 	    }
 	    printf(" $header_line{$name}\n");
+            # for now not tracked does not generate any fatal errors 
 	    #printf(" #define %-20s 0x%08xUL\n",$name,$header_number{$name});
         }
    }

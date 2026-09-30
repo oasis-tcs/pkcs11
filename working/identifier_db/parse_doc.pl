@@ -81,7 +81,7 @@ glob $doc_file="";
 glob $doc_dir="";
 glob $header_file="";
 glob $Command="./parse_doc.pl";  # get from the evironment?
-glob $BASE="..";
+glob $base="..";
 
 # ret=0 everything is fine
 # 0x80 parsing error in the document
@@ -203,7 +203,8 @@ foreach (@ARGV) {
         next;
     }
     if ($arg =~ /^base=(.*)$/) {
-       $BASE=$base;
+       $base=$1;
+       next;
     }
     if ($header_file eq "") {
         $header_file=$arg;
@@ -263,7 +264,7 @@ if ($need_doc==1 && $doc_file eq "") {
 }
 
 if ($need_header==1 &&  $header_file eq "") {
-    $header_file="${BASE}/headers/pkcs11t.h";
+    $header_file="${base}/headers/pkcs11t.h";
 }
 
 if ($need_header==1) {
@@ -308,7 +309,7 @@ if ($doc_file ne "") {
   foreach (@tx) {
    $doc_dir=$_;
    # verify the list exists
-   $current_dir="$BASE/doc/$doc_dir";
+   $current_dir="$base/doc/$doc_dir";
    $listfile="$current_dir/files.txt";
    # sigh files file in the spec directory is named differently
    if ($doc_dir eq "spec") {

@@ -18,7 +18,7 @@ on:
 
 jobs:
   verify:
-    name: Docs heder validation
+    name: Docs and header validation
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

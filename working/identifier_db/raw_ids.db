@@ -511,8 +511,8 @@ CKM_XMSSMT,0x00004037,mechanisms,spec
 CKM_ECDH_X_AES_KEY_WRAP,0x00004038,mechanisms,spec
 CKM_ECDH_COF_AES_KEY_WRAP,0x00004039,mechanisms,spec
 CKM_PUB_KEY_FROM_PRIV_KEY,0x0000403a,mechanisms,spec
-CKM_ML_DSA_EXTERNAL_MU_GEN,0x0000403b,mechanisms,proposed
-CKM_ML_DSA_EXTERNAL_MU,0x0000403c,mechanisms,proposed
+CKM_ML_DSA_EXTERNAL_MU_GEN,0x0000403b,mechanisms,approved
+CKM_ML_DSA_EXTERNAL_MU,0x0000403c,mechanisms,approved
 CKM_COMP_SIG_KEY_PAIR_GEN,0x0000403d,mechanisms,proposed
 CKM_COMP_SIG,0x0000403e,mechanisms,proposed
 CKM_COMP_SIG_EXTERNAL_HASH,0x0000403f,mechanisms,proposed

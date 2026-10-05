@@ -168,7 +168,7 @@ typedef struct CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS {
     CK_ULONG  ulNrLen;
     CK_OBJECT_HANDLE_PTR  phSK;
     CK_ULONG  ulNumKeys;
- } CK_IKE1_PRF_DERIVE_PARAMS;
+ } CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS;
 ~~~
 
 The fields of the structure have the following meanings:
@@ -201,7 +201,6 @@ _ulNumKeys_
 **CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS_PTR** is a pointer to a
 **CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS**.
 
-#### CK_IKE1_EXTENDED_DERIVE_PARAMS
 #### CK_IKE1_PRF_DERIVE_PARAMS
 \  
 
@@ -365,11 +364,11 @@ value **CKA_KEY_TYPE** must be specified in the template or
 
 ### IKEv2 PRF Multi-KEY DERIVE
 
-The IKEv2 PRF Multi-Key Derive mechanism denoted **CKM_IKE2_MULTI_KEY_PRF_DERIVE** is used in
+The IKEv2 PRF Multi-Key Derive mechanism denoted **CKM_IKE2_PRF_MULTI_KEY_DERIVE** is used in
 IPSEC IKEv2 prf to generate the rekey to generate the SKEYSEED and the to generate various additional keys from the SKEYSEED.
 as defined in [RFC 9370]. It takes a
-**CK_IKE2_MULTI_KEY_PRF_DERIVE_PARAMS** as a mechanism parameter. The actual size of the mechanism paramaters depends
-on the number keys in_ulNumKeys.
+**CK_IKE2_PRF_MULTI_KEY_DERIVE_PARAMS** as a mechanism parameter. The actual size of the mechanism paramaters depends
+on the number keys in_ulNumKeys. The value of ulNumKeys must always be greater than zero.
 
 If bPrfPlus is false, then if **CKA_VALUE_LEN**s not specified, the resulting key will be the length of
 the prf. If **CKA_VALUE_LEN** is greater then the prf, **CKR_KEY_SIZE_RANGE** is
@@ -400,7 +399,7 @@ In [RFC 9370] the base key from the derive is SK_d;
 
 ### IKEv2 PRF Resumption Key DERIVE
 
-The IKEv2 PRF Resumption Key DERIVE mechanism, denotned **CKM_IKE2_PRF_RESUME_DERIVE** creates the resumption SKEYSEED from [RFC 5723] section 5.1. The base key is SK_d_old. The mechanism takes **CK_IKE2_PRF_RESUME_DERIVE_PARAMS** as a mechanism parameter. **CKA_VALUE_LEN** most not be set in the template and the length of the key is the length of the inderlying prf function.
+The IKEv2 PRF Resumption Key DERIVE mechanism, denotned **CKM_IKE2_PRF_RESUME_DERIVE** creates the resumption SKEYSEED from [RFC 5723] section 5.1. The base key is SK_d_old. The mechanism takes **CK_IKE2_PRF_RESUME_DERIVE_PARAMS** as a mechanism parameter. **CKA_VALUE_LEN** must not be set in the template and the length of the key is the length of the underlying prf function.
 
 ### IKEv2 PRF PLUS DERIVE
 

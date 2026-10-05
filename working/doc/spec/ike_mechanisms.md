@@ -124,7 +124,7 @@ _hNewKey_
 **CKM_IKE2_PRF_RESUME_DERIVE** mechanism. It is defined as follows:
 
 ~~~{.c}
-typedef struct CK_IKE_PRF_RESUME_DERIVE_PARAMS {
+typedef struct CK_IKE2_PRF_RESUME_DERIVE_PARAMS {
     CK_MECHANISM_TYPE  prfMechanism;
     CK_BYTE_PTR  pNi;
     CK_ULONG  ulNiLen;

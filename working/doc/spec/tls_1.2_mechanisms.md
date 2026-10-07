@@ -6,11 +6,11 @@ base hash used in the underlying TLS PRF (pseudo-random function) can be
 negotiated. Therefore each mechanism parameter for the TLS 1.2 mechanisms
 contains a new value in the parameters structure to specify the hash function. 
 
-This section also specifies **CKM_TLS_KDF** (and **CKM_TLS12_MAC**) which should
+This section also specifies **CKM_TLS_MAC** which should
 be used in place of **CKM_TLS_PRF** to calculate the verify_data in the TLS
 "finished" message.
 
-This section also specifies **CKM_TLS_KDF** (and **CKM_TLS12_KDF)** that can be
+This section also specifies **CKM_TLS_KDF** that can be
 used in place of **CKM_TLS_PRF** to implement key material exporters.
 
 +--------------------------------------+---------------------------------------------------+

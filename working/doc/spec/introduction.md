@@ -262,9 +262,6 @@ typedef CK_BYTE CK_BBOOL;
 /* an unsigned value, at least 32 bits long */
 typedef unsigned long int CK_ULONG;
 
-/* a signed value, the same size as a CK_ULONG */
-typedef long int CK_LONG;
-
 /* at least 32 bits; each bit is a Boolean flag */
 typedef CK_ULONG CK_FLAGS;
 ~~~

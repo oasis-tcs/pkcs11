@@ -302,6 +302,8 @@ with the Cryptoki library to which the application is linked.
 
 Note that CK_ULONG, regardless of the underlying implementation-defined size, can only ever contain values up to the maximum value representable as a 32-bit signed integer. This is needed to assure compatibility with all supported platforms and platform drivers. Any type defined in terms of CK_ULONG carries the same restriction.
 
+For most types, a corresponding pointer type is defined with a `_PTR` suffix (for example `CK_BYTE_PTR` as shown above). These are not all explicitly documented.
+
 All numbers and values expressed in this document are decimal, unless they are
 preceded by “0x”, in which case they are hexadecimal values.
 

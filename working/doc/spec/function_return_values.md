@@ -168,6 +168,10 @@ may return any applicable error code.
   token, or because the object has the relevant **CKA_COPYABLE**,
   **CKA_MODIFIABLE** or **CKA_DESTROYABLE** policy attribute set to CK_FALSE.
 
+* CKR_AEAD_DECRYPT_FAILED: The decryption mechanism is an AEAD algorithm and
+  the authenticity of the associated data or ciphertext cannot be verified.
+  This error code may be returned by **C_DecryptMessage** or **C_DecryptMessageNext**.
+
 * CKR_ARGUMENTS_BAD: This is a rather generic error code which indicates that
   the arguments supplied to the Cryptoki function were in some way not
   appropriate.
@@ -274,6 +278,10 @@ may return any applicable error code.
   indicates that one of the keys specified is not the same key that was being
   used in the original saved session.
 
+* CKR_KEY_EXHAUSTED: The key cannot be used for signing because the number of
+  signatures that can be created with it has been exhausted. Used with stateful
+  signature mechanisms such as HSS.
+
 * CKR_KEY_FUNCTION_NOT_PERMITTED: An attempt has been made to use a key for a
   cryptographic purpose that the key’s attributes are not set to allow it to do.
   For example, to use a key for performing encryption, that key MUST have its
@@ -338,6 +346,15 @@ may return any applicable error code.
      native operating system methods to spawn new threads.
   2. The library cannot function properly without being able to spawn new
      threads in the above fashion.
+
+* CKR_NEW_PIN_MODE: The supplied OTP was not accepted, and the library requests
+  a new OTP computed using a new PIN. The new PIN is set through means out of
+  scope for this document.
+
+* CKR_NEXT_OTP: The supplied OTP was correct but indicated a larger than
+  normal drift in the token’s internal state (e.g. clock, counter). To ensure
+  this was a legitimate code, the application should provide the next one-time
+  value to the library for verification.
 
 * CKR_NO_EVENT: This value can only be returned by **C_WaitForSlotEvent**. It
   is returned when **C_WaitForSlotEvent** is called in non-blocking mode and
@@ -473,6 +490,9 @@ may return any applicable error code.
 
 * CKR_TOKEN_NOT_RECOGNIZED: The Cryptoki library and/or slot does not recognize
   the token in the slot.
+
+* CKR_TOKEN_RESOURCE_EXCEEDED: The requested operation could not be completed
+  because a resource limit on the token has been exceeded.
 
 * CKR_TOKEN_WRITE_PROTECTED: The requested action could not be performed because
   the token is write-protected. This return value has higher priority than

@@ -496,11 +496,11 @@ Even though **C_FindObjectsInit** can return the values
 **CKR_ATTRIBUTE_TYPE_INVALID** and **CKR_ATTRIBUTE_VALUE_INVALID**, it is not
 required to. For example, if it is given a search template with nonexistent
 attributes in it, it can return **CKR_ATTRIBUTE_TYPE_INVALID**, or it can
-initialize a search operation which will match no objects and return CKR_OK.
+initialize a search operation which will match no objects and return **CKR_OK**.
 
 If the **CKA_UNIQUE_ID** attribute is present in the search template, either
 zero or one objects will be found, since at most one object can have any
-particular CKA_UNIQUE_ID value.
+particular **CKA_UNIQUE_ID** value.
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_TYPE_INVALID,
 CKR_ATTRIBUTE_VALUE_INVALID, CKR_CRYPTOKI_NOT_INITIALIZED, CKR_DEVICE_ERROR,
@@ -576,7 +576,84 @@ while (1) {
   .
   .
 }
+~~~
 
-rv = C_FindObjectsFinal(hSession);
-assert(rv == CKR_OK);
+### C_FindObjectsAtomic
+
+~~~{.c}
+CK_DECLARE_FUNCTION(CK_RV, C_FindObjectsAtomic)(
+    CK_SESSION_HANDLE hSession,
+    CK_ATTRIBUTE_PTR pTemplate,
+    CK_ULONG ulCount,
+    CK_OBJECT_HANDLE_PTR phObject,
+    CK_ULONG ulMaxObjectCount,
+    CK_ULONG_PTR pulObjectCount
+);
+~~~
+
+**C_FindObjectsAtomic** initializes and performs a search for token and session
+objects that match a template, by combining **C_FindObjectsInit**, 
+**C_FindObjects** and **C_FindObjectsFinal** into a single atomic call.
+_hSession_ is the session’s handle; _pTemplate_ points to a search template that
+specifies the attribute values to match; _ulCount_ is the number of attributes 
+in the search template. The matching criterion is an exact byte-for-byte match 
+with all attributes in the template. To find all objects, set ulCount to 0.
+_phObject_ points to the location that receives the list (array) of object 
+handles; _ulMaxObjectCount_ is the maximum number of object handles to be 
+returned; _pulObjectCount_ points to the location that receives the actual 
+number of object handles returned.
+
+At most one search operation may be active at a given time in a given session.
+
+**C_FindObjectsAtomic** uses the convention described in Section 5.2 on 
+producing output.
+
+If there are no objects matching the template, then the location that
+_pulObjectCount_ points to receives the value 0.
+
+If the **CKA_UNIQUE_ID** attribute is present in the search template, either
+zero or one objects will be found, since at most one object can have any
+particular **CKA_UNIQUE_ID** value.
+
+The object search operation will only find objects that the session can view.
+For example, an object search in an “R/W Public Session” will not find any
+private objects (even if one of the attributes in the search template specifies
+that the search is for private objects).
+
+If a search operation is active, and objects are created or destroyed which fit
+the search template for the active search operation, then those objects may or
+may not be found by the search operation. Note that this means that, under these
+circumstances, the search operation may return invalid object handles.
+
+Even though **C_FindObjectsAtomic** can return the values
+**CKR_ATTRIBUTE_TYPE_INVALID** and **CKR_ATTRIBUTE_VALUE_INVALID**, it is not
+required to. For example, if it is given a search template with nonexistent
+attributes in it, it can return **CKR_ATTRIBUTE_TYPE_INVALID**, or it can
+initialize a search operation which will match no objects and return **CKR_OK**.
+
+Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_TYPE_INVALID,
+CKR_ATTRIBUTE_VALUE_INVALID, CKR_BUFFER_TOO_SMALL, CKR_CRYPTOKI_NOT_INITIALIZED, 
+CKR_DEVICE_ERROR, CKR_DEVICE_MEMORY, CKR_DEVICE_REMOVED, CKR_FUNCTION_FAILED, 
+CKR_GENERAL_ERROR, CKR_HOST_MEMORY, CKR_OK, CKR_OPERATION_ACTIVE, CKR_PENDING, 
+CKR_SESSION_CLOSED, CKR_SESSION_HANDLE_INVALID.
+
+Example: 
+~~~{.c}
+CK_SESSION_HANDLE hSession;
+CK_BYTE unique_id[] = {...}; 
+CK_ATTRIBUTE template[] = {
+  {CKA_UNIQUE_ID, unique_id, sizeof(unique_id)}
+};
+CK_OBJECT_HANDLE hObject;
+CK_ULONG ulObjectCount = 1;
+CK_RV rv;
+
+.
+.
+rv = C_FindObjectsAtomic(hSession, template, 1, &hObject, 1, &ulObjectCount);
+if (rv == CKR_OK && ulObjectCount == 1)
+  // process object identified by unique_id
+.
+.
+}
 ~~~

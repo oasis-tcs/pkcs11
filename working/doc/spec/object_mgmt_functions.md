@@ -50,7 +50,8 @@ TBD).
 
 ==Option 2 (bulletted list)==
 
-Whenever an object is created, 
+Whenever an object is created by this operation, the following attribute
+specific behaviour is taken:
 - a value for **CKA_UNIQUE_ID** is generated and assigned to the new object
   (See Section 4.5.1).
 - a value for **CKA_TIMESTAMP** may be generated and assigned to the new object

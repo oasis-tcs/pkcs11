@@ -454,6 +454,12 @@ Rigney et al, “Remote Authentication Dial In User Service (RADIUS)”, IETF RF
 
 URL: <http://www.ietf.org/rfc/rfc2865.txt.>
 
+**[RFC 3339]**
+
+Klyne, G. and C. Newman, “Date and Time on the Internet: Timestamps”, IETF RFC 3339, July 2002 
+
+URL: <https://www.rfc-editor.org/rfc/rfc3339.txt>
+
 **[RFC 3552]**
 
 Rescorla, E. and B. Korver, "Guidelines for Writing RFC Text on Security Considerations", BCP 72, RFC 3552, DOI 10.17487/RFC3552, July 2003.

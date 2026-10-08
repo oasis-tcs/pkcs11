@@ -31,8 +31,33 @@ set to CK_FALSE, and the **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE.
 Only session objects can be created during a read-only session. Only public
 objects can be created unless the normal user is logged in.
 
+==Asking for opinion on options. There are a few patterns like this used for nearly all 
+Object Management and Key Management functions; specifically for handling
+attributes.  Option 1 continues the longer format. Option 2 uses a list
+which I think is cleaner and I'd use it for the two attributes below as well
+as CKA_LOCAL for the Key Management functions.
+More clean up could be done, but I don't want to bloat this change.
+Thoughts?==
+
+==Option 1 ( a lot of repetative text?)==
+
 Whenever an object is created, a value for **CKA_UNIQUE_ID** is generated and
 assigned to the new object (See Section 4.5.1).
+
+Whenever an object is created, a value for **CKA_TIMESTAMP** may be generated
+and assigned to the new object depending on a tokens capabilities (See Section
+TBD).
+
+==Option 2 (bulletted list)==
+
+Whenever an object is created by this operation, the following attribute
+specific behaviour is taken:
+- a value for **CKA_UNIQUE_ID** is generated and assigned to the new object
+  (See Section 4.5.1).
+- a value for **CKA_TIMESTAMP** may be generated and assigned to the new object
+  depending on a tokens capabilities (See Section TBD).
+
+==End of Options==
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID,

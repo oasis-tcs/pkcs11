@@ -81,13 +81,26 @@ glob $doc_file="";
 glob $doc_dir="";
 glob $header_file="";
 glob $Command="./parse_doc.pl";  # get from the evironment?
-glob $BASE="..";
+glob $base="..";
+
+# ret=0 everything is fine
+# 0x80 parsing error in the document
+# 0x08 return value inconsistancy in the doc
+# 0x01 missing define from header or mismatch with doc
+# 0x10 missing define from doc
+# 0x02 missing struct from header or mismatch with doc
+# 0x20 missing struct from doc
+# 0x04 missing typedef from header or mismatch with doc
+# 0x40 missing typedef from doc
+# 0xf8 mask for doc issues
+# 0x07 mask for header issues.
+glob $ret=0;
 
 foreach (@ARGV) {
     $arg=$_;
     if ($arg eq "help") {
         usage();
-        exit;
+        exit 1;
     }
     if ($arg eq "table") {
         $print_doc_tables=1;
@@ -134,7 +147,6 @@ foreach (@ARGV) {
     }
     if ($arg eq "diff_defines") {
         $print_diff_defines=1;
-        printf("diff_defines, setting print_diff_defines=$print_diff_defines\n");
         next;
     }
     if ($arg eq "diff_structs") {
@@ -191,7 +203,8 @@ foreach (@ARGV) {
         next;
     }
     if ($arg =~ /^base=(.*)$/) {
-       $BASE=$base;
+       $base=$1;
+       next;
     }
     if ($header_file eq "") {
         $header_file=$arg;
@@ -251,7 +264,7 @@ if ($need_doc==1 && $doc_file eq "") {
 }
 
 if ($need_header==1 &&  $header_file eq "") {
-    $header_file="${BASE}/headers/pkcs11t.h";
+    $header_file="${base}/headers/pkcs11t.h";
 }
 
 if ($need_header==1) {
@@ -296,7 +309,7 @@ if ($doc_file ne "") {
   foreach (@tx) {
    $doc_dir=$_;
    # verify the list exists
-   $current_dir="$BASE/doc/$doc_dir";
+   $current_dir="$base/doc/$doc_dir";
    $listfile="$current_dir/files.txt";
    # sigh files file in the spec directory is named differently
    if ($doc_dir eq "spec") {
@@ -315,6 +328,7 @@ if ($doc_file ne "") {
         $short_case= lc($short_doc);
         if (($short_case ne "acknowledgements.md") && ($short_case ne "revsion_history.md")) {
             printf(" ERROR uncompleted table in $current_doc!\n");
+            $ret |= 0x80;
         }
         $in_table=0;
         $in_table_2=0;
@@ -324,6 +338,7 @@ if ($doc_file ne "") {
     if ($in_struct == 1) {
         printf(" ERROR uncompleted struct in $current_doc!\n");
         $in_struct=0;
+        $ret |= 0x80;
     }
     if ($in_return_value == 1) {
         # this is not an error, several files have the Return Value: block as the
@@ -363,6 +378,7 @@ if ($doc_file ne "") {
             }
             printf "%s line %d: missing \{ in struct (%s) skipping\n", $current_doc, $line, $struct_name;
             # fall through and see if something else comes up
+            $ret |= 0x80;
         }
         if ($in_return_value == 1) {
             $test=$entry;
@@ -382,6 +398,7 @@ if ($doc_file ne "") {
                 if ($verbose == 1) {
                     printf "%s line %d: missing ';' in typedef '%s'\n",
                            $current_doc, $line, $typedef_names[$typedef_count];
+                    $ret |=  0x80;
                 }
                 $typedef_names[$typedef_count]=$typedef_names[$typedef_count].";";
                 $in_multiline=0;
@@ -425,8 +442,6 @@ if ($doc_file ne "") {
                 next;
             }
             $line_continue = $has_line_continue;
-#."_".$current_column_count;
-    #printf " handling %d, current_row_count=%d current_column_count=%d entry=%s\n", $table_number, $current_row_count, $current_column_count, $entry;
             if ($in_table_header == 1) {
                 $test=$_;
                 if ($test =~ /^\+=/) {
@@ -438,11 +453,6 @@ if ($doc_file ne "") {
             $test=$_;
             if ($test =-/^\|/) {
                 if ($row_found == 1) {
-#Function table #1 generates lots of noise here, so silence this
-#                    if ($verbose == 1) {
-#                        printf "%s line %d: bad table entry, too many rows in row %d table %d\n",
-#                            $current_doc, $line, $current_row_count,$table_number;
-#                    }
                     next;
                 }
                 @table_columns=split('\|', $_);
@@ -477,6 +487,7 @@ if ($doc_file ne "") {
                 if ($1 != $table_number) {
                     printf "%s line %d: explicit table number (%d) does not match table in order (%d).\n",
                            $current_doc, $line, $1, $table_number ;
+                    $ret != 0x80;
                 }
                 $table_name{$table_index}=$2;
                 $table_row_count{$table_index}=$current_row_count;
@@ -485,6 +496,7 @@ if ($doc_file ne "") {
             # error no table label
             printf "%s line %d: missing table label in table %d\n",
                         $current_doc, $line, $table_number;
+            $ret != 0x80;
             $table_name{$table_index}="unknown".$table_index;
             $table_row_count{$table_index}=$current_row_count;
             next;
@@ -536,6 +548,7 @@ if ($doc_file ne "") {
                 if ($1 != $table_number) {
                     printf "%s line %d: explicit table number (%d) does not match table in order (%d).\n",
                            $current_doc, $line, $1, $table_number ;
+                    $ret |= 0x80;
                 }
                 $table_name{$table_index}=$2;
                 $table_row_count{$table_index}=$current_row_count;
@@ -545,6 +558,7 @@ if ($doc_file ne "") {
             # error no table label
             printf "%s line %d: missing table label in table %d\n",
                            $current_doc, $line, $table_number;
+            $ret |= 0x80;
             $table_name{$table_index}="unknown".$table_index;
             $table_row_count{$table_index}=$current_row_count;
             next;
@@ -769,6 +783,7 @@ foreach (@table_indices) {
                     printf("%s: identifier %s has inconsistant values 0x%08xUL (Table %s) and 0x%08xUL (Table %s)\n",
                             $table_doc{$index}, $name, $header_number{$name},
                             $doc_table_number{$name}, $number, $index);
+                    $ret |= 0x80;
                 }
             }
             $test=$name;
@@ -839,7 +854,9 @@ for my $i (0..($return_value_count-1)) {
 if (%missing_return_doc) {
     print "The following return codes were used in function retun blocks, but\n";
     print " not define in 'function_return_values.md' return code section:\n";
+    $ret |= 8;
 }
+
 foreach (sort keys %missing_return_doc) {
     $name=$_;
     print "    $name define in $missing_return_doc{$name}\n";
@@ -866,6 +883,7 @@ for my $i (0..($naked_return_count-1)) {
             print "The following return codes were used in the spec but defined in neither\n";
             print " function return blocks nor in 'function_return_values.md':\n";
             $need_print_header=0;
+            $ret |= 8;
         }
         print "    $value defined in $naked_return_doc[$i] line $naked_return_line[$i]\n";
     }
@@ -938,6 +956,8 @@ if ($print_diff_struct) {
     printf "\n";
 }
 
+exit $ret;
+
 sub process_header
 {
     my ($l_header_file, $l_verbose)=@_;
@@ -994,6 +1014,7 @@ sub process_header
                 next;
             }
             printf "%s: missing \{ in struct (%s) skipping\n", $l_header_file, $struct_name;
+            $ret |= 0x80;
             # fall through and see if something else comes up
         }
         if ($in_struct == 1) {
@@ -1306,11 +1327,13 @@ sub print_diff_defines
                 printf "#define %-40s 0x%08xUL missing from header %s\n",
                        $name, $doc_number{$name}, $header_file;
             }
+            $ret |= 1;
         } else {
             if ($doc_number{$name} != 0) {
                 if ($doc_number{$name} != $header_number{$name} ) {
                     printf "#define %-40s mismatched values, %s=0x%08xUL %s=0x%08xUL\n",
                            $name, $doc_file, $doc_number{$name}, $header_file, $header_number{$name};
+                    $ret |= 1;
                 }
             }
         }
@@ -1324,6 +1347,7 @@ sub print_diff_defines
             } else {
                 $missing_in_doc++;
             }
+            $ret |= 0x10;
         }
     }
     if (($silence_doc_errors == 1) && ($missing_in_doc != 0)) {
@@ -1346,6 +1370,7 @@ sub print_diff_struct
                 }
             }
             printf "missing struct '%s' in header %s\n", $index, $header_file;
+            $ret |= 2;
             next;
         }
         if ( $typedef_struct_name{$index} ne $header_typedef_struct_name{$index}) {
@@ -1353,6 +1378,7 @@ sub print_diff_struct
                    $index, $header_file,
                    $header_typedef_struct_name{$index},
                    $doc_file, $typedef_struct_name{$index};
+            $ret |= 2;
         }
         for my $i (0..($typedef_struct_count{$index}-1)) {
             $entry_index=$index."_".$i;
@@ -1362,6 +1388,7 @@ sub print_diff_struct
                       ."   doc    '%s' (%s)\n",
                        $index, $i, $header_struct_value{$entry_index},
                        $header_file, $struct_value{$entry_index}, $doc_file;
+                $ret |= 2;
             }
         }
     }
@@ -1373,6 +1400,7 @@ sub print_diff_struct
             } else {
                 $missing_structs++;
             }
+            $ret |= 0x20;
         }
     }
     if (($silence_doc_errors == 1) and ($missing_structs !=0)) {
@@ -1397,6 +1425,7 @@ sub print_diff_typedefs
         $name=$_;
         if ($header_typedef_present{$name} == 0) {
             printf "missing typedef (%s) from header %s\n", $name, $header_file;
+            $ret |= 4;
         }
     }
     foreach (sort keys %header_typedef_present)  {
@@ -1407,6 +1436,7 @@ sub print_diff_typedefs
                 my @names=split(/[ ;]/,$name);
                 if ($names[2] ne $names[3]) {
                     printf "%s: inconsistent function list declaration:\n $name\n $names[2] ne $names[3]\n", $header_file;
+                    $ret |= 4;
                     next;
                 }
                 if ($typedef_struct_name{$names[2]} ne "" ) {
@@ -1418,6 +1448,7 @@ sub print_diff_typedefs
                 $ckptr_count++;
             } else {
                 printf "typedef (%s) missing from doc '%s'\n", $name, $doc_file;
+                $ret |= 0x40;
             }
         }
     }

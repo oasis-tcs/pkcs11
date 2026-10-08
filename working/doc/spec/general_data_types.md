@@ -389,8 +389,7 @@ ulMaxSessionCount field is something along the lines of the following:
 CK_TOKEN_INFO info;
 .
 .
-if ((CK_LONG) info.ulMaxSessionCount
-    == CK_UNAVAILABLE_INFORMATION) {
+if (info.ulMaxSessionCount == CK_UNAVAILABLE_INFORMATION) {
   /* Token refuses to give value of ulMaxSessionCount */
   .
   .

@@ -71,6 +71,7 @@ ssl.md
 tls_1.2_mechanisms.md
 wtls.md
 sp800-108_key_derivation.md
+ssh_key_derivation.md
 miscellaneous_simple_key_derivation_mechanisms.md
 cms_mechanisms.md
 blowfish.md

@@ -2740,6 +2740,13 @@ typedef struct CK_HASH_SIGN_ADDITIONAL_CONTEXT {
      CK_MECHANISM_TYPE hash;
 } CK_HASH_SIGN_ADDITIONAL_CONTEXT;
 
+typedef struct CK_MU_GEN_PARAMS {
+  CK_OBJECT_HANDLE    hKey,     /* public or private. */
+  CK_BYTE_PTR         pTR;      /* pre computed TR from public key */
+  CK_ULONG            ulTRLen;
+  CK_BYTE_PTR         pctx;
+  CK_ULONG            ulctxLen;
+} CK_MU_GEN_PARAMS;
 
 /* ML-DSA values for CKA_PARAMETER_SETS */
 typedef CK_ULONG CK_ML_DSA_PARAMETER_SET_TYPE;

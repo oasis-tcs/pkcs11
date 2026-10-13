@@ -121,8 +121,8 @@ or pre computed TR and a context for the generation of an External Mu for pure M
 
 ~~~{.c}
 typedef struct CK_MU_GEN_PARAMS {
-  CK_OBJECT_HANDLE hKey, //public or private.
-  CK_BYTE_PTR         pTR; //pre computed TR from public key 
+  CK_OBJECT_HANDLE    hKey,     /* public or private. */
+  CK_BYTE_PTR         pTR;      /* pre computed TR from public key  */
   CK_ULONG            ulTRLen;
   CK_BYTE_PTR         pctx;
   CK_ULONG            ulctxLen;

@@ -1,0 +1,6 @@
+Defines Composite Kem and signature mechanisms and parameters sets
+
+Mechanisms
+#define CKM_IKE2_PRF_MULTI_KEY_DERIVE       TBD opt
+#define CKM_IKE2_PRF_RESUME_DERIVE          TBD opt
+

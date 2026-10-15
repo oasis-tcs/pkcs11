@@ -1,0 +1,24 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "KMAC and SHAKE mechanisms".
+
+Mechanisms:
+
+ #define CKM_KMAC128   0x0000001eUL
+ #define CKM_KMAC256   0x00000022UL
+ #define CKM_SHAKE_128 0x0000002fUL
+ #define CKM_SHAKE_256 0x00000035UL
+
+Key types:
+
+ #define CKK_KMAC 0x0000004eUL
+
+This represents the following changes to your original proposal:
+    CKM_KMAC128 was allocated 0x1e because no number was proposed
+    CKM_KMAC256 was allocated 0x22 because no number was proposed
+    CKM_SHAKE_128 was allocated 0x2f because no number was proposed
+    CKM_SHAKE_256 was allocated 0x35 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKK_KMAC was allocated 0x4e because no number was proposed
+
+Please update your spec before sending it to ballot.

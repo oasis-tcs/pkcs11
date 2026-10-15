@@ -1,0 +1,13 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Add new mechanism object attributes".
+
+Attributes:
+
+ #define CKA_FLAGS                    0x00000638UL
+ #define CKA_SUPPORTED_PARAMETER_SETS 0x00000639UL
+
+This represents the following changes to your original proposal:
+    CKA_FLAGS was allocated 0x638 because no number was proposed
+    CKA_SUPPORTED_PARAMETER_SETS was allocated 0x639 because no number was proposed
+
+Please update your spec before sending it to ballot.

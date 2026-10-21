@@ -1,6 +1,6 @@
 ## Common attributes
 
-Objects are identified by two main attributess the should be present on every
+Objects are identified by two main attributes that should be present on every
 object, **CKA_CLASS** and **CKA_UNIQUE_ID**. Each Object class further defines
 which attibutes are mandatory or optional for objects of that class, se further
 sections for additional details.
@@ -58,6 +58,7 @@ Any attempt to modify the **CKA_UNIQUE_ID** attribute of an existing object or
 to specify the value of the **CKA_UNIQUE_ID** attribute in the template for an
 operation that creates one or more objects MUST fail. Operations failing for
 this reason return the error code **CKR_ATTRIBUTE_READ_ONLY**.
+
 
 The following table defines the attributes common to all objects.
 

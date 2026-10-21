@@ -21,22 +21,25 @@ of domain parameters; _ulCount_ is the number of attributes in the template;
 _phKey_ points to the location that receives the handle of the new key or set of
 domain parameters.
 
-If the generation mechanism is for domain parameter generation, the
-**CKA_CLASS** attribute will have the value **CKO_DOMAIN_PARAMETERS**;
-otherwise, it will have the value **CKO_SECRET_KEY**.
+If a call to **C_GenerateKey** cannot support the precise template supplied to
+it, it will fail and return without creating an object.
+
+Whenever an object is created by this operation, the following attribute
+specific behaviour is taken:
+- if the generation mechanism is for domain parameter generation, the
+  **CKA_CLASS** attribute will have the value **CKO_DOMAIN_PARAMETERS**;
+  otherwise, it will have the value **CKO_SECRET_KEY**.
+- the object will have its **CKA_LOCAL** attribute set to CK_TRUE.
+- a new value for **CKA_UNIQUE_ID** is generated and assigned to the new object
+  (See Section 4.5.1).
+- the object will have its **CKA_CREATION_TIMESTAMP** assigned if the token
+  reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])
 
 Since the type of key or domain parameters to be generated is implicit in the
 generation mechanism, the template does not need to supply a key type. If it
 does supply a key type which is inconsistent with the generation mechanism,
 **C_GenerateKey** fails and returns the error code
 **CKR_TEMPLATE_INCONSISTENT**. The CKA_CLASS attribute is treated similarly.
-
-If a call to **C_GenerateKey** cannot support the precise template supplied to
-it, it will fail and return without creating an object.
-
-The object created by a successful call to **C_GenerateKey** will have its
-**CKA_LOCAL** attribute set to CK_TRUE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID,
@@ -92,12 +95,6 @@ template; _phPublicKey_ points to the location that receives the handle of the
 new public key; _phPrivateKey_ points to the location that receives the handle
 of the new private key.
 
-Since the types of keys to be generated are implicit in the key pair generation
-mechanism, the templates do not need to supply key types. If one of the
-templates does supply a key type which is inconsistent with the key generation
-mechanism, **C_GenerateKeyPair** fails and returns the error code
-**CKR_TEMPLATE_INCONSISTENT**. The **CKA_CLASS** attribute is treated similarly.
-
 If a call to **C_GenerateKeyPair** cannot support the precise templates supplied
 to it, it will fail and return without creating any key objects.
 
@@ -105,10 +102,19 @@ A call to **C_GenerateKeyPair** will never create just one key and return. A
 call can fail, and create no keys; or it can succeed, and create a matching
 public/private key pair.
 
-The key objects created by a successful call to **C_GenerateKeyPair** will have
-their **CKA_LOCAL** attributes set to CK_TRUE. In addition, the key objects
-created will both have values for **CKA_UNIQUE_ID** generated and assigned (See
-Section 4.5.1).
+Whenever a key pair is created by this operation, the following attribute
+specific behaviour is taken:
+- the objects will have their **CKA_LOCAL** attribute set to CK_TRUE.
+- both objects will have values for **CKA_UNIQUE_ID** generated and assigned
+  (See Section 4.5.1).
+- the objects will have their **CKA_CREATION_TIMESTAMP** assigned if the token
+  reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])
+
+Since the types of keys to be generated are implicit in the key pair generation
+mechanism, the templates do not need to supply key types. If one of the
+templates does supply a key type which is inconsistent with the key generation
+mechanism, **C_GenerateKeyPair** fails and returns the error code
+**CKR_TEMPLATE_INCONSISTENT**. The **CKA_CLASS** attribute is treated similarly.
 
 _Note carefully the order of the arguments to **C_GenerateKeyPair**. The last
 two arguments do not have the same order as they did in the original Cryptoki
@@ -296,19 +302,23 @@ of the unwrapped key. If any length conflict occurs between the key type of the
 unwrapped key, the output from the unwrapping mechanism, or the specified
 **CKA_VALUE_LEN**, then the function SHALL return **CKR_WRAPPED_KEY_LEN_RANGE**.
 
-The new key will have the **CKA_ALWAYS_SENSITIVE** attribute set to CK_FALSE,
-and the **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE. The
-**CKA_EXTRACTABLE** attribute is by default set to CK_TRUE.
-
 Some mechanisms may modify, or attempt to modify. the contents of the
 _pMechanism_ structure at the same time that the key is unwrapped.
 
 If a call to **C_UnwrapKey** cannot support the precise template supplied to it,
 it will fail and return without creating any key object.
 
-The key object created by a successful call to **C_UnwrapKey** will have its
-**CKA_LOCAL** attribute set to CK_FALSE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
+Whenever a key is created by this operation, the following attribute
+specific behaviour is taken:
+- the key created will have its **CKA_LOCAL** attribute set to CK_FALSE.
+- the key created will have its **CKA_ALWAYS_SENSITIVE** attribute set to
+  CK_FALSE, and its **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE. Its
+  **CKA_EXTRACTABLE** attribute set to the value of the input template, with a
+  default of CK_TRUE if not provided.
+- the key created will have a value for **CKA_UNIQUE_ID** generated and
+  assigned (See Section 4.5.1).
+- the key will have its **CKA_CREATION_TIMESTAMP** assigned if the token
+  reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])
 
 To partition the unwrapping keys so they can only unwrap a subset of keys the
 attribute **CKA_UNWRAP_TEMPLATE** can be used on the unwrapping key to specify
@@ -385,18 +395,21 @@ key; _pTemplate_ points to the template for the new key; _ulAttributeCount_ is
 the number of attributes in the template; and _phKey_ points to the location
 that receives the handle of the derived key.
 
-The values of the **CKA_SENSITIVE**, **CKA_ALWAYS_SENSITIVE**,
-**CKA_EXTRACTABLE**, and **CKA_NEVER_EXTRACTABLE** attributes for the base key
-affect the values that these attributes can hold for the newly-derived key. See
-the description of each particular key-derivation mechanism in Section 6.42 and
-6.43 for any constraints of this type.
-
 If a call to **C_DeriveKey** cannot support the precise template supplied to it,
 it will fail and return without creating any key object.
 
-The key object created by a successful call to **C_DeriveKey** will have its
-**CKA_LOCAL** attribute set to CK_FALSE. In addition, the object created will
-have a value for **CKA_UNIQUE_ID** generated and assigned (See Section 4.5.1).
+Whenever a key is created by this operation, the following attribute
+specific behaviour is taken:
+- the key(s) created will have their **CKA_LOCAL** attribute set to CK_FALSE.
+- the values of the **CKA_SENSITIVE**, **CKA_ALWAYS_SENSITIVE**,
+  **CKA_EXTRACTABLE**, and **CKA_NEVER_EXTRACTABLE** attributes for the base key
+  affect the values that these attributes can hold for the newly-derived key(s).
+  See the description of each particular key-derivation mechanism in Section
+  6.42 and 6.43 for any constraints of this type.
+- the key(s) created will have a value for **CKA_UNIQUE_ID** generated and
+  assigned (See Section 4.5.1).
+- the key(s) will have their **CKA_CREATION_TIMESTAMP** assigned if the token
+  reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])
 
 To partition the derivation keys so they can only derive a subset of keys the
 attribute **CKA_DERIVE_TEMPLATE** can be used on the derivation keys to specify
@@ -618,20 +631,23 @@ receives the handle of the key.
 The **CKA_UNWRAP** attribute of the unwrapping key, which indicates whether the
 key supports unwrapping, MUST be CK_TRUE.
 
-The new key will have the **CKA_ALWAYS_SENSITIVE** attribute set to CK_FALSE,
-and the **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE. The
-**CKA_EXTRACTABLE** attribute is by default set to CK_TRUE.
-
 Some mechanisms may modify, or attempt to modify, the contents of the
 _pMechanism_ structure at the same time that the key is unwrapped.
 
 If a call to **C_UnwrapKeyAuthenticated** cannot support the precise template
 supplied to it, it will fail and return without creating any key object.
 
-The key object created by a successful call to **C_UnwrapKeyAuthenticated** will
-have its **CKA_LOCAL** attribute set to CK_FALSE. In addition, the object
-created will have a value for **CKA_UNIQUE_ID** generated and assigned (see
-section 4.5.1).
+Whenever a key is created by this operation, the following attribute
+specific behaviour is taken:
+- the key created will have its **CKA_LOCAL** attribute set to CK_FALSE.
+- the key created will have its **CKA_ALWAYS_SENSITIVE** attribute set to
+  CK_FALSE, and its **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE. Its
+  **CKA_EXTRACTABLE** attribute set to the value of the input template, with a
+  default of CK_TRUE if not provided.
+- the key created will have a value for **CKA_UNIQUE_ID** generated and
+  assigned (See Section 4.5.1).
+- the key will have its **CKA_CREATION_TIMESTAMP** assigned if the token
+  reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])
 
 **C_UnwrapKeyAuthenticated** Primary use case:
 
@@ -744,14 +760,17 @@ _pCiphertext_ and **C_EncapsulateKey** returns **CKR_BUFFER_TOO_SMALL**. The
 **CKA_ENCAPSULATE** attribute of the public key, which indicates whether the key
 supports encapsulation, MUST be CK_TRUE.
 
-The new key will have:
-
-* the **CKA_ALWAYS_SENSITIVE** attribute set to CK_FALSE,
-* the **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE.
-* the **CKA_EXTRACTABLE** set to the value of the input template with a default
-  of CK_TRUE if not provided,
-* the **CKA_LOCAL** attribute set to CK_FALSE, and
-* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.5.1.
+Whenever a key is created by this operation, the following attribute
+specific behaviour is taken:
+- the key created will have its **CKA_LOCAL** attribute set to CK_FALSE.
+- the key created will have its **CKA_ALWAYS_SENSITIVE** attribute set to
+  CK_FALSE, and its **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE. Its
+  **CKA_EXTRACTABLE** attribute set to the value of the input template, with a
+  default of CK_TRUE if not provided.
+- the key created will have a value for **CKA_UNIQUE_ID** generated and
+  assigned (See Section 4.5.1).
+- the key will have its **CKA_CREATION_TIMESTAMP** assigned if the token
+  reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])
 
 If a call to **C_EncapsulateKey** cannot support the precise template supplied
 to it, it will fail and return without creating any key object.
@@ -850,14 +869,17 @@ to it, it will fail and return without creating any key object.
 The **CKA_DECAPSULATE** attribute of the private key, which indicates whether
 the key supports decapsulation, MUST be CK_TRUE.
 
-The new key will have:
-
-* the **CKA_ALWAYS_SENSITIVE** attribute set to CK_FALSE,
-* the **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE.
-* the **CKA_EXTRACTABLE** set to the value of the input template with a default
-  of CK_TRUE if not provided,
-* the **CKA_LOCAL** attribute set to CK_FALSE, and
-* the **CKA_UNIQUE_ID** attribute generated and assigned per section 4.5.1.
+Whenever a key is created by this operation, the following attribute
+specific behaviour is taken:
+- the key created will have its **CKA_LOCAL** attribute set to CK_FALSE.
+- the key created will have its **CKA_ALWAYS_SENSITIVE** attribute set to
+  CK_FALSE, and its **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE. Its
+  **CKA_EXTRACTABLE** attribute set to the value of the input template, with a
+  default of CK_TRUE if not provided.
+- the key created will have a value for **CKA_UNIQUE_ID** generated and
+  assigned (See Section 4.5.1).
+- the key will have its **CKA_CREATION_TIMESTAMP** assigned if the token
+  reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])
 
 Some mechanisms may modify, or attempt to modify, the contents of the
 _pMechanism_ structure at the same time that the key is decapsulated.

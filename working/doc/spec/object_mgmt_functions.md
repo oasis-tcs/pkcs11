@@ -23,16 +23,19 @@ new object’s handle.
 If a call to **C_CreateObject** cannot support the precise template supplied to
 it, it will fail and return without creating any object.
 
-If **C_CreateObject** is used to create a key object, the key object will have
-its **CKA_LOCAL** attribute set to CK_FALSE. If that key object is a secret or
-private key then the new key will have the **CKA_ALWAYS_SENSITIVE** attribute
-set to CK_FALSE, and the **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE.
-
 Only session objects can be created during a read-only session. Only public
 objects can be created unless the normal user is logged in.
 
-Whenever an object is created, a value for **CKA_UNIQUE_ID** is generated and
-assigned to the new object (See Section 4.5.1).
+Whenever an object is created by this operation, the following attribute
+specific behaviour is taken:
+- a key object created will have its **CKA_LOCAL** attribute set to CK_FALSE.
+- an object that is a secret key or private key will have its
+  **CKA_ALWAYS_SENSITIVE** attribute set to CK_FALSE, and its
+  **CKA_NEVER_EXTRACTABLE** attribute set to CK_FALSE.
+- a new value for **CKA_UNIQUE_ID** is generated and assigned to the new object
+  (See Section 4.5.1).
+- a storage object created will have its **CKA_CREATION_TIMESTAMP** assigned if
+  the token reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])
 
 Return values: CKR_ARGUMENTS_BAD, CKR_ATTRIBUTE_READ_ONLY,
 CKR_ATTRIBUTE_TYPE_INVALID, CKR_ATTRIBUTE_VALUE_INVALID,
@@ -148,8 +151,13 @@ it, it will fail and return without creating any object. If the object indicated
 by hObject has its **CKA_COPYABLE** attribute set to CK_FALSE, **C_CopyObject**
 will return **CKR_ACTION_PROHIBITED**.
 
-Whenever an object is copied, a new value for **CKA_UNIQUE_ID** is generated and
-assigned to the new object (See Section 4.5.1).
+Whenever an object is created by this operation, the following attribute
+specific behaviour is taken:
+- a new value for **CKA_UNIQUE_ID** is generated and assigned to the new object
+  (See Section 4.5.1).
+- a storage object created will have its **CKA_CREATION_TIMESTAMP** assigned if
+  the token reports **CKF_CLOCK_ON_TOKEN**. (See Section [4.5.1][The CKA_CREATION_TIMESTAMP attribute])  When copying an
+  object, the **CKA_CREATION_TIMESTAMP** is never copied from the source object.
 
 Only session objects can be created during a read-only session. Only public
 objects can be created unless the normal user is logged in.

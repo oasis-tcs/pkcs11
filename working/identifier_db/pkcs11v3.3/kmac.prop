@@ -1,0 +1,10 @@
+KMAC and SHAKE mechanisms
+
+Mechanisms:
+#define CKM_KMAC128  TBD opt
+#define CKM_KMAC256  TBD opt
+#define CKM_SHAKE_128  TBD opt
+#define CKM_SHAKE_256  TBD opt
+
+Key Types:
+#define CKK_KMAC TBD

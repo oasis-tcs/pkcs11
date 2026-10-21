@@ -1,0 +1,5 @@
+Add new mechanism object attributes
+
+Attributes:
+#define CKA_FLAGS                     TBD
+#define CKA_SUPPORTED_PARAMETER_SETS  TBD

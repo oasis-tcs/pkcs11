@@ -136,7 +136,7 @@ _kdfMechanism_
 CKM_X2RATCHET_RESPOND mechanism. It is defined as follows:
 
 ~~~{.c}
-Typedef struct CK_X2RATCHET_RESPOND_PARAMS {
+typedef struct CK_X2RATCHET_RESPOND_PARAMS {
 	CK_BYTE_PTR	sk;
 	CK_OBJECT_HANDLE	own_prekey;
 	CK_OBJECT_HANDLE	initiator_identity;

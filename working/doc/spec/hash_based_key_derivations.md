@@ -43,7 +43,7 @@
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_BLAKE2B_512_KEY_DERIVE           |     |     |      |     |       |     |  ✓  |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
-table 141: Hash-based key derivation Mechanisms vs. Functions
+table: Hash-based key derivation Mechanisms vs. Functions
 
 ### Definitions
 
@@ -116,7 +116,7 @@ key by digesting the value of another secret key with function \<hash\>.
 +-------------------------------+----------------------------+-------------------------+
 | CKM_BLAKE2B_512_KEY_DERIVE    | Blake2b ^3^                | 64                      |
 +-------------------------------+----------------------------+-------------------------+
-table 142: Hash-based key derivation: mechanisms and hash / expansion functions
+table: Hash-based key derivation: mechanisms and hash / expansion functions
 
 The value of the base key is digested once, and the result is used to make the
 value of the derived secret key.

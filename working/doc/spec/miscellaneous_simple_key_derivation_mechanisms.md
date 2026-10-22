@@ -377,6 +377,7 @@ the template) are handled as described in the following table:
 | CKA_PUBLIC_KEY_INFO    |               | CKA_PUBLIC_KEY_INFO             |
 | CKA_KEY_GEN_MECHANISM  |               | CKA_KEY_GEN_MECHANISM           |
 | CKA_ALLOWED_MECHANISMS |               | CKA_ALLOWED_MECHANISMS          |
+table: Public key from private key mapping
 
 This mechanism should be supported for all private key types supported by the
 token.

@@ -113,7 +113,7 @@ vectors.
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_BLAKE2B_512_KEY_GEN              |     |     |      |     |   ✓   |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
-table 143: HMAC Mechanisms vs. Functions
+table: HMAC Mechanisms vs. Functions
 
 ### Definitions
 
@@ -239,14 +239,14 @@ HMAC output.
 +-------------------------------+----------------------------+--------------------------+
 | CKM_BLAKE2B_512_HMAC_GENERAL  | Blake2b ^3^                | 64                       |
 +-------------------------------+----------------------------+--------------------------+
-table 144: HMAC: mechanisms and hash functions
+table: HMAC: mechanisms and hash functions
 
 
 | Function | Key type                            | Data length | Signature length               |
 |----------|-------------------------------------|-------------|--------------------------------|
 | C_Sign   | generic secret or CKK_\<hash\>_HMAC | Any         | 1-len, depending on parameters |
 | C_Verify | generic secret or CKK_\<hash>\_HMAC | Any         | 1-len, depending on parameters |
-table 145: General-length HMAC: Key And Data Length
+table: General-length HMAC: Key And Data Length
 
 ### HMAC
 

@@ -6,15 +6,11 @@ that follow.
 
 | Attribute        | Data Type      | Meaning                             |
 |------------------|----------------|-------------------------------------|
-| CKA_TOKEN        | CK_BBOOL       | CK_TRUE if object is a token object; CK_FALSE if object is a session object.\
-                                      Default is CK_FALSE. |
-| CKA_PRIVATE      | CK_BBOOL       | CK_TRUE if object is a private object; CK_FALSE if object is a public object.\
-                                      Default value is token-specific, and may depend on the values of other\
-                                      attributes of the object. |
+| CKA_TOKEN        | CK_BBOOL       | CK_TRUE if object is a token object; CK_FALSE if object is a session object.  Default is CK_FALSE. |
+| CKA_PRIVATE      | CK_BBOOL       | CK_TRUE if object is a private object; CK_FALSE if object is a public object.  Default value is token-specific, and may depend on the values of other attributes of the object. |
 | CKA_MODIFIABLE   | CK_BBOOL       | CK_TRUE if object can be modified Default is CK_TRUE. |
 | CKA_LABEL        | RFC2279 string | Description of the object (default empty). |
-| CKA_COPYABLE     | CK_BBOOL       | CK_TRUE if object can be copied using C_CopyObject. Defaults to CK_TRUE.\
-                                      Can’t be set to TRUE once it is set to FALSE. |
+| CKA_COPYABLE     | CK_BBOOL       | CK_TRUE if object can be copied using C_CopyObject. Defaults to CK_TRUE.  Can’t be set to TRUE once it is set to FALSE. |
 | CKA_DESTROYABLE  | CK_BBOOL       | CK_TRUE if the object can be destroyed using C_DestroyObject. Default is CK_TRUE. |
 table: Common Storage Object Attributes
 

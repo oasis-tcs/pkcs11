@@ -121,8 +121,8 @@ or pre computed TR and a context for the generation of an External Mu for pure M
 
 ~~~{.c}
 typedef struct CK_MU_GEN_PARAMS {
-  CK_OBJECT_HANDLE hKey, //public or private.
-  CK_BYTE_PTR         pTR; //pre computed TR from public key 
+  CK_OBJECT_HANDLE    hKey,     /* public or private. */
+  CK_BYTE_PTR         pTR;      /* pre computed TR from public key  */
   CK_ULONG            ulTRLen;
   CK_BYTE_PTR         pctx;
   CK_ULONG            ulctxLen;
@@ -180,7 +180,7 @@ addition to the common attributes defined for this object class:
 |---------------------------|------------|------------------------------|
 | CKA_PARAMETER_SET ^1,4,6^ | CK_ML_DSA_PARAMETER_SET_TYPE | ML-DSA parameter set |
 | CKA_SEED ^4,6,7^          | Byte array | Seed value (𝜉) as defined in ML-DSA.Keygen in [FIPS 204] |
-| CKA_VALUE ^1,4,6,7^       | Byte array | Private key (sk) as defined in ML-DSA.Keygen-internal in [FIPS 204] |
+| CKA_VALUE ^4,6,7^         | Byte array | Private key (sk) as defined in ML-DSA.Keygen-internal in [FIPS 204] |
 table: ML-DSA Private Key Object Attributes
 
 - Refer to Table 13 for footnotes
@@ -303,6 +303,7 @@ following table. In the table, k is the length in bytes of the ML-DSA signature.
 |-----------------|---------------------|----------------|---------------|
 | C_Sign ^1^      | ML-DSA Private Key  | Length of hash | k             |
 | C_Verify ^1^    | ML-DSA Public Key   | any, k         | N/A           |
+| C_VerifySignature ^1^ | ML-DSA Public Key   | any, k       | N/A           |
 table: HashML-DSA: Key and Data Length
 
 ^1^ Single-part operations only.
@@ -313,8 +314,8 @@ keys in bytes.
 
 ### HashML-DSA Signature with hashing
 
-The HashML-DSA with hashing mechanism, denoted **CKM_HASH_ML_DSA_<hash>** where
-<hash> identifies a hash function as per [Table 1], is a mechanism for single-
+The HashML-DSA with hashing mechanism, denoted **CKM_HASH_ML_DSA_\<hash\>** where
+\<hash\> identifies a hash function as per [Table 248], is a mechanism for single-
 and multiple-part signatures and verification for pre-hash ML-DSA signatures as
 defined in section [5.4] of [FIPS 204], Algorithm 4 HashML-DSA.Sign and
 Algorithm 5 HashML-DSA.Verify. This mechanism computes the entire HashML-DSA

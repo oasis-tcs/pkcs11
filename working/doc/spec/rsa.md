@@ -962,7 +962,7 @@ of the RSA modulus.
 | C_Decrypt ^1^ | RSA private key | k            | ≤ _k_-2-40-5  |
 | C_WrapKey     | RSA public key  | ≤ _k_-2-40-5 | _k_           |
 | C_UnwrapKey   | RSA private key | _k_          | ≤ _k_-2-40-5  |
-Table 51, TPM 1.1b and TPM 1.2 PKCS #1 RSA OAEP: Key And Data Length
+table: TPM 1.1b and TPM 1.2 PKCS #1 RSA OAEP: Key And Data Length
 
 ^1^ Single-part operations only.
 

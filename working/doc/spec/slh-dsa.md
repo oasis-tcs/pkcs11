@@ -84,7 +84,7 @@ Parameter set types:
 - CKP_SLH_DSA_SHA2_256S
 - CKP_SLH_DSA_SHAKE_256S
 - CKP_SLH_DSA_SHA2_256F
-- CKP_SLH_DSA_SHAKE_256S
+- CKP_SLH_DSA_SHAKE_256F
             
 ### SLH-DSA public key objects
 
@@ -283,7 +283,7 @@ on token. The data passed in is the message M.
 | CKM_HASH_SLH_DSA_SHA3_512 | SHA3-512      |
 | CKM_HASH_SLH_DSA_SHAKE128 | SHAKE128      |
 | CKM_HASH_SLH_DSA_SHAKE256 | SHAKE256      |
-Table 1, HashSLH-DSA with hashing: mechanisms and hash functions
+table: HashSLH-DSA with hashing: mechanisms and hash functions
 
 These mechanisms have an optional parameter **CK_SIGN_ADDITIONAL_CONTEXT**. If
 no parameter is supplied the hedgeVariant will be **CKH_HEDGE_PREFERRED**,

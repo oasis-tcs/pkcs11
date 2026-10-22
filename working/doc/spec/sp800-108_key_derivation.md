@@ -110,14 +110,45 @@ typedef CK_ULONG CK_PRF_DATA_TYPE;
 
 The following table lists all of the supported data field types:
 
-| Data Field Identifier           | Description                          |
-|---------------------------------|--------------------------------------|
-| CK_SP800_108_ITERATION_VARIABLE | Identifies the iteration variable defined internally by the KDF. |
-| CK_SP800_108_COUNTER            | Identifies an optional counter value represented as a binary string. Exact formatting of the counter value is defined by the CK_SP800_108_COUNTER_FORMAT structure. The value of the counter is defined by the KDF’s internal loop counter. |
-| CK_SP800_108_DKM_LENGTH         | Identifies the length in bits of the derived keying material (DKM) represented as a binary string. Exact formatting of the length value is defined by the CK_SP800_108_DKM_LENGTH_FORMAT structure. |
-| CK_SP800_108_BYTE_ARRAY         | Identifies a generic byte array of data. This data type can be used to provide “context”, “label”, “separator bytes” as well as any other type of encoding information required by the higher level protocol. |
-| CK_SP800_108_KEY_HANDLE         | Identifies the key handle for an object with CK_OBJECT_CLASS set to **CKO_SECRET_KEY**. If specified, this data type will be interpreted as an instance of CK_BYTE_ARRAY where pValue points to the buffer containing the **CKA_VALUE** attribute of the provided key handle, and ulValueLen is assigned the value of the **CKA_VALUE_LEN** attribute of the provided key handle. |V
-The specified key handle must have attributes settings consistent with a key that would allow it to be used as a base key for this key derivation mechanism.
++--------------------------------------+---------------------------------------------------+
+| Data Field Identifier                | Description                                       |
++======================================+===================================================+
+| CK_SP800_108_ITERATION_VARIABLE      | Identifies the iteration variable defined         |
+|                                      | internally by the KDF.                            |
++--------------------------------------+---------------------------------------------------+
+| CK_SP800_108_COUNTER                 | Identifies an optional counter value represented  |
+|                                      | as a binary string. Exact formatting of the       |
+|                                      | counter value is defined by the                   |
+|                                      | CK_SP800_108_COUNTER_FORMAT structure. The value  |
+|                                      | of the counter is defined by the KDF’s internal   |
+|                                      | loop counter.                                     |
++--------------------------------------+---------------------------------------------------+
+| CK_SP800_108_DKM_LENGTH              | Identifies the length in bits of the derived      |
+|                                      | keying material (DKM) represented as a binary     |
+|                                      | string. Exact formatting of the length value is   |
+|                                      | defined by the CK_SP800_108_DKM_LENGTH_FORMAT     |
+|                                      | structure.                                        |
++--------------------------------------+---------------------------------------------------+
+| CK_SP800_108_BYTE_ARRAY              | Identifies a generic byte array of data. This data|
+|                                      | type can be used to provide “context”, “label”,   |
+|                                      | “separator bytes” as well as any other type of    |
+|                                      | encoding information required by the higher level |
+|                                      | protocol.                                         |
++--------------------------------------+---------------------------------------------------+
+| CK_SP800_108_KEY_HANDLE              | Identifies the key handle for an object with      |
+|                                      | CK_OBJECT_CLASS set to **CKO_SECRET_KEY**. If     |
+|                                      | specified, this data type will be interpreted as  |
+|                                      | an instance of CK_BYTE_ARRAY where pValue points  |
+|                                      | to the buffer containing the **CKA_VALUE**        |
+|                                      | attribute of the provided key handle, and         |
+|                                      | ulValueLen is assigned the value of the           |
+|                                      | **CKA_VALUE_LEN** attribute of the provided key   |
+|                                      | handle.                                           |
+|                                      | The specified key handle must have                |
+|                                      | attributes settings consistent with a key that    |
+|                                      | would allow it to be used as a base key for this  |
+|                                      | key derivation mechanism.                         |
++--------------------------------------+---------------------------------------------------+
 table: SP800-108 PRF Data Field Types
 
 #### CK_PRF_DATA_PARAM
@@ -213,10 +244,18 @@ typedef CK_ULONG CK_SP800_108_DKM_LENGTH_METHOD;
 
 The following table lists all of the supported DKM Length Methods:
 
-| DKM Length Method Identifier | Description                             |
-|------------------------------|-----------------------------------------|
-| CK_SP800_108_DKM_LENGTH_SUM_OF_KEYS | Specifies that the DKM length should be set to the sum of the length of all keys derived by this invocation of the KDF. |
-| CK_SP800_108_DKM_LENGTH_SUM_OF_SEGMENTS | Specifies that the DKM length should be set to the sum of the length of all segments of output produced by the PRF by this invocation of the KDF.= |
++-----------------------------------------+------------------------------------------------+
+| DKM Length Method Identifier            | Description                                    |
++=========================================+================================================+
+| CK_SP800_108_DKM_LENGTH_SUM_OF_KEYS     | Specifies that the DKM length should be set to |
+|                                         | the sum of the length of all keys derived by   |
+|                                         | this invocation of the KDF.                    |
++-----------------------------------------+------------------------------------------------+
+| CK_SP800_108_DKM_LENGTH_SUM_OF_SEGMENTS | Specifies that the DKM length should be set to |
+|                                         | the sum of the length of all segments of output|
+|                                         | produced by the PRF by this invocation of the  |
+|                                         | KDF.                                           |
++-----------------------------------------+------------------------------------------------+
 table: SP800-108 DKM Length Methods
 
 #### CK_SP800_108_DKM_LENGTH_FORMAT
@@ -384,24 +423,41 @@ It has a parameter, a **CK_SP800_108_KDF_PARAMS** structure.
 The following table lists the data field types that are supported for this KDF
 type and their meaning:
 
-| Data Field Identifier           | Description                          |
-|---------------------------------|--------------------------------------|
-| CK_SP800_108_ITERATION_VARIABLE | This data field type is mandatory.   |
-|                                 | This data field type identifies the location of the iteration variable in the constructed PRF input data. |
++---------------------------------+--------------------------------------------------------+
+| Data Field Identifier           | Description                                            |
++=================================+========================================================+
+| CK_SP800_108_ITERATION_VARIABLE | This data field type is mandatory.                     |
+|                                 | This data field type identifies the location of the    |
+|                                 | iteration variable in the constructed PRF input data.  |
 |                                 | The iteration variable for this KDF type is a counter. |
-|                                 | Exact formatting of the counter value is defined by the CK_SP800_108_COUNTER_FORMAT structure. |
-| CK_SP800_108_COUNTER            | This data field type is invalid for this KDF type. |
-| CK_SP800_108_DKM_LENGTH         | This data field type is optional. |
-|                                 | This data field type identifies the location of the DKM length  in the constructed PRF input data.| 
-|                                 | Exact formatting of the DKM length is defined by the CK_SP800_108_DKM_LENGTH_FORMAT structure. |
-|                                 | If specified, only one instance of this type may be specified. |
-| CK_SP800_108_BYTE_ARRAY         | This data field type is optional. |
-|                                 | This data field type identifies the location and value of a byte array of data in the constructed PRF input data. |
-|                                 | This standard does not restrict the number of instances of this data type. |
-| CK_SP800_108_KEY_HANDLE         | This data field type is optional. |
-|                                 | This data field type identifies the location of a symmetric key value in the constructed PRF input data. |
-|                                 | This standard does not restrict the number of instances of this data type. |
-|                                 | This standard does not restrict the same key handle being defined multiple times. |
+|                                 | Exact formatting of the counter value is defined by the|
+|                                 | CK_SP800_108_COUNTER_FORMAT structure.                 |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_COUNTER            | This data field type is invalid for this KDF type.     |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_DKM_LENGTH         | This data field type is optional.                      |
+|                                 | This data field type identifies the location of the DKM|
+|                                 | length  in the constructed PRF input data.             | 
+|                                 | Exact formatting of the DKM length is defined by the   |
+|                                 | CK_SP800_108_DKM_LENGTH_FORMAT structure.              |
+|                                 | If specified, only one instance of this type may be    |
+|                                 | specified.                                             |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_BYTE_ARRAY         | This data field type is optional.                      |
+|                                 | This data field type identifies the location and value |
+|                                 | of a byte array of data in the constructed PRF input   |
+|                                 | data.                                                  |
+|                                 | This standard does not restrict the number of instances|
+|                                 | of this data type.                                     |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_KEY_HANDLE         | This data field type is optional.                      |
+|                                 | This data field type identifies the location of a      |
+|                                 | symmetric key value in the constructed PRF input data. |
+|                                 | This standard does not restrict the number of instances|
+|                                 | of this data type.                                     |
+|                                 | This standard does not restrict the same key handle    |
+|                                 | being defined multiple times.                          |
++---------------------------------+--------------------------------------------------------+
 table: Counter Mode data field requirements
  
 [NIST SP800-108] limits the amount of derived keying material that can be
@@ -422,28 +478,50 @@ It has a parameter, a **CK_SP800_108_FEEDBACK_KDF_PARAMS** structure.
 The following table lists the data field types that are supported for this KDF
 type and their meaning:
 
-| Data Field Identifier           | Description                          |
-|---------------------------------|--------------------------------------|
-| CK_SP800_108_ITERATION_VARIABLE | This data field type is mandatory.   |
-|                                 | This data field type identifies the location of the iteration variable in the constructed PRF input data. |
-|                                 | The iteration variable is defined as K(i-1) in section 5.2 of [NIST SP800-108]. |
-|                                 | The size, format and value of this data input is defined by the internal KDF structure and PRF output. |
-|                                 | Exact formatting of the counter value is defined by the CK_SP800_108_COUNTER_FORMAT structure. |
-| CK_SP800_108_COUNTER            | This data field type is optional.    |
-|                                 | This data field type identifies the location of the counter in the constructed PRF input data. |
-|                                 | Exact formatting of the counter value is defined by the CK_SP800_108_COUNTER_FORMAT structure. |
-|                                 | If specified, only one instance of this type may be specified. |
-| CK_SP800_108_DKM_LENGTH         | This data field type is optional.    |
-|                                 | This data field type identifies the location of the DKM length in the constructed PRF input data. |
-|                                 | Exact formatting of the DKM length is defined by the CK_SP800_108_DKM_LENGTH_FORMAT structure. |
-|                                 | If specified, only one instance of this type may be specified. |
-| CK_SP800_108_BYTE_ARRAY         | This data field type is optional.    |
-|                                 | This data field type identifies the location and value of a byte array of data in the constructed PRF input data. |
-|                                 | This standard does not restrict the number of instances of this data type. |
-| CK_SP800_108_KEY_HANDLE         | This data field type is optional.    |
-|                                 | This data field type identifies the location of a symmetric key value in the constructed PRF input data. |
-|                                 | This standard does not restrict the number of instances of this data type. |
-|                                 | This standard does not restrict the same key handle being defined multiple times. |
++---------------------------------+--------------------------------------------------------+
+| Data Field Identifier           | Description                                            |
++=================================+========================================================+
+| CK_SP800_108_ITERATION_VARIABLE | This data field type is mandatory.                     |
+|                                 | This data field type identifies the location of the    |
+|                                 | iteration variable in the constructed PRF input data.  |
+|                                 | The iteration variable is defined as K(i-1) in section |
+|                                 | 5.2 of [NIST SP800-108].                               |
+|                                 | The size, format and value of this data input is       |
+|                                 | defined by the internal KDF structure and PRF output.  |
+|                                 | Exact formatting of the counter value is defined by the|
+|                                 | CK_SP800_108_COUNTER_FORMAT structure.                 |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_COUNTER            | This data field type is optional.                      |
+|                                 | This data field type identifies the location of the    |
+|                                 | counter in the constructed PRF input data.             |
+|                                 | Exact formatting of the counter value is defined by    |
+|                                 | the CK_SP800_108_COUNTER_FORMAT structure.             |
+|                                 | If specified, only one instance of this type may be    |
+|                                 | specified.                                             |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_DKM_LENGTH         | This data field type is optional.                      |
+|                                 | This data field type identifies the location of the DKM|
+|                                 | length in the constructed PRF input data.              |
+|                                 | Exact formatting of the DKM length is defined by the   |
+|                                 | CK_SP800_108_DKM_LENGTH_FORMAT structure.              |
+|                                 | If specified, only one instance of this type may be    |
+|                                 | specified.                                             |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_BYTE_ARRAY         | This data field type is optional.                      |
+|                                 | This data field type identifies the location and value |
+|                                 | of a byte array of data in the constructed PRF input   |
+|                                 | data.                                                  |
+|                                 | This standard does not restrict the number of instances|
+|                                 | of this data type.                                     |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_KEY_HANDLE         | This data field type is optional.                      |
+|                                 | This data field type identifies the location of a      |
+|                                 | symmetric key value in the constructed PRF input data. |
+|                                 | This standard does not restrict the number of instances|
+|                                 | of this data type.                                     |
+|                                 | This standard does not restrict the same key handle    |
+|                                 | being defined multiple times.                          |
++---------------------------------+--------------------------------------------------------+
 table: Feedback Mode data field requirements
 
 [NIST SP800-108] limits the amount of derived keying material that can be
@@ -463,28 +541,50 @@ It has a parameter, a **CK_SP800_108_KDF_PARAMS** structure.
 The following table lists the data field types that are supported for this KDF
 type and their meaning:
 
-| Data Field Identifier           | Description                          |
-|---------------------------------|--------------------------------------|
-| CK_SP800_108_ITERATION_VARIABLE | This data field type is mandatory.   |
-|                                 | This data field type identifies the location of the iteration variable in the constructed PRF input data. |
-|                                 | The iteration variable is defined as A(i) in section 5.3 of [NIST SP800-108]. |
-|                                 | The size, format and value of this data input is defined by the internal KDF structure and PRF output. |
-|                                 | Exact formatting of the counter value is defined by the CK_SP800_108_COUNTER_FORMAT structure. |
-| CK_SP800_108_COUNTER            | This data field type is optional.    |
-|                                 | This data field type identifies the location of the counter in the constructed PRF input data. |
-|                                 | Exact formatting of the counter value is defined by the CK_SP800_108_COUNTER_FORMAT structure. |
-|                                 | If specified, only one instance of this type may be specified. |
-| CK_SP800_108_DKM_LENGTH         | This data field type is optional.    |
-|                                 | This data field type identifies the location of the DKM length in the constructed PRF input data. |
-|                                 | Exact formatting of the DKM length is defined by the CK_SP800_108_DKM_LENGTH_FORMAT structure. |
-|                                 | If specified, only one instance of this type may be specified. |
-| CK_SP800_108_BYTE_ARRAY         | This data field type is optional.    |
-|                                 | This data field type identifies the location and value of a byte array of data in the constructed PRF input data. |
-|                                 | This standard does not restrict the number of instances of this data type. |
-| CK_SP800_108_KEY_HANDLE         | This data field type is optional.    |
-|                                 | This data field type identifies the location of a symmetric key value in the constructed PRF input data. |
-|                                 | This standard does not restrict the number of instances of this data type. |
-|                                 | This standard does not restrict the same key handle being defined multiple times. |
++---------------------------------+--------------------------------------------------------+
+| Data Field Identifier           | Description                                            |
++=================================+========================================================+
+| CK_SP800_108_ITERATION_VARIABLE | This data field type is mandatory.                     |
+|                                 | This data field type identifies the location of the    |
+|                                 | iteration variable in the constructed PRF input data.  |
+|                                 | The iteration variable is defined as A(i) in section   |
+|                                 | 5.3 of [NIST SP800-108].                               |
+|                                 | The size, format and value of this data input is       |
+|                                 | defined by the internal KDF structure and PRF output.  |
+|                                 | Exact formatting of the counter value is defined by the|
+|                                 | CK_SP800_108_COUNTER_FORMAT structure.                 |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_COUNTER            | This data field type is optional.                      |
+|                                 | This data field type identifies the location of the    |
+|                                 | counter in the constructed PRF input data.             |
+|                                 | Exact formatting of the counter value is defined by the|
+|                                 | CK_SP800_108_COUNTER_FORMAT structure.                 |
+|                                 | If specified, only one instance of this type may be    |
+|                                 | specified.                                             |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_DKM_LENGTH         | This data field type is optional.                      |
+|                                 | This data field type identifies the location of the DKM|
+|                                 | length in the constructed PRF input data.              |
+|                                 | Exact formatting of the DKM length is defined by the   |
+|                                 | CK_SP800_108_DKM_LENGTH_FORMAT structure.              |
+|                                 | If specified, only one instance of this type may be    |
+|                                 | specified.                                             |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_BYTE_ARRAY         | This data field type is optional.                      |
+|                                 | This data field type identifies the location and value |
+|                                 | of a byte array of data in the constructed PRF input   |
+|                                 | data.                                                  |
+|                                 | This standard does not restrict the number of instances|
+|                                 | of this data type.                                     |
++---------------------------------+--------------------------------------------------------+
+| CK_SP800_108_KEY_HANDLE         | This data field type is optional.                      |
+|                                 | This data field type identifies the location of a      |
+|                                 | symmetric key value in the constructed PRF input data. |
+|                                 | This standard does not restrict the number of instances|
+|                                 | of this data type.                                     |
+|                                 | This standard does not restrict the same key handle    |
+|                                 | being defined multiple times.                          |
++---------------------------------+--------------------------------------------------------+
 table: Double Pipeline Mode data field requirements
 
 [NIST SP800-108] limits the amount of derived keying material that can be

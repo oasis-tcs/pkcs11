@@ -38,7 +38,6 @@ the PKCS #11 attributes for public keys, use the following table.
 | keyAgreement                                                         | CKA_DERIVE                                             |
 | keyEncipherment                                                      | CKA_WRAP                                               |
 | keyAgreement, keyEncipherment                                        | CKA_ENCAPSULATE                                        |
-
 table: Mapping of X.509 key usage flags to Cryptoki attributes for public keys
 
 The value of the **CKA_PUBLIC_KEY_INFO** attribute is the DER encoded value

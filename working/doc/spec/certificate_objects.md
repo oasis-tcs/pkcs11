@@ -16,7 +16,7 @@ common attributes defined for this object class:
 | Attribute	           | Data type	        | Meaning                    |
 |----------------------|--------------------|----------------------------|
 | CKA_CERTIFICATE_TYPE ^1^ | CK_CERTIFICATE_TYPE | Type of certificate   |
-| CKA_TRUSTED10        | CK_BBOOL           | The certificate can be trusted for the application that it was created. |
+| CKA_TRUSTED ^10^     | CK_BBOOL           | The certificate can be trusted for the application that it was created. |
 | CKA_CERTIFICATE_CATEGORY | CKA_CERTIFICATE_CATEGORY | (default CK_CERTIFICATE_CATEGORY_UNSPECIFIED) |
 | CKA_CHECK_VALUE      | Byte array         | Checksum                   |
 | CKA_START_DATE       | CK_DATE            | Start date for the certificate (default empty) |

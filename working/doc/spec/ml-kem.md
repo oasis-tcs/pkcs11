@@ -92,7 +92,7 @@ addition to the common attributes defined for this object class:
 |---------------------------|------------------------------|-----------------|
 | CKA_PARAMETER_SET ^1,4,6^ | CK_ML_KEM_PARAMETER_SET_TYPE | ML-KEM parameter set |
 | CKA_SEED ^4,6,7^          | Byte array                   | Randomness value (d||z) as defined in ML-KEM.Keygen in [FIPS 203] |
-| CKA_VALUE ^1,4,6,7^       | Byte array                   | Private value i.e. decapsulation key dk as defined in [FIPS 203] |
+| CKA_VALUE ^4,6,7^         | Byte array                   | Private value i.e. decapsulation key dk as defined in [FIPS 203] |
 table: ML-KEM Private Key Object Attributes
 
 - Refer to Table 13 for footnotes

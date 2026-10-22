@@ -11,7 +11,7 @@ For the Advanced Encryption Standard (AES) see [FIPS PUB 197].
 +======================================+:===:+:===:+:====:+:===:+:=====:+:===:+:===:+:====:+
 | CKM_AES_KEY_GEN                      |     |     |      |     |   ✓   |     |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
-| CKM_AES_EC                           |  ✓  |     |      |     |       |  ✓  |     |      |
+| CKM_AES_ECB                          |  ✓  |     |      |     |       |  ✓  |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
 | CKM_AES_CBC                          |  ✓  |     |      |     |       |  ✓  |     |      |
 +--------------------------------------+-----+-----+------+-----+-------+-----+-----+------+
@@ -221,7 +221,7 @@ table:
 | C_Decrypt   | AES | multiple of block size | between 1 and block size bytes shorter than input length |
 | C_WrapKey   | AES | any | input length rounded up to multiple of the block size |
 | C_UnwrapKey | AES | multiple of block size | between 1 and block length bytes shorter than input length |
-Table 99, AES-CBC with PKCS Padding: Key And Data Length
+table: AES-CBC with PKCS Padding: Key And Data Length
 
 For this mechanism, the _ulMinKeySize_ and _ulMaxKeySize_ fields of the
 **CK_MECHANISM_INFO** structure specify the supported range of AES key sizes, in
@@ -265,7 +265,7 @@ table:
 |-----------|-----|--------------|---------------------|----------------|
 | C_Encrypt | AES | any | same as input length | no final part |
 | C_Decrypt | AES | any | same as input length | no final part |
-Table 101, AES-CFB: Key And Data Length
+table: AES-CFB: Key And Data Length
 
 For this mechanism the **CK_MECHANISM_INFO** structure is as specified for CBC
 mode.

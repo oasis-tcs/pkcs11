@@ -30,7 +30,7 @@ Byte array
 : an arbitrary string (array) of **CK_BYTE**s
 
 Big integer
-: a string of **CK_BYTE**s representing an unsigned integer of arbitrary
+: a nonempty string of **CK_BYTE**s representing an unsigned integer of arbitrary
   size, most-significant byte first (e.g., the integer 32768 is represented
   as the 2-byte string 0x80 0x00)
 

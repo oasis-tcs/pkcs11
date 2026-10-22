@@ -104,7 +104,7 @@ hash function as per table 137, defined in [FIPS PUB 180-4]^1^, [FIPS PUB
 +------------------+----------------------------+-------------------------+-------------------------+
 | CKM_BLAKE2B_512  | Blake2b ^3^                | 512                     | 64                      |
 +------------------+----------------------------+-------------------------+-------------------------+
-table 137: Digest: mechanisms and hash functions
+table: Digest: mechanisms and hash functions
 
 It does not have a parameter.
 
@@ -115,7 +115,7 @@ the same location in memory.
 | Function | Input length | Digest length                              |
 |----------|--------------|--------------------------------------------|
 | C_Digest | any          | Digest length in bytes as per table 137    |
-table 138: Digest: Data Length
+table: Digest: Data Length
 
 ### Truncated Digest
 
@@ -136,7 +136,7 @@ initial hash value and truncated to \<t\> bits as per table 139.
 +------------------+-----------------+-------------------------+-------------------------+
 | CKM_SHA512_T     | SHA-512/t       | t                       | ⌈t divided by 8⌉        |
 +------------------+-----------------+-------------------------+-------------------------+
-table 139: Truncated digest: mechanisms and hash functions
+table: Truncated digest: mechanisms and hash functions
 
 **CKM_SHA512_224** and **CKM_SHA512_256** do not have a parameter.
 
@@ -151,7 +151,7 @@ the same location in memory.
 | Function | Input length | Digest length                              |
 |----------|--------------|--------------------------------------------|
 | C_Digest | any          | Digest length in bytes as per table 139    |
-table 140: Truncated digest: Data Length
+table: Truncated digest: Data Length
 
 ### Extensible Output Digest
 

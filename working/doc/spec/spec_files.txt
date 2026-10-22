@@ -43,6 +43,7 @@ random_number_generation_functions.md
 parallel_function_management_functions.md
 asynchronous_function_management_functions.md
 callback_functions.md
+atomic_cryptographic_functions.md
 rsa.md
 dsa.md
 elliptic_curves.md

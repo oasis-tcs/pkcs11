@@ -42,9 +42,17 @@ for In a new, *UP TO DATE* branch:
     will be allocated. For mechanisms, adding the 'opt' option will allocate
     from one of the low number gaps, otherwise it will allocate based on the
     larget currently allocated.
-   1.4) optionally next type of identifier (say for example, new mypqalg param set),
-    followed by it's list. (now paramsets are each in their own space).
+   1.4) optionally new type of identifier (say for example, new mypqalg param set),
+    followed by it's list. The new operator tells process to add the new type to
+    the database if it doesn't exist, otherwise ./process_proposal will throw an
+    error.
     Blank lines are ignored.
+    NOTE: ./process_proposal is idempotent. If you try to allocate an identifier
+    that already exists, the results file will assign that identifier it's  already
+    allocated value. If you try to create a new type that already exists,
+    ./process_proposal will just reuse that type. As a result, your can
+    safely run ./process_proposal multiple times on the same .prop file and it will
+    generate the same .result file.
 
 2) run ./process_proposal.pl as follows:
 	$ ./process_proposal.pl pkcs11vX.X/myproposal.prop

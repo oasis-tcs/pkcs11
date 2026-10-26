@@ -442,7 +442,7 @@ typedef CK_ULONG          CK_KEY_TYPE;
 
 #define CKK_COMP_KEM            0x0000004cUL
 #define CKK_COMP_SIG            0x0000004dUL
-
+#define CKK_KMAC                0x0000004eUL
 
 #define CKK_VENDOR_DEFINED      0x80000000UL
 
@@ -676,6 +676,9 @@ typedef CK_ULONG          CK_ATTRIBUTE_TYPE;
 #define CKA_PUBLIC_CRC64_VALUE          0x00000636UL
 /* new post-quantum (general) */
 #define CKA_SEED                        0x00000637UL
+/* new mechanism object attributes. */
+#define CKA_FLAGS                       0x00000638UL
+#define CKA_SUPPORTED_PARAMETER_SETS    0x00000639UL
 
 #define CKA_VENDOR_DEFINED              0x80000000UL
 
@@ -1265,6 +1268,12 @@ typedef CK_ULONG          CK_MECHANISM_TYPE;
 
 #define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE    0x00000056UL
 #define CKM_TLS12_EXTENDED_MASTER_KEY_DERIVE_DH 0x00000057UL
+
+/* KMAC mechanisms */
+#define CKM_KMAC128          0x0000001eUL
+#define CKM_KMAC256          0x00000022UL
+#define CKM_SHAKE_128        0x0000002fUL
+#define CKM_SHAKE_256        0x00000035UL
 
 #define CKM_VENDOR_DEFINED             0x80000000UL
 
@@ -2819,6 +2828,13 @@ typedef CK_ULONG CK_TRUST;
 #define CKT_NOT_TRUSTED             0x00000003UL
 #define CKT_TRUST_MUST_VERIFY_TRUST 0x00000004UL
 
+/* CK_KMAC_PARAMS used by mechanism CKM_KMAC* */
+typedef struct CK_KMAC_PARAMS {
+    CK_OBJECT_HANDLE hKey;
+    CK_ULONG         ulMacLength;
+    CK_VOID_PTR      pCustomizationString;
+    CK_ULONG         ulCustomizationStringLen;
+} CK_KMAC_PARAMS;
 
 #endif /* _PKCS11T_H_ */
 

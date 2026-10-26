@@ -130,7 +130,7 @@ typedef struct CK_IKE2_PRF_RESUME_DERIVE_PARAMS {
     CK_ULONG  ulNiLen;
     CK_BYTE_PTR  pNr;
     CK_ULONG  ulNrLen;
- } CK_IKE2_PRF_DERIVE_PARAMS;
+ } CK_IKE2_RESUME_PRF_DERIVE_PARAMS;
 ~~~
 
 The fields of the structure have the following meanings:

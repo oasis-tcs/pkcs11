@@ -17,33 +17,67 @@ The tools in this directory include:
 
 -----------------------------------------------------------------
 
-How to allocate identifiers for a new proposal:
+How to allocate identifiers for a new proposal, do this when you
+are reasonably confident that you have the appropriate name and
+number of identifier.
+
+To figure out what identifiers you need to add, checkout the
+proposal branch on your fork, got to working/identifier.db
+and run ./parse_doc.pl and identifiers missing, you need to
+add to your proposal. You do not need to add data structures
+and typedefs to your proposal:
+
+Make sure your fork is up to date, use git pull to update
+the local copy of your branch, create a new branch specifically
+for In a new, *UP TO DATE* branch:
 
 1)  Create a new proposal. Proposals have:
-   1.1) first line is the proposal name
+   1.1) first line is the proposal name. Your proposals should be in the pkcs11vX.X
+   directory where X.X is the current release.
    1.2) type of identifier. you can list the types with:
            $ ./verify.pl types
    1.3) list of identifiers and proposed values of the form:
            #define <identifier> <value>
-    value must be a hex value. If value is zero, then a new identifer value
-    will be allocated.
-   1.4) optionally next type of identifer, followed by it's list.
-     Blank lines are ignored.
+    value must be a hex value. If value is TBD, then a new identifer value
+    will be allocated. For mechanisms, adding the 'opt' option will allocate
+    from one of the low number gaps, otherwise it will allocate based on the
+    larget currently allocated.
+   1.4) optionally next type of identifier (say for example, new mypqalg param set),
+    followed by it's list. (now paramsets are each in their own space).
+    Blank lines are ignored.
 
-2) pull the git repository.
-3) run ./process_proposal.pl as follows:
-	$ ./process_proposal.pl myproposal.prop myproposal.result
-4) git add raw_ids.db
-5) commit and push raw_ids.db
-6) send myproposal.result to the other co-chair and the proposer.
+2) run ./process_proposal.pl as follows:
+	$ ./process_proposal.pl pkcs11vX.X/myproposal.prop
+3) git add raw_ids.db pkcs11vX.x/myproposal.prop pkcs11vX.X/myproposal.result
+4) git commit
+5) git push (to create a pull request).
+6) optionally ask for a reviewer, your pull request will be voted on in the
+   next meeting.
 
+   This will create identifiers in the proposed state. Once they are merged,
+   New identifiers can be allocated, but they will not show up in the scanners
+   until they are marked approved.
 -----------------------------------------------------------------
 
-How to mark identifiers approved once the proposal passes the ballot.
+Once the pull request has been approved, 
 
-run ./approve_proposal.pl myproposal.result
-
-where myproposal.result is the result file created in the ./process_proposal.pl step
+1)update your fork
+2) git checkout master; git pull (to make your master current)
+3) Rebase your proposal branch to your master. The new identifier db
+should now be in your proposal branch.
+4) run:
+./approve_proposal.pl pkcs11vX.X/myproposal.result (generated above)
+5) run
+./verify.pl header
+This will tell you the new approved identifiers. If you did all the steps
+right, it should display the same identifiers as ./parse_doc.pl
+6) edit ../headers/pkcs11t.h to add these identifiers and the parameters
+from your spec. This will keep the header file and doc in sync.
+7) run
+./verify.pl header, and
+./parse_doc.pl 
+to make sure everything is in sync.
+8) commit your changes, the push to update your pull request.
 
 ----------------------------------------------------------------------
 How to examine the database:
@@ -98,28 +132,37 @@ each line is a record.
 
 How to verify the header file against the spec:
 
-./parse_doc.pl [commands...] [doc_file] [header_file]
- parse a doc text file and/or a header file and output according
- to the command:
-    verbose:  output inconsistancies in the doc_file
-    table:  the first two columns of every table in the doc_file
-    defines:  all the defines in both the doc_file and header_file
-    typedefs:  all the typedefs in both the doc_file and header_file
-    structs:  all the structs in both the doc_file and header_file
-    doc_defines:  all the defines in the doc_file
-    doc_typedefs:  all the typedefs in the doc_file
-    doc_structs:  all the structs in the doc_file
-    doc_all:  all the parsed values in the doc_file
+./parse_doc.pl [commands...] [header_file] [doc_directories ... ]
+parse one or more markdown documents and/or a header file and output
+according to the command:
+    base={base_dir}:  location of the root of the working tree, default is ../
+    verbose:  output inconsistancies in the document
+    verbose2:  output objects in the header_file that are not in the doc_file
+    no_doc_errors:  only print a summary of missing document values
+    table:  the first two columns of every table in the document(s)
+    defines:  all the defines in both the document(s)and header_file
+    typedefs: all the typedefs in both the document(s) and header_file
+    structs:  all the structs in both the documents(s) and header_file
+    doc_defines:     all the defines in the document(s)
+    doc_typedefs:    all the typedefs in the document(s)
+    doc_structs:     all the structs in the document(s)
+    doc_all:         all the parsed values in the document(s)
     header_defines:  all the defines in the header_file
-    header_typedefs:  all the typedefs in the header_file
+    header_typedefs: all the typedefs in the header_file
     header_structs:  all the structs in the header_file
-    header_all:  all the parsed values in the doc_file
-    diff_defines:  the differences betweeen the defines in the doc_file and the header_file
-    diff_typedefs: the differences between the typedefs in doc_file and header_file
-    diff_structs:  the differences between the structs in doc_file andthe header_file
+    header_all:      all the parsed values in the document(s)
+    diff_defines:  the differences betweeen the defines in the document(s) and the header_file
+    diff_typedefs: the differences between the typedefs in document(s) and header_file
+    diff_structs:  the differences between the structs in document(s) and the header_file
     diff_all:  all the diffs
-if both files are required, the doc_file must be first, if no
-commands are supplied, then diff_all is assumed
+1. documents are specified by the directory. files.txt or
+   spec_files.txt are read to find the individual files of the doc.
+2. if more than one document directory is specified all directories
+   are read and treated as one combined document. Adding profile and
+   historical directories will turn on scanning of those defines
+   in the header.
+3. if documents and the header is required, the header_file must be first.
+4. if no commands are supplied, then diff_all is assumed.
 
 Between ./verify.pl and ./parse_doc.pl it's possible to make sure all the
 defines in the document have been allocated, all the defines that are allocated

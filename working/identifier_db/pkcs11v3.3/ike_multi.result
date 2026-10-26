@@ -1,0 +1,13 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "Defines IKE2 multi key and remume mechanisms".
+
+Mechanisms:
+
+ #define CKM_IKE2_PRF_MULTI_KEY_DERIVE 0x00000054UL
+ #define CKM_IKE2_PRF_RESUME_DERIVE    0x00000055UL
+
+This represents the following changes to your original proposal:
+    CKM_IKE2_PRF_MULTI_KEY_DERIVE was allocated 0x54 because no number was proposed
+    CKM_IKE2_PRF_RESUME_DERIVE was allocated 0x55 because no number was proposed
+
+Please update your spec before sending it to ballot.

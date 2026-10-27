@@ -1,0 +1,6 @@
+Defines IKE2 multi key and remume mechanisms
+
+Mechanisms
+#define CKM_IKE2_PRF_MULTI_KEY_DERIVE       TBD opt
+#define CKM_IKE2_PRF_RESUME_DERIVE          TBD opt
+

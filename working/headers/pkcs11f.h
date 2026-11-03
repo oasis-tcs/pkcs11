@@ -376,6 +376,23 @@ CK_PKCS11_FUNCTION_INFO(C_FindObjectsFinal)
 #endif
 
 
+/* C_FindObjectsAtomic initializes and performs a search for token and session
+ * objects that match a template, by combining C_FindObjectsInit, 
+ * C_FindObjects and C_FindObjectsFinal in a single atomic call.
+ */
+CK_PKCS11_FUNCTION_INFO(C_FindObjectsAtomic)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,     /* the session's handle      */
+  CK_ATTRIBUTE_PTR  pTemplate,    /* attribute values to match */
+  CK_ULONG          ulCount,      /* attrs in search template  */
+  CK_OBJECT_HANDLE_PTR phObject,  /* gets obj. handles         */
+  CK_ULONG ulMaxObjectCount,      /* max handles to get        */
+  CK_ULONG_PTR pulObjectCount     /* actual # returned         */
+);
+#endif
+
+
 
 /* Encryption and decryption */
 
@@ -544,6 +561,79 @@ CK_PKCS11_FUNCTION_INFO(C_DigestFinal)
   CK_SESSION_HANDLE hSession,     /* the session's handle */
   CK_BYTE_PTR       pDigest,      /* gets the message digest */
   CK_ULONG_PTR      pulDigestLen  /* gets byte count of digest */
+);
+#endif
+
+
+/* C_DigestXofInit initializes a extensible output digesting operation. */
+CK_PKCS11_FUNCTION_INFO(C_DigestXofInit)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,   /* the session's handle */
+  CK_MECHANISM_PTR  pMechanism  /* the extensible output digesting mechanism */
+);
+#endif
+
+
+/* C_DigestXof digests single-part data for an extensible output function. */
+CK_PKCS11_FUNCTION_INFO(C_DigestXof)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,     /* the session's handle */
+  CK_BYTE_PTR       pData,        /* data to be digested */
+  CK_ULONG          ulDataLen,    /* bytes of data to digest */
+  CK_BYTE_PTR       pDigest,      /* gets the message digest */
+  CK_ULONG_PTR      pulDigestLen  /* gets digest length */
+);
+#endif
+
+
+/* C_DigestXofUpdate continues a multiple-part digesting operation
+ * for an extensible output function.
+ */
+CK_PKCS11_FUNCTION_INFO(C_DigestXofUpdate)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,  /* the session's handle */
+  CK_BYTE_PTR       pPart,     /* data to be digested */
+  CK_ULONG          ulPartLen  /* bytes of data to be digested */
+);
+#endif
+
+
+/* C_DigestXofExtract continues a multiple-part digesting operation
+ * and extracts output in the squeeze phase.
+ */
+CK_PKCS11_FUNCTION_INFO(C_DigestXofExtract)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,    /* the session's handle */
+  CK_BYTE_PTR       pOutput,     /* gets the output of the squeeze phase */
+  CK_ULONG          ulOutputLen  /* bytes of data to be output */
+);
+#endif
+
+
+/* C_DigestXofKeyValue continues a multi-part digesting operation
+ * by digesting the value of a secret key.
+ */
+CK_PKCS11_FUNCTION_INFO(C_DigestXofKeyValue)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,  /* the session's handle */
+  CK_OBJECT_HANDLE  hKey       /* secret key to digest */
+);
+#endif
+
+
+/* C_DigestXofFinal finishes a multiple-part extensible output operation. */
+
+CK_PKCS11_FUNCTION_INFO(C_DigestXofFinal)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,     /* the session's handle */
+  CK_BYTE_PTR       pOutput,      /* gets the final output */
+  CK_ULONG          ulOutputLen   /* bytes of data to be output */
 );
 #endif
 
@@ -784,6 +874,121 @@ CK_PKCS11_FUNCTION_INFO(C_DecryptVerifyUpdate)
   CK_ULONG          ulEncryptedPartLen,  /* ciphertext length */
   CK_BYTE_PTR       pPart,               /* gets plaintext */
   CK_ULONG_PTR      pulPartLen           /* gets p-text length */
+);
+#endif
+
+
+
+/* Atomic cryptographic functions */
+
+/* C_EncryptAtomic initializes and encrypts data in an atomic operation. */
+CK_PKCS11_FUNCTION_INFO(C_EncryptAtomic)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,            /* session's handle */
+  CK_MECHANISM_PTR  pMechanism,          /* the encryption mechanism */
+  CK_OBJECT_HANDLE  hKey,                /* handle of encryption key */
+  CK_BYTE_PTR pAssociatedData,           /* AEAD Associated data */
+  CK_ULONG ulAssociatedDataLen,          /* AEAD Associated data length */
+  CK_BYTE_PTR pPlaintext,                /* plain text  */
+  CK_ULONG ulPlaintextLen,               /* plain text length */
+  CK_BYTE_PTR pCiphertext,               /* gets cipher text */
+  CK_ULONG_PTR pulCiphertextLen          /* gets cipher text length */
+);
+#endif
+
+
+/* C_DecryptAtomic initializes and decrypts data in an atomic operation. */
+CK_PKCS11_FUNCTION_INFO(C_Decrypt)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,           /* session's handle */
+  CK_MECHANISM_PTR  pMechanism,         /* the decryption mechanism */
+  CK_OBJECT_HANDLE  hKey,               /* handle of decryption key */
+  CK_BYTE_PTR pAssociatedData,          /* AEAD Associated data */
+  CK_ULONG ulAssociatedDataLen,         /* AEAD Associated data length */
+  CK_BYTE_PTR pCiphertext,              /* cipher text */
+  CK_ULONG ulCiphertextLen,             /* cipher text length */
+  CK_BYTE_PTR pPlaintext,               /* gets plain text */
+  CK_ULONG_PTR pulPlaintextLen          /* gets plain text length */
+);
+#endif
+
+
+/* C_SignAtomic initializes and signs data in an atomic operation. */
+CK_PKCS11_FUNCTION_INFO(C_SignAtomic)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,            /* session's handle */
+  CK_MECHANISM_PTR  pMechanism,          /* the signature mechanism */
+  CK_OBJECT_HANDLE  hKey,                /* handle of signature key */
+  CK_BYTE_PTR       pData,               /* the data to sign */
+  CK_ULONG          ulDataLen,           /* count of bytes to sign */
+  CK_BYTE_PTR       pSignature,          /* gets the signature */
+  CK_ULONG_PTR      pulSignatureLen      /* gets signature length */
+);
+#endif
+
+
+/* C_SignRecoverAtomic initializes and signs data, where the data
+ * can be recovered from the signature, in an atomic operation. 
+ */
+CK_PKCS11_FUNCTION_INFO(C_SignRecoverAtomic)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,            /* session's handle */
+  CK_MECHANISM_PTR  pMechanism,          /* the signature mechanism */
+  CK_OBJECT_HANDLE  hKey,                /* handle of signature key */
+  CK_BYTE_PTR       pData,               /* the data to sign */
+  CK_ULONG          ulDataLen,           /* count of bytes to sign */
+  CK_BYTE_PTR       pSignature,          /* gets the signature */
+  CK_ULONG_PTR      pulSignatureLen      /* gets signature length */
+);
+#endif
+
+
+/* C_VerifyAtomic initializes and verifies a signature in an atomic operation. */
+CK_PKCS11_FUNCTION_INFO(C_VerifyAtomic)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,            /* session's handle */
+  CK_MECHANISM_PTR  pMechanism,          /* the signature mechanism */
+  CK_OBJECT_HANDLE  hKey,                /* handle of signature key */
+  CK_BYTE_PTR       pData,               /* signed data */
+  CK_ULONG          ulDataLen,           /* length of signed data */
+  CK_BYTE_PTR       pSignature,          /* signature */
+  CK_ULONG          ulSignatureLen       /* signature length*/
+);
+#endif
+
+
+/* C_VerifyRecoverAtomic initializes and verifies a signature, where the data
+ * can be recovered from the signature, in an atomic operation. 
+ */
+CK_PKCS11_FUNCTION_INFO(C_VerifyAtomic)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,            /* session's handle */
+  CK_MECHANISM_PTR  pMechanism,          /* the signature mechanism */
+  CK_OBJECT_HANDLE  hKey,                /* handle of signature key */
+  CK_BYTE_PTR       pData,               /* signed data */
+  CK_ULONG          ulDataLen,           /* length of signed data */
+  CK_BYTE_PTR       pSignature,          /* signature */
+  CK_ULONG          ulSignatureLen       /* signature length*/
+);
+#endif
+
+
+/* C_DigestAtomic initializes and digests data in an atomic operation. */
+CK_PKCS11_FUNCTION_INFO(C_DigestAtomic)
+#ifdef CK_NEED_ARG_LIST
+(
+  CK_SESSION_HANDLE hSession,            /* session's handle */
+  CK_MECHANISM_PTR  pMechanism,          /* the digesting mechanism */
+  CK_BYTE_PTR       pData,               /* data to be digested */
+  CK_ULONG          ulDataLen,           /* bytes of data to digest */
+  CK_BYTE_PTR       pDigest,             /* gets the message digest */
+  CK_ULONG_PTR      pulDigestLen         /* gets digest length */
 );
 #endif
 

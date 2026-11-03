@@ -209,7 +209,7 @@ The Cryptoki API functions are presented in the following table:
 |             |                        | digesting operation              |
 +-------------+------------------------+----------------------------------+
 +-------------+------------------------+----------------------------------+
-| Extensible  | C_DigestXofInit        | initializes a extensible output  |
+| Extensible  | C_DigestXofInit        | initializes an extensible output |
 | Output      |	                       | digesting operation              |
 | Digesting	  +------------------------+----------------------------------+
 | Functions   | C_DigestXof            | digests single-part data for an  |
@@ -220,15 +220,15 @@ The Cryptoki API functions are presented in the following table:
 |             |                        | extensible output function       |
 |             +------------------------+----------------------------------+
 |             | C_DigestXofExtract     | continues a multiple-part        |
-|             |                        | digesting operation an extracts  |
+|             |                        | digesting operation and extracts |
 |             |                        | output in the squeeze phase      |
-|             +------------------------+----------------------------------+
-|             | C_DigestXofFinal       | finishes a multiple-part         |
-|             |                        | extensible output operation      |
 |             +------------------------+----------------------------------+
 |             | C_DigestXofKeyValue    | continues a multiple-part        |
 |             |                        | digesting operation by digesting |
 |             |                        | the value of a secret key        |
+|             +------------------------+----------------------------------+
+|             | C_DigestXofFinal       | finishes a multiple-part         |
+|             |                        | extensible output operation      |
 +-------------+------------------------+----------------------------------+
 +-------------+------------------------+----------------------------------+
 | Signing     | C_SignInit             | initializes a signature operation|

@@ -4,17 +4,19 @@ Cryptoki's functions are organized into the following categories:
 * general-purpose functions (6 functions)
 * slot and token management functions (9 functions)
 * session management functions (11 functions)
-* object management functions (9 functions)
+* object management functions (10 functions)
 * encryption functions (4 functions)
 * message-based encryption functions (5 functions)
 * decryption functions (4 functions)
 * message-based decryption functions (5 functions)
 * message digesting functions (5 functions)
+* extensible output digesting functions (6 functions)
 * signing and MACing functions (6 functions)
 * message-based signing functions (5 functions)
 * functions for verifying signatures and MACs (10 functions)
 * message-based functions for verifying signatures and MACs (5 functions)
 * dual-purpose cryptographic functions (4 functions)
+* atomic cryptographic functions (7 functions)
 * key management functions (9 functions)
 * random number generation functions (2 functions)
 * parallel function management functions (2 functions)
@@ -131,6 +133,9 @@ The Cryptoki API functions are presented in the following table:
 |             +------------------------+----------------------------------+
 |             | C_FindObjectsFinal     | finishes an object search        |
 |             |                        | operation                        |
+|             +------------------------+----------------------------------+
+|             | C_FindObjectsAtomic    | performs an object search        |
+|             |                        | operation as atomic operation    |
 +-------------+------------------------+----------------------------------+
 +-------------+------------------------+----------------------------------+
 | Encryption  | C_EncryptInit          | initializes an encryption        |
@@ -202,6 +207,28 @@ The Cryptoki API functions are presented in the following table:
 |             +------------------------+----------------------------------+
 |             | C_DigestFinal          | finishes a multiple-part         |
 |             |                        | digesting operation              |
++-------------+------------------------+----------------------------------+
++-------------+------------------------+----------------------------------+
+| Extensible  | C_DigestXofInit        | initializes an extensible output |
+| Output      |	                       | digesting operation              |
+| Digesting	  +------------------------+----------------------------------+
+| Functions   | C_DigestXof            | digests single-part data for an  |
+|             |                        | extensible output function       |
+|             +------------------------+----------------------------------+
+|             | C_DigestXofUpdate      | continues a multiple-part        |
+|             |                        | digesting operation for an       |
+|             |                        | extensible output function       |
+|             +------------------------+----------------------------------+
+|             | C_DigestXofExtract     | continues a multiple-part        |
+|             |                        | digesting operation and extracts |
+|             |                        | output in the squeeze phase      |
+|             +------------------------+----------------------------------+
+|             | C_DigestXofKeyValue    | continues a multiple-part        |
+|             |                        | digesting operation by digesting |
+|             |                        | the value of a secret key        |
+|             +------------------------+----------------------------------+
+|             | C_DigestXofFinal       | finishes a multiple-part         |
+|             |                        | extensible output operation      |
 +-------------+------------------------+----------------------------------+
 +-------------+------------------------+----------------------------------+
 | Signing     | C_SignInit             | initializes a signature operation|
@@ -305,6 +332,29 @@ The Cryptoki API functions are presented in the following table:
 |             | C_DecryptVerifyUpdate  | continues simultaneous           |
 |             |                        | multiple-part decryption and     |
 |             |                        | verification operations          |
++-------------+------------------------+----------------------------------+
++-------------+------------------------+----------------------------------+
+| Atomic      | C_EncryptAtomic        | encrypts data in an atomic       |
+|cryptographic|                        | operation                        |
+| functions   +------------------------+----------------------------------+
+|             | C_DecryptAtomic        | decrypts data in an atomic       |
+|             |                        | operation                        |
+|             +------------------------+----------------------------------+
+|             | C_SignAtomic           | signs data in an atomic operation|
+|             +------------------------+----------------------------------+
+|             | C_SignRecoverAtomic    | signs data, where the data       |
+|             |                        | can be recovered from the        |
+|             |                        | signature, in an atomic operation|
+|             +------------------------+----------------------------------+
+|             | C_VerifyAtomic         | verifies a signature in an atomic|
+|             |                        | operation                        |
+|             +------------------------+----------------------------------+
+|             | C_VerifyRecoverAtomic  | verifies a signature, where the  |
+|             |                        | data is recovered from the       |
+|             |                        | signature, in an atomic operation|
+|             +------------------------+----------------------------------+
+|             | C_DigestAtomic         | digests data in an atomic        |
+|             |                        | operation                        |
 +-------------+------------------------+----------------------------------+
 +-------------+------------------------+----------------------------------+
 | Key         | C_GenerateKey          | generates a secret key           |

@@ -59,6 +59,7 @@ officially published Cryptoki specifications.
 | 3.0     | 0x03  | 0x00  |
 | 3.1     | 0x03  | 0x01  |
 | 3.2     | 0x03  | 0x02  |
+| 3.3     | 0x03  | 0x03  |
 table: Major and minor version values for published Cryptoki specifications
 
 Minor revisions of the Cryptoki standard are always upwardly compatible within
@@ -1328,6 +1329,146 @@ This function list may be returned via **C_GetInterfaceList** or
 **CK_FUNCTION_LIST_3_2_PTR** is a pointer to a **CK_FUNCTION_LIST_3_2**.
 **CK_FUNCTION_LIST_3_2_PTR_PTR** is a pointer to a
 **CK_FUNCTION_LIST_3_2_PTR**.
+
+### CK_FUNCTION_LIST_3_3
+
+**CK_FUNCTION_LIST_3_3** is a structure which contains the same function
+pointers as in **CK_FUNCTION_LIST_3_2** and additional functions added to the
+end of the structure that were defined in Cryptoki version 3.3. It is defined
+as follows:
+
+~~~{.c}
+typedef struct CK_FUNCTION_LIST_3_3 {
+  CK_VERSION version;
+  CK_C_Initialize C_Initialize;
+  CK_C_Finalize C_Finalize;
+  CK_C_GetInfo C_GetInfo;
+  CK_C_GetFunctionList C_GetFunctionList;
+  CK_C_GetSlotList C_GetSlotList;
+  CK_C_GetSlotInfo C_GetSlotInfo;
+  CK_C_GetTokenInfo C_GetTokenInfo;
+  CK_C_GetMechanismList C_GetMechanismList;
+  CK_C_GetMechanismInfo C_GetMechanismInfo;
+  CK_C_InitToken C_InitToken;
+  CK_C_InitPIN C_InitPIN;
+  CK_C_SetPIN C_SetPIN;
+  CK_C_OpenSession C_OpenSession;
+  CK_C_CloseSession C_CloseSession;
+  CK_C_CloseAllSessions C_CloseAllSessions;
+  CK_C_GetSessionInfo C_GetSessionInfo;
+  CK_C_GetOperationState C_GetOperationState;
+  CK_C_SetOperationState C_SetOperationState;
+  CK_C_Login C_Login;
+  CK_C_Logout C_Logout;
+  CK_C_CreateObject C_CreateObject;
+  CK_C_CopyObject C_CopyObject;
+  CK_C_DestroyObject C_DestroyObject;
+  CK_C_GetObjectSize C_GetObjectSize;
+  CK_C_GetAttributeValue C_GetAttributeValue;
+  CK_C_SetAttributeValue C_SetAttributeValue;
+  CK_C_FindObjectsInit C_FindObjectsInit;
+  CK_C_FindObjects C_FindObjects;
+  CK_C_FindObjectsFinal C_FindObjectsFinal;
+  CK_C_EncryptInit C_EncryptInit;
+  CK_C_Encrypt C_Encrypt;
+  CK_C_EncryptUpdate C_EncryptUpdate;
+  CK_C_EncryptFinal C_EncryptFinal;
+  CK_C_DecryptInit C_DecryptInit;
+  CK_C_Decrypt C_Decrypt;
+  CK_C_DecryptUpdate C_DecryptUpdate;
+  CK_C_DecryptFinal C_DecryptFinal;
+  CK_C_DigestInit C_DigestInit;
+  CK_C_Digest C_Digest;
+  CK_C_DigestUpdate C_DigestUpdate;
+  CK_C_DigestKey C_DigestKey;
+  CK_C_DigestFinal C_DigestFinal;
+  CK_C_SignInit C_SignInit;
+  CK_C_Sign C_Sign;
+  CK_C_SignUpdate C_SignUpdate;
+  CK_C_SignFinal C_SignFinal;
+  CK_C_SignRecoverInit C_SignRecoverInit;
+  CK_C_SignRecover C_SignRecover;
+  CK_C_VerifyInit C_VerifyInit;
+  CK_C_Verify C_Verify;
+  CK_C_VerifyUpdate C_VerifyUpdate;
+  CK_C_VerifyFinal C_VerifyFinal;
+  CK_C_VerifyRecoverInit C_VerifyRecoverInit;
+  CK_C_VerifyRecover C_VerifyRecover;
+  CK_C_DigestEncryptUpdate C_DigestEncryptUpdate;
+  CK_C_DecryptDigestUpdate C_DecryptDigestUpdate;
+  CK_C_SignEncryptUpdate C_SignEncryptUpdate;
+  CK_C_DecryptVerifyUpdate C_DecryptVerifyUpdate;
+  CK_C_GenerateKey C_GenerateKey;
+  CK_C_GenerateKeyPair C_GenerateKeyPair;
+  CK_C_WrapKey C_WrapKey;
+  CK_C_UnwrapKey C_UnwrapKey;
+  CK_C_DeriveKey C_DeriveKey;
+  CK_C_SeedRandom C_SeedRandom;
+  CK_C_GenerateRandom C_GenerateRandom;
+  CK_C_GetFunctionStatus C_GetFunctionStatus;
+  CK_C_CancelFunction C_CancelFunction;
+  CK_C_WaitForSlotEvent C_WaitForSlotEvent;
+  CK_C_GetInterfaceList C_GetInterfaceList;
+  CK_C_GetInterface C_GetInterface;
+  CK_C_LoginUser C_LoginUser;
+  CK_C_SessionCancel C_SessionCancel;
+  CK_C_MessageEncryptInit C_MessageEncryptInit;
+  CK_C_EncryptMessage C_EncryptMessage;
+  CK_C_EncryptMessageBegin C_EncryptMessageBegin;
+  CK_C_EncryptMessageNext C_EncryptMessageNext;
+  CK_C_MessageEncryptFinal C_MessageEncryptFinal;
+  CK_C_MessageDecryptInit C_MessageDecryptInit;
+  CK_C_DecryptMessage C_DecryptMessage;
+  CK_C_DecryptMessageBegin C_DecryptMessageBegin;
+  CK_C_DecryptMessageNext C_DecryptMessageNext;
+  CK_C_MessageDecryptFinal C_MessageDecryptFinal;
+  CK_C_MessageSignInit C_MessageSignInit;
+  CK_C_SignMessage C_SignMessage;
+  CK_C_SignMessageBegin C_SignMessageBegin;
+  CK_C_SignMessageNext C_SignMessageNext;
+  CK_C_MessageSignFinal C_MessageSignFinal;
+  CK_C_MessageVerifyInit C_MessageVerifyInit;
+  CK_C_VerifyMessage C_VerifyMessage;
+  CK_C_VerifyMessageBegin C_VerifyMessageBegin;
+  CK_C_VerifyMessageNext C_VerifyMessageNext;
+  CK_C_MessageVerifyFinal C_MessageVerifyFinal;
+  CK_C_EncapsulateKey C_EncapsulateKey;
+  CK_C_DecapsulateKey C_DecapsulateKey;
+  CK_C_VerifySignatureInit C_VerifySignatureInit;
+  CK_C_VerifySignature C_VerifySignature;
+  CK_C_VerifySignatureUpdate C_VerifySignatureUpdate;
+  CK_C_VerifySignatureFinal C_VerifySignatureFinal;
+  CK_C_GetSessionValidationFlags C_GetSessionValidationFlags;
+  CK_C_AsyncComplete C_AsyncComplete;
+  CK_C_AsyncGetID C_AsyncGetID;
+  CK_C_AsyncJoin C_AsyncJoin;
+  CK_C_DigestXofInit C_DigestXofInit;
+  CK_C_DigestXof C_DigestXof;
+  CK_C_DigestXofUpdate C_DigestXofUpdate;
+  CK_C_DigestXofFinal C_DigestXofFinal;
+  CK_C_FindObjectsAtomic C_FindObjectsAtomic;
+  CK_C_EncryptAtomic C_EncryptAtomic;
+  CK_C_DecryptAtomic C_DecryptAtomic;
+  CK_C_SignAtomic C_SignAtomic;
+  CK_C_SignRecoverAtomic C_SignRecoverAtomic;
+  CK_C_VerifyAtomic C_VerifyAtomic;
+  CK_C_VerifyRecoverAtomic C_VerifyRecoverAtomic;
+  CK_C_DigestAtomic C_DigestAtomic;
+} CK_FUNCTION_LIST_3_3;
+~~~
+
+For a general description of **CK_FUNCTION_LIST_3_3** see **CK_FUNCTION_LIST**.
+
+In this structure, _version_ is the cryptoki specification version number. It
+should match the value of cryptokiVersion returned in the **CK_INFO**
+structure, but must be 3.3 at minimum.
+
+This function list may be returned via **C_GetInterfaceList** or
+**C_GetInterface**
+
+**CK_FUNCTION_LIST_3_3_PTR** is a pointer to a **CK_FUNCTION_LIST_3_3**.
+**CK_FUNCTION_LIST_3_3_PTR_PTR** is a pointer to a
+**CK_FUNCTION_LIST_3_3_PTR**.
 
 ### CK_INTERFACE
 

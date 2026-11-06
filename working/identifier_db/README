@@ -22,14 +22,12 @@ are reasonably confident that you have the appropriate name and
 number of identifier.
 
 To figure out what identifiers you need to add, checkout the
-proposal branch on your fork, got to working/identifier.db
+proposal branch on your fork, go to working/identifier.db
 and run ./parse_doc.pl and identifiers missing, you need to
 add to your proposal. You do not need to add data structures
 and typedefs to your proposal:
 
-Make sure your fork is up to date, use git pull to update
-the local copy of your branch, create a new branch specifically
-for In a new, *UP TO DATE* branch:
+In a new, *UP TO DATE* branch:
 
 1)  Create a new proposal. Proposals have:
    1.1) first line is the proposal name. Your proposals should be in the pkcs11vX.X
@@ -41,7 +39,7 @@ for In a new, *UP TO DATE* branch:
     value must be a hex value. If value is TBD, then a new identifer value
     will be allocated. For mechanisms, adding the 'opt' option will allocate
     from one of the low number gaps, otherwise it will allocate based on the
-    larget currently allocated.
+    largest currently allocated.
    1.4) optionally new type of identifier (say for example, new mypqalg param set),
     followed by it's list. The new operator tells process to add the new type to
     the database if it doesn't exist, otherwise ./process_proposal will throw an
@@ -50,13 +48,13 @@ for In a new, *UP TO DATE* branch:
     NOTE: ./process_proposal is idempotent. If you try to allocate an identifier
     that already exists, the results file will assign that identifier it's  already
     allocated value. If you try to create a new type that already exists,
-    ./process_proposal will just reuse that type. As a result, your can
+    ./process_proposal will just reuse that type. As a result, you can
     safely run ./process_proposal multiple times on the same .prop file and it will
     generate the same .result file.
 
 2) run ./process_proposal.pl as follows:
 	$ ./process_proposal.pl pkcs11vX.X/myproposal.prop
-3) git add raw_ids.db pkcs11vX.x/myproposal.prop pkcs11vX.X/myproposal.result
+3) git add raw_ids.db update_stamp.txt pkcs11vX.x/myproposal.prop pkcs11vX.X/myproposal.result
 4) git commit
 5) git push (to create a pull request).
 6) optionally ask for a reviewer, your pull request will be voted on in the

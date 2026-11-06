@@ -4,10 +4,13 @@
 # read the database
 use File::Basename;
 use File::Spec;
+use POSIX qw(strftime);
+
 sub find_number;
 sub print_types;
 
 my $database_file="raw_ids.db";
+my $update_file="update_stamp.txt";
 my $source_file=$ARGV[0];
 my $dest_file=$ARGV[1];
 glob %types = ();
@@ -202,6 +205,10 @@ for $type (sort keys %types) {
       }
 }
 close($database);
+open(my $stampFile, ">", $update_file) or die "Can't write $update_file: $!";
+    my $timestamp = strftime "%Y-%m-%d %H:%M:%S", localtime;
+    printf $stampFile "$source_file - $timestamp";
+close($stampFile);
 
 sub print_types
 {

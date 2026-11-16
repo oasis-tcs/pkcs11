@@ -1,0 +1,12 @@
+blockdiag {
+   default_fontsize = 12;
+   orientation = portrait;
+
+   "Cryptoki Object" -> "Storage Object", "Other Object";
+   
+   "Storage Object" -> CKO_DATA, CKO_CERTIFICATE, CKO_TRUST, CKO_KEY, CKO_DOMAIN_PARAMETERS;
+   
+   CKO_KEY -> CKO_PUBLIC_KEY, CKO_PRIVATE_KEY, CKO_SECRET_KEY, CKO_OTP_KEY;
+   
+   "Other Object" -> CKO_HW_FEATURE, CKO_MECHANISM, CKO_PROFILE, CKO_VALIDATION;
+}

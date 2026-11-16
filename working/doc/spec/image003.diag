@@ -1,0 +1,12 @@
+blockdiag {
+   default_fontsize = 12;
+   orientation = landscape;
+   
+   "Segment 1\n(32 bytes)" -> "Segment 2\n(32 bytes)" -> "Segment 3\n(32 bytes)";
+   
+   "Segment 1\n(32 bytes)" -> "48-byte key" [label = "32 bytes"];
+   "Segment 2\n(32 bytes)" -> "48-byte key" [label = "First 16 bytes"];
+   "Segment 2\n(32 bytes)" -> "Unused" [label = "Second 16 bytes"];
+   "Segment 3\n(32 bytes)" -> "16-byte key" [label = "First 16 bytes"];
+   "Segment 3\n(32 bytes)" -> "Unused " [label = "Second 16 bytes"];
+}

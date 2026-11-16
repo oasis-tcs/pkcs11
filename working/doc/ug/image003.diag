@@ -1,0 +1,7 @@
+blockdiag {
+   default_fontsize = 12;
+   orientation = portrait;
+   
+   "Cryptoki Object" -> "Data Object", "Certificate Object", "Key Object";
+   "Key Object" -> "Public Key", "Private Key", "Secret Key";
+}

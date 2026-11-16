@@ -1,0 +1,7 @@
+blockdiag {
+   default_fontsize = 12;
+   orientation = landscape;
+   
+   "R/O Public Session" -> "R/O User Functions" [label = "User logs in"];
+   "R/O User Functions" -> "R/O Public Session" [label = "User logs out"];
+}

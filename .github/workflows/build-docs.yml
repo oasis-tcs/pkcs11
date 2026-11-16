@@ -24,6 +24,7 @@ jobs:
         run: |
            dnf -y install \
                   make pandoc \
+                  python3-pip \
                   dejavu-sans-fonts \
                   dejavu-sans-mono-fonts \
                   dejavu-serif-fonts \
@@ -45,6 +46,7 @@ jobs:
                   texlive-sectsty \
                   texlive-selnolig \
                   texlive-unicode-math
+           pip3 install "setuptools<70" blockdiag
 
       - name: Checkout Repository
         uses: actions/checkout@v4

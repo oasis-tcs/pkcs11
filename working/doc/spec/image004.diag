@@ -1,0 +1,26 @@
+blockdiag {
+   default_fontsize = 11;
+   node_width = 165;
+   node_height = 45;
+   span_width = 75;
+   span_height = 35;
+
+   user [shape = actor, label = "User"];
+   client_app [label = "Client Application"];
+   pkcs11_lib [label = "PKCS #11 Library"];
+   conn_token_api [label = "Connected Token API"];
+   conn_token [shape = ellipse, label = "Connected Token", style = dashed];
+   client_api [label = "Client API"];
+   auth_server [label = "Authentication\nServer"];
+
+   user -> client_app;
+   
+   // Left path
+   client_app -> client_api;
+   client_api -> auth_server;
+   
+   // Right path
+   client_app -> pkcs11_lib [label = "C_Sign()"];
+   pkcs11_lib -> conn_token_api;
+   conn_token_api <-> conn_token [style = dashed];
+}

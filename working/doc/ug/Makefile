@@ -1,12 +1,20 @@
+BLOCKDIAG ?= python3 -c "import PIL.Image, PIL.ImageDraw, PIL.ImageFont; PIL.Image.ANTIALIAS = getattr(PIL.Image, 'Resampling', PIL.Image).LANCZOS; PIL.ImageDraw.ImageDraw.textsize = lambda self, text, font=None, *args, **kwargs: (font.getbbox(text)[2] - font.getbbox(text)[0], font.getbbox(text)[3] - font.getbbox(text)[1]) if font else (len(text)*8, 16); PIL.ImageFont.FreeTypeFont.getsize = lambda self, text, *args, **kwargs: (self.getbbox(text)[2] - self.getbbox(text)[0], self.getbbox(text)[3] - self.getbbox(text)[1]); from blockdiag.command import main; import sys; sys.argv[0] = 'blockdiag'; main()"
+
+DIAG_FILES = $(wildcard *.diag)
+PNG_FILES = $(DIAG_FILES:.diag=.png)
+
+%.png: %.diag
+	$(BLOCKDIAG) $< -o $@
+
 INPUT_FILES = $(shell cat files.txt)
 
 all: docs
 
-.PHONY: all build html pdf
+.PHONY: all build html pdf clean
 
 docs: html pdf
 
-html:
+html: $(PNG_FILES)
 	pandoc -s \
 		-f markdown-implicit_figures+mark \
 		--toc \
@@ -17,7 +25,7 @@ html:
 		-o pkcs11-ug-v3.2.html \
 		$(INPUT_FILES)
 
-pdf:
+pdf: $(PNG_FILES)
 	pandoc -s \
 		-H header.tex \
 		-f markdown+mark \
@@ -35,7 +43,7 @@ pdf:
 		-o pkcs11-ug-v3.2.pdf \
 		$(INPUT_FILES)
 
-latex:
+latex: $(PNG_FILES)
 	pandoc -s \
 		-H header.tex \
 		-f markdown-implicit_figures+mark \
@@ -53,4 +61,4 @@ latex:
 		-o pkcs11-ug-v3.2.latex \
 		$(INPUT_FILES)
 clean:
-	-rm -rf *.html *.pdf *.latex
+	-rm -rf *.html *.pdf *.latex $(PNG_FILES)

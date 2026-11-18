@@ -1,0 +1,11 @@
+blockdiag {
+   default_fontsize = 12;
+   orientation = landscape;
+   
+   "Application" -> "Token" [label = "C_DeriveKey"];
+   "Application" -> "CT-KIP Server" [label = "Communicates"];
+   "Token" -> "Application" [label = "C_WrapKey"];
+   "Application" -> "CT-KIP Server" [label = "Wrapped Key"];
+   "CT-KIP Server" -> "Application" [label = "Authenticate"];
+   "Application" -> "Token" [label = "C_Verify"];
+}

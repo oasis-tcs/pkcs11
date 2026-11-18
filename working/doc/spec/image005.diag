@@ -1,0 +1,15 @@
+blockdiag {
+   default_fontsize = 11;
+   node_width = 180;
+   node_height = 45;
+   span_height = 35;
+
+   server_app [label = "Server Application"];
+   pkcs11_lib [label = "PKCS #11 Library"];
+   token_api [label = "Internal Token API"];
+   token [label = "Token (or query to\nauthentication\nserver)"];
+
+   server_app -> pkcs11_lib [label = "C_Verify()"];
+   pkcs11_lib <-> token_api;
+   token_api <-> token;
+}

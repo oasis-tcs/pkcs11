@@ -1,0 +1,10 @@
+blockdiag {
+   default_fontsize = 12;
+   orientation = portrait;
+   
+   "Application" -> "Cryptoki Library";
+   "Cryptoki Library" -> "Slot 1", "Slot 2", "Slot N";
+   "Slot 1" -> "Token 1";
+   "Slot 2" -> "Token 2";
+   "Slot N" -> "Token N";
+}

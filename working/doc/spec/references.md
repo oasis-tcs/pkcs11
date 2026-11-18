@@ -420,6 +420,10 @@ ISO. Information Technology — Open Systems Interconnection — The Directory: 
 
 ISO. Information Technology — Security Techniques — Digital Signature Scheme Giving Message Recovery — Part 2: Integer factorization based mechanisms. 2002.
 
+**[ISO/IEC 18033-2:2006/Amd 2:2026]**
+
+ISO. Information technology — Security techniques — Encryption algorithms — Part 2: Asymmetric ciphers — AMENDMENT 2. 2026.
+
 **[Java MIDP]**
 
 Java Community Process. Mobile Information Device Profile for Java 2 Micro Edition. November 2002. 

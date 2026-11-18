@@ -102,6 +102,7 @@ slh-dsa.md
 comp_kem.md
 comp_sig.md
 kmac.md
+frodokem.md
 references.md
 security_and_privacy_considerations.md
 acknowledgements.md

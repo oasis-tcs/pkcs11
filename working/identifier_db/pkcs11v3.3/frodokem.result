@@ -1,0 +1,35 @@
+In accordance to our standing rules, the following identifiers have been
+allocated for your proposal "New defines to support FrodoKEM".
+
+Key types:
+
+ #define CKK_FRODOKEM 0x0000004fUL
+
+Mechanisms:
+
+ #define CKM_FRODOKEM_KEY_PAIR_GEN 0x00004042UL
+ #define CKM_FRODOKEM              0x00004043UL
+
+Frodokem params:
+
+ #define CKP_FRODOKEM_640_AES     0x00000001UL
+ #define CKP_FRODOKEM_640_SHAKE   0x00000002UL
+ #define CKP_FRODOKEM_976_AES     0x00000003UL
+ #define CKP_FRODOKEM_976_SHAKE   0x00000004UL
+ #define CKP_FRODOKEM_1344_AES    0x00000005UL
+ #define CKP_FRODOKEM_1344_SHAKE  0x00000006UL
+ #define CKP_EFRODOKEM_640_AES    0x00000007UL
+ #define CKP_EFRODOKEM_640_SHAKE  0x00000008UL
+ #define CKP_EFRODOKEM_976_AES    0x00000009UL
+ #define CKP_EFRODOKEM_976_SHAKE  0x0000000aUL
+ #define CKP_EFRODOKEM_1344_AES   0x0000000bUL
+ #define CKP_EFRODOKEM_1344_SHAKE 0x0000000cUL
+
+This represents the following changes to your original proposal:
+    CKM_FRODOKEM_KEY_PAIR_GEN was allocated 0x4042 because no number was proposed
+    CKM_FRODOKEM was allocated 0x4043 because no number was proposed
+
+Please update your spec before sending it to ballot.
+    CKK_FRODOKEM was allocated 0x4f because no number was proposed
+
+Please update your spec before sending it to ballot.
